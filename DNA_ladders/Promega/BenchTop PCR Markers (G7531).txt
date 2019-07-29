@@ -1,0 +1,1 @@
+BenchTop PCR Markers (G7531)	1000 750 500 300 150 50
