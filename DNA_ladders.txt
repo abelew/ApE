@@ -1,9 +1,0 @@
-#comment lines start with #
-#enter each new ladder on a new line
-#start with the name of the ladder
-#THEN A TAB
-#then the fragment sizes (decreasing order), separated by a space
-#no commas in the sizes.
-#enter a band twice or more to make it drawn thicker
-1Kb plus	12000 11000 10000 9000 8000 7000 6000 5000 4000 3000 2000 1650 1650 1000 850 650 500 400 300 200 100
-lambda Hind	23130 9416 6557 4361 2322 2027 564 125
