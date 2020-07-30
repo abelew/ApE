@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+## This assumes one is using the provided module file
+## which sets APE_DIR to the environment-modules root/local/ape/$version
+wish "${APE_DIR}/ApE.tcl" $@
+
