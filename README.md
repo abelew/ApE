@@ -50,10 +50,10 @@ tclkit[2] and sdx.kit[3] I used.
     script, the accessory files, and the miscellaneous stuff used by
     tclkit/sdx.
 4.  Copy out the main script with:
-    `cp ApE_win_current.vfs/lib/app-AppMain/AppMain.tcl ..`
+    `cp ApE_win_current.vfs/lib/app-AppMain/AppMain.tcl ../..`
 5.  Copy the accessory files, I usually delete the existing files first, but I
-    doubt that is necessary: `rsync -av ApE_win_current.vfs/Accessory\ Files/ ..`
-6.  Delete the windows specific material: `rm -r ../lib`
+    doubt that is necessary: `rsync -av ApE_win_current.vfs/Accessory\ Files/ ../../`
+6.  Delete the windows specific material: `rm -r ../../lib`
 7.  Clean up the $(pwd).
 
 # References
