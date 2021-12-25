@@ -1,0 +1,86 @@
+#%Module
+set NAME [module-info name]
+set URL "http://jorgensen.biology.utah.edu/wayned/ape"
+set MAINTAINER "abelew@umd.edu"
+module-whatis "My favorite plasmid editor"
+
+## The variable MODULE_PRE is set in /cbcb/sw/cbcb_profile and provides the $PREFIX to which
+## software was compiled.  Changing that variable in the cbcb/rhel7 file will therefore
+## set $DIR below
+###
+# Only set MODULE_PRE when:
+# a) loading a module _AND_
+# b) if MODULE_PRE is not defined
+# Thus it will not get unset on rm/purge.
+###
+if [module-info mode load] {
+    if {![info exists ::env(MODULE_PRE)]} {
+        setenv COMMON "/sw"
+        setenv MODULE_PRE "$::env(COMMON)/local"
+    }
+}
+set DIR $::env(MODULE_PRE)/[module-info name]
+setenv APE_DIR $DIR
+### Add pre-requisites here
+
+### Add extra variables here
+
+### Define a simple help message
+proc ModulesHelp {} {
+    global NAME MAINTAINER
+    set test_result "Successfully ran $DIR/module_test."
+    if {[file isfile $DIR/module_test]} {
+        if {[catch {eval exec $DIR/module_test} msg]} {
+            set test_result "ERROR, unable to run module_test, $::errorInfo"
+        }
+    } else {
+        set test_result ""
+    }
+    puts "The $NAME module file was installed by $MODULE_FILE_AUTHOR ($MODULE_FILE_AUTHOR_EMAIL)
+and is maintained by $MODULE_FILE_MAINTAINER, and is:
+$DESCRIPTION
+$test_result
+"
+}
+
+set is_module_rm [module-info mode remove]
+
+###
+# Add your executable to PATH.
+###
+if {[file isdirectory $DIR/bin] == 1} {
+    prepend-path PATH $DIR/bin
+}
+
+###
+# Add an include directory
+###
+if {[file isdirectory $DIR/include] == 1} {
+    prepend-path CPATH $DIR/include
+}
+
+###
+# Set up library paths
+###
+if {[file isdirectory $DIR/lib] == 1} {
+    prepend-path LIBRARY_PATH $DIR/lib
+    prepend-path LD_RUN_PATH $DIR/lib
+}
+
+###
+# If this is a module for a virtualenv
+# this should figure that out and set the appropriate stuff
+###
+## Note that the PS1 is not quite as fancy as maybe by default.
+if {[file isfile $DIR/bin/activate] == 1} {
+    setenv VIRTUAL_ENV $DIR
+}
+
+###
+# Set smaller manpath, pkgconfig, and info environment variables
+###
+if [module-info mode load] {
+    prepend-path PKG_CONFIG_PATH $::env(COMMON)/pkgconfig
+    prepend-path MANPATH $::env(COMMON)/man
+    prepend-path INFOPATH $::env(COMMON)/info
+}

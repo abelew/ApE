@@ -16,7 +16,9 @@ package require Tk 8.6
 #Original Author: Michael I. Schwartz, mschwart@nyx.net
 
 #set version number here
-set version 2.0.64
+set version 3.0.8
+## bug fixes- mac next_orf keyboard shortcut
+
 
 if {0} {
   ## pretend to be windows
@@ -24,9 +26,9 @@ rename tk tk_real
 proc tk {args} {
   puts "tk $args"
   if {$args eq "windowingsystem"} {
-      return win32
+   return win32
   } else {
-      return [eval tk_real $args]
+    return [eval tk_real $args]
   }
 }
 set info(user_defaults_dir) "~/Library/Preferences/ApE/"
@@ -52,6 +54,7 @@ set info(user_defaults_dir) "~/Library/Preferences/ApE/"
 
 
 ##  CDS change case to 3-up-3-down
+## Next ORF start codons
 ## selecting/ shift selecting a feature in graphic map selects the feature in the feature table, and thus in the sequence.
 ## selecting two primer_bind in the feature table lets you do a PCR with those primers (how to activate? right click on feature?)
 
@@ -75,10 +78,10 @@ set info(user_defaults_dir) "~/Library/Preferences/ApE/"
 #########################################
 ## Pretty maps
 ###########
-# store and use graphicformat: circular and linear: outline_color, outline_width, width, graphic_label_font, graphic_label_color (blank is feature), arrow points, text_subst (free text with: name, start pos, end pos, size substitutions)
+# store and use graphicformat: circular and linear: outline_color, outline_width, width, graphic_label_font, graphic_label_color (blank is feature), arrow points, text_subst (free text with: name, start pos, end pos, size substitutions) 
 # store and use graphicformat: linear: linear_label_position, linear_map_y,  linear_map_hidden
-# store and use graphicformat: circular: use_arc_label, arc_text_offset (relative to feature), linear_text_position (angle and radial offset as percent of circle), feature_offset_position (as percent added to feature_line), circular_map_hidden,
-#
+# store and use graphicformat: circular: use_arc_label, arc_text_offset (relative to feature), linear_text_position (angle and radial offset as percent of circle), feature_offset_position (as percent added to feature_line), circular_map_hidden, 
+# 
 # arrow styles menubutton instead of points
 # intron gdata, linear (0,0 to 1,1 relative position pirs of points), circular (0 to 1 relative offset)
 
@@ -95,7 +98,7 @@ set info(user_defaults_dir) "~/Library/Preferences/ApE/"
 ## Index:
 #circular_map_index_radius, circular_map_index_max_tick_spacing, circular_map_index_max_tick_color, circular_map_index_max_tick_font, circular_map_index_max_tick_width, #circular_map_index_min_tick_per_max, circular_map_index_min_tick_color, circular_map_index_min_tick_width
 ## Offsets:
-#circular_map_features_offset,
+#circular_map_features_offset, 
 
 
 # edit and save graphic data in feature libraries
@@ -116,7 +119,7 @@ set info(user_defaults_dir) "~/Library/Preferences/ApE/"
 # live drag of texts- respace all other texts, change anchor point based on position of text relative to feature line.
 # potential feature metadata (circular): radius position (-1, 0 ,1), direction (0,1), angle indices, arrow data (fwd+rev), tick angle, feature bp, default color
 # non-arrow features- circle, triangle (up down left right), 5, 6, 8 sided, start arrow. height, width, justification (centered start end)
-# procs:  move feature in and out (move coords of all arcs and arrows, including backgrounds), change arrow coord points to change arrow type (also background coords), change feature width, move texts and their lines, bump texts (and their lines) (bump features first, only relative to feature labels, then bump enzyme labels), turn lines on/off, turn coords on/off, turn enz counts on/off, dialog to change text formatting (font, points, color, bold, underline).
+# procs:  move feature in and out (move coords of all arcs and arrows, including backgrounds), change arrow coord points to change arrow type (also background coords), change feature width, move texts and their lines, bump texts (and their lines) (bump features first, only relative to feature labels, then bump enzyme labels), turn lines on/off, turn coords on/off, turn enz counts on/off, dialog to change text formatting (font, points, color, bold, underline). 
 #######################################################
 
 
@@ -157,7 +160,7 @@ set info(user_defaults_dir) "~/Library/Preferences/ApE/"
 #all sgRNAs "DNGG"
 #dropdown for 6 frames (CDS features)
 #check box make restriction site with mutation
-#click on sgRNAs, show sequence, show silent mutations that hit NGG, or 3bp within the next 8bp
+#click on sgRNAs, show sequence, show silent mutations that hit NGG, or 3bp within the next 8bp 
 
 
 
@@ -236,8 +239,8 @@ if {[string first "AppKit" [winfo server .] ] > -1} {
 ## fix alignment
 #   generate alignment score to decide to use fwd or reverse alignment
 #   circular alignments
-#### alignment- add tag to accept or reject differences beween ref and aligned (bold w/ no background for rejected or accepted, red text with black background for unchecked).
-## Buttons to go to next or previous difference. Button to generate new sequence from accepted changes.
+#### alignment- add tag to accept or reject differences beween ref and aligned (bold w/ no background for rejected or accepted, red text with black background for unchecked). 
+## Buttons to go to next or previous difference. Button to generate new sequence from accepted changes. 
 ## Use get seq and get tags like duplicate sequence to make a new sequence window, then go through all accepted changes and change the text. Change the feature extents for accepted indels.
 
 # feature_from_found- needs be converted into a dialog (add in to the find dialog) to get the name, type, colors and gformat, then pass this to the find dialog to add the feature instead of foundf and foundr (finds can be overlapping in the same orientation), can also pass this to feature_from_selection function to clean it up.
@@ -328,7 +331,7 @@ if {[string first "AppKit" [winfo server .] ] > -1} {
 # add features to translation window (above, below or none)
 
 # features, enzyme sites, index line as boxdrawing characters in text map (and translation), or underline
-# color feature text
+# color feature text 
 
 
 # copy special- uppercase only, cds only??
@@ -349,7 +352,7 @@ if {[string first "AppKit" [winfo server .] ] > -1} {
 #   Set oWS = WScript.CreateObject("WScript.Shell")
 #   sLinkFile = "C:\Documents and Settings\Wayne\Desktop\sht.lnk"
 #   Set oLink = oWS.CreateShortcut(sLinkFile)
-#
+#  
 #   oLink.TargetPath = "C:\Program Files\ApE\ApE.exe"
 #   '    oLink.Arguments = ""
 #   '    oLink.Description = "MyProgram"
@@ -376,9 +379,9 @@ if {[string first "AppKit" [winfo server .] ] > -1} {
 # aa feature definitions
 
 ####bigger projects:
-#project files:
-#  manage project files dialog:
-# file list:
+#project files: 
+#  manage project files dialog: 
+# file list: 
 #     above each slot: filename of project; menu button: open project file,  open recent project file, save as, create new blank project file (save as dialog); open second project file (becomes close second after open)
 #     below each slot: remove selected files; add folder to project file (folder dialog); add open file to project file (menu button); add file (file dialog)
 #     select all, select none, toggle selected absolute directory references
@@ -406,7 +409,7 @@ if {[string first "AppKit" [winfo server .] ] > -1} {
 ##set up a formatting file that contains default formatting and colors for features by type (fonts, flip offset?), enzymes by count (fonts, colors)
 ##apply/edit defaults in edit features
 ##apply defaults in edit configure graphic map
-
+ 
 ##############
 # <<Metadata>> (1) dict: arrow_data (list: fwd, rev, flip), width, offset (show as symbol?, flip offset?)
 #<<Metadata>>:(0)name, (1)format_info, (2)type, (3)fwd/rev, (4)annotations_string (qualifiers data)
@@ -435,12 +438,12 @@ if {[string first "AppKit" [winfo server .] ] > -1} {
 # right-click to bring up edit text/ feature/ class dialog, include checkbox option to apply to all of type and all of class
 # put show/hide items into main menu and popup menu- dialog with checkboxes for texts (center label, center bp count, feature list, enzyme list, comment), enzymes (list), features (list)
 # ok: arrow redraw function that can be called for changing feature width, initial setup, arrow edits- sets coord values for both arrow polygons (and arrow_bg polygons)
-# ok: tags: label, type (exon, intron, arrow_f, arrow_r, foreground, outline, feature_text, feature_text_line, feature_text_tick, enz_text, enz_text_line, enz_text_tick),
-# ok: use -state hidden rather than visible tag
+# ok: tags: label, type (exon, intron, arrow_f, arrow_r, foreground, outline, feature_text, feature_text_line, feature_text_tick, enz_text, enz_text_line, enz_text_tick), 
+# ok: use -state hidden rather than visible tag 
 # make feature text line just point to nearest point on feature (change anchor point if feature text is inside arc)
 # enzyme and feature label %substitutions
 # background color for texts
-# circles (width, color, bg color): set radius of features circle relative to enz circle, boolean: flip rev features; tic circle; %GC circle;
+# circles (width, color, bg color): set radius of features circle relative to enz circle, boolean: flip rev features; tic circle; %GC circle; 
 
 
 
@@ -460,10 +463,14 @@ if {[string first "AppKit" [winfo server .] ] > -1} {
 
 
 set time0 [clock clicks -milliseconds]
-if {!$info(android)} {
+if {$info(android)} {
+  wm geometry . 1x1+0+0
+} elseif {[tk windowingsystem] == "aqua"} {
+  wm geometry . 1x1+0-10
+  wm title . "ApE"
   wm withdraw .
 } else {
-  wm geometry . 1x1+0+0
+  wm withdraw .
 }
 
 #if {[winfo exists .]} {
@@ -481,7 +488,7 @@ proc bgerror {msg} {
   sputs $errorInfo
   if {[tk windowingsystem] == "win32"} {
     set mail_program [registry get {HKEY_CURRENT_USER\Software\Clients\Mail} {}]
-    if {![catch {set mail_command [registry get "HKEY_LOCAL_MACHINE\\Software\\Clients\\Mail\\$mail_program\\Protocols\\mailto\\shell\\open\\command" {}]}]} {
+    if {![catch {set mail_command [registry get "HKEY_LOCAL_MACHINE\\Software\\Clients\\Mail\\$mail_program\\Protocols\\mailto\\shell\\open\\command" {}]}]} { 
       regsub "%1" $mail_command "" mail_command
       regsub -all {\\} $mail_command {\\\\} mail_command
     } else {
@@ -505,7 +512,7 @@ proc bgerror {msg} {
     tk_messageBox -message "Sorry, ApE has encountered an internal error.\n[string range $errorInfo 0 50]" -type ok
   }
   set dialogblock 0
-  if {[ bind . <<RaiseDialogs>>] != {}} {bind . <<RaiseDialogs>> {}}
+  if {[ bind . <<RaiseDialogs>>] != {}} {bind . <<RaiseDialogs>> {}}  
 }
 }
 
@@ -534,30 +541,35 @@ proc canvas_test {} {
 
 if {[tk windowingsystem] == "aqua"} {
   proc ::tk::mac::OpenDocument {args} {
+    global info
     if {([lsearch [winfo children .] ".menubar"] != -1) && ([llength [winfo children .]] == 2)} {
-      global info
       foreach file $info(open_at_close) {
         if {[file exists $file] && [file readable $file]} {
          after 300
-         open_file $file
+         open_file $file 0
         }
       }
       unset -nocomplain file
     }
 
     foreach filename $args {
-      after 300
-      open_file $filename
+        open_file $filename 1
     }
+    set info(open_at_close) [list]
   }
 
   proc ::tk::mac::OnShow {args} {
+puts "mac OnShow"
   }
 
   proc ::tk::mac::PrintDocument {args} {
     foreach filename $args {
       open_file $filename
     }
+  }
+
+  proc ::tk::mac::OpenApplication {} {
+    puts "mac OpenApplication"
   }
 
   proc ::tk::mac::ReopenApplication {} {
@@ -607,11 +619,10 @@ proc create_window {{newdna ""} {filename ""} {filecomment ""} {circular linear}
   global toolbar_images
   set reuse_startup 0
 
-
   if {($newdna == -1)} {
     if {$winum > 0} {
       #trying to open a blank startup window after a window is already open
-      return
+      return 
     } else {
       set newdna ""
     }
@@ -622,6 +633,11 @@ proc create_window {{newdna ""} {filename ""} {filecomment ""} {circular linear}
     }
     incr winum
   }
+  
+  if {[tk windowingsystem] == "aqua"} {
+    wm withdraw .
+  }
+  
   set w .dna_window$winum
 
   set info($w,saved) 0
@@ -634,7 +650,7 @@ proc create_window {{newdna ""} {filename ""} {filecomment ""} {circular linear}
   }
   set info($w,linked_abi_list) $abi_data
   set info($w,gformat_data) $gformat_data
-
+  
   set info($w,circular) $circular
   if {$methylated > -1} {
     set info($w,Dam_Dcm_methylated) $methylated
@@ -657,12 +673,12 @@ proc create_window {{newdna ""} {filename ""} {filecomment ""} {circular linear}
   }
 
 set info($w,locked) 0
-toplevel $w
+toplevel $w 
 
 if {[tk windowingsystem] == "aqua"} {
   #::tk::unsupported::MacWindowStyle style $w document {closeBox collapseBox horizontalZoom unifiedTitleAndToolbar resizable liveResize toolbarButton}
    #::tk::unsupported::MacWindowStyle style $w document {closeBox collapseBox horizontalZoom resizable liveResize toolbarButton}; #this one worked until the toolbar button was removed
-  # ::tk::unsupported::MacWindowStyle style $w simple {noTitleBar};#to add unified menu - needs to define the file menu and the close, colapse and zoom buttons, resize handle, and the toolbar button
+  # ::tk::unsupported::MacWindowStyle style $w simple {noTitleBar};#to add unified menu - needs to define the file menu and the close, colapse and zoom buttons, resize handle, and the toolbar button 
 }
 
 wm title $w $title
@@ -685,7 +701,7 @@ menu $w.menubar
 
 
 #define file menu
-menu  $w.menubar.filemenu
+menu  $w.menubar.filemenu 
 $w.menubar add cascade -menu $w.menubar.filemenu -label [mc "File"] -underline 0
 $w.menubar.filemenu add command -label [mc "New"] -accelerator "$modstring+N" -command "create_window" -underline 0
 $w.menubar.filemenu add command -label [mc "Open..."] -accelerator "$modstring+O"  -command "open_file_dialog"
@@ -709,7 +725,7 @@ $w.menubar.filemenu add cascade -label [mc "Access Cloud Services"] -menu $w.men
 #exit is added below in the platform specific code
 
 #define edit menu
-menu  $w.menubar.edit
+menu  $w.menubar.edit  
 $w.menubar add cascade -menu $w.menubar.edit  -label [mc "Edit"]
 $w.menubar.edit  add command -label [mc "Undo"] -state disabled -accelerator "$modstring+Z" -command "undo $w"
 bind $w.menubar.edit <<undostate>> disabled
@@ -798,7 +814,7 @@ $w.menubar.enzymes add separator
 $w.menubar.enzymes add command -label [mc "Silent Sites"]  -command "after $bugdelay {silent_sites $w \$info(enz_currently_selected)}"
   $w.menubar.enzymes add command -label [mc "Add Diagnostic Site"]  -command "after $bugdelay {add_daignostic_site_dialog $w}"
 $w.menubar.enzymes add separator
-$w.menubar.enzymes add command -label [mc "Text Map..."] -accelerator "$modstring+Shift+T" -command "after $bugdelay enz_text_map $w "
+$w.menubar.enzymes add command -label [mc "Text Map..."] -accelerator "$modstring+Shift+T" -command "after $bugdelay enz_text_map $w"
 
 #add ORFs menu
 menu  $w.menubar.orf
@@ -833,7 +849,7 @@ $w.menubar add cascade -menu $w.menubar.orf -label [mc "ORFs"]
       set info($w,selection_Trans_rev) ""
       set info($w,selection_Trans) ""
   #$w.menubar.orf add checkbutton -label "Selection Translate" -variable info(selection_shows_Trans) -onvalue 1 -offvalue 0 -command "selection_manager $w"
-  $w.menubar.orf add checkbutton -label [mc "Selection Translate"] -variable info($w,selection_shows_Trans) -onvalue 1 -offvalue 0 -command "if {\$info($w,selection_shows_Trans)} {grid propagate $w.infoframe 1; grid configure $w.infoframe.trans;update; grid propagate $w.infoframe 0; selection_manager $w} else {grid propagate $w.infoframe 1; grid remove $w.infoframe.trans; update; grid propagate $w.infoframe 0}"
+  $w.menubar.orf add checkbutton -label [mc "Selection Translate"] -variable info($w,selection_shows_Trans) -onvalue 1 -offvalue 0 -command "if {\$info($w,selection_shows_Trans)} {grid propagate $w.infoframe 1; grid configure $w.infoframe.trans;update idletasks; grid propagate $w.infoframe 0; selection_manager $w} else {grid propagate $w.infoframe 1; grid remove $w.infoframe.trans;update idletasks; grid propagate $w.infoframe 0}"
   $w.menubar.orf add cascade -label [mc "Selection Translate Direction"]  -menu $w.menubar.orf.selection_translate_dir
   $w.menubar.orf add checkbutton -label [mc "Selection Translate Uppercase ONLY"] -variable info($w,selection_shows_Trans_upper) -onvalue 1 -offvalue 0
 
@@ -850,7 +866,7 @@ $w.menubar add cascade -menu $w.menubar.features -label [mc "Features"]
   $w.menubar.features add command -label [mc "List Features"] -command "after $bugdelay list_features $w"
   #$w.menubar.features add command -label [mc "Edit Features..."] -command "after $bugdelay configure_features $w"
   $w.menubar.features add command -label [mc "Clear Features"] -accelerator "$modstring+Shift+K" -command "feature_clear $w"
-  #$w.menubar.features add command -label [mc "Edit Feaure Color Favorites"] -command "edit_color_favorites $w"
+  #$w.menubar.features add command -label [mc "Edit Feature Color Favorites"] -command "edit_color_favorites $w"
   $w.menubar.features add command -label [mc "Restack Features by Length"] -command "restack_features $w"
   $w.menubar.features add separator
   $w.menubar.features add command -label [mc "Edit Feature Library..."] -command "after $bugdelay edit_feature_library $w"
@@ -866,23 +882,22 @@ $w.menubar add cascade -menu $w.menubar.features -label [mc "Features"]
 #add Tools menu
 menu  $w.menubar.tools
 $w.menubar add cascade -menu $w.menubar.tools -label [mc "Tools"]
-  $w.menubar.tools add command -label [mc "Find Primers..."] -command "after $bugdelay primer_window $w"
-  $w.menubar.tools add separator
   $w.menubar.tools add command -label [mc "Align Sequences..."] -accelerator "$modstring+L" -command "after $bugdelay align_dialog2 $w"
   $w.menubar.tools add command -label [mc "Align Two Sequences..."] -accelerator "$modstring+Shift+L" -command "after $bugdelay align_dialog $w"
   $w.menubar.tools add separator
-  $w.menubar.tools add command -label [mc "Restriction-Ligation Wizard"] -accelerator "" -command "after $bugdelay re_cloning_wizard_dialog $w"
+  $w.menubar.tools add command -label [mc "Restriction-Ligation Assembler"] -accelerator "" -command "after $bugdelay re_cloning_wizard_dialog $w"
   $w.menubar.tools add separator
-  $w.menubar.tools add command -label [mc "Recombination Tool..."] -accelerator "" -command "after $bugdelay recombination_window $w"
+  $w.menubar.tools add command -label [mc "Recombination Assembler Tool..."] -accelerator "" -command "after $bugdelay recombination_window $w"
   $w.menubar.tools add command -label [mc "Recombination Reaction Editor..."] -accelerator "" -command "after $bugdelay recomb_dialog $w"
   $w.menubar.tools add separator
   #$w.menubar.tools add command -label [mc "Gibson Reaction"] -command "after $bugdelay gibson_dialog $w"
-  $w.menubar.tools add command -label [mc "Gibson Assembly Wizard"] -command "after $bugdelay gibson_wizard_dialog $w"
+  $w.menubar.tools add command -label [mc "Gibson Designer"] -command "after $bugdelay gibson_wizard_dialog $w"
   $w.menubar.tools add separator
-  $w.menubar.tools add command -label [mc "PCR Reaction"] -command "after $bugdelay pcr_dialog $w"
+$w.menubar.tools add command -label [mc "PCR Reaction"] -command "after $bugdelay pcr_dialog $w"
+  $w.menubar.tools add command -label [mc "Find Primers..."] -command "after $bugdelay primer_window $w"
   $w.menubar.tools add separator
-  $w.menubar.tools add command -label [mc "Golden Gate Assembly Wizard"] -command "after $bugdelay gg_wizard_dialog $w"
-  $w.menubar.tools add command -label [mc "Golden Gate Reaction"] -command "after $bugdelay golden_gate_dialog $w"
+  $w.menubar.tools add command -label [mc "Golden Gate Designer"] -command "after $bugdelay gg_wizard_dialog $w"
+  $w.menubar.tools add command -label [mc "Golden Gate Assembler"] -command "after $bugdelay golden_gate_dialog $w"
   #$w.menubar.tools add command -label [mc "Reverse Golden Gate Reaction"] -command "after $bugdelay reverse_golden_gate_dialog $w"
   $w.menubar.tools add separator
   $w.menubar.tools add command -label [mc "dCAPS calculator"] -command "after $bugdelay dcaps_dialog $w"
@@ -891,16 +906,15 @@ $w.menubar add cascade -menu $w.menubar.tools -label [mc "Tools"]
  # $w.menubar.tools add command -label [mc "BLAST Sequences At Wormbase..."] -command "Wormbase_Blast $w"
   $w.menubar.tools add command -label [mc "Download sequences From NCBI..."] -command "after $bugdelay entrez_dialog $w"
   $w.menubar.tools add separator
-  $w.menubar.tools add command -label [mc "Calculator..."] -accelerator "$modstring+1" -command "after $bugdelay calc"
   $w.menubar.tools add command -label [mc "Palette Generator"] -command "after $bugdelay palette_test $w"
   $w.menubar.tools add separator
   $w.menubar.tools add command -label [mc "Make Features From FASTA search file..."] -command "multi_search_dialog $w"
   $w.menubar.tools add separator
-  $w.menubar.tools add command -label [mc "sgRNA Analysis"] -command "after $bugdelay sg_RNA_analysis $w"
+  $w.menubar.tools add command -label [mc "sgRNA Analysis"] -command "after $bugdelay sg_RNA_analysis $w" 
   $w.menubar.tools add separator
   $w.menubar.tools add command -label [mc "Insert Repeat Sequence..."] -command "after $bugdelay insert_repeat $w"
   $w.menubar.tools add separator
-  $w.menubar.tools add command -label [mc "Multi-Cre Recombination..."] -command "after $bugdelay lox_recombination_window $w"
+  $w.menubar.tools add command -label [mc "Multi-Cre Recombination..."] -command "after $bugdelay lox_recombination_window $w" 
   $w.menubar.tools add separator
   $w.menubar.tools add command -label [mc "Digest All Open Windows"] -command "after $bugdelay digest_open_windows"
   $w.menubar.tools add separator
@@ -911,7 +925,7 @@ $w.menubar add cascade -menu $w.menubar.tools -label [mc "Tools"]
 
 if {!$info(android)} {
   #add Windows menu stub (menu items are maintained by update_windows_menu procedure)
-  menu $w.menubar.windows
+  menu $w.menubar.windows 
     $w.menubar add cascade -menu $w.menubar.windows -label [mc "Window"]
 } else {
   menu $w.windowsmenu
@@ -966,8 +980,11 @@ $popupmenu add command -label [mc "BLAST Sequences at NCBI..."] -accelerator "$m
 #$popupmenu add command -label [mc "BLAST Sequences at Wormbase..."] -command "Wormbase_Blast $w"
 
 #add Help menu
-menu  $w.menubar.help1
+menu  $w.menubar.help1 
 $w.menubar add cascade -menu $w.menubar.help1 -label [mc "Help"]
+  $w.menubar.help1 add command -label [mc "Calculator..."] -accelerator "$modstring+1" -command "calc" 
+  $w.menubar.help1 add command -label [mc "Molecular Reaction Calculator..."] -accelerator "$modstring+2" -command "mol_calc" 
+  $w.menubar.help1 add separator
   $w.menubar.help1 add command -label [mc "Standard Genetic Code"] -command "genetic_code_dialog $w"
   $w.menubar.help1 add command -label [mc "AA Info"] -command "aa_info_dialog $w"
 
@@ -983,28 +1000,22 @@ $w.menubar add cascade -menu $w.menubar.help1 -label [mc "Help"]
     $w.menubar.help1 add command -label [mc "About ApE..."] -command "about_dialog $w"
     #$w.menubar.help1 add command -label [mc "Check for Updates"] -command "web_version_check 1"
 
-    #add menu icons
-    # this is done in ui_buttons_set_icons
-  #    set iconlist [list $w.menubar.filemenu [mc New] new $w.menubar.filemenu [mc Open...] open $w.menubar.filemenu [mc Save] save $w.menubar.edit  [mc "Cut"] cut $w.menubar.edit  [mc "Copy"] copy $w.menubar.edit  [mc "Paste"] paste $w.menubar.edit  [mc "Cut Rev-Com"] cut $w.menubar.edit  [mc "Copy Rev-Com"] copy $w.menubar.edit  [mc "Paste Rev-Com"] paste $w.menubar.edit  [mc "Select From-To..."] select $w.menubar.edit  [mc "Jump To..."] jump $w.menubar.edit  [mc "Find..."] find $w.menubar.edit  [mc "Convert to UPPERCASE"] uppercase $w.menubar.edit  [mc "Convert to lowercase"] lowercase $w.menubar.edit  [mc "Reverse-Complement"] reverse_com $w.menubar.edit  [mc "Set Origin"] origin $w.menubar.enzymes [mc "Enzyme Selector..."] enzymes $w.menubar.enzymes [mc "Graphic Map"] graphic_map $w.menubar.enzymes [mc "Graphic Map +U"] graphic_map $w.menubar.enzymes [mc "Highlight"] highlight_enzymes $w.menubar.enzymes [mc "Clear Highlighting"] highlight_enzymes $w.menubar.enzymes [mc "Digestion"] digest $w.menubar.enzymes [mc "Digestion Dialog..."] digest $w.menubar.enzymes [mc "Text Map..."] text_map $w.menubar.tools [mc "Find Primers..."] find_primers $w.menubar.tools [mc "Align Sequences..."] align  $w.menubar.tools [mc "PCR Reaction"] pcr $w.menubar.tools [mc "Recombination Tool..."] gibson $w.menubar.tools [mc "Gibson Assembly Wizard"] gibson $w.menubar.tools [mc "Golden Gate Assembly Wizard"] golden_gate $w.menubar.tools [mc "Golden Gate Reaction"] golden_gate $w.menubar.tools [mc "BLAST Sequences at NCBI..."] ncbi $w.menubar.tools [mc "BLAST Sequences at Wormbase..."] wormbase $w.menubar.tools [mc "Download sequences from NCBI..."] ncbi]
-  #  foreach {menu item icon} $iconlist {
-  #    catch {$menu entryconfigure $item  -compound left -image $toolbar_images($icon)} err
-  #    #sputs $err
-  #  }
+
   } elseif {[tk windowingsystem] == "aqua"} {
     #define the apple menu
     if {!$info(use_cocoa)} {
-      menu $w.menubar.apple
+      menu $w.menubar.apple 
       $w.menubar add cascade -menu $w.menubar.apple
       $w.menubar.apple add command -label [mc "About ApE"] -command "about_dialog $w"
       $w.menubar.apple add separator
       #$w.menubar.apple add command -label [mc "Preferences..."]  -command "configure_preferences $w" -accelerator "$modstring+,"
     }
 
-    catch {.menubar.filemenu entryconfigure [mc "New"] -state disabled}
-    catch {.menubar.filemenu entryconfigure [mc "Open..."] -state disabled}
-    catch { .menubar.filemenu entryconfigure [mc "Open Recent Files"] -state disabled}
+    #catch {.menubar.filemenu entryconfigure [mc "New"] -state disabled}
+    #catch {.menubar.filemenu entryconfigure [mc "Open..."] -state disabled}
+   # catch { .menubar.filemenu entryconfigure [mc "Open Recent Files"] -state disabled}
     #.menubar.apple entryconfigure [mc "Preferences..."] -state disabled
-    catch {.menubar.apple entryconfigure [mc "About ApE"] -state disabled}
+   # catch {.menubar.apple entryconfigure [mc "About ApE"] -state disabled}
     #bind . <Command-KeyPress-o> ""
     #bind . <Command-KeyPress-n> ""
     #bind . <Command-KeyPress-q> ""
@@ -1016,6 +1027,35 @@ $w.menubar add cascade -menu $w.menubar.help1 -label [mc "Help"]
     if {$info(newaquax) > 100} {set info(newaquax) 20}
     if {$info(newaquay) > 100} {set info(newaquay) 20}
   }
+
+    #add menu icons
+    set iconlist [list $w.menubar.filemenu [mc New] new $w.menubar.filemenu [mc Open...] open $w.menubar.filemenu [mc Save] save $w.menubar.edit  [mc "Cut"] cut $w.menubar.edit  [mc "Copy"] copy $w.menubar.edit  [mc "Paste"] paste $w.menubar.edit  [mc "Cut Rev-Com"] cut $w.menubar.edit  [mc "Copy Rev-Com"] copy $w.menubar.edit  [mc "Paste Rev-Com"] paste $w.menubar.edit  [mc "Select From-To..."] select $w.menubar.edit  [mc "Jump To..."] jump $w.menubar.edit  [mc "Find..."] find $w.menubar.edit  [mc "Convert to UPPERCASE"] uppercase $w.menubar.edit  [mc "Convert to lowercase"] lowercase $w.menubar.edit  [mc "Reverse-Complement"] reverse_com $w.menubar.enzymes [mc "Enzyme Selector..."] enzymes $w.menubar.enzymes [mc "Graphic Map"] graphic_map $w.menubar.enzymes [mc "Graphic Map +U"] graphic_map $w.menubar.enzymes [mc "Highlight"] highlight_enzymes $w.menubar.enzymes [mc "Clear Highlighting"] highlight_enzymes $w.menubar.enzymes [mc "Digestion"] digest $w.menubar.enzymes [mc "Digestion Dialog..."] digest $w.menubar.enzymes [mc "Text Map..."] text_map $w.menubar.tools [mc "Find Primers..."] find_primers $w.menubar.tools [mc "Align Sequences..."] align  $w.menubar.tools [mc "PCR Reaction"] pcr $w.menubar.tools [mc "Recombination Assembler Tool..."] gibson $w.menubar.tools [mc "Gibson Designer"] gibson $w.menubar.tools [mc "Gibson Assembly Wizard"] gibson $w.menubar.tools [mc "Golden Gate Assembler"] golden_gate $w.menubar.tools [mc "Golden Gate Designer"] golden_gate]
+
+
+    set text_size [expr {round([tk scaling]  * [font actual menufont -size])}]
+    if {$text_size < 32} {
+      set x "1x"
+    } elseif {$text_size < 48} {
+      set x "2x"
+    } elseif {$text_size < 64} {
+      set x "3x"
+    } elseif {$text_size < 128} {
+      set x "4x"
+    } elseif {$text_size < 256} {
+      set x "8x"
+    } else {
+      set x "16x"
+    }
+    if {$info(dark_mode)} {
+      set dark "_dark"
+    } else {
+      set dark ""
+    }
+    foreach {menu item icon} $iconlist {
+      catch {$menu entryconfigure $item  -compound left -image $toolbar_images($icon$dark,$x)} err
+    }
+
+
 
 ###Android windows menu generated here
 if {!$info(android)} {
@@ -1047,7 +1087,7 @@ if {[tk windowingsystem] == "aqua" || $info(android)} {
     set press_color [gray_color $info(bg_color)]
     set normal_color $info(bg_color);#$info(bg_color)
 } else {
-  frame $w.infoframe -borderwidth 2 -relief ridge
+  frame $w.infoframe -borderwidth 2 -relief ridge 
     set over_relief solid
     set press_relief solid
     set normal_relief flat
@@ -1058,7 +1098,7 @@ if {[tk windowingsystem] == "aqua" || $info(android)} {
 #grid propagate $w.infoframe 0
 
 
-    ttk::checkbutton $w.infoframe.locked -style Icon.MD.TCheckbutton -image [list $toolbar_images(button_unlocked) selected $toolbar_images(button_locked)] -command "toggle_locked $w" -variable info($w,locked) -onvalue 1 -offvalue 0
+    ttk::checkbutton $w.infoframe.locked -style Icon.MD.TCheckbutton -image [list $toolbar_images(button_unlocked) selected $toolbar_images(button_locked)] -command "toggle_locked $w" -variable info($w,locked) -onvalue 1 -offvalue 0 
     tooltip_install $w.infoframe.locked "[mc Lock/Unlock]\n[mc File]"
 
 
@@ -1081,21 +1121,21 @@ if {[tk windowingsystem] == "aqua" || $info(android)} {
 
   #checkbutton $w.infoframe.saved -text [mc "Saved"]  -variable info($w,saved) -onvalue 1 -offvalue 0 -selectcolor white -activebackground $info(bg_color) -disabledforeground $info(label_fg_color) -state normal -command  "if {!\[save_file $w Save\]} {set info($w,saved) \[expr {!\$info($w,saved)}\]}"
   #tooltip_install $w.infoframe.saved [mc {Click to Save File}]
-  ttk::label $w.infoframe.totallenlabel -text [mc "Sequence"]  -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.totallen  -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.startlabel -text [mc "Start"]  -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.start  -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.sellenlabel -text [mc "Length"] -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.sellen -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.endlabel -text [mc "End"] -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.end -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.orflabel -text [mc "ORF"] -style InfoboxStyle.TLabel
+  ttk::label $w.infoframe.totallenlabel -text [mc "Sequence"]  -style InfoboxStyle.TLabel 
+  ttk::label $w.infoframe.totallen  -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.startlabel -text [mc "Start"]  -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.start  -style InfoboxStyle.TLabel   
+  ttk::label $w.infoframe.sellenlabel -text [mc "Length"] -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.sellen -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.endlabel -text [mc "End"] -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.end -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.orflabel -text [mc "ORF"] -style InfoboxStyle.TLabel  
   ttk::label $w.infoframe.orf -style InfoboxStyle.TLabel  -textvariable info($w,orf_text)
-  ttk::label $w.infoframe.tmlabel -text "Tm"  -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.tm -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.gclabel -text "%GC"  -style InfoboxStyle.TLabel
-  ttk::label $w.infoframe.gc -style InfoboxStyle.TLabel
-  label $w.infoframe.trans -justify center
+  ttk::label $w.infoframe.tmlabel -text "Tm"  -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.tm -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.gclabel -text "%GC"  -style InfoboxStyle.TLabel  
+  ttk::label $w.infoframe.gc -style InfoboxStyle.TLabel  
+  label $w.infoframe.trans -justify center 
 
   bind  $w.infoframe.start <Double-Button-1> "infoframe_entry $w %W"
   bind  $w.infoframe.sellen <Double-Button-1> "infoframe_entry $w %W"
@@ -1115,18 +1155,18 @@ if {[tk windowingsystem] == "aqua" || $info(android)} {
 
   if {$info(android)} {
     ttk::label $w.infoframe.circular -textvariable info($w,circular_text)  -borderwidth 1
-    bind $w.infoframe.circular <ButtonRelease-1>  "toggle_circ $w"
-    bind $w.infoframe.circular <ButtonRelease-2>  "toggle_circ $w"
+    bind $w.infoframe.circular <ButtonRelease-1>  "toggle_circ $w" 
+    bind $w.infoframe.circular <ButtonRelease-2>  "toggle_circ $w" 
 
     label $w.infoframe.find -image $toolbar_images(button_find,4x)  -borderwidth 1
-    bind $w.infoframe.find <ButtonRelease-1>  "find_dialog $w 1"
-    bind $w.infoframe.find <ButtonRelease-2>  "find_dialog $w 1"
+    bind $w.infoframe.find <ButtonRelease-1>  "find_dialog $w 1" 
+    bind $w.infoframe.find <ButtonRelease-2>  "find_dialog $w 1" 
     label $w.infoframe.edit_features -image $toolbar_images(button_edit,4x)  -borderwidth 1
-    bind $w.infoframe.edit_features <ButtonRelease-1>  "add_feature_edit_box $w"
-    bind $w.infoframe.edit_features <ButtonRelease-2>  "add_feature_edit_box $w"
+    bind $w.infoframe.edit_features <ButtonRelease-1>  "add_feature_edit_box $w" 
+    bind $w.infoframe.edit_features <ButtonRelease-2>  "add_feature_edit_box $w" 
     label $w.infoframe.find_orf -image $toolbar_images(button_orf,4x)  -borderwidth 1
-    bind $w.infoframe.find_orf <ButtonRelease-1>  "add_orf_search_box $w"
-    bind $w.infoframe.find_orf <ButtonRelease-2>  "add_orf_search_box $w"
+    bind $w.infoframe.find_orf <ButtonRelease-1>  "add_orf_search_box $w" 
+    bind $w.infoframe.find_orf <ButtonRelease-2>  "add_orf_search_box $w" 
     grid $w.infoframe.edit_features -row 0 -column 1
     grid $w.infoframe.find -row 1 -column 1
     grid $w.infoframe.find_orf -row 2 -column 1
@@ -1149,7 +1189,7 @@ if {[tk windowingsystem] == "aqua" || $info(android)} {
   ttk::checkbutton $w.infoframe.methylation -text "Dam/Dcm" -onvalue 1 -offvalue 0  -variable info($w,Dam_Dcm_methylated) -command "toggle_methylation $w" -style InfoboxStyle.TCheckbutton
 
 
-      ##
+      ##  
   if {!$info(android)} {
     #grid $w.infoframe.saved -row 0 -column 2
     grid columnconfigure $w.infoframe 1 -minsize [font measure labelfont 9999999]
@@ -1324,11 +1364,11 @@ bind $w.textarea <Key-Tab> "if {\[grid info $w.comframe\] == \"\"} {toggle_comme
 #bind $w.textarea <Double-Button-1> "select_region $w 1.0 end-1c"
 if {[tk windowingsystem] != "aqua"} {
   bind $w.textarea <Button-1> "if {(\[focus\] != \"$w.textarea\") && (\$dialogblock == 0)} {focus $w.textarea} else {textsetcursor $w \[text_closest_gap $w.textarea %x %y\]}"
-  bind $w.textarea <Double-Button-1> "sequence_window_double_button $w %x %y"
+  bind $w.textarea <Double-Button-1> "sequence_window_double_button $w %x %y" 
 } else {
   bind $w.textarea <Button-1> "if {(\[focus\] != \"$w.textarea\") && (\$dialogblock == 0)} {focus $w.textarea} else {textsetcursor $w \[text_closest_gap $w.textarea %x %y\]};double_button_manager $w.textarea"
-  bind $w.textarea <<Double-Button-1>> "sequence_window_double_button $w %x %y"
-  #bind $w.textarea <Double-Button-1> "sequence_window_double_button $w %x %y"
+  bind $w.textarea <<Double-Button-1>> "sequence_window_double_button $w %x %y" 
+  #bind $w.textarea <Double-Button-1> "sequence_window_double_button $w %x %y" 
 }
 #bind $w.textarea <Shift-Button-1> "[bind Text <Shift-Button-1>]; selection_manager $w"
 bind $w.textarea <Shift-Button-1> "text_reset_anchor %W @%x,%y; text_select_xy $w %x %y; selection_manager $w"
@@ -1412,7 +1452,7 @@ if {!$info(use_tile)} {
   set info($w,show_fetauretable) 0
 }
 
-tooltip_install $w.show_feature_table [mc "Show Feature List"]
+tooltip_install $w.show_feature_table [mc "Show Feature List\nShift:Show Feature Buttons"]
 if {[tk windowingsystem] != "aqua"} {
   bind $w.show_feature_table <ButtonRelease-3> "toggle_features_treeview $w"
   bind $w.show_feature_table <ButtonRelease-1> "toggle_features_treeview $w"
@@ -1423,6 +1463,7 @@ if {[tk windowingsystem] != "aqua"} {
   bind $w.show_feature_table <ButtonRelease-2> "toggle_features_treeview $w"
   bind $w.show_feature_table <Control-ButtonRelease-1> "toggle_features_treeview $w"
   bind $w.show_feature_table <ButtonRelease-1> "toggle_features_treeview $w"
+  bind $w.show_feature_table <Shift-ButtonRelease-1> "if {\[winfo ismapped $w.tvframe\] && \[winfo exists $w.tvframe.buttons\]} {if {\[winfo ismapped $w.tvframe.buttons\]} {grid remove $w.tvframe.buttons} else {grid configure $w.tvframe.buttons}}"
 }
 
 
@@ -1432,7 +1473,7 @@ if {[tk windowingsystem] != "aqua"} {
     bind $w.showcomment <Enter> "$w.showcomment configure -bg $over_color -relief $over_relief; tooltip_enter $w.showcomment \"\[mc Show/Hide\]\n\[mc \{File Comment\}\]\""
     bind $w.showcomment <Leave> "$w.showcomment configure -bg $normal_color -relief $normal_relief; tooltip_leave $w.showcomment"
     bind $w.showcomment <Button-1> "$w.showcomment configure -bg $press_color -relief $press_relief"
-    bind $w.showcomment <ButtonRelease-1> "if \{\[$w.showcomment cget -relief\] == \"$press_relief\"\} \{$w.showcomment configure -bg $over_color -relief $over_relief; toggle_comment $w\} else \{$w.showcomment configure -bg $normal_color -relief $normal_relief\}"
+    bind $w.showcomment <ButtonRelease-1> "if \{\[$w.showcomment cget -relief\] == \"$press_relief\"\} \{$w.showcomment configure -bg $over_color -relief $over_relief; toggle_comment $w\} else \{$w.showcomment configure -bg $normal_color -relief $normal_relief\}" 
     #bind "$w.showcomment" <B1-ButtonRelease> "toggle_comment $w"
     #tooltip_install $w.showcomment "[mc Show/Hide]\n[mc {File Comment}]"
   } elseif {$info(android)} {
@@ -1463,7 +1504,7 @@ grid [scrollbar $w.comframe.comtextframe.scrolly -orient vertical -command "$w.c
   } else {
     set resize_cursor sb_v_double_arrow
   }
-grid [frame  $w.comframe.comtextframe.resize -height 3 -bg $info(bg_color) -cursor $resize_cursor] -row 1 -column 0 -columnspan 2 -sticky nwe
+grid [frame  $w.comframe.comtextframe.resize -height 3 -bg $info(bg_color) -cursor $resize_cursor] -row 1 -column 0 -columnspan 2 -sticky nwe 
 grid configure $w.comframe.comtextframe.text -pady 0
   bind  $w.comframe.comtextframe.resize <ButtonPress-1> "bind $w.comframe.comtextframe.text <<resizeY>> %Y; bind $w.comframe.comtextframe.text <<resizeHeight>> \[$w.comframe.comtextframe.text cget -height\]"
   bind  $w.comframe.comtextframe.resize <Button1-Motion> "comment_resize $w.comframe.comtextframe.text %Y"
@@ -1486,7 +1527,7 @@ $w.comframe.comtextframe.text insert 1.0 $filecomment
 $w.comframe.comtextframe.text edit reset
 bind $w.comframe.comtextframe.text <$modifier-KeyPress> "comment_keyevent_manager $w Control %K ; break"
 bind $w.comframe.comtextframe.text <Shift-$modifier-KeyPress> "comment_keyevent_manager $w ShiftControl %K ; break"
-bind $w.comframe.comtextframe.text <Key> "if {\[string equal %A \"\"\] || \[file_lock_check $w\]} {break} else {set info($w,saved) 0;  if {\[tk windowingsystem\] == \"aqua\"} {wm attributes $w -modified 1}}"
+bind $w.comframe.comtextframe.text <Key> "if {\[string equal %A \"\"\] || \[file_lock_check $w\]} {break} else {set info($w,saved) 0;  if {\[tk windowingsystem\] == \"aqua\"} {wm attributes $w -modified 1}}" 
 bind $w.comframe.comtextframe.text <Delete> "if {\[file_lock_check $w\]} {break} else {set info($w,saved) 0;if {\[tk windowingsystem\] == \"aqua\"} {wm attributes $w -modified 1}}"
 bind $w.comframe.comtextframe.text <Key-BackSpace> "if {\[file_lock_check $w\]} {break} else {set info($w,saved) 0;if {\[tk windowingsystem\] == \"aqua\"} {wm attributes $w -modified 1}}"
 bind $w.comframe.comtextframe.text <Key-Return> "if {\[file_lock_check $w\]} {break} else {set info($w,saved) 0;if {\[tk windowingsystem\] == \"aqua\"} {wm attributes $w -modified 1}}"
@@ -1635,7 +1676,7 @@ if {!$info(lock_bug)} {
 }
 
 if {[tk windowingsystem] == "aqua"} {
-  wm attributes $w -modified [expr {!$info($w,saved)}]
+  wm attributes $w -modified [expr {!$info($w,saved)}] 
   if {[file exists $filename]} {
     wm attributes $w -titlepath $filename
   }
@@ -1650,7 +1691,6 @@ if {$info(android)} {
   }
   resize_infoframe_fonts $w
 }
-
 
 
 if {$info(use_cocoa)} {
@@ -1674,7 +1714,7 @@ sputs here c
 ## right click menu in Feature_group column heading to apply tag to selected ("new tag..." option)
 ## hidden column
 ## can do a list, hide or add tag to selected items
-## right click menu in type column heading to select all of a type-
+## right click menu in type column heading to select all of a type- 
 proc add_featuretable {w {show 1}} {
   global info
   set f [frame $w.tvframe]
@@ -1689,12 +1729,20 @@ proc add_featuretable {w {show 1}} {
   } else {
     set resize_cursor sb_v_double_arrow
   }
-  frame $w.tvframe.resize -height 3 -bg $info(bg_color) -cursor $resize_cursor
+  frame $w.tvframe.buttons
+  grid [button $w.tvframe.buttons.raise -text [mc "Raise"] -command "if {\$dialogblock} {} elseif {\$info($w,locked)} {tk_messageBox -message \[mc {File Is Locked}\] -type ok} else  {featuretable_edit_items $w 0 raise_selected}" ] -row 0 -column 0
+  grid [button $w.tvframe.buttons.lower -text [mc "Lower"]  -command "if {\$dialogblock} {} elseif {\$info($w,locked)} {tk_messageBox -message \[mc {File Is Locked}\] -type ok} else {featuretable_edit_items $w 0 lower_selected}" ] -row 0 -column 1
+  grid [button $w.tvframe.buttons.delete -text [mc "Delete"] -command "if {\$dialogblock} {} elseif {\$info($w,locked)} {tk_messageBox -message \[mc {File Is Locked}\] -type ok} else {featuretable_edit_items $w 0 delete_selected}" ] -row 0 -column 2
+  grid [button $w.tvframe.buttons.hide -text [mc "Hide"] -command "if {\$dialogblock} {} elseif {\$info($w,locked)} {tk_messageBox -message \[mc {File Is Locked}\] -type ok} else {featuretable_edit_items $w 0 hide_selected}" ] -row 0 -column 4
+  grid [button $w.tvframe.buttons.show -text [mc "Show"] -command "if {\$dialogblock} {} elseif {\$info($w,locked)} {tk_messageBox -message \[mc {File Is Locked}\] -type ok} else {featuretable_edit_items $w 0 show_selected}" ] -row 0 -column 5
+  frame $w.tvframe.resize -height 3 -cursor $resize_cursor
   bind $t <MouseWheel> "treeview_do_entry_edit $t"
   grid $f -row 3 -column 0 -columnspan 5 -sticky ew  -padx {5 0}
   grid $f.tv -row 0 -column 0  -sticky nsew
   grid $f.sc -row 0 -column 1 -sticky nsw
-  grid $w.tvframe.resize -row 1 -column 0 -columnspan 2 -sticky ew
+  grid $w.tvframe.buttons -row 2 -column 0 -columnspan 2 -sticky ew
+  grid remove $w.tvframe.buttons
+  grid $w.tvframe.resize -row 3 -column 0 -columnspan 2 -sticky ew
   grid columnconfigure $f 0 -weight 1
   grid columnconfigure $f 1 -minsize 17
 
@@ -1713,7 +1761,7 @@ proc add_featuretable {w {show 1}} {
   $t column Location -minwidth 50 -stretch 1 -anchor c
 
   for {set i 0} {$i < 20} {incr i} {
-    $t column [format "g_%03u" $i] -width 16 -minwidth 12 -stretch 0 -anchor c
+    $t column [format "g_%03u" $i] -width 16 -minwidth 12 -stretch 0 -anchor c 
   }
 
 
@@ -1790,16 +1838,16 @@ proc add_feature_edit_box {w} {
   if {$info(android)} {
       grid [frame $s.buttons_frame] -row 0 -column 0 -sticky nsew
       label  $s.buttons_frame.find -image $toolbar_images(button_find,4x)  -borderwidth 1
-      bind $s.buttons_frame.find <ButtonRelease-1>  "grid remove $s; find_dialog $w 1"
-      bind $s.buttons_frame.find <ButtonRelease-2>  "grid remove $s; find_dialog $w 1"
+      bind $s.buttons_frame.find <ButtonRelease-1>  "grid remove $s; find_dialog $w 1" 
+      bind $s.buttons_frame.find <ButtonRelease-2>  "grid remove $s; find_dialog $w 1" 
 
       label  $s.buttons_frame.seq_info -image $toolbar_images(button_info,4x)  -borderwidth 1
-      bind $s.buttons_frame.seq_info <ButtonRelease-1>  "grid remove $s"
-      bind $s.buttons_frame.seq_info <ButtonRelease-2>  "grid remove $s"
+      bind $s.buttons_frame.seq_info <ButtonRelease-1>  "grid remove $s" 
+      bind $s.buttons_frame.seq_info <ButtonRelease-2>  "grid remove $s" 
 
       label  $s.buttons_frame.find_orf -image $toolbar_images(button_orf,4x)  -borderwidth 1
-      bind $s.buttons_frame.find_orf <ButtonRelease-1>  "grid remove $s;  add_orf_search_box $w"
-      bind $s.buttons_frame.find_orf <ButtonRelease-2>  "grid remove $s;  add_orf_search_box $w"
+      bind $s.buttons_frame.find_orf <ButtonRelease-1>  "grid remove $s;  add_orf_search_box $w" 
+      bind $s.buttons_frame.find_orf <ButtonRelease-2>  "grid remove $s;  add_orf_search_box $w" 
 
       grid $s.buttons_frame.find -row 0 -column 0
       grid $s.buttons_frame.seq_info -row 1 -column 0
@@ -1916,7 +1964,7 @@ proc add_feature_edit_box {w} {
   menu $a.infoframe.stackingframe.featutres.menu
   $a.infoframe.stackingframe.featutres.menu insert 0 radiobutton -label [mc "Place on bottom"] -value "none" -variable editbox_info($w,fea_edit_place_above) -command "set editbox_info($w,fea_edit_place_above_name) \"[mc {Place on bottom}]\"; edit_box_apply $w stacking"
   set last_tag "none"
-
+  
 
 
 ####
@@ -2003,7 +2051,7 @@ proc qualifier_table_calculate_dict {treeview row column} {
       set text [regsub -all "\"" $text "\"\""]
       set text "\"$text\""
     } else {#sputs type $type [$treeview item $e -text]}
-    dict append result $type $text
+    dict append result $type $text 
   }
   set editbox_info($w,fea_qualifiers_dict) $result
 
@@ -2073,7 +2121,7 @@ proc edit_box_treeviewselect {w} {
     } else {
       $s.ok_frame.hide configure -text "Show [llength $tags]"  -command "featuretable_edit_items $w 0 show_selected"
       if {$hidden_count != [llength $tags]} {
-        grid configure $s.ok_frame.hide2
+        grid configure $s.ok_frame.hide2 
         $s.ok_frame.hide2 configure -text "Hide [llength $tags]"  -command "featuretable_edit_items $w 0 hide_selected"
       }
     }
@@ -2124,9 +2172,9 @@ proc edit_box_treeviewselect {w} {
           }
         }
       }
-    }
+    } 
 
-
+    
     ## Fill Qualifiers frame
 if {0} {
     $s.nb.f4.t delete [$s.nb.f4.t children {}]
@@ -2282,16 +2330,16 @@ proc add_orf_search_box {w} {
   if {$info(android)} {
       grid [frame $s.buttons_frame] -row 0 -column 0 -rowspan 3 -sticky nsew
       label  $s.buttons_frame.edit_features -image $toolbar_images(button_edit,4x)  -borderwidth 1
-      bind $s.buttons_frame.edit_features <ButtonRelease-1>  "grid remove $s; add_feature_edit_box $w"
-      bind $s.buttons_frame.edit_features <ButtonRelease-2>  "grid remove $s; add_feature_edit_box $w"
+      bind $s.buttons_frame.edit_features <ButtonRelease-1>  "grid remove $s; add_feature_edit_box $w" 
+      bind $s.buttons_frame.edit_features <ButtonRelease-2>  "grid remove $s; add_feature_edit_box $w" 
 
       label  $s.buttons_frame.find -image $toolbar_images(button_find,4x)  -borderwidth 1
-      bind $s.buttons_frame.find <ButtonRelease-1>  "grid remove $s; find_dialog $w 1"
-      bind $s.buttons_frame.find <ButtonRelease-2>  "grid remove $s; find_dialog $w 1"
+      bind $s.buttons_frame.find <ButtonRelease-1>  "grid remove $s; find_dialog $w 1" 
+      bind $s.buttons_frame.find <ButtonRelease-2>  "grid remove $s; find_dialog $w 1" 
 
       label  $s.buttons_frame.seq_info -image $toolbar_images(button_info,4x)  -borderwidth 1
-      bind $s.buttons_frame.seq_info <ButtonRelease-1>  "grid remove $s"
-      bind $s.buttons_frame.seq_info <ButtonRelease-2>  "grid remove $s"
+      bind $s.buttons_frame.seq_info <ButtonRelease-1>  "grid remove $s" 
+      bind $s.buttons_frame.seq_info <ButtonRelease-2>  "grid remove $s" 
 
       grid $s.buttons_frame.edit_features -row 0 -column 0
       grid $s.buttons_frame.find -row 1 -column 0
@@ -2358,7 +2406,7 @@ proc add_orf_search_box {w} {
     grid [button $s.action_frame.prev -text [mc "Find Prev"] -command "next_ORF $w reverse"] -row 1 -column 2 -sticky n
     #grid [button $s.action_frame.all -text [mc "Highlight All"] -command "set info(find_action) highlight; do_find $w highlight"] -row 1 -column 3 -sticky n
 
-
+   
 
   grid $s -row 2 -column 0 -columnspan 5 -sticky nsew
 }
@@ -2384,7 +2432,7 @@ proc treeview_manageselection {t} {
   foreach item [bind $t <<OldSelection>>] {
     #### can use tag remove when 8.6 is available
     if {[$t exists $item] && ([set i [lsearch [$t item $item -tags] sel]] > -1)} {
-      $t item $item -tags [lreplace [$t item $item -tags] $i $i]
+      $t item $item -tags [lreplace [$t item $item -tags] $i $i]  
     }
   }
   foreach item [$t selection] {
@@ -2403,27 +2451,43 @@ proc treeview_resize {t y} {
   set deltaY [expr {$y-[bind $t <<resizeY>>]}]
   set w [winfo toplevel $t]
   set newHeight [expr {[bind $t <<resizeHeight>>] + $deltaY / [ttk::style configure Featuretable.Treeview -rowheight]}]
-#rowheight default=16, header =15?,
-# usually 60 pixels, can be 85 if
+#rowheight default=16, header =15?, 
+# usually 60 pixels, can be 85 if 
 # exec defaults read "Apple Global Domain" AppleScrollBarVariant
 # returns DoubleBoth
   if {[$t cget -height] != $newHeight && $newHeight >= $info(feature_table_minsize)} {
-    grid propagate $w.tvframe 0
+    #grid propagate $w.tvframe 0
+
+    set w1 [$t column #0 -width] 
+    set w2 [$t column Direction -width] 
+    set w3 [$t column Type -width]
+    set w4 [$t column Location -width]
+     $t column #0 -width 200 -stretch 0 
+     $t column Location -width 200 -stretch 0 
+
     $t configure -height $newHeight
-    $w.tvframe configure -height [expr {[winfo reqheight $t]+4}]
+    #$w.tvframe configure -height [expr {[winfo $t reqheight]+4}]
+    #grid propagate $w.tvframe 1
+
+    $t column Location -width $w4 
+    $t column Type -width $w3
+    $t column Direction -width $w2
+    $t column #0 -width $w1
+    $t column #0 -stretch 1
+    $t column Location -stretch 1
   }
 }
 
 ##############
-##
+## 
 ##############
 proc treeview_copy {t} {
-  clipboard clear
+  clipboard clear 
   clipboard append -displayof [winfo toplevel $t] [treeview_to_text $t]
 }
 
 ##############
-##
+## 
 ##############
 proc treeview_to_text {t {selected_only 1}} {
   set result [list "[$t heading #0 -text]\t[join [$t cget -columns] \t]"]
@@ -2433,13 +2497,13 @@ proc treeview_to_text {t {selected_only 1}} {
     set t_selection [$t selection]
   }
   foreach c $t_selection {
-    lappend result "[$t item $c -text]\t[join [$t item $c -values] \t]"
+    lappend result "[$t item $c -text]\t[join [$t item $c -values] \t]"   
   }
   return [join $result \n]
 }
 
 ##############
-##
+## 
 ##############
 proc treeview_save {t {filename {}}} {
   global info
@@ -2463,10 +2527,10 @@ proc treeview_save {t {filename {}}} {
     incr i
     close $text_file
   }
-}
+} 
 
 ##############
-##
+## 
 ##############
 proc treeview_print {t} {
 
@@ -2555,15 +2619,15 @@ proc features_to_tree_view {w} {
   foreach tag_record [lsort -dictionary -index [lsearch [list tag {} Direction Type Location subfeatures] [bind $tv <<Sort_column>>]] {*}-[expr {[bind $tv <<Sort_direction>>]?"increasing":"decreasing"}] $new_taglist] {
    set tag [lindex $tag_record 0]
     if {[$w.textarea tag ranges $tag] == {}} {continue}
-    catch {$tv insert {} end -id $tag -text [lindex $tag_record 1] -tag $tag}
+    catch {$tv insert {} end -id $tag -text [lindex $tag_record 1] -tag $tag} 
     $tv set $tag Direction [expr {[lindex $tag_record 2]?"<<<":">>>"}]
     $tv set $tag Type [lindex $tag_record 3]
     $tv set $tag Location [lindex $tag_record 4]
     set start_end_ix [feature_tag_start_end_ix $w $tag]
     if {[llength $start_end_ix] > 2} {
-      $tv tag bind $tag <Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $start_end_ix 1]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $start_end_ix 0]]\]; focus .; focus $w.textarea"
+      $tv tag bind $tag <Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $start_end_ix 1]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $start_end_ix 0]]\]; focus .; focus $w.textarea" 
     } else {
-      $tv tag bind $tag <Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $start_end_ix 1]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $start_end_ix 0]]\] ; focus .; focus $w.textarea"
+      $tv tag bind $tag <Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $start_end_ix 1]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $start_end_ix 0]]\] ; focus .; focus $w.textarea" 
     }
     ## add groups bullets -unicode \u2022 bullet \u25cf black circle  \u25c6 black diamond \u25ca lozenge
    # foreach group [dict get $tag_group_dict $tag] {
@@ -2572,7 +2636,7 @@ proc features_to_tree_view {w} {
     set i 0
     ## add in the qualifiers data from Metadata index 4
     foreach {subfeature data}  [lindex $tag_record 5] {
-      $tv insert $tag end -id "$tag.$i#"
+      $tv insert $tag end -id "$tag.$i#" 
       $tv set "$tag.$i#" Type $subfeature
       $tv set "$tag.$i#" Location $data
       incr i
@@ -2602,7 +2666,7 @@ proc features_to_tree_view {w} {
   }
 
   if {[$tv cget -displaycolumns] != [list Direction Type Location]} {
-    #  if we are changing the display columns (adding or removing groups), we need to add up the widths of all of the displayed columns, then adjust the size of the Location column to keep the treeview with constant. The widths need to be adjusted BEFORE changing the display columns. Changing display columns immediately fires a width adjustment on the treeview, which propagates up to the toplevel window.
+    #  if we are changing the display columns (adding or removing groups), we need to add up the widths of all of the displayed columns, then adjust the size of the Location column to keep the treeview with constant. The widths need to be adjusted BEFORE changing the display columns. Changing display columns immediately fires a width adjustment on the treeview, which propagates up to the toplevel window. 
     set i 0
     foreach column [list #0 Direction Type] {
       incr i [$tv column $column -width]
@@ -2664,7 +2728,7 @@ proc treeview_sort {t column {keep_direction 0} {mode -dictionary}} {
     $t children hidden $o2
     if {[llength $o2] > 0} {
       set o [linsert $o 0 hidden]
-    }
+    } 
   }
   $t children {} $o
 
@@ -2675,7 +2739,7 @@ proc treeview_sort {t column {keep_direction 0} {mode -dictionary}} {
     set ctext [$t heading #0 -text]
     regsub " \u2193" $ctext "" ctext
     regsub " \u2191" $ctext "" ctext
-    $t heading #0 -text $ctext
+    $t heading #0 -text $ctext  
   } else {
     $t heading $ccolumn -text [$t column $ccolumn -id]
   }
@@ -2705,11 +2769,11 @@ proc featuretable_rightclick {w x y} {
   global featuretable_popup_type info dialogblock
   set f $w.tvframe
   set t $w.tvframe.tv
-  set column [$t identify column $x $y]
+  set column [$t identify column $x $y]  
   set row [$t identify row $x $y]
   if {($row !={}) && ([$t bbox $row] == {})} {set row {}}
   set column [$t column $column -id]
-  if {($row != {}) && (![regexp {#\.} $row])} {
+  if {($row != {}) && (![regexp {\#\.} $row])} {
     if {[winfo exists $t.popupmenu]} {
       destroy $t.popupmenu
     }
@@ -2738,7 +2802,7 @@ proc featuretable_rightclick {w x y} {
       #  make uppercase
       #  $t.popupmenu.popup1 add cascade -label [mc "Arrow Style"] -menu $t.popupmenu.popup1.a
       #    menu $t.popupmenu.popup1.a
-      $t.popupmenu add command -label [mc "Edit Feature (dialog)"] -command "featuretable_edit_items $w $row dialog"
+      $t.popupmenu add command -label [mc "Edit Feature (Dialog)"] -command "featuretable_edit_items $w $row dialog"
       $t.popupmenu add cascade -label [mc "Arrange"] -menu $t.popupmenu.popup2
         menu $t.popupmenu.popup2
         $t.popupmenu.popup2 add command -label [mc "Bring to Top"] -command "featuretable_edit_items $w $row raise"
@@ -2761,7 +2825,7 @@ proc featuretable_rightclick {w x y} {
         $t.popupmenu add command -label [mc "Lower %1$\s Selected Features to Bottom" [llength [regexp -all -inline {f[0-9]+#(?:[\s]|$)} [$t selection ]]]] -command "featuretable_edit_items $w $row lower_selected"
         $t.popupmenu add command -label [mc "Hide %1$\s Selected Features" [llength [regexp -all -inline {f[0-9]+#(?:[\s]|$)} [$t selection ]]]] -command "featuretable_edit_items $w $row hide_selected"
         $t.popupmenu add command -label [mc "Show %1$\s Selected Features" [llength [regexp -all -inline {f[0-9]+#(?:[\s]|$)} [$t selection ]]]] -command "featuretable_edit_items $w $row show_selected"
-        $t.popupmenu add command -label [mc "New Group from %1$\s Selected Features" [llength [regexp -all -inline {f[0-9]+#(?:[\s]|$)} [$t selection ]]]] -command "featuretable_edit_items $w $row new_group_from_selected"
+       # $t.popupmenu add command -label [mc "New Group from %1$\s Selected Features" [llength [regexp -all -inline {f[0-9]+#(?:[\s]|$)} [$t selection ]]]] -command "featuretable_edit_items $w $row new_group_from_selected"
       }
     } elseif {($column == "Direction")} {
       $t.popupmenu add command -label [mc "Reverse Feature"] -command "featuretable_edit_items $w $row reverse"
@@ -2774,7 +2838,7 @@ proc featuretable_rightclick {w x y} {
 ## see http://www.insdc.org/documents/feature_table.html#3.3 for qualifiers (need to be able to edit qualifiers with - boxes, + at the end and a re-order)
 ## need to make this list a global
 
-        set divided_typelist [list Genes [list promoter CDS exon intron gene 5'UTR 3'UTR polyA_site mRNA prim_transcript precursor_RNA 5'clip 3'clip] Signals [list rep_origin promoter enhancer polyA_site polyA_signal terminator CAAT_signal TATA_signal -35_signal -10_signal GC_signal RBS attenuator misc_signal sig_peptide transit_peptide mat_peptide] Binding [list primer_bind protein_bind misc_binding] Variation [list variation STS unsure conflict modified_base misc_difference old_sequence] Repeats [list LTR repeat_region repeat_unit satellite] RNA [list mRNA rRNA tRNA scRNA snRNA snoRNA misc_RNA] Misc [list source misc_feature misc_binding misc_recomb misc_structure iDNA stem_loop D-loop] Ig [list C_region D_segment J_segment N_region S_region V_region V_segment]]
+        set divided_typelist [list Genes [list promoter CDS exon intron gene 5'UTR 3'UTR polyA_site mRNA prim_transcript precursor_RNA 5'clip 3'clip] Signals [list rep_origin promoter enhancer polyA_site polyA_signal terminator CAAT_signal TATA_signal -35_signal -10_signal GC_signal RBS attenuator misc_signal sig_peptide transit_peptide mat_peptide] Binding [list primer_bind protein_bind misc_binding] Variation [list variation STS unsure conflict modified_base misc_difference old_sequence] Repeats [list LTR repeat_region repeat_unit satellite] RNA [list mRNA rRNA tRNA scRNA snRNA snoRNA misc_RNA] Misc [list source misc_feature misc_binding misc_recomb misc_structure iDNA stem_loop D-loop] Ig [list C_region D_segment J_segment N_region S_region V_region V_segment]] 
         set found 0
         foreach {header types} $divided_typelist {
           $t.popupmenu.popup1 add cascade -label $header -menu [menu  $t.popupmenu.popup1.[string tolower $header]]
@@ -2800,12 +2864,21 @@ proc featuretable_rightclick {w x y} {
       $t.popupmenu add command -label [mc "Feature Minus Selection"] -command "featuretable_change_loc $w $row minus_sel"
     }
     tk_popup $t.popupmenu [winfo pointerx $w] [winfo pointery $w]
-  } elseif {[regexp {#\.} $row]} {
-#right click on subfeature
-sputs right click on subfeature
+  } elseif {[regexp {\#\.} $row]} {
+    #right click on subfeature
+    sputs right click on subfeature $row
+    if {[regexp {(f[0-9]+#)\.([0-9]+)#} $row - row qual_number]} {
+      if {[winfo exists $t.popupmenu]} {
+        destroy $t.popupmenu
+      }
+      set popupmenu [menu $t.popupmenu]
+      sputs popup $popupmenu  [winfo pointerx $w] [winfo pointery $w]
+      $t.popupmenu add command -label [mc "Edit Qualifier (Dialog)"] -command "edit_feature_dialog $w $w $row $qual_number"
+      tk_popup $t.popupmenu [winfo pointerx $w] [winfo pointery $w]
+    }
   } else {
-# right click popup menu in headings to set visible columns, move current column left or right (can't move feature name), set number of rows displayed
-sputs right click on heading
+    # right click popup menu in headings to set visible columns, move current column left or right (can't move feature name), set number of rows displayed
+    sputs right click on heading
   }
 }
 
@@ -2814,7 +2887,7 @@ sputs right click on heading
 ##############
 proc featuretable_edit_name {tv feature column} {
   set w [winfo toplevel $tv]
-
+  
   if {([$w.textarea tag ranges $feature] != {}) && ($column == "#0")} {
     set metadata [$w.textarea tag bind $feature <<Metadata>>]
     lset metadata 0 [$tv item $feature -text]
@@ -2860,7 +2933,7 @@ proc featuretable_doubleclick {w x y} {
 }
 
 ##############
-##
+## 
 ##############
 proc featuretable_edit_items {w feature column args} {
   global info
@@ -2922,7 +2995,7 @@ proc featuretable_edit_items {w feature column args} {
               if {[tk windowingsystem] == "aqua"} {wm attributes $w -modified 1}
 	      register_undo_separator $w "Lower Feature"
             }
-          }
+          }    
         }
         edit_box_treeviewselect $w
       }
@@ -3259,7 +3332,7 @@ proc read_toolbar_images {} {
       set toolbar_images(separator,$scale\x) [image create photo -height [expr {16*$scale}] -width 2]
     $toolbar_images(separator,$scale\x) copy $toolbar_images(separator) -zoom $scale
     set toolbar_images(separator_dark,$scale\x) [image create photo -height [expr {16*$scale}] -width 2]
-    $toolbar_images(separator_dark,$scale\x) copy $toolbar_images(separator,$scale\x)
+    $toolbar_images(separator_dark,$scale\x) copy $toolbar_images(separator,$scale\x) 
   }
 
   set image_dir [file join $info(Accdir) "Icons and images" "Green"]
@@ -3270,13 +3343,13 @@ proc read_toolbar_images {} {
     set error 0
   }
 
-
+ 
 
   foreach button [list monkey_icon] {
     if {[catch {set toolbar_images($button) [image create photo -file "$image_dir/$button.gif"]}]} {
         set toolbar_images($button) [image create photo -height 16 -width 16]
         $toolbar_images($button) copy $toolbar_images(blank)
-    }
+    } 
     set toolbar_images($button,1x) $toolbar_images($button)
   }
   # jump find_again clear_find swap_case origin graphic_map_u clear_highlighting duplicate
@@ -3386,7 +3459,7 @@ proc read_toolbar_images {} {
        }
        set toolbar_images($button$dark,$x) $toolbar_images($button$dark\_$x)
     }
-
+    
   ##
   ## Standard Push Buttons
     foreach button [list Button_Normal  Button_Alt Button_Active Button_Pressed Button_Disabled] {
@@ -3402,7 +3475,7 @@ proc read_toolbar_images {} {
     set border [expr { [image height $toolbar_images(Button_Normal_$x)]/2 -2}]
     ttk::style element create MD.TMenubutton.button$dark\_$x image [list $toolbar_images(Button_Normal$dark\_$x) disabled $toolbar_images(Button_Disabled$dark\_$x)  background $toolbar_images(Button_Disabled$dark\_$x) {pressed} $toolbar_images(Button_Alt$dark\_$x) {active} $toolbar_images(Button_Active$dark\_$x) ] -border [list $border $border $border $border] -padding {5 5} -sticky nsew
     ttk::style element create MD.TButton.disclosure$dark\_$x image [list $toolbar_images(button_disclose_d$dark\_$x) {pressed} $toolbar_images(button_disclose_u$dark\_$x)] -border [list 0 0 0 0] -padding {0 0} -sticky nsew
-
+      
     ## Add chip widget- rounded button with checkbutton function.
 
     };# foreach x
@@ -3485,7 +3558,7 @@ proc fill_toolbar {w} {
   } else {
 	set x "1x"
   }
-
+  
   if {[tk windowingsystem] == "aqua"} {
     if {$info(bg_color) == "systemWindowBackgroundColor" && $info(dark_mode)} {
       set normal_color gray30;#$info(bg_color)
@@ -3507,12 +3580,12 @@ proc fill_toolbar {w} {
   }
 
   set background_color_image [image create photo -height 20 -width 20]
-  set rgb_color [format "\#%04X%04X%04X" {*}[winfo rgb . $normal_color]]
+  set rgb_color [format "\#%04X%04X%04X" {*}[winfo rgb . $normal_color]] 
   $background_color_image put -to 0 0 20 20 $rgb_color
 
   if {$normal_color != $inactive_color} {
     set toolbar_second_color [image create photo -height 20 -width 20]
-    set i_color [format "\#%04X%04X%04X" {*}[winfo rgb . $inactive_color]]
+    set i_color [format "\#%04X%04X%04X" {*}[winfo rgb . $inactive_color]] 
     $toolbar_second_color put -to 0 0 20 20 $i_color
     catch {ttk::style element create "Toolbar_bg_$rgb_color\,$i_color" image [list $background_color_image background $toolbar_second_color] -padding {5} -border {0} -sticky news}
      ttk::style layout ToolbarButton.MD.TButton "Toolbar_bg_$rgb_color\,$i_color -sticky nswe -children {ToolbarButton.MD.TButton.hover$dark\_$x -side top -sticky {} -children {Button.image -sticky {}}}"
@@ -3527,7 +3600,7 @@ proc fill_toolbar {w} {
 
 
 
-
+  
   set i 0
   if {[tk windowingsystem] != "aqua"} {
     set secbut 3
@@ -3573,8 +3646,8 @@ proc fill_toolbar {w} {
       text_map {set button_type button; set tooltip [mc "Text Map"]; set command "enz_text_map $w"}
       find_primers {set button_type button; set tooltip [mc "Find Primers"]; set command "primer_window $w"}
       pcr {set button_type button; set tooltip [mc "PCR"]; set command "pcr_dialog $w"}
-      golden_gate {set button_type button; set tooltip [mc {Golden Gate Wizard}]\n[mc Shift:][mc "Golden Gate Reaction"]; set command "gg_wizard_dialog $w"; set command2 "golden_gate_dialog $w"}
-      gibson {set button_type button; set tooltip [mc {Gibson Wizard}]\n[mc Shift:][mc "Recombination Tool"]; set command "gibson_wizard_dialog $w"; set command2 "recombination_window $w"}
+      golden_gate {set button_type button; set tooltip [mc {Golden Gate Designer}]\n[mc Shift:][mc "Golden Gate Assembler"]; set command "gg_wizard_dialog $w"; set command2 "golden_gate_dialog $w"}
+      gibson {set button_type button; set tooltip [mc {Gibson Designer}]\n[mc Shift:][mc "Recombination Assembler Tool"]; set command "gibson_wizard_dialog $w"; set command2 "recombination_window $w"}
       align {set button_type button; set tooltip "[mc {Align Sequences}] \n[mc Shift:][mc {Align Two Sequences}]"; set command "align_dialog2 $w"; set command2 "align_dialog $w"}
       more_arrow {set button_type menu; set tooltip "more tools"; set command "";}
       temp {set tooltip ""; set command ""}
@@ -3609,13 +3682,13 @@ proc fill_toolbar {w} {
       separator {
         if {[winfo exists $w.toolbar.separator$i]} {
           $w.toolbar.separator$i configure -image $toolbar_images(separator) -bg $normal_color -relief flat -border 0 -width $separator_width
-          grid configure "$w.toolbar.separator$i" -row 0 -column $column
+          grid configure "$w.toolbar.separator$i" -row 0 -column $column 
           incr column
           if {([tk windowingsystem] == "aqua") && ([focus -displayof .] == {})} {
             "$w.toolbar.separator$i" configure -bg $inactive_color
           }
         } else {
-          grid [label "$w.toolbar.separator$i" -image $toolbar_images(separator) -bg $normal_color -relief flat -border 0 -width $separator_width] -row 0 -column $column
+          grid [label "$w.toolbar.separator$i" -image $toolbar_images(separator) -bg $normal_color -relief flat -border 0 -width $separator_width] -row 0 -column $column 
           incr column
 
         }
@@ -3677,7 +3750,7 @@ proc toolbar_set_icons {toolbar_size} {
 	set x "1x"
   }
   set dark [expr {$info(dark_mode) ? "_dark" : ""}]
-
+  
   foreach button [list new open save cut copy paste find uppercase lowercase reverse_com  enzymes enzymes_all enzymes_sonly graphic_map highlight_enzymes digest text_map align pcr golden_gate gibson more_arrow separator] {
     if {[info exists toolbar_images($button)]} {
       set toolbar_images($button) $toolbar_images($button$dark,$x)
@@ -3789,7 +3862,7 @@ proc tooltip_leave {window} {
     after cancel $tooltip_after
   } else {
     set tooltip_after "showing_[after 300 {set tooltip_after "not_showing"}]"
-  }
+  }  
 }
 
 ##############
@@ -3823,7 +3896,7 @@ proc tooltip_install {w tip} {
 ## Double-click to select the current feature
 ##############
 proc sequence_window_double_button {w x y} {
-  set tags [$w.textarea tag names @$x,$y]
+  set tags [$w.textarea tag names @$x,$y] 
   set result [list]
   foreach text_tag $tags {
     if {([regexp {f[0-9]+#} $text_tag])} {
@@ -3881,7 +3954,7 @@ proc sequence_window_popup {w popupmenu rootx rooty} {
       catch {[$popupmenu entryconfigure [mc "Arrange Feature"] -state disabled]}
     }
   }
-
+  
   if {[winfo exists $popupmenu.delete_feature]} {
     if {$result != {}} {
       catch {[$popupmenu entryconfigure [mc "Delete Feature"] -state normal]} msg
@@ -3949,7 +4022,7 @@ proc random_palette {{palette_start_color {}} {n 5} {lperc 0} {shademin 0.3} {lw
 
     set change 0
     set color_store [hsl2rgb $h $s $l2]
-    if {$readability_on} {
+    if {$readability_on} { 
       while {$l2 < 1.0 && [luminance [set color [hsl2rgb $h $s $l2]]] < .15} {
         set l2 [expr {min(1.0,$l2+.05)}]
         set change 1
@@ -4111,11 +4184,11 @@ global info ok
   if {!$info(android)} {
     grid [frame .dialog.f3 -relief flat] -row 3 -column 0 -sticky nwe
     grid [button .dialog.f3.ok -command "set ok 1" -text [mc "OK"] -default active] -row 0 -column 1 -padx 10 -pady 3
-    bind .dialog <Key-Return> "set ok 1"
+    bind .dialog <Key-Return> "set ok 1" 
   #grid [button .dialog.f3.cancel -command "set ok -1" -text [mc "Cancel"]] -row 0 -column 0 -padx 10
     grid columnconfigure .dialog.f3 0 -weight 1 -uniform 1
     grid columnconfigure .dialog.f3 1 -weight 1 -uniform 1
-#return
+#return 
   }
 
   #palette_display [set palettereslist [random_palette [expr {$palette_start_color_on?"$palette_start_color":{}}] $colornum $lpercent]] $s.labels
@@ -4392,13 +4465,13 @@ proc text_to_clipboard_html {textarea {range {1.0 end}}} {
   if {$span} {
     append text "</span>"
   }
-
+  
   append text "</span>"
   #set filename [tk_getSaveFile]
   #set fid [open $filename w]
   #puts $fid $text
   #close $fid
-
+  
   return $text
 }
 
@@ -4474,7 +4547,7 @@ function translate (dna) {
   var aa_string = \"XFFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG\";
   var codon = \"\";
   var pos = 0;
-  for (i = 0; i < Math.floor(dna.length/3)*3; i+=3) {
+  for (i = 0; i < Math.floor(dna.length/3)*3; i+=3) { 
     codon = dna.substr(i, 3);
     pos = codon_array.indexOf(codon)+1
     result = result + aa_string.charAt(pos);
@@ -4569,7 +4642,7 @@ document.onselectionchange = on_selection_change;
   var start_base = start_y*$linewidth+selRange.startOffset+1;
   var end_base = end_y*$linewidth+selRange.endOffset;
   if (Number(start_base) > Number(end_base)) {
-    if (start_base - end_base == 1) {
+    if (start_base - end_base == 1) { 
       start_base = start_base - 1;
     }
     var temp = start_base;
@@ -4778,7 +4851,7 @@ document.getElementById(\"text_box\").style.fontSize = Math.min(36, (window.inne
 </head>
 <body onresize=\"on_resize()\"  onload=\"on_resize()\">
 <div id=\"text_box\">
-$html_text
+$html_text 
 </div>
 </body>
 </html>"
@@ -4835,7 +4908,7 @@ proc text_to_svg {t startline endline {line_numbers 0}} {
       if {($i >= $startline) && ($i<= $endline)} {
         append result "<rect x=\"[expr {$col1*$char_x}]\" y=\"[expr {($i-$startline)*$char_y}]\" width=\"[expr {($col2-$col1)*$char_x}]\" height=\"[expr {$char_y}]\" stroke-width=\"1\" stroke=\"[color_to_svgrgb $color]\" fill=\"[color_to_svgrgb $color]\"/>\n"
       }
-    }
+    } 
   }
   append result "<text font-weight=\"[font actual $text_font -weight]\" font-style=\"[font actual $text_font -slant]\" font-family=\"[font actual $text_font -family], monospace\" font-size=\"[expr {round([tk scaling]*[font actual $text_font -size]*10)/10.0}]\" fill=\"#000000\" xml:space='preserve'>\n"
 
@@ -4954,21 +5027,20 @@ proc open_file {filename  {interactive_opening 1}} {
     if {[tk windowingsystem] == "win32"} {
       regsub -all {\\} $filename {/} filename
     }
-    if {$interactive_opening} {
-      foreach win [dnawindows_list] {
-        if {$info($win,filename) == $filename} {
+
+
+    foreach win [dnawindows_list] {
+      if {$info($win,filename) == $filename} {
+        if {$interactive_opening} {
           tk_messageBox -message [mc "The file is already being edited."] -type ok -icon info
-          wm deiconify $win
-          raise $win
-          after 100 "focus $win"
-          # can't update here- causes crash in Yosemite
-          if {[tk windowingsystem] != "aqua"} {
-            #update
-          }
-          return $win
         }
+        wm deiconify $win
+        raise $win
+        after 100 "focus $win"
+        return $win
       }
-    }
+    } 
+
     if {![catch {open $filename r} fileid err]} {
       #read in the 1st header line and determine filetype (storing info from the line)
       fconfigure $fileid -translation binary
@@ -4996,6 +5068,8 @@ proc open_file {filename  {interactive_opening 1}} {
         }
         if {[binary scan $striderheader H64Ix* macvec_magnum macvec_seq_len] < 2} {
           set macvec_magnum 0
+        } elseif {[binary scan $striderheader I9x* macvec_header_ints] < 1} {
+          set macvec_header_ints [list]
         }
         if {[binary scan $striderheader cIc8SSSx* snapgene_packet_tag snapgene_header_len snapgene_cookie snapgene_filetype snapgene_export snapgene_import] < 6} {
           set snapgene_packet_tag 0
@@ -5021,7 +5095,7 @@ proc open_file {filename  {interactive_opening 1}} {
          set filetype "Genbank"
       } elseif {[string range $a 0 1] == "ID"} {
          set filetype "embl"
-      } elseif {([string first "Created:" $a] > -1) && ($b == "^^")} {
+      } elseif {([string first "Created:" $a] > -1) && ($b == "^^")} {  
          set filetype "editseq"
       } elseif {($strversion == 0) && (($strtype == 1) || ($strtype == 2) || ($strtype == 3) || ($strtype == 4))} {
          set filetype "strider"
@@ -5033,7 +5107,7 @@ proc open_file {filename  {interactive_opening 1}} {
          set filetype "gck"
       } elseif {($snapgene_cookie == {83 110 97 112 71 101 110 101}) && ( $snapgene_packet_tag == 9) && ( $snapgene_filetype == 1)} {
          set filetype "snapgene"
-      } elseif {[regexp {0000000.01014} $macvec_magnum]} {
+      } elseif {[regexp  {0000000.01014} $macvec_magnum] || ( [lindex $macvec_header_ints 4] ==1 && [lindex $macvec_header_ints 6] ==1  && [lindex $macvec_header_ints 5] == [lindex $macvec_header_ints 7] && [lindex $macvec_header_ints 7] == [lindex $macvec_header_ints 8] )} {
          set filetype "macvector"
       } elseif {([string length $a] > 10) && ([regexp -nocase {[^ACGTN*BDHKMRSUVWY 0-9]} $a] == 0)} {
          set filetype "plain"
@@ -5056,7 +5130,7 @@ proc open_file {filename  {interactive_opening 1}} {
             return "error:unknown type"
           } else {
 sputs open_error 0
-            set filetype "empty"
+            set filetype "empty" 
           }
       }
       #read in DNA and comment for each file type
@@ -5071,7 +5145,7 @@ sputs open_error 0
       set circular "linear"
       set new_tags [list]
       set new_title [mc "New_DNA"]
-
+	  
       switch $filetype {
         empty {
           set filetype "None"
@@ -5120,14 +5194,14 @@ sputs open_error 0
           }
           if {$strtype == 4} {
             set filecomment ">$filecomment"
-            append filecomment \n $newdna
+            append filecomment \n $newdna 
             set newdna [reverse_translate $newdna]
           }
           set filetype "DNA Strider"
-        }
+        } 
         strider1 {
           #sputs "strider: $filename"
-          global
+          global 
           seek $fileid 112
           set newdna [read $fileid $strlength]
           #regsub -all {\*} $newdna "N" newdna
@@ -5164,20 +5238,162 @@ fconfigure $fileid -translation binary
           }
           if {$strtype == 4} {
             set filecomment ">$filecomment"
-            append filecomment \n $newdna
+            append filecomment \n $newdna 
             set newdna [reverse_translate $newdna]
           }
           set filetype "DNA Strider v1"
-        }
+        } 
         macvector {
-          seek $fileid 36
-          binary scan [read $fileid $macvec_seq_len] H* newdna
-          set newdna [string map {01 A 02 C 03 M 04 G 05 R 06 S 07 V 08 T 09 W 0a Y 0b H 0c K 0d D 0e B 0f N} $newdna]
           set filecomment ""
           set circular "linear"
           set new_tags [list]
           set new_title [file tail $filename]
           set filetype "MacVector"
+	  fconfigure $fileid -translation binary -encoding utf-8
+
+          binary scan $striderheader I9x* header_bytes
+          if {[lindex $header_bytes 0] == 1} {set circular "circular"}
+          #sputs header_bytes  $header_bytes
+          # linear sequence is {0 128 xx 0 1 len 1 len len}
+          # circular is {1 0 xx 16 1 len 1 len len}
+
+          seek $fileid 36
+          binary scan [read $fileid $macvec_seq_len] H* newdna
+          set newdna [string map {01 A 02 C 03 M 04 G 05 R 06 S 07 V 08 T 09 W 0a Y 0b H 0c K 0d D 0e B 0f N} $newdna]
+
+
+          set data [read $fileid 2]
+          binary scan $data S  feature_number
+          #sputs feature_number $feature_number
+
+          set mac_vec_type_dict {0 continuation 2 CDS 3 sig_peptide 4 mat_peptide 8 misc_RNA 10 mRNA 11 misc_feature 16 misc_binding 18 conflict 26 intron 27 LTR 31 variation 32 rep_origin 34 misc_recombination 36 old_sequence 37 repeat_region 38 misc_signal 39 misc_feature 42 misc_difference 44 variation 53 -35_signal 52 -10_signal 57 5'_UTR 55 3'_UTR 62 enhancer 67 misc_structure 69 polyA_signal 70 polyA_site 72 primer_bind 73 prim_transcript 74 promoter 75 protein_bind 76 RBS 84 terminator 87 gene 88 source 109 centromere 112 regulatory}
+          set bindlist [list <<Revcolors>> <<Metadata>>]
+          ## read feature data- S_type c_direction 9_bytes I_string_length "string of genbank qualifiers", I_start, I_end
+          set result [list]
+          for {set i1 0} {$i1 < $feature_number} {incr i1} {
+            #sputs i1 $i1
+            set data [read $fileid 12]
+            binary scan $data Scc*  type1 direction1 unknown_data1
+            #sputs feature data line   $type1 $direction1 $unknown_data1
+            set str_len_data [read $fileid 4]
+            binary scan $str_len_data I* string_length
+            #sputs string length $string_length
+            set qualifier_data [read $fileid $string_length]
+	    #sputs feature qualifier $qualifier_data
+            if {$type1 > 0 && [regexp {/label="([^\"]*)"} $qualifier_data - name]} {
+            } elseif {[regexp {/gene="([^\"]*)"} $qualifier_data - name]} {
+            } elseif {[regexp {/note="([^\"]*)"} $qualifier_data - name]} {
+            } elseif {[regexp {/organism="([^\"]*)"} $qualifier_data - name]} {
+            } else {
+               set name "New Feature"
+            }
+            #sputs string $qualifier_data
+            set loc_data [read $fileid 8]
+            binary scan $loc_data II start1 end1
+            #sputs feature data $type1 $direction1 $start1 $end1
+
+	    if {$type1 == 0} {
+	      ## Feature Extension item
+              set coords_list [lindex $result end 0]
+	      lappend coords_list [expr {$start1-1}] [expr {$end1}]
+	      set coords_list [lsort -integer -increasing $coords_list]
+	      lset result end 0 $coords_list
+	    } else {
+	      ## New Feature item
+              if {[dict exists $mac_vec_type_dict $type1]} {
+                set f_type [dict get $mac_vec_type_dict $type1]
+              } else {
+                set f_type "misc_feature"
+                  sputs feature code not in MacVector dict: $filename : $type1
+                 sputs $qualifier_data $start1 $end1
+              }
+              if {[catch {set Apeinfo_gformat [dict get $info(feature_default_type_gformat) $f_type]}]} {
+                set Apeinfo_gformat $info(feature_default_gformat)
+              }
+              if {[dict exists $info(feature_default_type_colors) $f_type]} {
+                  set clist [dict get $info(feature_default_type_colors) $f_type]
+               } else {
+                  set clist [list #ff926c #ff926c]
+                  #sputs feature type not in default colors: $f_type
+              }
+               foreach {fwd_color rev_color} $clist {}
+               if {$f_type eq "source"} {
+                 set formatlist [list {} {} {}]
+               } elseif {$direction1 == 0} {
+                 set formatlist [list $fwd_color {} {}]
+               } else {
+                 set formatlist [list $rev_color {} {}]
+               }
+
+               ## need to add genbank qualifier data to features
+               set genbank_list [list]
+                #sputs qualifier_data $qualifier_data
+               regsub {^/}  $qualifier_data ""  qualifier_data
+               regsub -all {; /}  $qualifier_data "\u0001"  qualifier_data
+               foreach qual_line [split $qualifier_data "\u0001"] {
+               #sputs qual_line $qual_line
+                 set subdata {}
+                 if {![regexp {([^=]*)=(.*)} $qual_line -- subtype subdata] && ![regexp {([^=]*)} $qual_line -- subtype]} {
+                   sputs can't parse $qual_line
+                 } else {
+                   regexp {\"(.*)\"} $subdata -- subdata
+                   regexp {"(.*)"} $subdata -- subdata
+                   lappend  genbank_list $subtype $subdata
+                 }
+               }
+               set actionlist [list [list $fwd_color $rev_color] [list $name $Apeinfo_gformat $f_type $direction1 $genbank_list]]
+	      lappend result "f$i1#" [list [list [expr {$start1-1}] [expr {$end1}]] $formatlist $bindlist $actionlist]
+	    }
+          }
+	  ## add Fn tags
+	  foreach {tag tag_data} $result {
+            if {[llength [lindex $tag_data 0]] > 2} {
+	      set fntag [regsub f $tag fn]
+	      lappend result $fntag [list [list [lindex $tag_data 0 0] [lindex $tag_data 0 end]] [list] [list]]
+	    }
+	  }
+          set new_tags $result
+	  #sputs mv_new_tags $new_tags
+
+          set data [read $fileid 2]
+          binary scan $data S  header_lines_number
+          #sputs header_lines_number $header_lines_number
+
+
+         ## read genbank header data
+         set genbank_header_info [list]
+	  set mv_gb_header_dict {2 {LOCUS       } 3 {DEFINITION  } 4 {ACCESSION   } 5 {KEYWORDS    } 7 {SOURCE      } 8  {  ORGANISM  } 10 {REFERENCE   } 11 {  AUTHORS   } 12 {  TITLE     } 13 {  JOURNAL   } 14 {COMMENT     } 16 {BASE COUNT  } 20 {  REMARK    } 23 {NID    } 24 {VERSION     } 30 {CONTIG      } 31 {DBLINK      }}
+         for {set i1 0} {$i1 < $header_lines_number} {incr i1} {
+           set data [read $fileid 12]
+           binary scan $data c* first_data
+           #sputs first data $first_data
+           set header_line_type [lindex $first_data 1]
+           set str_len_data [read $fileid 4]
+           binary scan $str_len_data I* string_length
+           set header_line [read $fileid $string_length]
+           regsub -all {[\n\r\f]*} $header_line "" header_line
+           #sputs header_line $header_line
+           if {[dict exists $mv_gb_header_dict $header_line_type]} {
+             lappend genbank_header_info [dict get $mv_gb_header_dict $header_line_type] $header_line
+           } else {
+             sputs genbank header line type not known: $header_line_type
+	     sputs $header_line
+             sputs $filename
+           }
+           set data [read $fileid 8]
+           # this data seems to always be 8 bytes of zero
+           #binary scan $data c* line_data
+           #sputs line data $line_data
+           #sputs
+         }
+#sputs genbank_header_info $genbank_header_info
+###
+## need to add genbank header data to genbank_header_info
+	  set data [read $fileid]
+	  sputs [string length $data] 
+          binary scan $data c* format_data
+          sputs $format_data 
+          sputs [string range $data 0 800]
         }
 	  snapgene {
 	  set filecomment ""
@@ -5194,7 +5410,7 @@ fconfigure $fileid -translation binary
               lappend packet_list $packet_tag $packet_data
             } else {
               if {[string length $packet_header] > 0} {
-                sputs err snapgene read
+                sputs err snapgene read 
               }
               break
             }
@@ -5388,7 +5604,7 @@ sputs gck f $start $end $type $strand $has_name $has_comment $ignore
             }
             if {$has_comment} {
               sputs comment:[read_pascal_string $fileid 8]
-            }
+            } 
           }
 
           ## sites packet
@@ -5412,15 +5628,15 @@ sputs gck f $start $end $has_name $has_comment
             }
             if {$has_comment} {
             #  sputs comment:[read_pascal_string $fileid 8]
-            }
+            } 
           }
 }
-
+         
           set filecomment ""
           seek $fileid -1 end
           binary scan [read $fileid 1] c* circ_flag
           sputs circ_flag:$circ_flag
-          set circular [expr {$circ_flag !=0 ? "circular": "linear"}]
+          set circular [expr {$circ_flag !=0 ? "circular": "linear"}] 
           sputs gck $circular
           #set circular "linear"
           set strmet 0
@@ -5481,7 +5697,7 @@ sputs gck f $start $end $has_name $has_comment
             unset i j
             array unset genbank_type_array
             array unset genbank_data_array
-
+            
           }
 
           if {$third == {4 0 0 0}} {
@@ -5605,7 +5821,7 @@ sputs gck f $start $end $has_name $has_comment
           set newdna ""
           while {([gets $fileid nextline] != -1)} {
             append newdna $nextline
-
+       
           }
           regsub -all {[\n ]} $newdna "" newdna
           regsub -all {<.*?<} $newdna "" newdna
@@ -5624,7 +5840,7 @@ sputs gck f $start $end $has_name $has_comment
           set newdna ""
           while {([gets $fileid nextline] != -1)} {
             append newdna $nextline
-
+       
           }
           regsub -all {[[:space:]0-9\n]} $newdna "" newdna
           set filecomment ""
@@ -5675,13 +5891,13 @@ sputs pdwfh $fstart $fend $ftype $frev
           if {![regexp {LOCUS       (.*) ([0-9]*) bp (   |ss-|ds-|ms-)(NA    |DNA   |RNA   |tRNA  |rRNA  |mRNA  |uRNA  |snRNA |snoRNA)[ ]*(linear  |circular|        )[ ]*([ A-Z]{3})[ ]*(..-...-....)} $a x name size stranded type circular div date] || $circular== "        "} {
             set circular "linear"
             set name "Untitled"
-          }
+          }  
           regsub -all {[^a-zA-Z0-9]} $name _ name
-          regsub -all {[[:space:]]} $circular "" circular
+          regsub -all {[[:space:]]} $circular "" circular     
           set header $a\n
           set newdna ""
           set dna_started 0
-          #fconfigure $fileid -encoding utf-8
+          #fconfigure $fileid -encoding utf-8 
           while {([gets $fileid nextline] != -1) && ($nextline ne "//")} {
             if {!(([string range $nextline 0 5] eq "ORIGIN") || ([string range $nextline 0 9] eq "BASE COUNT"))} {
               if {$dna_started} {
@@ -5713,7 +5929,7 @@ sputs pdwfh $fstart $fend $ftype $frev
             set feature_table ""
           } else {
             set genbank_header [string range $header 0 [lindex $genbank_header_indices 1]]
-            set feature_table [string range $header [lindex $feature_indices 1] end]
+            set feature_table [string range $header [lindex $feature_indices 1] end] 
           }
           set genbank_header_info [list]
           set vnti 0
@@ -5745,12 +5961,14 @@ sputs pdwfh $fstart $fend $ftype $frev
             }
 
           }
+          #sputs genbank_header_info $genbank_header_info
           regsub \n\n$ $filecomment ""  filecomment
           regsub -all {[[:space:]0-9\n]} $newdna "" newdna
           if {[regexp {[^abcdghkmnrstuvwyABCDGHKMNRSTUVWY*]} $newdna]} {
             tk_messageBox -message "Eror: bad dna sequence in Genbank" -icon error -type ok
           }
           set new_tags [feature_table_to_taglist [split $feature_table \n] $circular [string length $newdna]]
+          #sputs gb_new_tags $new_tags
           set new_title [file tail $filename]
           set filetype "Genbank"
         }
@@ -5759,9 +5977,9 @@ sputs pdwfh $fstart $fend $ftype $frev
           set filecomment ""
           if {![regexp {LOCUS       (.*) ([0-9]*) bp (   |ss-|ds-|ms-)(NA    |DNA   |RNA   |tRNA  |rRNA  |mRNA  |uRNA  |snRNA |snoRNA)[ ]*(linear  |circular|        )[ ]*([ A-Z]{3})[ ]*(..-...-....)} $a x name size stranded type circular div date] || $circular== "        "} {
             set circular "linear"
-          }
+          }  
           regsub -all {[^a-zA-Z0-9]} $name _ name
-          regsub -all {[[:space:]]} $circular "" circular
+          regsub -all {[[:space:]]} $circular "" circular          
           set genbank_type_array(0) "LOCUS       "
           set genbank_data_array(0) [string range $a 12 end]
           set i 0
@@ -5819,14 +6037,14 @@ sputs pdwfh $fstart $fend $ftype $frev
 #sputs $genbank_features
           regsub -all {[^abcdghkmnrstuvwyABCDGHKMNRSTUVWY*]} $newdna "" newdna
 
-          set new_tags [feature_table_to_taglist $genbank_features $circular [string length $newdna]]
+          set new_tags [feature_table_to_taglist $genbank_features $circular [string length $newdna]]  
 
           set new_title [file tail $filename]
           set filetype "Genbank"
         }
         embl {
           #sputs "embl: $filename"
-          if {([string match "*;*circular*;*" $a])} {
+          if {([string match "*;*circular*;*" $a])} { 
             set circular "circular"
           } else {
             set circular "linear"
@@ -5838,7 +6056,7 @@ sputs pdwfh $fstart $fend $ftype $frev
             } elseif {$type == "SQ"} {
               break
             }  else {
-              set filecomment "$filecomment\n$nextline"
+              set filecomment "$filecomment\n$nextline" 
             }
           }
           set newdna ""
@@ -5893,7 +6111,7 @@ sputs pdwfh $fstart $fend $ftype $frev
           set dialogblock 0
           close $fileid
           return "error:unkown filetype"
-        }
+        }  
       }
       close $fileid
       regsub -all {[^abcdghkmnrstuvwyABCDGHKMNRSTUVWY*]} $newdna "" newdna
@@ -5928,7 +6146,7 @@ sputs doesn't exist:$filename
 sputs here g
 
 ###############
-## parse gff file- returns list: newdna filecomment circular startindex new_tags
+## parse gff file- returns list: newdna filecomment circular startindex new_tags 
 ###############
 proc parse_gff_file {gff3file} {
   global info headerlist
@@ -6005,7 +6223,7 @@ proc parse_gff_file {gff3file} {
 
   # if multiple seqids in file, pick one and delete all the others
   if {[llength [lsort -unique $seqid_list]] > 1} {
-    #chose seqid here- use #0 for now
+    #choose seqid here- use #0 for now
     set seqid [lindex $seqid_list 0]
   } else {
     set seqid [lindex $seqid_list 0]
@@ -6019,7 +6237,7 @@ proc parse_gff_file {gff3file} {
     sputs "end of gff seq region is less than start?"
     set seqtemp $seqstart
     set seqstart $seqend
-    set seqend $seqtemp
+    set seqend $seqtemp 
   }
   set seqlength [expr {$seqend - $seqstart}]
   set length_from_seqregion [expr {$seqend > 1}]
@@ -6030,7 +6248,7 @@ proc parse_gff_file {gff3file} {
     if {[llength $loc_array([lindex $keylist 0])] == 1} {
       foreach key [lrange $keylist 1 end] {
         lappend loc_array([lindex $keylist 0]) [lindex $loc_array($key) 0]
-        array unset loc_array $key
+        array unset loc_array $key 
       }
     }
   }
@@ -6078,8 +6296,8 @@ proc parse_gff_file {gff3file} {
       regsub -all {%3B} $note {;} note
       lappend subdata note $note
     }
-    if {[dict exists $info(feature_default_type_colors) $feature_type]} {
-      set clist [dict get $info(feature_default_type_colors) $feature_type]
+    if {[dict exists $info(feature_default_type_colors) $type]} {
+      set clist [dict get $info(feature_default_type_colors) $type]
     } else {
        set clist {#5fd5a3 #5fd5a3}
     }
@@ -6120,14 +6338,14 @@ proc parse_gff_file {gff3file} {
           set seqend [expr {max ($seqend, $b)}]
         }
         lappend new_range [expr {$a - $seqstart}]  [expr {$b - $seqstart}]
-      }
+      } 
     }
 
 ##don't know what do do about unsorted range- needs to be sorted in the file to deal with split features that span the origin
     if {([lindex $new_range 0] > [lindex $new_range end])} {
       set new_range [lsort -integer $new_range ]
     }
-        if {[llength $new_range] > 0} {
+        if {[llength $new_range] > 0} { 
           if {[llength $new_range] > 2} {
             if {($circular== "circular") && ([lindex $new_range 0] > [lindex $new_range end])} {
               #crosses the origin
@@ -6165,7 +6383,7 @@ proc parse_gff_file {gff3file} {
 ###########
 proc duplicate_window {w {region selection}} {
   global info
-
+ 
   if {([llength [$w.textarea tag ranges sel]] > 0) && ($region == "selection")} {
     if {[llength [$w.textarea tag ranges sel]] == 2} {
       set start [$w.textarea index sel.first]
@@ -6184,7 +6402,7 @@ proc duplicate_window {w {region selection}} {
     set end [$w.textarea index end-1c]
     set circ $info($w,circular)
     if {$circ eq "linear"} {
-      set tags [get_tags $w.textarea [list $start $end] forward]
+      set tags [get_tags_exact $w.textarea [list $start $end] forward]
     } else {
       set text $w.textarea
       set tags [list]
@@ -6278,7 +6496,7 @@ get_fixed_fonts [expr {$i}]
 ## Get a list of fixed fonts on the system
 ###########
 proc get_fixed_fonts2 {{i 0}} {
-  global info temp_info
+  global info temp_info 
   set info(fixedfontlist) [list]
   foreach font [font families] {
     if {(![regexp {[^a-z,0-9,A-Z,\ ,\}\{\_\(\)]} \{$font\}]) && ([font metrics \{$font\} -fixed])} {
@@ -6345,7 +6563,7 @@ proc tk_messageBox {args} {
       }
     }
     set args $temp_args
-  }
+  } 
 
   set ret [old_tk_messageBox {*}$args]
   catch {focus $focus_store}
@@ -6406,7 +6624,7 @@ proc color_button {name variable {size 12}} {
   if {[info exists $variable]} {set color [set $variable]}
   if {[catch {winfo rgb . $color}]} {set color $info(bg_color)}
   #set $variable $color
-  set rgb_color [format "\#%04X%04X%04X" {*}[winfo rgb . $color]]
+  set rgb_color [format "\#%04X%04X%04X" {*}[winfo rgb . $color]] 
   set new_image [image create photo]
   $new_image put [string repeat "{[string repeat "$rgb_color " $size] } " $size]
   if {[info commands tk_button] == {}} {
@@ -6439,8 +6657,8 @@ proc configure_preferences {{w .}} {
   global keysubst
   global allowedkeys possible_extensions
 
-  global ok current_NCBI_translation_code
-  global dialogblock
+  global ok current_NCBI_translation_code 
+  global dialogblock 
 
 
   if {$dialogblock == 1} {return}
@@ -6449,7 +6667,7 @@ proc configure_preferences {{w .}} {
   if {[llength $info(fixedfontlist)] == 0} {
     get_fixed_fonts
   }
-
+  
   #this is called with $w=="." on the mac when ::tk::mac::ShowPreferences is called
   if {$w=="."} {
     for {set i 0} {$i < [llength [wm stackorder .]]} {incr i} {
@@ -6493,32 +6711,32 @@ proc configure_preferences {{w .}} {
     set temp_info($element) $info($element)
   }
 
-  grid [frame $t.generaloptions.f1 -relief flat -borderwidth 3 -bg $info(bg_color)] -row 1 -column 0 -columnspan 2 -sticky nwe
+  grid [frame $t.generaloptions.f1 -relief flat -borderwidth 3] -row 1 -column 0 -columnspan 2 -sticky nwe
   grid [label $t.generaloptions.f1.label1 -text [mc "Text font:"]] -row 0 -column 0 -sticky w
 
   grid [menubutton $t.generaloptions.f1.menubutton -textvariable temp_info(dnafontsize) -menu $t.generaloptions.f1.menubutton.menu -indicatoron 1 -relief raised] -row 0 -column 1 -sticky w
-  menu $t.generaloptions.f1.menubutton.menu
+  menu $t.generaloptions.f1.menubutton.menu 
     foreach fontsize [lsort -unique -integer [concat [list 8 9 10 11 12 13 14 16 18 24 28 32 36 42 48] $temp_info(dnafontsize)]] {
       $t.generaloptions.f1.menubutton.menu add radiobutton -label $fontsize -indicatoron 1 -value $fontsize -variable temp_info(dnafontsize)
     }
   bind $t.generaloptions.f1.menubutton.menu <<MenuSelect>> "focus $s"
   grid [label $t.generaloptions.f1.label2 -text "pt"] -row 0 -column 2 -sticky w
   grid [menubutton $t.generaloptions.f1.menubutton1 -textvariable temp_info(textfontfamily) -menu $t.generaloptions.f1.menubutton1.menu -indicatoron 1 -relief raised] -row 0 -column 3 -sticky w
-  menu $t.generaloptions.f1.menubutton1.menu
+  menu $t.generaloptions.f1.menubutton1.menu 
   bind $t.generaloptions.f1.menubutton1.menu <<MenuSelect>> "focus $s"
   foreach fontfam $info(fixedfontlist) {
       $t.generaloptions.f1.menubutton1.menu add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_info(textfontfamily);# -font [list $fontfam 10]
   }
   grid [label $t.generaloptions.f1.label3 -text [mc "Graphic font:"]] -row 1 -column 0 -sticky w
   grid [menubutton $t.generaloptions.f1.menubutton2 -textvariable temp_info(graphicfontsize) -menu $t.generaloptions.f1.menubutton2.menu -indicatoron 1 -relief raised] -row 1 -column 1 -sticky w
-  menu $t.generaloptions.f1.menubutton2.menu
+  menu $t.generaloptions.f1.menubutton2.menu 
     foreach fontsize [lsort -unique -integer [concat [list 8 9 10 11 12 13 14 16 18 24 28 32 36 42 48] $temp_info(graphicfontsize)]] {
       $t.generaloptions.f1.menubutton2.menu add radiobutton -label $fontsize -indicatoron 1 -value $fontsize -variable temp_info(graphicfontsize)
     }
   bind $t.generaloptions.f1.menubutton2.menu <<MenuSelect>> "focus $s"
   grid [label $t.generaloptions.f1.label4 -text "pt"] -row 1 -column 2 -sticky w
   grid [menubutton $t.generaloptions.f1.menubutton3 -textvariable temp_info(graphicfontfamily) -menu $t.generaloptions.f1.menubutton3.menu -indicatoron 1 -relief raised] -row 1 -column 3 -sticky w
-  menu $t.generaloptions.f1.menubutton3.menu
+  menu $t.generaloptions.f1.menubutton3.menu 
     if {[llength $info(allfontlist)] <= 20} {
       foreach fontfam $info(allfontlist) {
         $t.generaloptions.f1.menubutton3.menu add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_info(graphicfontfamily);# -font [list $fontfam 10]
@@ -6526,7 +6744,7 @@ proc configure_preferences {{w .}} {
     } else {
       for {set fi 0} {$fi < [llength $info(allfontlist)]} {incr fi 20} {
         if {[set fj [expr {$fi + 19}]] > [llength $info(allfontlist)]} {set fj [expr {[llength $info(allfontlist)]-1}]}
-        $t.generaloptions.f1.menubutton3.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $t.generaloptions.f1.menubutton3.menu$fi
+        $t.generaloptions.f1.menubutton3.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $t.generaloptions.f1.menubutton3.menu$fi 
         menu $t.generaloptions.f1.menubutton3.menu$fi
         foreach fontfam [lrange $info(allfontlist) $fi $fj] {
           $t.generaloptions.f1.menubutton3.menu$fi add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_info(graphicfontfamily);# -font [list $fontfam 10]
@@ -6535,18 +6753,20 @@ proc configure_preferences {{w .}} {
     }
   bind $t.generaloptions.f1.menubutton3.menu <<MenuSelect>> "focus $s"
 
-grid [label $t.generaloptions.f1.label5 -text [mc "Menu font:"]] -row 2 -column 0 -sticky w
-  grid [menubutton $t.generaloptions.f1.menubutton4 -textvariable temp_info(menu_font_size) -menu $t.generaloptions.f1.menubutton4.menu -indicatoron 1 -relief raised] -row 2 -column 1 -sticky w
-  menu $t.generaloptions.f1.menubutton4.menu
-    foreach fontsize [lsort -unique -integer [concat [list 8 9 10 11 12 13 14 16 18 24 28 32 36 42 48] $temp_info(menu_font_size)]] {
-      $t.generaloptions.f1.menubutton4.menu add radiobutton -label $fontsize -indicatoron 1 -value $fontsize -variable temp_info(menu_font_size)
-    }
-  bind $t.generaloptions.f1.menubutton4.menu <<MenuSelect>> "focus $s"
-  grid [label $t.generaloptions.f1.label6 -text "pt"] -row 2 -column 2 -sticky w
+if {[tk windowingsystem] != "aqua"} {
+  grid [label $t.generaloptions.f1.label5 -text [mc "Menu font:"]] -row 2 -column 0 -sticky w
+    grid [menubutton $t.generaloptions.f1.menubutton4 -textvariable temp_info(menu_font_size) -menu $t.generaloptions.f1.menubutton4.menu -indicatoron 1 -relief raised] -row 2 -column 1 -sticky w
+    menu $t.generaloptions.f1.menubutton4.menu 
+      foreach fontsize [lsort -unique -integer [concat [list 8 9 10 11 12 13 14 16 18 24 28 32 36 42 48] $temp_info(menu_font_size)]] {
+        $t.generaloptions.f1.menubutton4.menu add radiobutton -label $fontsize -indicatoron 1 -value $fontsize -variable temp_info(menu_font_size)
+      }
+    bind $t.generaloptions.f1.menubutton4.menu <<MenuSelect>> "focus $s"
+    grid [label $t.generaloptions.f1.label6 -text "pt"] -row 2 -column 2 -sticky w
+}
 
 grid [label $t.generaloptions.f1.label7 -text [mc "Toolbar size:"]] -row 3 -column 0 -sticky w
 grid [menubutton $t.generaloptions.f1.menubutton6 -textvariable temp_info(toolbar_size) -menu $t.generaloptions.f1.menubutton6.menu -indicatoron 1 -relief raised] -row 3 -column 1 -sticky w
-  menu $t.generaloptions.f1.menubutton6.menu
+  menu $t.generaloptions.f1.menubutton6.menu 
     foreach iconsize [lsort -unique -integer [concat [list 16 32 48 64 128 256] $temp_info(toolbar_size)]] {
       $t.generaloptions.f1.menubutton6.menu add radiobutton -label $iconsize -indicatoron 1 -value $iconsize -variable temp_info(toolbar_size)
     }
@@ -6558,7 +6778,7 @@ grid [menubutton $t.generaloptions.f1.menubutton6 -textvariable temp_info(toolba
   grid [label $t.generaloptions.f1.label8 -text [mc "Locale:"]] -row 5 -column 0 -sticky w
   grid [menubutton $t.generaloptions.f1.menubutton5 -textvariable temp_info(locale) -menu $t.generaloptions.f1.menubutton5.menu -indicatoron 1 -relief raised] -row 5 -column 1 -columnspan 2 -sticky w
 
-  menu $t.generaloptions.f1.menubutton5.menu
+  menu $t.generaloptions.f1.menubutton5.menu 
     foreach localefile [glob -directory [file join $info(Accdir) Msgs] *.msg] {
       set localefile [string tolower [file rootname [file tail $localefile]]]
       $t.generaloptions.f1.menubutton5.menu add radiobutton -label $localefile -indicatoron 1 -value $localefile -variable temp_info(locale)
@@ -6572,7 +6792,7 @@ grid [menubutton $t.generaloptions.f1.menubutton6 -textvariable temp_info(toolba
   grid [frame $t.generaloptions.f2 -relief flat -borderwidth 3] -row 2 -column 0 -columnspan 2 -sticky nwe
   grid [label $t.generaloptions.f2.label1 -text [mc "Allowed keys:"]] -row 0 -column 0  -sticky w
   grid [menubutton $t.generaloptions.f2.menubutton -textvariable allowedkeys -menu $t.generaloptions.f2.menubutton.menu -indicatoron 1 -relief raised] -row 0 -column 1  -sticky w
-  menu $t.generaloptions.f2.menubutton.menu
+  menu $t.generaloptions.f2.menubutton.menu 
     $t.generaloptions.f2.menubutton.menu add radiobutton -label "ACGT" -value "ACGT" -variable allowedkeys -state active
     $t.generaloptions.f2.menubutton.menu add radiobutton -label "ACGTN" -value "ACGTN" -variable allowedkeys
     $t.generaloptions.f2.menubutton.menu add radiobutton -label "degenerate code" -value "degenerate code" -variable allowedkeys
@@ -6617,7 +6837,7 @@ grid [menubutton $t.generaloptions.f1.menubutton6 -textvariable temp_info(toolba
       grid [frame $t.generaloptions.f4.f2 -relief flat -borderwidth 2] -row 1 -column 0 -sticky nswe
       #grid [checkbutton $t.generaloptions.f4.f2.native -text [mc "Use Mac Native Speech"] -selectcolor white -onvalue 1 -offvalue 0 -variable temp_info(speak_use_aqua)] -row 1 -column 1
       grid [menubutton $t.generaloptions.f4.f2.menubutton -textvariable temp_info(speak_voice) -menu $t.generaloptions.f4.f2.menubutton.menu -indicatoron 1 -relief raised] -row 2 -column 1 -sticky w
-      menu $t.generaloptions.f4.f2.menubutton.menu
+      menu $t.generaloptions.f4.f2.menubutton.menu 
       foreach menuitem [speech::speakers] {
         $t.generaloptions.f4.f2.menubutton.menu add radiobutton -label $menuitem -value $menuitem -variable temp_info(speak_voice) -state active -command "speech::speak {$menuitem} -voice {$menuitem}"
       }
@@ -6631,7 +6851,7 @@ grid [menubutton $t.generaloptions.f1.menubutton6 -textvariable temp_info(toolba
     grid columnconfigure $t.generaloptions.f4 2 -weight 1 -pad 0
   } elseif  {[info commands snack::sound] != {}} {
 sputs windows here
-    ###snack options
+    ###snack options 
     grid [frame $t.generaloptions.f4 -relief flat -borderwidth 3] -row 4 -column 0 -columnspan 2 -sticky nwe
     foreach var [list speak_delay] {
       set temp_info($var) $info($var)
@@ -6642,7 +6862,7 @@ sputs windows here
     grid rowconfigure $t.generaloptions.f4 14 -weight 1
     grid [ttk::separator $t.generaloptions.f4.s1 -orient horizontal] -row 2 -column 0 -columnspan 3 -sticky swe
     grid columnconfigure $t.generaloptions.f4 2 -weight 1 -pad 0
-  }
+  } 
 ####
 
 
@@ -6653,15 +6873,23 @@ sputs windows here
   grid [checkbutton $t.generaloptions.f5.meth -text [mc "Dam/Dcm default"] -selectcolor white -onvalue 1 -offvalue 0 -variable temp_info(methylated_default)] -row 3 -column 0 -columnspan 3 -sticky nw
   grid [checkbutton $t.generaloptions.f5.comment -text [mc "Show File Comment"] -selectcolor white -onvalue 1 -offvalue 0 -variable temp_info(show_comment)] -row 4 -column 0 -sticky nw
   grid [label $t.generaloptions.f5.label1 -text [mc "Comment Height"]] -row 4 -column 1 -sticky ne -padx 30
-  grid [entry $t.generaloptions.f5.commheight -textvariable temp_info(comment_height) -validate key -vcmd "check_char %S" -width 3 -justify right] -row 4 -column 2 -columnspan 2 -sticky nw
+  #grid [entry $t.generaloptions.f5.commheight -textvariable temp_info(comment_height) -validate key -vcmd "check_char %S" -width 3 -justify right] -row 4 -column 2 -columnspan 2 -sticky nw
+  grid [ttk::spinbox $t.generaloptions.f5.commheight -width 1 -textvariable temp_info(comment_height) -from 1 -to 15 -validate all -validatecommand "entry_integer %P %W %V 1 15"] -row 4 -column 2 -columnspan 2 -sticky nw
   grid [checkbutton $t.generaloptions.f5.transel -text [mc "Translate Selection"] -selectcolor white -onvalue 1 -offvalue 0 -variable temp_info(selection_shows_Trans)] -row 6 -column 0 -columnspan 3 -sticky nw
   grid [label $t.generaloptions.f5.circradlabel -text [mc "Circular Map Radius"]] -row 9 -column 0 -columnspan 1 -sticky nw
-  grid [entry $t.generaloptions.f5.circrad -textvariable temp_info(circ_map_radius) -validate key -vcmd "check_char %S" -width 3 -justify right] -row 9 -column 1 -columnspan 2 -sticky nw
+  #grid [entry $t.generaloptions.f5.circrad -textvariable temp_info(circ_map_radius) -validate key -vcmd "check_char %S" -width 3 -justify right] -row 9 -column 1 -columnspan 2 -sticky nw
+  grid [ttk::spinbox $t.generaloptions.f5.circrad -width 3 -textvariable temp_info(circ_map_radius) -from 100 -to 500 -validate key -validatecommand "check_char %S"] -row 9 -column 1 -columnspan 2 -sticky nw
   grid [frame $t.generaloptions.f5.f1] -row 10 -column 0 -columnspan 6 -sticky nwse
-    grid [label $t.generaloptions.f5.f1.l1 -text [mc "Minimal Gel Band Gray Level"]] -row 0 -column 0  -sticky nw
-    grid [ttk::scale $t.generaloptions.f5.f1.sc -orient horizontal -to 100 -from 0 -variable temp_info(gel_min_gray) -command "set temp_info(gel_min_gray) \[expr {int(\$temp_info(gel_min_gray))}\];#"] -row 0 -column 1  -sticky nwe
-    grid [label $t.generaloptions.f5.f1.l2 -textvariable temp_info(gel_min_gray)] -row 0 -column 2 -sticky nw
-    grid columnconfigure $t.generaloptions.f5.f1 1 -weight 1
+  grid [label $t.generaloptions.f5.f1.l1 -text [mc "Minimal Gel Band Gray Level"]] -row 0 -column 0  -sticky nw
+    #grid [label $t.generaloptions.f5.f1.l2 -textvariable temp_info(gel_min_gray)] -row 0 -column 1 -sticky nw
+    #grid [ttk::scale $t.generaloptions.f5.f1.sc -orient horizontal -to 100 -from 0 -variable temp_info(gel_min_gray) -command "set temp_info(gel_min_gray) \[expr {int(\$temp_info(gel_min_gray))}\];#"] -row 0 -column 2  -sticky nwe
+
+
+
+
+  grid [ttk::spinbox $t.generaloptions.f5.f1.l2 -width 3 -textvariable temp_info(gel_min_gray) -from 0 -to 100 -validate all -validatecommand "entry_integer %P %W %V 0 100"]  -row 0 -column 1  -sticky nw
+
+  grid columnconfigure $t.generaloptions.f5.f1 1 -weight 1
   grid columnconfigure $t.generaloptions.f5 3 -weight 1 -pad 0
 
   grid rowconfigure $t.generaloptions 0 -weight 1
@@ -6682,7 +6910,7 @@ sputs windows here
     set temp_info(bg_color) gray9
     set temp_info(label_fg_color) black
   }
-  if {[tk windowingsystem] != "aqua"} {
+  if {[tk windowingsystem] != "aqua"} { 
     #Aqua menus don't set colors
     grid [label $t.coloroptions.l4  -text [mc "Menu"]] -row 2 -column 0 -sticky nw
     grid [color_button $t.coloroptions.b2  temp_info(menu_bg_color)] -row 2 -column 1 -sticky n
@@ -6722,7 +6950,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   grid [checkbutton $t.coloroptions.b19 -text [mc "Selection Highlight on top"] -selectcolor white -variable temp_info(selection_on_top) -onvalue 1 -offvalue 0] -row 17 -column 0 -columnspan 3 -sticky nw
   #grid [checkbutton $t.coloroptions.b18 -text [mc "Use png formatted Button Images"] -selectcolor white -variable temp_info(use_png_images) -onvalue 1 -offvalue 0] -row 15 -column 0 -columnspan 3 -sticky nw
 
-  #ABI options
+  #ABI options 
   grid [ttk::separator $t.coloroptions.s1 -orient horizontal] -row 18 -column 0 -columnspan 3 -sticky swe
   grid [frame $t.coloroptions.f1 -relief flat -borderwidth 0] -row 19 -column 0  -columnspan 4 -sticky nwe
   grid [label $t.coloroptions.f1.abilabel -justify left -text "ABI" ] -row 0 -column 0 -sticky nw
@@ -6737,7 +6965,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   grid [frame $t.coloroptions.f1.abi_print_options -relief flat -borderwidth 2] -row 7 -column 0 -columnspan 2 -sticky nswe
   grid [label $t.coloroptions.f1.abi_print_options.l1 -text [mc "Print lines per page:"]] -row 0 -column 0 -sticky w
   grid [menubutton $t.coloroptions.f1.abi_print_options.menubutton -textvariable temp_info(print_abi_lines_per_page) -menu $t.coloroptions.f1.abi_print_options.menubutton.menu -indicatoron 1 -relief raised] -row 0 -column 1  -sticky w
-  menu $t.coloroptions.f1.abi_print_options.menubutton.menu
+  menu $t.coloroptions.f1.abi_print_options.menubutton.menu 
   foreach menuitem [list 2 3 4 5 6 7 8] {
     $t.coloroptions.f1.abi_print_options.menubutton.menu add radiobutton -label $menuitem -value $menuitem -variable temp_info(print_abi_lines_per_page) -state active
   }
@@ -6759,6 +6987,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   ### Analysis Options Frame
   $t add [frame $t.analysis] -text [mc Analysis] -sticky nswe
   grid [frame $t.analysis.f4 -relief flat -borderwidth 3] -row 4 -column 0 -columnspan 2 -sticky nwe
+  grid columnconfigure $t.analysis.f4 1 -weight 1
   grid [label $t.analysis.f4.label1 -text [mc "Find ORFs starting with:"]] -row 0 -column 0  -sticky nw
   grid [menubutton $t.analysis.f4.menubutton -textvariable temp_info(find_orf_starts) -menu $t.analysis.f4.menubutton.menu -indicatoron 1 -relief raised] -row 0 -column 1 -sticky nw
     menu $t.analysis.f4.menubutton.menu
@@ -6778,6 +7007,16 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
     grid [label $t.analysis.f4.traslation_code.line1 -text {TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG} -width 65 -justify left -font dnafont] -row 3 -column 1 -sticky nwe
     grid [label $t.analysis.f4.traslation_code.line2 -text {TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG} -width 65 -justify left -font dnafont] -row 4 -column 1 -sticky nwe
     grid [label $t.analysis.f4.traslation_code.line3 -text {TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG} -width 65 -justify left -font dnafont] -row 5 -column 1 -sticky nwe
+  
+    grid [labelframe $t.analysis.f4.f1 -text [mc "Start Codon"]] -row 2 -column 0 -columnspan 3 -sticky nswe
+    set col 0
+    foreach codon [list ATG GTG TTG ATA ATT CAG CTG] {
+      grid [ttk::checkbutton $t.analysis.f4.f1.start_$codon -variable temp_info(start_codon,$codon) -text $codon] -row 1 -column  [expr {$col}]  -sticky w
+      set temp_info(start_codon,$codon) [expr {$codon in $info(start_codons)}]
+      incr col
+    }
+    set temp_info(start_codon,ATG) 1
+    $t.analysis.f4.f1.start_ATG state disabled
 
     grid [ttk::separator $t.analysis.s1 -orient horizontal] -row 5 -column 0 -columnspan 3 -sticky swe
     grid [frame $t.analysis.f5 -relief flat -borderwidth 3] -row 6 -column 0 -columnspan 2 -sticky nwe
@@ -6795,7 +7034,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   grid [frame $t.files.f1 -relief flat -borderwidth 2] -row 0 -column 0 -sticky nswe
   grid [label $t.files.f1.dnalabel -text [mc "Default DNA Directory:"]] -row 0 -column 0 -sticky w
   grid [label $t.files.f1.dnadir -textvariable temp_info(default_dnadir)] -row 1 -column 0 -columnspan 2 -sticky nsw
-  grid [button $t.files.f1.changednadir -text [mc "Change Directory"] -command "set temp_info(default_dnadir) \[tk_chooseDirectory -initialdir \$temp_info(default_dnadir) -mustexist 1 -title \"Chose New DNA Directory...\" -parent $s\]"] -row 2 -column 0 -sticky w
+  grid [button $t.files.f1.changednadir -text [mc "Change Directory"] -command "set temp_info(default_dnadir) \[tk_chooseDirectory -initialdir \$temp_info(default_dnadir) -mustexist 1 -title \"Choose New DNA Directory...\" -parent $s\]"] -row 2 -column 0 -sticky w
   grid [checkbutton $t.files.f1.follows -text [mc "Follows Last Opened File"] -selectcolor white -onvalue 1 -offvalue 0 -variable temp_info(dnadir_follows_open)] -row 2 -column 1 -sticky w
   grid [ttk::separator $t.files.f1.s1 -orient horizontal] -row 3 -column 0 -columnspan 3 -sticky swe
   grid columnconfigure $t.files.f1 1 -weight 1 -uniform 1
@@ -6803,7 +7042,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   grid [frame $t.files.f2 -relief flat -borderwidth 2] -row 1 -column 0 -sticky nswe
   grid [label $t.files.f2.dnalabel -text [mc "Default Feature Directory:"]] -row 0 -column 0 -sticky w
   grid [label $t.files.f2.dnadir -textvariable temp_info(default_featuredir)] -row 1 -column 0 -columnspan 2 -sticky nsw
-  grid [button $t.files.f2.changednadir -text [mc "Change Directory"] -command "set temp_info(default_featuredir) \[tk_chooseDirectory -initialdir \$temp_info(default_featuredir) -mustexist 1 -title \"Chose New Feature Directory...\" -parent $s\]" ] -row 2 -column 0 -sticky w
+  grid [button $t.files.f2.changednadir -text [mc "Change Directory"] -command "set temp_info(default_featuredir) \[tk_chooseDirectory -initialdir \$temp_info(default_featuredir) -mustexist 1 -title \"Choose New Feature Directory...\" -parent $s\]" ] -row 2 -column 0 -sticky w
   if {1} {
     grid [button $t.files.f2.exportfeatures -text [mc "Create Default Feature File"] -command {
       if {(![file exists [file join $temp_info(default_featuredir) "Default_Features.txt"]]) || ([tk_messageBox -message [mc {Replace Default_Features.txt in directory %1$s?} $temp_info(default_featuredir)] -title [mc "Default Features file exists"] -icon question -type yesno -default no] == "yes")} {
@@ -6818,7 +7057,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   grid [frame $t.files.f3 -relief flat -borderwidth 2] -row 2 -column 0 -sticky nswe
   grid [label $t.files.f3.dnalabel -text [mc "Default Enzyme Directory:"]] -row 0 -column 0 -sticky w
   grid [label $t.files.f3.dnadir -textvariable temp_info(default_enzymedir)] -row 1 -column 0 -columnspan 2 -sticky nsw
-  grid [button $t.files.f3.changednadir -text [mc "Change Directory"] -command "set temp_info(default_enzymedir) \[tk_chooseDirectory -initialdir \$temp_info(default_enzymedir) -mustexist 1 -title \"Chose New Enzyme Directory...\" -parent $s\] "] -row 2 -column 0 -sticky w
+  grid [button $t.files.f3.changednadir -text [mc "Change Directory"] -command "set temp_info(default_enzymedir) \[tk_chooseDirectory -initialdir \$temp_info(default_enzymedir) -mustexist 1 -title \"Choose New Enzyme Directory...\" -parent $s\] "] -row 2 -column 0 -sticky w
   if {1} {
     grid [button $t.files.f3.exportenzymes -text [mc "Create Default Enzyme File"] -command {
       if {(![file exists [file join $temp_info(default_enzymedir) "Default_Enzymes.txt"]]) || ([tk_messageBox -message [mc {Replace Default_Enzymes.txt in directory %1$s?} $temp_info(default_enzymedir)] -title [mc "Default Enzymes file exists"] -icon question -type yesno -default no] == "yes")} {
@@ -6842,7 +7081,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   grid [label $t.files.f4.rfileslabel -text [mc "Recently used files list"]] -row 5 -column 0 -sticky wn
   tk_optionMenu $t.files.f4.rfiles temp_info(max_open_previous) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
   grid $t.files.f4.rfiles -row 5 -column 1 -sticky wn
-  grid [checkbutton $t.files.f4.restoreonclose -text [mc "Restore Open Files on Startup"] -selectcolor white -onvalue 1 -offvalue 0 -variable temp_info(restore_on_startup)] -row 6 -column 0 -sticky nw -columnspan 2
+  #grid [checkbutton $t.files.f4.restoreonclose -text [mc "Restore Open Files on Startup"] -selectcolor white -onvalue 1 -offvalue 0 -variable temp_info(restore_on_startup)] -row 6 -column 0 -sticky nw -columnspan 2
   grid columnconfigure $t.files.f4 1 -weight 1 -uniform 1
 
   #autosave
@@ -6850,7 +7089,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   grid [frame $t.files.f5 -relief flat -borderwidth 2] -row 5 -column 0 -sticky nswe
   grid [label $t.files.f5.asdirlabel -text [mc "Autosave Directory:"]] -row 0 -column 0 -sticky w
   grid [label $t.files.f5.asdir -textvariable temp_info(autosave_dir)] -row 1 -column 0 -columnspan 2 -sticky nsw
-  grid [button $t.files.f5.aschangednadir -text [mc "Change Directory"] -command "set temp_info(autosave_dir) \[tk_chooseDirectory -initialdir \$temp_info(autosave_dir) -mustexist 1 -title \"Chose New Autosave Directory...\" -parent $s\]"] -row 2 -column 0 -sticky w
+  grid [button $t.files.f5.aschangednadir -text [mc "Change Directory"] -command "set temp_info(autosave_dir) \[tk_chooseDirectory -initialdir \$temp_info(autosave_dir) -mustexist 1 -title \"Choose New Autosave Directory...\" -parent $s\]"] -row 2 -column 0 -sticky w
 
   grid [label $t.files.f5.autosavemaxperfilelabel -text [mc "Maximum autosaves per file:"]] -row 3 -column 0 -sticky en
   grid [entry $t.files.f5.autosavemaxperfile -textvariable temp_info(autosave_max_bkp_files) -validate key -vcmd "check_char %S" -width 3 -justify left] -row 3 -column 1 -sticky wn
@@ -6901,7 +7140,7 @@ grid [checkbutton $t.coloroptions.b18 -text [mc "Color Feature Table Rows"] -sel
   if {!$info(android)} {
     grid [frame $s.f3 -relief flat] -row 1 -column 0 -columnspan 2 -sticky nswe
     grid [button $s.f3.ok -command "after 300 execute_pref_changes 1" -text [mc "OK"] -default active] -row 0 -column 1 -padx 10 -pady 3
-    bind $s <Key-Return> "after 300 execute_pref_changes 1"
+    bind $s <Key-Return> "after 300 execute_pref_changes 1" 
     grid [button $s.f3.cancel -command "after 300 execute_pref_changes -1" -text [mc "Cancel"]] -row 0 -column 0 -padx 10
     grid columnconfigure $s.f3 0 -weight 1 -uniform 1
     grid columnconfigure $s.f3 1 -weight 1 -uniform 1
@@ -7016,12 +7255,22 @@ proc execute_pref_changes {ok} {
     }
 
     if {($temp_info(menu_font_size) != $info(menu_font_size))} {
-      option add *Menu.font [list [font configure TkMenuFont -family] $temp_info(menu_font_size)] 40
+      #&#option add *Menu.font [list [font configure TkMenuFont -family] $temp_info(menu_font_size)] 40
+      font configure menufont -size $temp_info(menu_font_size)
     }
 
     if {($temp_info(toolbar_size) != $info(toolbar_size))} {
       toolbar_set_icons $temp_info(toolbar_size)
     }
+
+    set temp_info(start_codons) [list]
+    foreach codon [list ATG GTG TTG ATA ATT CAG CTG] {
+      if {$temp_info(start_codon,$codon)} {
+        lappend temp_info(start_codons) $codon
+      }
+      array unset temp_info start_codon,$codon
+    }
+
 
     #######
     ####### apply temp_info to info array
@@ -7038,7 +7287,7 @@ proc execute_pref_changes {ok} {
       }
     }
 
-    set info(allowedkeys) [string map {"ACGTN" "ACGTNacgtn*" "ACGT" "ACGTacgt" "degenerate code" "ABCDGHKMNRSTVWYabcdghkmnrstvwy*" "ACGU" "ACGUacgu" "ACGUN" "ACGUNacgun*"} $allowedkeys]
+    set info(allowedkeys) [string map {"ACGTN" "ACGTNacgtn*" "ACGT" "ACGTacgt" "degenerate code" "ABCDGHKMNRSTVWYabcdghkmnrstvwy*" "ACGU" "ACGUacgu" "ACGUN" "ACGUNacgun*"} $allowedkeys] 
     set info(keysubstmap) [list]
     foreach sub [array names keysubst] {
       foreach char [split $keysubst($sub)] {
@@ -7065,7 +7314,7 @@ proc execute_pref_changes {ok} {
     foreach base [list B D H K M R S V W Y -] {
       set abi_info(colors,$base) $temp_abi(non)
     }
-    foreach window [winfo children .] {
+    foreach window [winfo children .] { 
       if {([string match ".abi_window*" $window]) && (![string match "*analysis*" $window])} {
         if {$abi_info($window,rev_com)} {
           foreach base [list A C G T N B D H K M R S V W Y] rc_base [list T G C A N V H D K H Y W B S R] {
@@ -7134,7 +7383,7 @@ proc recolor_app {} {
 
   foreach {option color} [list background $info(bg_color) troughColor gray50 activeBackground $info(bg_color) activeForeground black] {
     option add *$option $color
-  }
+  }    
 
   catch {style default -background  $info(bg_color)}
 
@@ -7151,14 +7400,14 @@ proc recolor_app {} {
 
   option add *Text.background $info(text_bg_color)
   option add *Text.foreground $info(text_fg_color)
-  option add *Text.selectForeground $info(text_select_fg_color)
-  option add *Text.selectBackground $info(text_select_bg_color)
+  option add *Text.selectForeground $info(text_select_fg_color) 
+  option add *Text.selectBackground $info(text_select_bg_color) 
   option add *Text.inactiveSelectBackground $info(text_select2_bg_color)
 
   option add *Entry.background $info(text_bg_color)
   option add *Entry.foreground $info(text_fg_color)
-  option add *Entry.selectForeground $info(text_select_fg_color)
-  option add *Entry.selectBackground $info(text_select_bg_color)
+  option add *Entry.selectForeground $info(text_select_fg_color) 
+  option add *Entry.selectBackground $info(text_select_bg_color) 
   option add *Entry.highlightBackground $info(bg_color)
 
 
@@ -7174,6 +7423,7 @@ proc recolor_app {} {
 
   ttk::style configure TRadiobutton -foreground $info(label_fg_color)
   ttk::style configure TCheckbutton -foreground $info(label_fg_color)
+  ttk::style configure TSpinbox -foreground $info(text_fg_color) -background $info(text_bg_color) -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) 
   ttk::style map TLabel -foreground [list {} $info(label_fg_color) background $info(label_disabled_fg_color)]
   ttk::style map TRadiobutton -foreground [list {} $info(label_fg_color) pressed $info(label_fg_color) background $info(label_disabled_fg_color) disabled $info(label_disabled_fg_color)]
   ttk::style map TCheckbutton -foreground [list {} $info(label_fg_color) pressed $info(label_fg_color) background $info(label_disabled_fg_color) disabled $info(label_disabled_fg_color)]
@@ -7181,7 +7431,7 @@ proc recolor_app {} {
   ttk::style map TButton -foreground "!pressed $info(label_fg_color) pressed white"
   #ttk::style map TMenubutton -foreground "!pressed $info(label_fg_color) pressed white"
   ttk::style configure TMenubutton -foreground  $info(label_fg_color)
-
+  
   if {$info(color_feature_table_tags)} {
     ttk::style map Treeview -background [list {background selected} $info(text_select2_bg_color) selected $info(text_select_bg_color)] -foreground [list !selected $info(text_fg_color) selected $info(text_select_fg_color)]
   } else {
@@ -7191,7 +7441,7 @@ proc recolor_app {} {
     ## apply background colors to tile widgets (not perfect for radiobutton and checkbutton)
   #sputs recolor $info(bg_color)
   set background_color_image [image create photo -height 20 -width 20]
-  set rgb_color [format "\#%04X%04X%04X" {*}[winfo rgb . $info(bg_color)]]
+  set rgb_color [format "\#%04X%04X%04X" {*}[winfo rgb . $info(bg_color)]] 
   $background_color_image put -to 0 0 20 20 $rgb_color
   catch {ttk::style element create "Tile_bg_$rgb_color" image [list $background_color_image] -padding {0} -border {0} -sticky news}
 
@@ -7233,7 +7483,7 @@ proc recolor_app {} {
       $w.map_zoom configure -background $info(text_bg_color)
 
       # apply feature colors, if $info(color_feature_table_tags)
-      features_to_tree_view $w
+      features_to_tree_view $w 
 
       # recolor the background color values
       toolbar_set_icons $info(toolbar_size)
@@ -7242,7 +7492,7 @@ proc recolor_app {} {
     }
   }
 
-}
+}   
 
 ###########
 ## recolor the app widgets color schemes change
@@ -7254,13 +7504,14 @@ global info
   }
   switch [winfo class $w] {
     "Text" {
-      set param [list -background $info(text_bg_color) -foreground $info(text_fg_color) -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -inactiveselectbackground $info(text_select2_bg_color)]
+      set param [list -background $info(text_bg_color) -foreground $info(text_fg_color) -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -inactiveselectbackground $info(text_select2_bg_color)] 
     }
+    "TSpinbox" -
     "Entry" {
-      set param [list -background $info(text_bg_color) -foreground $info(text_fg_color) -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -highlightbackground $info(bg_color)]
+      set param [list -background $info(text_bg_color) -foreground $info(text_fg_color) -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -highlightbackground $info(bg_color)] 
     }
     "Listbox" {
-      set param [list -background $info(text_bg_color) -foreground $info(text_fg_color) -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color)]
+      set param [list -background $info(text_bg_color) -foreground $info(text_fg_color) -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color)] 
     }
     "Menu" {
       set param [list -background $info(menu_bg_color) -foreground $info(menu_fg_color) -activebackground $info(menu_select_bg_color) -activeforeground $info(menu_select_fg_color)]
@@ -7275,11 +7526,11 @@ global info
     "Menubutton" -
     "Labelframe" -
     "Label" {
-      set param [list -background $info(bg_color) -foreground $info(label_fg_color)]
+      set param [list -background $info(bg_color) -foreground $info(label_fg_color)] 
     }
     "Toplevel" -
     "Frame" {
-      set param [list -background $info(bg_color)]
+      set param [list -background $info(bg_color)] 
     }
     default {
       set param [list]
@@ -7342,7 +7593,7 @@ proc darkmode_set {mode} {
 	      tk::unsupported::MacWindowStyle appearance $tl [expr {$info(dark_mode)?"darkaqua":"auto"}]
             }
 	}
-    }
+    } 
   recolor_app
 sputs darkmode
 }
@@ -7352,7 +7603,7 @@ sputs darkmode
 proc ui_buttons_set_icons {} {
   global info toolbar_images
   set background_color_image [image create photo -height 20 -width 20]
-  set rgb_color [format "\#%04X%04X%04X" {*}[winfo rgb . $info(bg_color)]]
+  set rgb_color [format "\#%04X%04X%04X" {*}[winfo rgb . $info(bg_color)]] 
   $background_color_image put -to 0 0 20 20 $rgb_color
   catch {ttk::style element create "Tile_bg_$rgb_color" image [list $background_color_image] -padding {0} -border {0} -sticky news}
 
@@ -7395,7 +7646,7 @@ proc ui_buttons_set_icons {} {
     ttk::style layout Icon.MD.TCheckbutton "Tile_bg_$rgb_color -sticky nswe  -children {Icon.MD.TCheckbutton.hover$dark\_$x -side left -sticky nsew -children {TCheckbutton.image}}"
     ttk::style layout Disclosure.Icon.MD.TCheckbutton "Tile_bg_$rgb_color -sticky nswe  -children {Disclosure.Icon.MD.TCheckbutton.button$dark\_$x -side left -sticky w Icon.MD.TCheckbutton.hover$dark\_$x -side left -sticky nsew -children {TCheckbutton.image}}"
     ttk::style layout TButton "Tile_bg_$rgb_color -sticky nswe -children {MD.TButton.spacing -sticky nswe -children {MD.TButton.button$dark\_$x -sticky nswe -children {Button.label  -sticky nswe}}}"
-
+    
     ttk::style layout TMenubutton "Tile_bg_$rgb_color -sticky nswe -children {MD.TMenubutton.spacing -sticky nswe -children {MD.TMenubutton.button$dark\_$x -sticky nswe -children {TMenubutton.label -sticky ns -side left MD.TMenubutton.disclosure_spacing -sticky e -side right -children { MD.TButton.disclosure$dark\_$x -sticky {}}}}}"
   }
 
@@ -7406,7 +7657,7 @@ proc ui_buttons_set_icons {} {
   set toolbar_images(button_info) $toolbar_images(button_info$dark,1x)
   foreach w [winfo children .] {
     #if {[winfo exists [set s $w.findframe]]} {
-    #  $s.buttons_frame.edit_features configure -image $toolbar_images(button_edit)
+    #  $s.buttons_frame.edit_features configure -image $toolbar_images(button_edit) 
     #  $s.buttons_frame.seq_info configure -image $toolbar_images(button_info)
     #  $s.buttons_frame.find_orf configure -image $toolbar_images(button_orf)
     #}
@@ -7414,7 +7665,7 @@ proc ui_buttons_set_icons {} {
     #  $s.buttons_frame.find  configure -image $toolbar_images(button_find)
     #  $s.buttons_frame.seq_info  configure -image $toolbar_images(button_info)
     #  $s.buttons_frame.find_orf  configure -image $toolbar_images(button_orf)
-    #}
+    #}  
     #if {[winfo exists [set s $w.orf_search_frame]]} {
     #  $s.buttons_frame.edit_features configure -image $toolbar_images(button_edit)
     #  $s.buttons_frame.find configure -image $toolbar_images(button_find)
@@ -7431,7 +7682,7 @@ proc ui_buttons_set_icons {} {
     if {[winfo exists $w.infobutton]} {
       $w.infobutton configure -image $toolbar_images(button_info)
     }
-
+    
     if {[winfo exists $w.showcomment]} {
       $w.showcomment configure -image $toolbar_images(button_comment)
     }
@@ -7448,7 +7699,7 @@ proc ui_buttons_set_icons {} {
 
   if {!$info(android)} {
     set x "1x"
-    set text_size [expr {round([tk scaling]  * [font actual TkMenuFont -size])}]
+    set text_size [expr {round([tk scaling]  * [font actual menufont -size])}]
     if {$text_size < 32} {
       set x "1x"
     } elseif {$text_size < 48} {
@@ -7464,14 +7715,15 @@ proc ui_buttons_set_icons {} {
     }
     foreach w [winfo children .] {
       if {[winfo exists $w.menubar.filemenu]} {
-      set iconlist [list $w.menubar.filemenu [mc New] new $w.menubar.filemenu [mc "Duplicate Selection"] new $w.menubar.filemenu [mc Open...] open $w.menubar.filemenu [mc Save] save $w.menubar.filemenu [mc "Save As..."] save $w.menubar.edit  [mc "Cut"] cut $w.menubar.edit  [mc "Copy"] copy $w.menubar.edit  [mc "Paste"] paste $w.menubar.edit  [mc "Cut Rev-Com"] cut $w.menubar.edit  [mc "Copy Rev-Com"] copy $w.menubar.edit  [mc "Paste Rev-Com"] paste $w.menubar.edit  [mc "Select From-To..."] select $w.menubar.edit  [mc "Jump To..."] jump $w.menubar.edit  [mc "Find..."] find $w.menubar.edit  [mc "Clear Find Highlighting"] find $w.menubar.edit  [mc "Convert to UPPERCASE"] uppercase $w.menubar.edit  [mc "Convert to lowercase"] lowercase $w.menubar.edit  [mc "Reverse-Complement"] reverse_com $w.menubar.edit  [mc "Set Origin"] origin $w.menubar.enzymes [mc "Enzyme Selector..."] enzymes $w.menubar.enzymes [mc "Graphic Map"] graphic_map $w.menubar.enzymes [mc "Graphic Map +U"] graphic_map $w.menubar.enzymes [mc "Highlight"] highlight_enzymes $w.menubar.enzymes [mc "Clear Highlighting"] highlight_enzymes $w.menubar.enzymes [mc "Digestion"] digest $w.menubar.enzymes [mc "Digestion Dialog..."] digest $w.menubar.enzymes [mc "Text Map..."] text_map $w.menubar.tools [mc "Find Primers..."] find_primers $w.menubar.tools [mc "Align Sequences..."] align  $w.menubar.tools [mc "PCR Reaction"] pcr $w.menubar.tools [mc "Recombination Tool..."] gibson $w.menubar.tools [mc "Gibson Assembly Wizard"] gibson $w.menubar.tools [mc "Golden Gate Assembly Wizard"] golden_gate $w.menubar.tools [mc "Golden Gate Reaction"] golden_gate $w.menubar.tools [mc "BLAST Sequences at NCBI..."] ncbi $w.menubar.tools [mc "BLAST Sequences at Wormbase..."] wormbase $w.menubar.tools [mc "Download sequences from NCBI..."] ncbi]
+        set iconlist [list $w.menubar.filemenu [mc New] new $w.menubar.filemenu [mc Open...] open $w.menubar.filemenu [mc Save] save $w.menubar.edit  [mc "Cut"] cut $w.menubar.edit  [mc "Copy"] copy $w.menubar.edit  [mc "Paste"] paste $w.menubar.edit  [mc "Cut Rev-Com"] cut $w.menubar.edit  [mc "Copy Rev-Com"] copy $w.menubar.edit  [mc "Paste Rev-Com"] paste $w.menubar.edit  [mc "Select From-To..."] select $w.menubar.edit  [mc "Jump To..."] jump $w.menubar.edit  [mc "Find..."] find $w.menubar.edit  [mc "Convert to UPPERCASE"] uppercase $w.menubar.edit  [mc "Convert to lowercase"] lowercase $w.menubar.edit  [mc "Reverse-Complement"] reverse_com $w.menubar.enzymes [mc "Enzyme Selector..."] enzymes $w.menubar.enzymes [mc "Graphic Map"] graphic_map $w.menubar.enzymes [mc "Graphic Map +U"] graphic_map $w.menubar.enzymes [mc "Highlight"] highlight_enzymes $w.menubar.enzymes [mc "Clear Highlighting"] highlight_enzymes $w.menubar.enzymes [mc "Digestion"] digest $w.menubar.enzymes [mc "Digestion Dialog..."] digest $w.menubar.enzymes [mc "Text Map..."] text_map $w.menubar.tools [mc "Find Primers..."] find_primers $w.menubar.tools [mc "Align Sequences..."] align  $w.menubar.tools [mc "PCR Reaction"] pcr $w.menubar.tools [mc "Recombination Assembler Tool..."] gibson $w.menubar.tools [mc "Gibson Designer"] gibson $w.menubar.tools [mc "Gibson Assembly Wizard"] gibson $w.menubar.tools [mc "Golden Gate Assembler"] golden_gate $w.menubar.tools [mc "Golden Gate Designer"] golden_gate]
+
         foreach {menu item icon} $iconlist {
           catch {$menu entryconfigure $item  -compound left -image $toolbar_images($icon$dark,$x)} err
         }
       }
     }
   }
-
+      
 }
 
 
@@ -7542,7 +7794,8 @@ proc save_defaults {} {
   ##needed to get around the bug in menus- \b is used as a non-printing leader to "-"
   set info(enz_text_index_char2) [string index $info(enz_text_index_char2) end]
   set info(enz_text_index_char1) [string index $info(enz_text_index_char1) end]
-
+  
+  lappend required_items start_codons
 
   set oldfilename [file join $info(user_defaults_dir) "ApE_Defaults.txt"]
 
@@ -7587,7 +7840,7 @@ proc save_defaults {} {
       if {[lsearch $saved_items $item] == -1 && [dict exists $infodict $item]} {
         puts $newfile "$item\t[dict get $infodict $item]"
       }
-    }
+    } 
     close $newfile
     catch {file delete $oldfilename}
     file rename -force $newfilename $oldfilename
@@ -7640,7 +7893,7 @@ proc run_autosave {} {
     foreach fname [glob -nocomplain -directory $info(autosave_dir) {*_autosave[0-9][0-9][0-9].ape}] {
       lappend flist [list $fname [file mtime $fname] [file size $fname]]
     }
-    set flist [lsort -integer -index 1 $flist]
+    set flist [lsort -integer -index 1 $flist] 
     for {set i 0} {$i < [expr {[llength $flist]- $info(autosave_max_dir_files)}] || ([lindex $flist $i 1] != "" && ([lindex $flist $i 1] < [expr {[clock seconds] - 86400*$info(autosave_max_age_days)}]))} {incr i} {
       catch {file delete [lindex $flist $i 0]}
     }
@@ -7682,12 +7935,12 @@ proc run_autosave {} {
 }
 
 ###########
-## downloads new ApE from web and updates the application
+## downloads new ApE from web and updates the application 
 ###########
 proc web_update {} {
   global argv0 info
 
-  set info(web_update_dl_dir) {http://www.biology.utah.edu/jorgensen/wayned/ape/Download/}
+  set info(web_update_dl_dir) {http://jorgensen.biology.utah.edu/wayned/ape/Download/}
   set appdir [file dir $argv0]
   package require vfs::zip
   if {[lsearch -exact [package names] "vfs::zip"] == -1} {
@@ -7738,7 +7991,7 @@ sputs "Zip file was last uploaded [clock format $web_zip_clock_scan]. Clock scan
     puts $tempfile [http::data $http_token]
     close $tempfile
     ::http::cleanup $http_token
-
+ 
     set zip_file_id [vfs::zip::Mount $tempfilename zip_volume]
     set i 2
     while {!(([set file_list [glob -directory $zip_dir -types f -nocomplain [string repeat /* $i]]] == {}))} {
@@ -7766,7 +8019,7 @@ sputs $incomming :: $existing
       incr i
     }
     vfs::zip::Unmount $zip_file_id zip_volume
-    #file delete $tempfilename
+    #file delete $tempfilename 
   } else {
     sputs "error copying zip: $err_msg"
   }
@@ -7779,7 +8032,7 @@ proc web_version_check {{dialog 0}} {
   global info version
 #sputs doing web version check
 update
-  set info(web_dir)  {http://www.biology.utah.edu/jorgensen/wayned/ape/}
+  set info(web_dir)  {http://jorgensen.biology.utah.edu/wayned/ape/}
   set dl_filename "current_version.html"
   set error [catch {set http_token [http::geturl "$info(web_dir)$dl_filename" -timeout 1000]} err_msg]
   if {(!$error) && ([::http::status $http_token] == "ok")} {
@@ -7952,7 +8205,7 @@ proc closewindow {w {exiting 0}} {
       if {![info exists info($window,linked_events)]} {continue}
       foreach event $info($window,linked_events) {
         #if the event doesn't refer to this analysis window, keep it in the list
-        if {[winfo exists [lindex $event 0]] && [winfo toplevel [lindex $event 0]] != $w} {
+        if {[winfo exists [lindex $event 0]] && [winfo toplevel [lindex $event 0]] != $w} { 
           lappend templist $event
         }
       }
@@ -8007,7 +8260,8 @@ proc closewindow {w {exiting 0}} {
 
   if {([llength [dnawindows_list]] == 0) && ([llength [lsearch -all -inline -regexp [winfo children .] {.abi_window[0-9]+$}]] == 0)} {
     if {!$exiting && ((([tk windowingsystem] == "aqua")&&([llength [winfo children .]] <= 2))||([llength [winfo children .]] == 0))} {
-      exit_with_checks
+      #exit_with_checks
+      wm deiconify .
     }
   }
 
@@ -8043,7 +8297,11 @@ proc exit_with_checks {} {
   global info fea_info option_q
 
   if {[close_all_windows] eq "cancel"} {return}
-  if {!$info(restore_on_startup) || [info exists option_q]} {
+  if {[tk windowingsystem] == "aqua"} {
+    if {[catch {set restore_on_startup [exec defaults read "Apple Global Domain" NSQuitAlwaysKeepsWindows]}] || ($restore_on_startup && [info exists option_q]) || (!$restore_on_startup && ![info exists option_q]) } {
+      set info(open_at_close) [list]
+    }
+  } else {
     set info(open_at_close) [list]
   }
   unset -nocomplain option_q
@@ -8095,7 +8353,7 @@ proc unlink_analysis_window {w} {
           [lindex $event 0] configure -background systemDialogBackgroundActive
         }
       }
-      if {[winfo class [lindex $event 0]] == "Text"} {
+      if {[winfo class [lindex $event 0]] == "Text"} {  
         lappend undo_list [list [lindex $event 0] bind [lindex $event 1] [lindex $event 2] [[lindex $event 0] tag bind [lindex $event 1] [lindex $event 2]]]
         [lindex $event 0] tag bind [lindex $event 1] [lindex $event 2] "
           tk_messageBox -message {The window this analysis refers to has been modified.} -parent [winfo toplevel [lindex $event 0]] -icon info -type ok -default ok
@@ -8113,7 +8371,7 @@ proc unlink_analysis_window {w} {
       bind [lindex $event 0] [lindex $event 1] "
         tk_messageBox -message {The window this analysis refers to has been modified.} -parent [winfo toplevel [lindex $event 0]] -icon info -type ok -default ok
        #bind [lindex $event 0] [lindex $event 1] {}
-      "
+      " 
     }
   }
 #take $w out of all the analysis,linked_windows lists
@@ -8234,14 +8492,14 @@ global info
           set pos [$w.textarea index insert]
         }
       }
-    }
+    } 
   }
 
   set new $pos
   if {[string equal [$w.textarea tag nextrange sel 1.0 end] ""]} {
     if {[$w.textarea compare $new < insert]} {
       $w.textarea tag add sel $new insert
-#selection used here - set
+#selection used here - set 
     } else {
       $w.textarea tag add sel insert $new
 #selection used here - set
@@ -8320,7 +8578,7 @@ global info
           set pos [$w.textarea index insert]
         }
       }
-    }
+    } 
   }
   textsetcursor $w $pos
 }
@@ -8427,7 +8685,7 @@ proc mouseover_info {w index} {
     }
     if {$info($w,seq_tooltip) && (([focus -displayof $w] eq "$w.textarea") || ([focus -displayof $w] eq "$w.tvframe.tv") || ([focus -displayof $w] eq "$w.comframe.comtextframe.text")) && [winfo ismapped $w]} {
       catch {after cancel $info($w,seq_tooltip_after)}
-      set info($w,seq_tooltip_after) [after 20 "seq_tooltip_post $w [lindex [$w.textarea bbox $index] 0]  [lindex [$w.textarea bbox $index] 1]"]
+      set info($w,seq_tooltip_after) [after 20 "if {[list [$w.textarea bbox $index]] ne {}} {seq_tooltip_post $w [lindex [$w.textarea bbox $index] 0]  [lindex [$w.textarea bbox $index] 1]}"]
     } else {
       catch {destroy $w.seqtooltip}
     }
@@ -8451,7 +8709,7 @@ proc seq_tooltip_post0 {w x y} {
   global ::tcl_platform
   if {![winfo exists $w] || [catch {$w.textarea index @$x,$y}]} return
   set textbox $w.textarea
-  set index [$textbox index @$x,$y]
+  set index [$textbox index @$x,$y]  
   seq_tooltip_create $w
   foreach {tt_height tt_width} [seq_tooltip_update $w [$w.textarea index "$index linestart"] [$w.textarea index "$index lineend"] $w.seqtooltip.c] {}
   if {$tt_height == 0} {
@@ -8470,7 +8728,7 @@ proc seq_tooltip_post0 {w x y} {
 #######
 ##new version- re-creates the .seqtooltip window with every new posting- avoids the lion bug of no re-geometry of a toplevel.
 proc seq_tooltip_post {w x y} {
-  global info
+  global info 
 
   if {![winfo exists $w] || [catch {$w.textarea index @$x,$y}]} return
   set start [$w.textarea index "@$x,$y linestart"]
@@ -8479,7 +8737,7 @@ proc seq_tooltip_post {w x y} {
   toplevel $w.seqtooltip  -borderwidth 1 -background black
   if {([tk windowingsystem] == "aqua")} {
     tk::unsupported::MacWindowStyle style $w.seqtooltip help {}; after 40 "catch \{raise $w.seqtooltip\}"
-  } else {
+  } else { 
     wm overrideredirect $w.seqtooltip 1
   }
   catch {wm attributes $w.seqtooltip -alpha $info(seq_tooltip_alpha)}
@@ -8505,7 +8763,7 @@ proc seq_tooltip_create {w} {
   toplevel $w.seqtooltip  -borderwidth 1 -background black
   if {([tk windowingsystem] == "aqua")} {
     tk::unsupported::MacWindowStyle style $w.seqtooltip help {}
-  } else {
+  } else { 
     wm overrideredirect $w.seqtooltip 1
   }
   catch {wm attributes $w.seqtooltip -alpha $info(seq_tooltip_alpha)}
@@ -8689,18 +8947,18 @@ proc seq_tooltip_linear_feature_draw {c y w start end total_length tag x_right} 
   #draw final (or only) exon
   set x1 [expr {$x_left + $x_right * ([lindex [lindex $ranges end] 0] - $start) / $total_length}]
   set x2 [expr {$x_left + $x_right * ([lindex [lindex $ranges end] 1] - $start+1) / $total_length}]
-  $c create rectangle $x1 [expr {$y-$width/2.0}] $x2 [expr {$y+$width/2.0}] -tag [concat $tags exon outline] -fill $tag_bg_color -outline $tag_bg_color -width      $tag_outline_width -state normal
+  $c create rectangle $x1 [expr {$y-$width/2.0}] $x2 [expr {$y+$width/2.0}] -tag [concat $tags exon outline] -fill $tag_bg_color -outline $tag_bg_color -width $tag_outline_width -state normal
   $c create rectangle $x1 [expr {$y-$width/2.0}] $x2 [expr {$y+$width/2.0}] -tag [concat $tags exon foreground] -fill $tag_color -outline {} -state normal
-
+  
   set tags_at_end [$w.textarea tag names [bp2ix $w.textarea $end]]
   if {([lsearch $tags_at_end $tag] == -1) && ([lsearch $tags_at_end [regsub f $tag fn]] > -1)} {
     set x1 $x_right
     $c create line [expr {$x2+0}] [expr {$y+$width/2.0}] [expr {($x1+$x2)/2.0}]  [expr {$y+$width/2.0+5}] $x1 [expr {$y+$width/2.0}] -tag [concat $tags intron] -state normal -fill $tag_color -width 2
   }
-
+    
 
   #draw arrows if required
-
+  
   if {[$w.textarea compare [bp2ix $w.textarea $end] == end-1c]} {
     if {$info($w,circular) eq "circular"} {
       set tags_at_end [$w.textarea tag names [bp2ix $w.textarea 0]]
@@ -8708,10 +8966,10 @@ proc seq_tooltip_linear_feature_draw {c y w start end total_length tag x_right} 
       set tags_at_end [list]
     }
   } else {
-    set tags_at_end [$w.textarea tag names [bp2ix $w.textarea [expr {$end+1}]]]
+    set tags_at_end [$w.textarea tag names [bp2ix $w.textarea [expr {$end+1}]]] 
   }
   if {([lsearch $tags_at_end $tag] == -1) && ([lsearch $tags_at_end [regsub f $tag fn]] == -1)} {
-      $c create line 0 0 0 0 -tag  [concat $tags fwd_arrow outline]  -fill $tag_bg_color -width [expr {$tag_outline_width-1}] -state normal
+      $c create line 0 0 0 0 -tag  [concat $tags fwd_arrow outline]  -fill $tag_bg_color -width [expr {max (0,$tag_outline_width-1)}] -state normal
     $c create polygon 0 0 -tag  [concat $tags fwd_arrow foreground]  -fill $tag_color  -state normal
   }
   if {$start == 0} {
@@ -8721,10 +8979,10 @@ proc seq_tooltip_linear_feature_draw {c y w start end total_length tag x_right} 
       set tags_at_start [list]
     }
   } else {
-    set tags_at_start [$w.textarea tag names [bp2ix $w.textarea [expr {$start-1}]]]
+    set tags_at_start [$w.textarea tag names [bp2ix $w.textarea [expr {$start-1}]]] 
   }
   if {([lsearch $tags_at_start $tag] == -1) && ([lsearch $tags_at_start [regsub f $tag fn]] == -1)} {
-    $c create polygon 0 0 -tag  [concat $tags rev_arrow outline]  -fill $tag_bg_color -width [expr {$tag_outline_width-1}] -state normal
+    $c create polygon 0 0 -tag  [concat $tags rev_arrow outline]  -fill $tag_bg_color -width [expr {max (0,$tag_outline_width-1)}] -state normal
     $c create polygon 0 0 -tag  [concat $tags rev_arrow foreground]  -fill $tag_color  -state normal
   }
 
@@ -8775,7 +9033,7 @@ proc tag_split {w index1 index2 {operation split}} {
   set c [$w.textarea compare $index1 > $index2]
   foreach tag [$w.textarea tag names $index1] {
     #sputs tagsplit2  $tag [$w.textarea tag ranges $tag]
-    if {[regexp {f[0-9]*#} $tag] && ([lsearch -exact [$w.textarea tag names $index2] $tag] > -1)} {
+    if {[regexp {f[0-9]*#} $tag] && ([lsearch -exact [$w.textarea tag names $index2] $tag] > -1)} { 
      #fix feature tags
       set ranges [$w.textarea tag ranges $tag]
       set name [lindex [$w.textarea tag bind $tag <<Metadata>>] 0]
@@ -8904,22 +9162,22 @@ proc tag_split {w index1 index2 {operation split}} {
               regsub f $newtag fn newfntag
               textarea_tag_create $w.textarea $newfntag
               textarea_tag_add $w.textarea $newfntag [lindex $newranges 0] [lindex $newranges end]
-              lappend tags_added $newfntag
+              lappend tags_added $newfntag 
             }
 
             if {[llength [$w.textarea tag ranges $ftag]] == 2} {
              textarea_tag_remove $w.textarea $tag 1.0 end
             }
-
+            
           } else {
-            #split the feature at the insertion point
+            #split the feature at the insertion point 
             set splitindex2 1.0
             foreach r $ranges {
               if {[$w.textarea compare $r < $index1]} {
                 set splitindex1 $r
               } elseif {[$w.textarea compare $r > $index2] && ($splitindex2 == 1.0)} {
                 set splitindex2 $r
-              }
+              } 
             }
             textarea_tag_remove $w.textarea $tag $splitindex1 $splitindex2
             textarea_tag_remove $w.textarea $ftag [lindex $fnranges 2] [lindex $fnranges 3]
@@ -8935,7 +9193,7 @@ proc tag_split {w index1 index2 {operation split}} {
             if {[llength $newranges]  > 2} {
               regsub f $newtag fn newfntag
               textarea_tag_add $w.textarea $newfntag [lindex $newranges 0] [lindex $newranges end]
-              lappend tags_added $newfntag
+              lappend tags_added $newfntag 
             }
             if {(([llength $fnranges] == 6) && ([llength [$w.textarea tag ranges $ftag]] == 4)) || ([llength [$w.textarea tag ranges $ftag]] == 2)} {
              textarea_tag_remove $w.textarea $tag 1.0 end
@@ -8960,7 +9218,7 @@ proc tag_split2 {w index1 index2 {operation dialog}} {
 #sputs here2 [$w.textarea tag names $index2] [$w.textarea tag names $index1] $index1 $index2
   set tag2list [$w.textarea tag names $index2]
   foreach tag [$w.textarea tag names $index1] {
-#sputs here $w.textarea $tag $index1+1c $index2 [regexp {fn?[0-9]*#} $tag] [lsearch -exact $tag2list $tag]
+#sputs here $w.textarea $tag $index1+1c $index2 [regexp {fn?[0-9]*#} $tag] [lsearch -exact $tag2list $tag] 
     if {[regexp {fn?[0-9]*#} $tag] && ([lsearch -exact $tag2list $tag] > -1)} {
       if {[$w.textarea compare $index1 > $index2]} {
 
@@ -8992,7 +9250,7 @@ proc vertscrollmanager {w args} {
     set numlines [expr {$numlines +1}]
     set toline [expr {int([lindex $args 1]*$numlines)}]
     $w.textarea yview [bp2ix $w.textarea [expr {$toline*$info($w,textwidth)+1}]]
-    $w.vertindex yview "[expr {$toline+1}].0"
+    $w.vertindex yview "[expr {$toline+1}].0" 
     $w.map_zoom yview {*}$args
   } else {
     $w.textarea yview {*}$args
@@ -9013,7 +9271,7 @@ proc vertscrollmanager {w args} {
 proc vertindex_touch_delta {v pixels} {
   set height_in_lines [$v cget -height]
   set height_in_pixels [winfo height $v]
-  set total_lines [$v index end-1line]
+  set total_lines [$v index end-1line] 
   set scrollable_lines [expr {$total_lines- $height_in_lines}]
   set scrollable_percent [expr {1- ($height_in_lines/$total_lines)}]
   set lines_per_pixel [expr {$height_in_pixels / $height_in_lines}]
@@ -9032,7 +9290,7 @@ proc vertindexbalancer {w } {
   set textend [expr round (([set textlen [ix2bp $w.textarea [$w.textarea index end-1c]]]) / ($info($w,textwidth)) )+1]
   set vertend [lindex [split [$w.vertindex index end-1chars] .] 0]
   #$w.vertindex configure -state normal
-  if {$vertend < $textend} {
+  if {$vertend < $textend} { 
     set templist [list]
     while {$vertend < $textend} {
       #$w.vertindex insert end "\n [expr $vertend*($info($w,textwidth))+1]" allvertindex
@@ -9065,7 +9323,7 @@ proc vertindexbalancer {w } {
   }
   #if {$mod < 4} {incr numlines}
 
-  $w.vertindex configure -width [expr {$textlen < 10 ? 2 : int(.0000000001+log($textlen)/log(10))+1}]
+  $w.vertindex configure -width [expr {$textlen < 10 ? 2 : int(.0000000001+log($textlen)/log(10))+1}] 
 
   if {($numlines == 0.0) || (($firstline == 0) && ($lastline == $numlines))} {
     if {[grid info $w.vertscroll] != {}} {
@@ -9075,7 +9333,7 @@ proc vertindexbalancer {w } {
     if {[grid info $w.vertscroll] == "" && !$info(hide_scrollbar)} {
       grid configure $w.vertscroll
       update idletasks
-    }
+    } 
     $w.vertscroll set [expr {1.0*$firstline/$numlines}] [expr {1.0*$lastline/$numlines}]
    #$w.infobox configure -text "$mod $lastline $numlines [expr {1.0*$firstline/$numlines}] [expr {1.0*$lastline/$numlines}]"
   }
@@ -9092,7 +9350,7 @@ proc textarea_width_changed {w} {
   if {![winfo exists $w]} {return}
   if {[winfo width $w.textarea] <= 1} {
     set width $info(default_textarea_width)
-  } else {
+  } else {  
     set width [expr {int(([winfo width $w.textarea]-4)/[lindex [wm grid $w] 2])}]
   }
   if {$width != $info($w,textwidth)} {
@@ -9114,7 +9372,7 @@ proc textarea_width_changed {w} {
     $w.horzindex2 insert 1.0 $iline
 
     ####redo the left side numbers
-    $w.vertindex delete 2.0 end
+    $w.vertindex delete 2.0 end 
 
     resize_infoframe_fonts $w
 
@@ -9130,16 +9388,16 @@ proc textarea_width_changed {w} {
 }
 
 ## need to update map when features change (fill_treeview)
-## need to do map mouseover info to add feature name to infobox
+## need to do map mouseover info to add feature name to infobox 
 ##########
 ## fill the right side map
 ##########
 proc textarea_fill_map {w} {
   global info
-
+  
   if {![winfo exists $w]} {
     return
-  }
+  } 
   if { [winfo height $w.map] <= 1} {
     set height 100
   } else {
@@ -9154,7 +9412,7 @@ proc textarea_fill_map {w} {
   $w.map_zoom delete all
   if {[winfo width $w.textarea] <= 1} {
     set width $info(default_textarea_width)
-  } else {
+  } else {  
     set width [expr {int(([winfo width $w.textarea]-4)/[lindex [wm grid $w] 2])}]
   }
   set c_zoom_scale [expr {1.0 * [lindex [wm grid $w] 3]/$width}]
@@ -9287,7 +9545,7 @@ proc selection_manager {w} {
     $w.textarea mark set insert end-1c
   }
   if {[$w.textarea tag names end] == "sel"} {
-    $w.textarea tag remove sel end
+    $w.textarea tag remove sel end 
   }
   $w.infoframe.totallen configure -text [ix2bp $w.textarea [$w.textarea index end-1c]]
 
@@ -9498,7 +9756,7 @@ return
 #########
 ## manages all key press events in the textbox
 #########
-proc keyevent_manager {w modifier k} {
+proc keyevent_manager {w modifier k} { 
   global info toolbar_images undo
   set k [string map {asterisk *} $k]
   #$w.infobox configure -text "$modifier $k" ;#this let's you see the keypress keysyms
@@ -9557,7 +9815,7 @@ proc keyevent_manager {w modifier k} {
 
               }
             }
-          }
+          } 
           "Delete" {
             if {![file_lock_check $w]} {
               if {[llength [$w.textarea tag ranges sel]] > 0} {
@@ -9578,14 +9836,14 @@ proc keyevent_manager {w modifier k} {
           }
           "space" {
             return
-          }
+          } 
           default {
             #sputs "unknown key:$k"
             return
 	    }
-        }
-      }
-    }
+        } 
+      } 
+    } 
     Control {
       switch -glob -- $k {
         Control_L {return}
@@ -9633,6 +9891,7 @@ proc keyevent_manager {w modifier k} {
               }
              }
         [1] {after $bugdelay calc}
+        [2] {after $bugdelay mol_calc}
         slash {rev_com_window $w}
         equal {change_case $w exchange}
         comma {after $bugdelay configure_preferences $w}
@@ -9668,9 +9927,9 @@ proc keyevent_manager {w modifier k} {
         equal -
         plus {change_case $w upper}
         period -
-        greater {next_ORF $w}
+        greater {if {[tk windowingsystem] != "aqua"} {next_ORF $w}}
         comma -
-        less {after cancel configure_preferences; next_ORF $w reverse}
+        less {after cancel configure_preferences; if {[tk windowingsystem] != "aqua"} {next_ORF $w reverse}}
         [fF] {after $bugdelay textarea_tag_remove $w.textarea foundf 1.0 end 0; textarea_tag_remove $w.textarea foundr 1.0 end 0; register_undo_separator $w "Clear Find Highlighting" 0}
         [gG] {feature_from_found $w}
         [aA] {after $bugdelay select_from_to $w}
@@ -9695,11 +9954,13 @@ proc keyevent_manager {w modifier k} {
         Meta_L {return}
         Alt_L {return}
         [zZ] {sputs key z}
+	"Greek_OMEGA" {sputs key z}
+        "oe" {sputs key q-oe;global option_q; set option_q 1}
         [Qq] {sputs key q;global option_q; set option_q 1}
 	}
 
     }
-  }
+  }  
   vertindexbalancer $w
   selection_manager $w
   #$w.infobox configure -text "$modifier $k" ;#this let's you see the keypress keysyms
@@ -9740,7 +10001,7 @@ proc comment_keyevent_manager {w modifier k} {
       }
     default {keyevent_manager $w $modifier $k}
     }
-  }
+  }  
 }
 
 ###########
@@ -9896,7 +10157,7 @@ global tcl_platform
 
   if {($mode != "Save_as") && ($info($w,filetype) != "None") && ($info($w,filetype) != $type) && $info(save_file_format_warning)} {
     set response [tk_messageBox -title [mc "Changing File Format"] -message "$info($w,filename) \n[mc "File is currently of filetype:%1\$s.\nIt will be saved as type: %2\$s.\n Do you want to change the file name?" $info($w,filetype) $type]" -type "yesno"  -icon warning -default no]
-    if {$response == "yes"} {
+    if {$response == "yes"} { 
       set mode "Save_as"
     }
   }
@@ -9980,7 +10241,7 @@ global tcl_platform
   }
 
 
-  set info($w,saved) 1
+  set info($w,saved) 1 
   if {[tk windowingsystem] == "aqua"} {wm attributes $w -modified 0 -titlepath $filename}
   set undo(saved_pointer,$w) 0
   set info($w,filename) $filename
@@ -10021,7 +10282,7 @@ proc genbank_text {w {include_linked 0}} {
       } else {
         set genbank_type "DNA   "
       }
-
+  
     }
     set genbank_locus_name [string trim $genbank_locus_name]
     if {$genbank_locus_name ==""} {set genbank_locus_name [file rootname [file tail $info($w,filename)]]}
@@ -10064,7 +10325,7 @@ proc genbank_text {w {include_linked 0}} {
     if {$info($w,gformat_data) != {}} {
       lappend header_list "COMMENT     " "ApEinfo:graphicformat::$info($w,gformat_data)"
     }
-  ##format each header field
+  ##format each header field 
     foreach {type data} $header_list {
       if {(($data != "") && ($data != ".")) || (!$info(genbank_skip_blank))} {
         while {([string length $data] > 67) || ([string first \n $data] > -1)} {
@@ -10076,7 +10337,7 @@ proc genbank_text {w {include_linked 0}} {
           set data [regsub {^[ ]*[\n]?} [string range $data $split end] ""]
           append result "$type$firstline\n"
           set type "            "
-        }
+        } 
         append result "$type$data\n"
       }
     }
@@ -10113,7 +10374,7 @@ proc genbank_text {w {include_linked 0}} {
       } else {
         append result "[format "     %-16s%s" [lindex $metadata 2] [string range $loc 0 [string last "," $loc 58]]]\n"
         set loc [string range $loc [expr {[string last "," $loc 58]+1}] end]
-        while {[string length $loc] > 58} {
+        while {[string length $loc] > 58} {  
           set split [string last "," $loc 58]
           if {$split < 0} {set split 58}
           set firstline [string range $loc 0 $split]
@@ -10142,7 +10403,7 @@ proc genbank_text {w {include_linked 0}} {
         ## change /label to /locus_tag in files
         lappend feature_comment locus_tag $new_label
         if {!$info(genbank_strict_genbank)} {
-          lappend feature_comment label $new_label
+          lappend feature_comment label $new_label 
           lappend feature_comment ApEinfo_label [lindex $metadata 0]
         }
         lappend used_labels $new_label
@@ -10258,7 +10519,7 @@ proc bankit_text {w} {
         }
       }
       append result "\t\t\tlabel\t$name\n"
-    }
+    } 
   return $result
 
 }
@@ -10276,26 +10537,26 @@ proc clip_cut_copy {w {function copy} {direction normal}} {
     if {[llength [$w.textarea tag ranges sel]] == 2} {
       set text [textarea_get $w.textarea sel.first sel.last]
       if {$direction == "rev-com"} {
-        set tags [get_tags $w.textarea [list [$w.textarea index sel.first] [$w.textarea index sel.last]] reverse]
+        set tags [get_tags_exact $w.textarea [list [$w.textarea index sel.first] [$w.textarea index sel.last]] reverse]
         set text [revcom $text]
       } else {
-        set tags [get_tags $w.textarea [list [$w.textarea index sel.first] [$w.textarea index sel.last]] forward]
+        set tags [get_tags_exact $w.textarea [list [$w.textarea index sel.first] [$w.textarea index sel.last]] forward]
       }
     } else {
       set text [textarea_get $w.textarea [lindex [$w.textarea tag ranges sel] 0] [lindex [$w.textarea tag ranges sel] 1]]
       set text2 [textarea_get $w.textarea [lindex [$w.textarea tag ranges sel] 2] [lindex [$w.textarea tag ranges sel] 3]]
       if {$direction == "rev-com"} {
-        set tags [get_tags $w.textarea [list [lindex [$w.textarea tag ranges sel] 0] [lindex [$w.textarea tag ranges sel] 1]] reverse]
-        set tags [join_tags $tags [get_tags $w.textarea [list [lindex [$w.textarea tag ranges sel] 2] [lindex [$w.textarea tag ranges sel] 3]] reverse] [string length $text]]
+        set tags [get_tags_exact $w.textarea [list [lindex [$w.textarea tag ranges sel] 0] [lindex [$w.textarea tag ranges sel] 1]] reverse]
+        set tags [join_tags $tags [get_tags_exact $w.textarea [list [lindex [$w.textarea tag ranges sel] 2] [lindex [$w.textarea tag ranges sel] 3]] reverse] [string length $text]]
         set text "[revcom $text][revcom $text2]"
       } else {
-        set tags [get_tags $w.textarea [list [lindex [$w.textarea tag ranges sel] 2] [lindex [$w.textarea tag ranges sel] 3]] forward]
-        set tags [join_tags $tags [get_tags $w.textarea [list [lindex [$w.textarea tag ranges sel] 0] [lindex [$w.textarea tag ranges sel] 1]] forward] [string length $text2]]
+        set tags [get_tags_exact $w.textarea [list [lindex [$w.textarea tag ranges sel] 2] [lindex [$w.textarea tag ranges sel] 3]] forward]
+        set tags [join_tags $tags [get_tags_exact $w.textarea [list [lindex [$w.textarea tag ranges sel] 0] [lindex [$w.textarea tag ranges sel] 1]] forward] [string length $text2]]
         set text "$text2$text"
       }
     }
 #selection used here - ok
-    clipboard clear
+    clipboard clear 
     clipboard append -displayof $w $text
     set info(clipboard_text) $text
     set info(clipboard_tags) $tags
@@ -10359,8 +10620,8 @@ set text2 $text
   set text [atgcfilter $text $info(allowedkeys) 1]
   if {$direction == "rev-com"} {set text [revcom $text]}
   if {$text == ""} return
-
-
+  
+  
 
   lappend undo(undo,$w) [list unlink_analysis_window $w [unlink_analysis_window $w]]
   if {[llength [$w.textarea tag ranges sel]] > 0} {
@@ -10379,8 +10640,8 @@ set text2 $text
   } else {
     textarea_insert $w.textarea [$w.textarea index insert] $text
   }
-
-
+  
+  
   if {[$w.textarea compare insert == [bp2ix $w.textarea [string length $text]]] && ($info($w,circular) == "circular")} {
     tag_split $w [$w.textarea index end-2chars] [$w.textarea index insert]
   } elseif {[$w.textarea compare insert == end-1c] && ($info($w,circular) == "circular")} {
@@ -10397,14 +10658,14 @@ set text2 $text
     put_tags $w.textarea [list [bp2ix $w.textarea [expr {[ix2bp $w.textarea [$w.textarea index insert]]-[string length $text]}]] [$w.textarea index insert]] $info(clipboard_tags) reverse
   } elseif {($direction != "rev-com") && ($text == $info(clipboard_text))} {
     put_tags $w.textarea [list [bp2ix $w.textarea [expr {[ix2bp $w.textarea [$w.textarea index insert]]-[string length $text]}]] [$w.textarea index insert]] $info(clipboard_tags)
-  }
+  } 
 
   register_undo_separator $w [mc "Paste"]
   features_to_tree_view $w
-
+ 
   select_region $w [bp2ix $w.textarea [expr {[ix2bp $w.textarea [$w.textarea index insert]]-[string length $text]}]] insert
   vertindexbalancer $w
-}
+} 
 
 ###########
 ## copy special (translated, reverse com, etc. function)
@@ -10412,7 +10673,7 @@ set text2 $text
 proc clip_copy_special {w function {direction normal}} {
 sputs $w $function $direction
   if {[llength [$w.textarea tag ranges sel]] > 0} {
-    clipboard clear
+    clipboard clear 
     if {[llength [$w.textarea tag ranges sel]] == 2} {
       set temp_text [textarea_get $w.textarea sel.first sel.last]
       if {$direction == "rev_com"} {
@@ -10474,11 +10735,11 @@ proc clip_copy_features_text {w tag} {
     foreach {i1 i2} $range {}
     incr i2
     set newdna  [textarea_get $w.textarea [bp2ix $w.textarea $i1] [bp2ix $w.textarea $i2]]
-    set tags [join_tags $tags [get_tags $w.textarea [list [bp2ix $w.textarea $i1] [bp2ix $w.textarea $i2]] "forward"] [string length $dna]]
+    set tags [join_tags $tags [get_tags_exact $w.textarea [list [bp2ix $w.textarea $i1] [bp2ix $w.textarea $i2]] "forward"] [string length $dna]]
     append dna $newdna
   }
   clipboard clear
-  clipboard append -displayof $w $dna
+  clipboard append -displayof $w $dna 
   set info(clipboard_text) $dna
   set info(clipboard_tags) $tags
 }
@@ -10497,7 +10758,7 @@ proc clip_copy_analysis_text_windows {t} {
   set html_text [text_to_clipboard_html $t $range]
   set html_len [string length $html_text]
   set full_html_text [format "Version:0.9\r\nStartHTML:0000000105\r\nEndHTML:%010u\r\nStartFragment:0000000141\r\nEndFragment:%010u\r\n<html>\r\n<body>\r\n<!--StartFragment-->%s<!--EndFragment-->\r\n</body>\r\n</html>" [expr {105 +$html_len}]  [expr {141 +$html_len}] $html_text]
-
+  
   ::twapi::open_clipboard
   ::twapi::empty_clipboard
   set f [::twapi::register_clipboard_format "HTML Format"]
@@ -10588,8 +10849,8 @@ proc paste_file {w text} {
 ## get tags from a selection for storage
 ###########
 #(list of tag data pairs siutable for array get; data = list of indices, list of properties, list of bindings, list of actions bound)
-#NOT USED - replaced with get_tags2 in wrapper below
-proc get_tags {text range {direction forward}} {
+#Use only for exact copy of tags for formatting -for making a copy of a region replaced with get_tags2 in wrapper below
+proc get_tags_exact {text range {direction forward}} {
   set first [lindex $range 0]
   set first [$text index $first]
   set last [lindex $range 1]
@@ -10665,8 +10926,8 @@ proc get_tags {text range {direction forward}} {
     #set tags($tagname) [list $indexlist $formatlist $bindlist $actionlist]
     #sputs "$tagname: $tags($tagname)"
   }
-  array unset tags sel
-  array unset tags tempsel
+  #array unset tags sel
+  #array unset tags tempsel
   #return [array get tags]
   return $result
 }
@@ -10748,8 +11009,12 @@ proc get_tags2 {text tag_first tag_last dir {end 0}} {
     }
   }
 
-  foreach fntag [lsearch -inline -all -regexp $new_tags {fn[0-9]+#}] {
+  foreach fntag [lsearch -inline -all -regexp [dict keys $new_tags] {fn[0-9]+#}] {
     set ftag [regsub fn $fntag f]
+    if {![dict exists $new_tags $ftag]} {
+      dict unset new_tags $fntag
+      continue
+    }
     set fndata [dict get $new_tags $fntag]
     set fdata [dict get $new_tags $ftag]
     set fncoords [lsort -integer [lindex $fndata 0]]
@@ -10853,7 +11118,7 @@ proc get_tags_get_coords {text tag  tag_first tag_last dir len end} {
 
 
   if {$newcoords != [list]} {
-    ## sort coords and
+    ## sort coords and 
     set newcoords [lsort -integer $newcoords]
 
     ## take out junction that was the original origin (if circular)
@@ -10910,7 +11175,6 @@ proc put_tags {text range taglist {direction forward} {rename 1}} {
   set last [ix2bp $text [lindex $range 1]]
   set name_store [list]
 
-
   foreach {tagname tagdata} $taglist {
     set formatlist [lindex $tagdata 1]
     set bindlist [lindex $tagdata 2]
@@ -10965,7 +11229,7 @@ proc put_tags {text range taglist {direction forward} {rename 1}} {
           }
         }
       }
-      textarea_tag_configure $text $newtagname -background [lindex $formatlist 0] -foreground [lindex $formatlist 1] -font [lindex $formatlist 2] -underline  [lindex $formatlist 3]
+      textarea_tag_configure $text $newtagname -background [lindex $formatlist 0] -foreground [lindex $formatlist 1] -font [lindex $formatlist 2] -underline  [lindex $formatlist 3] 
       foreach binding $bindlist action $actionlist {
         textarea_tag_bind $text $newtagname $binding $action
       }
@@ -10976,10 +11240,10 @@ proc put_tags {text range taglist {direction forward} {rename 1}} {
     }
   }
 
-
+ 
   ##make new fn# tags for split features that just got added in rename mode
   foreach {old_tag new_tag} $name_store {
-    if {[string match {f[0-9]*#} $old_tag]} {
+    if {[regexp {f[0-9]+#} $old_tag]} {
       set old_fn_tag "fn[regexp -inline {[0-9]+} $old_tag]#"
       if {([lsearch -exact $taglist $old_fn_tag] > -1) && ([llength [lindex $taglist [expr {[lsearch -exact $taglist $old_tag]+1}] 0]] > 2)} {
         set new_fn_tag "fn[regexp -inline {[0-9]+} $new_tag]#"
@@ -10996,7 +11260,7 @@ proc put_tags {text range taglist {direction forward} {rename 1}} {
       }
     }
   }
-
+  
 
   features_to_tree_view [winfo toplevel $text]
   return $name_store
@@ -11010,19 +11274,19 @@ proc lappend_tags {tag_variable args} {
   set used_names [list]
   foreach {name data} $old_tags {
     lappend used_names $name
-   }
-   set fn_tags_list [list]
-   set ftags_map [dict create]
-   foreach {name data} $args {
-     if {[regexp  {fn([0-9]+)#} $name - number]} {
-      lappend fn_tags_list $number $data
-     } else {
+  }
+  set fn_tags_list [list]
+  set ftags_map [dict create]
+  foreach {name data} $args {
+    if {[regexp  {fn([0-9]+)#} $name - number]} {
+     lappend fn_tags_list $number $data
+    } elseif {[regexp {f([0-9]+)#} $name - number]} {
       if {[lsearch $used_names $name] == -1} {
         lappend old_tags $name $data
-	lappend used_names $name
-	if {[regexp {f([0-9]+)#} $name - number]} {
+        lappend used_names $name
+        if {[regexp {f([0-9]+)#} $name - number]} {
           dict set ftags_map $number $number
-	}
+	} 
       } else {
         set i 0
         while {[lsearch $used_names f$i\#] > -1} {
@@ -11032,10 +11296,13 @@ proc lappend_tags {tag_variable args} {
 	lappend used_names f$i\#
         if {[regexp {f([0-9]+)#} $name - number]} {
           dict set ftags_map $number $i
-	}
+        }
       }
+    } else {
+      ## not an f or fn tag- just add it
+      lappend old_tags $name $data
     }
-   }
+  }
   foreach {number data} $fn_tags_list {
     if {[dict exists $ftags_map $number] } {
       lappend old_tags "fn[dict get $ftags_map $number]#" $data
@@ -11045,11 +11312,12 @@ proc lappend_tags {tag_variable args} {
 
 
 
-
+  
 #############
 ## copy tags into a destination analysis window
 #############
 proc copy_tags {text range dest dest_index {direction forward} {tagappend ""}} {
+#sputs copy_tags $text $range $dest $dest_index 
   set first [lindex $range 0]
   set last [lindex $range 1]
   if {[$text compare $first > $last]} {
@@ -11076,6 +11344,10 @@ proc copy_tags {text range dest dest_index {direction forward} {tagappend ""}} {
     set index_bp [expr {[ix2bp $text $index] - $firstchar}]
     #convert tag range to dest range
 
+
+    while {($dest_last_index< [string length $dest_line]) && [string first [string index $dest_line $dest_last_index] "abcdghkmnrstuvwyABCDGHKMNRSTUVWY"] == -1} {
+      incr dest_last_index
+    }
     set dest_first_index $dest_last_index
     while {($dest_last_index< [string length $dest_line]) && ($dest_char_count < $index_bp)} {
       incr dest_last_index
@@ -11152,23 +11424,23 @@ proc select_from_to {w} {
   set from 0
   set to 0
   set ok 0
-  frame $s.fromtoframe
+  frame $s.fromtoframe  
   grid [label $s.fromtoframe.fromlabel -text [mc "Select from"]] -row 0 -column 0 -sticky w
 
-  grid [entry $s.fromtoframe.from -width 10 -validate key -vcmd "check_char %S" -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -foreground $info(text_fg_color) -background $info(text_bg_color)] -row 0 -column 1 -sticky w
+  grid [entry $s.fromtoframe.from -width 10 -validate key -vcmd "check_char %S"] -row 0 -column 1 -sticky w
   grid [label $s.fromtoframe.tolabel -text [mc "to"]] -row 0 -column 2 -sticky w
-  grid [entry $s.fromtoframe.to -width 10 -validate key -vcmd "check_char %S" -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -foreground $info(text_fg_color) -background $info(text_bg_color)] -row 0 -column 3 -sticky w
-  button $s.ok -text [mc "OK"] -command "set ok 1" -default active
+  grid [entry $s.fromtoframe.to -width 10 -validate key -vcmd "check_char %S"] -row 0 -column 3 -sticky w
+  button $s.ok -text [mc "OK"] -command "set ok 1" -default active 
   bind $s <Key-Return> "set ok 1"
   button $s.cancel -text [mc "Cancel"] -command "set ok -1"
   grid rowconfigure $s 0 -weight 0
   grid rowconfigure $s 1 -weight 0
   grid columnconfigure $s 0 -weight 1
-  grid columnconfigure $s 1 -weight 1
+  grid columnconfigure $s 1 -weight 1 
   grid configure $s.fromtoframe -row 0 -column 0 -columnspan 2 -sticky we
   grid configure $s.ok -row 1 -column 0 -padx 10 -pady 3
   grid configure $s.cancel -row 1 -column 1  -padx 10 -pady 3
-
+  
   if {[llength [$w.textarea tag ranges sel]] > 0} {
     $s.fromtoframe.from insert 0 [expr {[ix2bp $w.textarea [$w.textarea index sel.first]]+1}]
     $s.fromtoframe.to insert 0 [ix2bp $w.textarea [$w.textarea index sel.last]]
@@ -11230,7 +11502,7 @@ proc jump_to {w} {
   grid rowconfigure $s 0 -weight 0
   grid rowconfigure $s 1 -weight 0
   grid columnconfigure $s 0 -weight 1
-  grid columnconfigure $s 1 -weight 1
+  grid columnconfigure $s 1 -weight 1 
   $s.to insert 0 [ix2bp $w.textarea [$w.textarea index insert]]
   $s.to selection range 0 end
 
@@ -11315,7 +11587,7 @@ proc infoframe_entry {w element} {
 ## Set selection based on entries in infobox
 ###########
 proc infoframe_entry_do {w element} {
-  global info
+  global info 
 
   set e "$element\_entry"
   set val [string trimleft [$e get] 0]
@@ -11323,7 +11595,7 @@ proc infoframe_entry_do {w element} {
   switch [file extension $element] {
     .end {
       if {[$w.textarea tag ranges sel] == ""} {
-        sputs error infoframe_entry_do no end pos
+        sputs error infoframe_entry_do no end pos 
         set first [expr {[ix2bp $w.textarea [$w.textarea index insert]]}]
         set last [expr {[ix2bp $w.textarea [$w.textarea index insert]]}]
       } elseif {[llength [$w.textarea tag ranges sel]] == 2 } {
@@ -11344,7 +11616,7 @@ proc infoframe_entry_do {w element} {
     }
     .sellen {
       if {[$w.textarea tag ranges sel] == ""} {
-        sputs error infoframe_entry_do no length pos
+        sputs error infoframe_entry_do no length pos 
         set first [expr {[ix2bp $w.textarea [$w.textarea index insert]]}]
         set last [expr {[ix2bp $w.textarea [$w.textarea index insert]]}]
       } elseif {[llength [$w.textarea tag ranges sel]] == 2 } {
@@ -11430,7 +11702,7 @@ proc insert_repeat {w} {
   set from 0
   set to 0
   set ok 0
-  frame $s.fromtoframe
+  frame $s.fromtoframe  
   grid [label $s.fromtoframe.seqlabel -text [mc "Sequence"]] -row 0 -column 0 -sticky nw
 
   grid [entry $s.fromtoframe.seq -width 10 -validate key -vcmd "regexp -nocase {\[ACGTN\]} %S" -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -foreground $info(text_fg_color) -background $info(text_bg_color)] -row 0 -column 1 -sticky nw
@@ -11439,7 +11711,7 @@ proc insert_repeat {w} {
   grid [entry $s.fromtoframe.repeats -width 10 -validate key -vcmd "check_char %S" -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -foreground $info(text_fg_color) -background $info(text_bg_color)] -row 1 -column 1 -sticky nw
 
   if {!$info(android)} {
-    button $s.ok -text [mc "OK"] -command "set ok 1" -default active
+    button $s.ok -text [mc "OK"] -command "set ok 1" -default active 
     bind $s <Key-Return> "set ok 1"
     button $s.cancel -text [mc "Cancel"] -command "set ok -1"
     grid configure $s.ok -row 1 -column 0 -padx 10 -pady 3
@@ -11448,10 +11720,10 @@ proc insert_repeat {w} {
   grid rowconfigure $s 0 -weight 0
   grid rowconfigure $s 1 -weight 0
   grid columnconfigure $s 0 -weight 1
-  grid columnconfigure $s 1 -weight 1
+  grid columnconfigure $s 1 -weight 1 
   grid configure $s.fromtoframe -row 0 -column 0 -columnspan 2 -sticky we
 
-
+  
 
   update idletasks
   #regexp {([0-9]*)x([0-9]*)\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $s] wgeom winw winh winx winy
@@ -11541,16 +11813,16 @@ proc find_dialog {w {embed 0}} {
     if {$info(android)} {
       frame $s.buttons_frame
       label  $s.buttons_frame.edit_features -image $toolbar_images(button_edit,4x)  -borderwidth 1
-      bind $s.buttons_frame.edit_features <ButtonRelease-1>  "grid remove $s; add_feature_edit_box $w"
-      bind $s.buttons_frame.edit_features <ButtonRelease-2>  "grid remove $s; add_feature_edit_box $w"
+      bind $s.buttons_frame.edit_features <ButtonRelease-1>  "grid remove $s; add_feature_edit_box $w" 
+      bind $s.buttons_frame.edit_features <ButtonRelease-2>  "grid remove $s; add_feature_edit_box $w" 
 
       label  $s.buttons_frame.seq_info -image $toolbar_images(button_info,4x)  -borderwidth 1
-      bind $s.buttons_frame.seq_info <ButtonRelease-1>  "grid remove $s"
-      bind $s.buttons_frame.seq_info <ButtonRelease-2>  "grid remove $s"
+      bind $s.buttons_frame.seq_info <ButtonRelease-1>  "grid remove $s" 
+      bind $s.buttons_frame.seq_info <ButtonRelease-2>  "grid remove $s" 
 
       label  $s.buttons_frame.find_orf -image $toolbar_images(button_orf,4x)  -borderwidth 1
-      bind $s.buttons_frame.find_orf <ButtonRelease-1>  "grid remove $s;  add_orf_search_box $w"
-      bind $s.buttons_frame.find_orf <ButtonRelease-2>  "grid remove $s;  add_orf_search_box $w"
+      bind $s.buttons_frame.find_orf <ButtonRelease-1>  "grid remove $s;  add_orf_search_box $w" 
+      bind $s.buttons_frame.find_orf <ButtonRelease-2>  "grid remove $s;  add_orf_search_box $w" 
 
       grid $s.buttons_frame.edit_features -row 0 -column 0
       grid $s.buttons_frame.seq_info -row 1 -column 0
@@ -11601,7 +11873,7 @@ proc find_dialog {w {embed 0}} {
 
 
 
-  frame $s.mod_frame
+  frame $s.mod_frame 
     grid [checkbutton  $s.mod_frame.casens -text [mc "case sensitive"] -onvalue 1 -offvalue 0 -variable info(find_casens) -selectcolor white -style InfoboxStyle.TCheckbutton] -row 1 -column 1 -sticky w
     grid [checkbutton  $s.mod_frame.revcom -text [mc "also find rev-com of string"] -onvalue 1 -offvalue 0 -variable info(find_revcom) -selectcolor white -style InfoboxStyle.TCheckbutton] -row 1 -column 2 -sticky w
 
@@ -11610,9 +11882,9 @@ proc find_dialog {w {embed 0}} {
     grid [checkbutton  $s.mod_frame2.exact -text [mc "as literal"] -onvalue 1 -offvalue 0 -variable info(find_as_literal) -selectcolor white -style InfoboxStyle.TCheckbutton] -row 1 -column 2 -sticky w
     set info(find_wrap) 1
     #grid [checkbutton  $s.mod_frame2.wrap -text [mc "wrap"] -onvalue 1 -offvalue 0 -variable info(find_wrap) -selectcolor white -style InfoboxStyle.TCheckbutton] -row 1 -column 3 -sticky w
-
+ 
   frame $s.mm_frame
-    #grid [checkbutton  $s.mm_frame.exact  -onvalue 1 -offvalue 0 -variable info(find_allow_mm) -selectcolor white -command "$s.mm_frame.mm_entry configure -state \[expr {\$info(find_allow_mm)?\"normal\":\"disabled\"}\]; $s.mm_frame.mm_label configure -state \[expr {\$info(find_allow_mm)?\"normal\":\"disabled\"}\]"] -row 1 -column 1 -sticky w
+    #grid [checkbutton  $s.mm_frame.exact  -onvalue 1 -offvalue 0 -variable info(find_allow_mm) -selectcolor white -command "$s.mm_frame.mm_entry configure -state \[expr {\$info(find_allow_mm)?\"normal\":\"disabled\"}\]; $s.mm_frame.mm_label configure -state \[expr {\$info(find_allow_mm)?\"normal\":\"disabled\"}\]"] -row 1 -column 1 -sticky w  
     grid [ttk::label $s.mm_frame.mm_label -text [mc "Allow mismatches:"]  -style InfoboxStyle.TLabel] -row 1 -column 1 -sticky w
     #grid [entry $s.mm_frame.mm_entry -width 5 -textvariable info(find_allow_mm_number) -validate key -vcmd "check_char %S"] -row 1 -column 2 -sticky w
     grid [menubutton $s.mm_frame.mm_button -menu $s.mm_frame.mm_button.menu -textvariable info(find_allow_mm_number) -indicatoron 1] -row 1 -column 3 -sticky w
@@ -11624,7 +11896,7 @@ proc find_dialog {w {embed 0}} {
     #$s.mm_frame.mm_label configure -state [expr {$info(find_allow_mm)?"normal":"disabled"}]
 
     grid [ttk::label $s.mm_frame.max_3_bases_label -text [mc "Minimum 3' bases:"]  -style InfoboxStyle.TLabel] -row 1 -column 4 -sticky w
-    grid [menubutton $s.mm_frame.max_button -menu $s.mm_frame.max_button.menu -textvariable info(find_max_3_bases) -indicatoron 1] -row 1 -column 5 -sticky w
+    grid [menubutton $s.mm_frame.max_button -menu $s.mm_frame.max_button.menu -textvariable info(find_max_3_bases) -indicatoron 1] -row 1 -column 5 -sticky w 
     menu $s.mm_frame.max_button.menu
     $s.mm_frame.max_button.menu add radiobutton -label [mc "All"] -variable info(find_max_3_bases) -value [mc "All"]
     for {set mma 10} {$mma <65} {incr mma 5} {
@@ -11656,7 +11928,7 @@ proc find_dialog {w {embed 0}} {
   grid $s.mm_frame -row 4 -column 2 -sticky w
   grid $s.results_frame -row 5 -column 2 -sticky w
   grid $s.action_frame -row 6 -column 2 -sticky w
-
+ 
   if {!$embed} {
     update idletasks
     #regexp {([0-9]*)x([0-9]*)\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $s] wgeom winw winh winx winy
@@ -11680,7 +11952,7 @@ proc find_dialog {w {embed 0}} {
   }
   while {$ok != -1} {
     vwait ok
-    if {$ok != -1} {
+    if {$ok != -1} { 
       set info(find_action) $ok
       do_find $w $ok
     }
@@ -11737,7 +12009,7 @@ proc do_find {w {action again}} {
   } elseif {!$as_literal} {
     regsub -all -nocase {[^abcdghkmnrstuvwy\*\|\;\,]} $s "" s
     regsub -all -nocase {\*} $s ".*" s
-    set pat [regsubpattern $s]
+    set pat [regsubpattern $s] 
     while {[regsub -all {\|\|} $pat "|" pat] > 0} {}
     regsub {^\|} $pat "" pat
     regsub {\|$} $pat "" pat
@@ -11745,7 +12017,7 @@ proc do_find {w {action again}} {
     regsub -all -nocase {[^abcdghkmnrstuvwy\*\|\;\,]} $s "" s
     regsub -all -nocase {\*} $s "\\\*" s
     regsub -all -nocase {;|,} $s "|" s
-    set pat $s
+    set pat $s 
   }
 
   if {$pat == ""} {
@@ -11843,7 +12115,7 @@ proc do_find {w {action again}} {
     }
     highlight {
       set cur 1.0
-      textarea_tag_remove $w.textarea foundf 1.0 end 0
+      textarea_tag_remove $w.textarea foundf 1.0 end 0 
       textarea_tag_remove $w.textarea foundr 1.0 end 0
       $w.textarea tag configure foundf -background $info(find_forward_highlight)
       $w.textarea tag configure foundr -background $info(find_reverse_highlight)
@@ -11923,7 +12195,7 @@ proc do_find {w {action again}} {
         set found_text "Found no match."
        # tk_messageBox -message [mc "No sequence found"] -type ok -icon info -parent [expr {[winfo exists .find_dialog]?".find_dialog":$w}]
       }
-
+      
     }
   }
 
@@ -11967,10 +12239,10 @@ proc do_find_mm {w {action again}} {
     set text_length [string length $text]
 
     regsub -all -nocase {[^abcdghkmnrstuvwy\*\|\;\,]} $s "" s
-    if {!$casens} {
+    if {!$casens} {  
       set text [string toupper $text]
       set s [string toupper $s]
-    }
+    }  
     set s_list1 [split $s "|,;"]
 
     set longest 0
@@ -12043,7 +12315,7 @@ proc do_find_mm {w {action again}} {
               catch {$w.textarea mark set insert [lindex [$w.textarea tag ranges sel] 2]+1chars}
             }
           }
-#selection used here - ok
+#selection used here - ok 
           lappend matchlist [expr {($found + $ins)% $text_length }]
         } else {
           set info($w,found_text) "Found no match."
@@ -12098,7 +12370,7 @@ proc do_find_mm {w {action again}} {
           } elseif {$info(find_wrap)} {
             set gap [string first \t $text2]
             if {$found > $gap} {
-              select_region $w [bp2ix $w.textarea [expr {($found - $gap - 1)}]]  [bp2ix $w.textarea [expr {($found - $gap -1) + [llength $st]}]]
+              select_region $w [bp2ix $w.textarea [expr {($found - $gap - 1)}]]  [bp2ix $w.textarea [expr {($found - $gap -1) + [llength $st]}]] 
               set info($w,found_text) "Found [expr {($revcom && $found_direction)?"reverse" : "forward"}] match at [expr {($found - $gap - 1)}]."
             } else {
               select_region $w [bp2ix $w.textarea [expr {($found + $ins)}]]  [bp2ix $w.textarea [expr {($found + $ins) + [llength $st]}]]
@@ -12139,7 +12411,7 @@ proc do_find_mm {w {action again}} {
               }
             }
             if {$mm <= $info(find_allow_mm_number)} {
-              # add tag here
+              # add tag here       
               textarea_tag_add $w.textarea [expr {$dir?"foundr":"foundf"}] [bp2ix $w.textarea [expr {($i)}]]  [bp2ix $w.textarea [expr {min ($text_length,($i +  [llength $st]))}]] 0
               if {[expr {($i + [llength $st])}] > $text_length} {
                 textarea_tag_add $w.textarea [expr {$dir?"foundr":"foundf"}] [bp2ix $w.textarea 0]  [bp2ix $w.textarea [expr {($i + [llength $st]) % $text_length }]] 0
@@ -12207,11 +12479,11 @@ proc search_with_mm {s text {mm_allowed 0}} {
 }
 
 ###########
-## returns regexp pattern for aa input
+## returns regexp pattern for aa input 
 ###########
 proc aa_regexp {pattern} {
   set temp [list]
-  set lookup [list A (GC.) C (TG\[CT\]) D (GA\[CT\]) E (GA\[AG\]) F (TT\[CT\]) G (GG.) H (CA\[CT\]) I (AT\[ACT\]) K (AA\[AG\]) L ((CT.)|(TT\[AG\])) M (ATG) N (AA\[CT\]) P (CC.) Q (CA\[AG\]) R ((CG.)|(AG\[AG\])) S ((TC.)|(AG\[CT\])) T (AC.) V (GT.) W (TGG) X (...) Y (TA\[CT\]) * ((TA\[AG\])|(TGA))]
+  set lookup [list A (GC.) C (TG\[CT\]) D (GA\[CT\]) E (GA\[AG\]) F (TT\[CT\]) G (GG.) H (CA\[CT\]) I (AT\[ACT\]) K (AA\[AG\]) L ((CT.)|(TT\[AG\])) M (ATG) N (AA\[CT\]) P (CC.) Q (CA\[AG\]) R ((CG.)|(AG\[AG\])) S ((TC.)|(AG\[CT\])) T (AC.) V (GT.) W (TGG) X (...) Y (TA\[CT\]) * ((TA\[AG\])|(TGA))]  
 
   foreach seq [split $pattern " ;,"] {
     lappend temp [string map -nocase $lookup $seq]
@@ -12277,7 +12549,7 @@ proc revcom {pattern} {
 ##########
 ## returns the reverse of the input
 ##########
-proc rev {args} {
+proc rev {args} { 
   return [string reverse [join $args " "]]
 }
 #end of if {catch [string reverse a]}
@@ -12371,11 +12643,11 @@ proc reverse_translate {protein} {
   foreach {codon aa} [lindex $info(translation_map_lists) 0] {
     if {[lsearch -exact $tr_map $aa] < 0} {
       lappend tr_map $aa [string toupper $codon] [string tolower $aa] $codon
-    }
+    } 
   }
   regsub -all -nocase {[^ACDEFGHIKLMNPQRSTVWXY*]} $protein "" protein
   return [string map $tr_map $protein]
-
+  
 }
 
 proc reverse_translate2 {protein} {
@@ -12390,7 +12662,7 @@ proc reverse_translate2 {protein} {
   }
   regsub -all -nocase {[^ACDEFGHIKLMNPQRSTVWXY*]} $protein "" protein
   return [string map $tr_map $protein]
-
+  
 }
 
 ################
@@ -12406,12 +12678,12 @@ proc get_cds {w tag} {
     set fn_tag_range [$w.textarea tag ranges $fn_tag]
     if {[llength $fn_tag_range] == 4} {
       set break [lsearch $tag_range [lindex $fn_tag_range 2]]
-      set tag_range [concat [lrange $tag_range $break end] [lrange $tag_range 0 [expr {$break -1}]]]
-    }
+      set tag_range [concat [lrange $tag_range $break end] [lrange $tag_range 0 [expr {$break -1}]]] 
+    } 
     set text ""
     foreach {f0 f1} $tag_range {
       set text "$text[textarea_get $w.textarea $f0 $f1]"
-    }
+    } 
   } else {
     if {[llength $tag_range] == 4} {
       set text "[textarea_get $w.textarea [lindex $tag_range 2] [lindex $tag_range 3]][textarea_get $w.textarea [lindex $tag_range 0] [lindex $tag_range 1]]"
@@ -12434,8 +12706,8 @@ proc get_feature_exons_indexes {w tag {start 1.0} {end end}} {
     set fn_tag_range [$w.textarea tag ranges $fn_tag]
     if {[llength $fn_tag_range] == 4} {
       set break [lsearch $tag_range [lindex $fn_tag_range 2]]
-      set tag_range [concat [lrange $tag_range $break end] [lrange $tag_range 0 [expr {$break -1}]]]
-    }
+      set tag_range [concat [lrange $tag_range $break end] [lrange $tag_range 0 [expr {$break -1}]]] 
+    } 
   } elseif {[llength $tag_range] == 4} {
     set tag_range [list [lindex $tag_range 2] [lindex $tag_range 3] [lindex $tag_range 0] [lindex $tag_range 1]]
   }
@@ -12493,8 +12765,8 @@ proc cds_trans_lines {w} {
           set fn_tag_range [$w.textarea tag ranges $fn_tag]
           if {[llength $fn_tag_range] == 4} {
             set break [lsearch $tag_range [lindex $fn_tag_range 2]]
-            set tag_range [concat [lrange $tag_range $break end] [lrange $tag_range 0 [expr {$break -1}]]]
-          }
+            set tag_range [concat [lrange $tag_range $break end] [lrange $tag_range 0 [expr {$break -1}]]] 
+          }  
         } elseif {[llength $tag_range] == 4} {
           set tag_range [list [lindex $tag_range 2] [lindex $tag_range 3] [lindex $tag_range 0] [lindex $tag_range 1]]
         }
@@ -12522,12 +12794,12 @@ proc cds_trans_lines {w} {
 ###############
 #Option for the table of Nearest-Neighbor thermodynamic parameters and for the method of melting temperature calculation. Two different tables of thermodynamic parameters are available:
 #   1. Breslauer et al. 1986, DOI:10.1073/ pnas.83.11.3746 In that case the formula for melting temperature calculation suggested by Rychlik et al. 1990 is used (this is used until Primer3 version 1.0.1). This is the default value of Primer3 (for backward compatibility).
-#   2. SantaLucia 1998, DOI:10.1073/pnas.95.4.1460 This is the recommended value.
+#   2. SantaLucia 1998, DOI:10.1073/pnas.95.4.1460 This is the recommended value. 
 ## see also http://onlinelibrary.wiley.com/doi/10.1002/(SICI)1097-0282(1997)44:3%3C217::AID-BIP3%3E3.0.CO;2-Y/epdf
 
 #Option for specifying the salt correction formula for the melting temperature calculation.
 
-#   There are three different options available:
+#   There are three different options available: 
 #   1. Schildkraut and Lifson 1965, DOI:10.1002/bip.360030207 (this is used until the version 1.0.1 of Primer3).The default value of Primer3 version 1.1.0 (for backward compatibility)
 #   2. SantaLucia 1998, DOI:10.1073/pnas.95.4.1460 This is the recommended value.
 #   3. Owczarzy et al. 2004, DOI:10.1021/bi034621r
@@ -12540,7 +12812,7 @@ proc Tm {seq {dna_conc 250} {salt_conc 50}} {
 #parameters from SantaLucia J., Proc. Nat. Acad. Sci. 95: 1460-1465 (1998)
   array set s {aa 222 tt 222 at 204 ta 213 ca 227 tg 227 gt 224 ac 224 ct 210 ag 210 ga 222 tc 222 cg 272 gc 244 gg 199 cc 199}
   array set h {aa 79 tt 79 at 72 ta 72 ca 85 tg 85 gt 84 ac 84 ct 78 ag 78 ga 82 tc 82 cg 106 gc 98 gg 80 cc 80}
-
+  
 #parameters from Breslauer et al. 1986
 #  array set s {aa 240 tt 240 at 239 ta 169 ca 129 tg 129 gt 173 ac 173 ct 208 ag 208 ga 135 tc 135 cg 278 gc 267 gg 266 cc 266}
 #  array set h {aa 91 tt 91 at 86 ta 60 ca 58 tg 58 gt 65 ac 65 ct 78 ag 78 ga 56 tc 56 cg 119 gc 111 gg 110 cc 110}
@@ -12587,7 +12859,7 @@ proc Tm {seq {dna_conc 250} {salt_conc 50}} {
 proc GC% {seq} {
 set seq [regsub -all \n $seq ""]
 set gc [string map -nocase {a "" t "" n "" b "" d "" h "" k "" m "" r "" v "" w "" y "" * ""} $seq]
-return [expr {100.0*[string length $gc]/[string length $seq]}]
+return [expr {100.0*[string length $gc]/[string length $seq]}] 
 }
 
 ##########
@@ -12609,7 +12881,7 @@ proc extinction {seq} {
 ### NOT USED
 ##########
 proc next_ORF1 {w {direction forward}} {
-  global info
+  global info 
   set c [list]
   if {$direction == "forward"} {
     if {[$w.textarea tag ranges sel] != {}} {
@@ -12704,7 +12976,7 @@ proc next_ORF2 {w {direction forward}} {
       set text [revcom [textarea_get $w.textarea 1.0 end-1c]]
       if {[$w.textarea tag ranges sel] != {}} {
         set i [ix2bp $w.textarea sel.last-2chars]
-#selection used here - not used
+#selection used here - not used 
       } else {
         set i [ix2bp $w.textarea insert-1char]
       }
@@ -12818,7 +13090,7 @@ proc find_orf {text i strand} {
     return $top_result
   } else {
     return $bottom_result
-  }
+  } 
 }
 
 ###########
@@ -12827,6 +13099,7 @@ proc find_orf {text i strand} {
 proc next_ORF {w {direction forward}} {
   global info
   set text [textarea_get $w.textarea 1.0 end-1c]
+
   if {1} {
     if {[$w.textarea tag ranges sel] != {}} {
       if {[llength [$w.textarea tag ranges sel]] > 2} {
@@ -12847,13 +13120,15 @@ proc next_ORF {w {direction forward}} {
 
     set reslist [orf_list $text [expr {$info($w,circular)=="circular"?1:0}] $info(find_orf_strand) $info(find_orf_min) $info(find_orf_starts)]
     set reslist [lsort -integer -index 0 $reslist]
+
     for {set j 0} {($j < [llength $reslist]) && ($i> [lindex $reslist $j 0])} {incr j} {
     }
     if {$direction ne "forward"} {
       incr j -1
     }
+
     if {[llength $reslist] > 0} {
-      set res [lindex $reslist [expr {$j % [llength $reslist]}]]
+      set res [lindex $reslist [expr {$j % [llength $reslist]}]] 
     } else {
       set res [list]
     }
@@ -12877,7 +13152,7 @@ proc next_ORF {w {direction forward}} {
     for {set j 0} {$j < [llength $reslist] && $i >= [lindex $reslist $j 1]} {incr j} {
     }
     incr j -1
-    set res [lindex $reslist [expr {$j % [llength $reslist]}]]
+    set res [lindex $reslist [expr {$j % [llength $reslist]}]] 
   }
 
   if {$res == [list]} {
@@ -12958,7 +13233,7 @@ proc orf_list {text circular strand min starts} {
 ##########
 ## changes case of the selection (or window if no selection)
 ##########
-proc change_case {w {action "upper"}} {
+proc change_case {w {action "upper"}} { 
   global info
 
   if {[file_lock_check $w]} {return}
@@ -12975,18 +13250,18 @@ proc change_case {w {action "upper"}} {
     set last [lindex [$w.textarea tag ranges sel] 1]
     catch {set anchorstore [$w.textarea index tk::anchor$w.textarea]}
     set reset 1
-
+ 
     if {[llength [$w.textarea tag ranges sel]] > 2} {
       set first2 [lindex [$w.textarea tag ranges sel] 2]
       set last2 [lindex [$w.textarea tag ranges sel] 3]
       set textstore2 [textarea_get $w.textarea $first2 $last2]
-      set tagstore2 [get_tags $w.textarea [list $first2 $last2]]
+      set tagstore2 [get_tags_exact $w.textarea [list $first2 $last2]]
       textarea_delete $w.textarea $first2 $last2
     }
 #selection used here - ok
   }
   set textstore [textarea_get $w.textarea $first $last]
-  set tagstore [get_tags $w.textarea [list $first $last]]
+  set tagstore [get_tags_exact $w.textarea [list $first $last]]
   textarea_delete $w.textarea $first $last
   switch $action {
     upper {
@@ -13023,7 +13298,7 @@ proc change_case {w {action "upper"}} {
   foreach tag $tag_order {
     textarea_tag_raise $w.textarea $tag
   }
-
+  
   switch $action {
     upper {
       register_undo_separator $w [mc "To Upper Case"]
@@ -13045,7 +13320,7 @@ proc change_case {w {action "upper"}} {
       $w.textarea tag add sel $first2 $last2
     }
     catch {$w.textarea mark set anchor $anchorstore; $w.textarea mark set tk::anchor$w.textarea $anchorstore}
-  }
+  } 
 
   $w.textarea mark set insert $insertstore
 }
@@ -13086,7 +13361,7 @@ proc set_origin {w} {
   if {([$w.textarea index insert] == 1.0) ||[file_lock_check $w]} {return}
   set before [textarea_get $w.textarea 1.0 insert]
   foreach tag [$w.textarea tag names] {
-    lappend stacking_store $tag
+    lappend stacking_store $tag 
     set coords [list]
     foreach a [$w.textarea tag ranges $tag] {
       lappend coords [ix2bp $w.textarea $a]
@@ -13099,10 +13374,10 @@ proc set_origin {w} {
   textarea_delete $w.textarea 1.0 insert
   set end_0 [ix2bp $w.textarea end]
   textarea_insert $w.textarea end-1chars $before
-  set end [ix2bp $w.textarea end]
+  set end [ix2bp $w.textarea end] 
   set new_tags [list]
   foreach {tag coords} $tagstore {
-    set newcoords [list]
+    set newcoords [list]  
     foreach {a b} $coords {
       set a [expr {$a +$end_0}]
       set b [expr {$b +$end_0}]
@@ -13113,7 +13388,7 @@ proc set_origin {w} {
       } elseif {$b > $end} {
         lappend newcoords $a [expr {$end}]
         lappend newcoords 0 [expr {$b-$end}]
-      }
+      } 
     }
     if {$newcoords != [list]} {
       foreach {a b} $newcoords {
@@ -13126,6 +13401,8 @@ proc set_origin {w} {
     catch {$w.textarea tag raise $tag}
   }
   selection_manager $w
+  features_to_tree_view $w
+  set info($w,scanned) 0
   register_undo_separator $w [mc "Set Origin"]
   vertindexbalancer $w
 }
@@ -13189,7 +13466,7 @@ proc rev_com_window {w} {
       set first2 [lindex [$w.textarea tag ranges sel] 2]
       set last2 [lindex [$w.textarea tag ranges sel] 3]
       set selected [textarea_get $w.textarea $first2 $last2]
-      set tagstore [get_tags $w.textarea [list $first2 $last2]]
+      set tagstore [get_tags_exact $w.textarea [list $first2 $last2]]
       textarea_delete $w.textarea $first2 $last2
       textarea_insert $w.textarea $first2 [revcom $selected]
       put_tags $w.textarea [list $first2 $last2] $tagstore reverse 1
@@ -13200,10 +13477,10 @@ proc rev_com_window {w} {
   set insertstore [$w.textarea index insert]
 
 
-
+  
   #selection used here - ok
   set selected [textarea_get $w.textarea $first $last]
-  set tagstore [get_tags $w.textarea [list $first $last]]
+  set tagstore [get_tags_exact $w.textarea [list $first $last]]
   textarea_delete $w.textarea $first $last
   textarea_insert $w.textarea $first [revcom $selected]
   put_tags $w.textarea [list $first $last] $tagstore reverse 1
@@ -13217,13 +13494,13 @@ proc rev_com_window {w} {
     $w.textarea mark set insert [bp2ix $w.textarea [expr {int([ix2bp $w.textarea [$w.textarea index end-1c]]- [ix2bp $w.textarea $insertstore])}]]
     $w.textarea see insert
   }
-
+  
   foreach tag $tag_order {
     if {[$w.textarea tag ranges $tag] != {}} {
       textarea_tag_raise $w.textarea $tag
     }
   }
-
+  
   register_undo_separator $w [mc "Reverse Complement"]
 
   vertindexbalancer $w
@@ -13275,7 +13552,7 @@ proc enzyme_selection_dialog {w} {
   wm title $s [mc "Enzyme Selection..."]
   menu $s.menubar
 
-  menu $s.menubar.filemenu
+  menu $s.menubar.filemenu 
   $s.menubar add cascade -menu $s.menubar.filemenu -label [mc "File"]
   $s.menubar.filemenu add command -label [mc "Open new enzymes file"] -command "reload_enzymes"
   $s.menubar.filemenu add command -label [mc "Save enzymes file"] -command {save_enzymes "" 0; wm deiconify .enz_selector}
@@ -13286,17 +13563,19 @@ proc enzyme_selection_dialog {w} {
   $s.menubar.filemenu add separator
   $s.menubar.filemenu add command -label [mc "Close Selection Dialog"] -accelerator "$modstring+W" -command "$s.actionframe.cancel invoke"
 
-  menu $s.menubar.enzmenu
+  menu $s.menubar.enzmenu 
   $s.menubar add cascade -menu $s.menubar.enzmenu -label [mc "Enzymes"]
   $s.menubar.enzmenu add command -label [mc "New Enzyme..."] -command "add_enzyme_dialog $s"
   $s.menubar.enzmenu add command -label [mc "Delete Selected Enzymes"] -command {delete_selected $info(enz_currently_selected)}
+  $s.menubar.enzmenu add separator
+  $s.menubar.enzmenu add command -label [mc "Quick Add Golden Gate Enzymes"] -command "enz_add_gg $s"
   $s.menubar.enzmenu add separator
   $s.menubar.enzmenu add command -label [mc "New Group..."] -command "add_enz_group $s \$info(enz_currently_selected)"
   $s.menubar.enzmenu add command -label [mc "Delete Groups..."] -command "delete_enz_group $s"
   $s.menubar.enzmenu add command -label [mc "Read Groups File..."] -command "read_enz_groups $s"
  $s.menubar.enzmenu add command -label [mc "Save Groups File..."] -command "save_enz_groups $s"
 
-  menu $s.menubar.editmenu
+  menu $s.menubar.editmenu 
   $s.menubar add cascade -menu $s.menubar.editmenu -label [mc "Edit"]
   $s.menubar.editmenu add command -label [mc "Copy Selected Enzymes"] -command "copy_enz_seleted $s"
   $s.menubar.editmenu add command -label [mc "Paste Selected Enzymes"] -command "paste_enz_seleted $s"
@@ -13331,7 +13610,7 @@ proc enzyme_selection_dialog {w} {
     $s.menubar add cascade -menu $s.menubar.listmenu -label [mc "List"]
     $s.menubar add command -label [mc "Close"] -command "enzyme_selection_dialog_do 0"
 
-    menu $s.overflow
+    menu $s.overflow 
     $s.overflow add command -label [mc "Open new enzymes file"] -command "reload_enzymes"
     android_action_bar $s
   } else {
@@ -13340,26 +13619,26 @@ proc enzyme_selection_dialog {w} {
 
   bind $s <$modifier-KeyPress-w> "$s.actionframe.cancel invoke"
   bind $s <$modifier-KeyPress-y> "$s.actionframe.graphic invoke"
-  bind $s <$modifier-KeyPress-Y> "$s.actionframe.graphicU invoke"
-  bind $s <$modifier-KeyPress-g> "$s.actionframe.digest invoke"
+  bind $s <$modifier-KeyPress-Y> "$s.actionframe.graphicU invoke" 
+  bind $s <$modifier-KeyPress-g> "$s.actionframe.digest invoke" 
   bind $s <$modifier-KeyPress-T> "$s.actionframe.textmap invoke"
 
 ##Region of interest frame###
   grid [frame $s.location -relief ridge -borderwidth 3] -row 1 -column 0 -sticky nwe
   grid [label $s.location.label -text [mc "Window"] -font boldlabelfont] -row 0 -column 0 -sticky wns
   menubutton $s.location.win_button
-    menu $s.location.win_button.menu
+    menu $s.location.win_button.menu 
     foreach window [dnawindows_list 1] {
-      $s.location.win_button.menu add radiobutton -command "change_enz_select_window" -label [wm title $window] -variable enz_select_window -value $window
+      $s.location.win_button.menu add radiobutton -command "change_enz_select_window" -label [wm title $window] -variable enz_select_window -value $window 
     }
-    $s.location.win_button configure -text [wm title $w] -menu $s.location.win_button.menu  -indicatoron 1 -relief raised -width 50
+    $s.location.win_button configure -text [wm title $w] -menu $s.location.win_button.menu  -indicatoron 1 -relief raised -width 50 
     bind $s.location.win_button <<MenuSelect>> "focus $s"
 
   set enz_select_window $w
   set old_enz_select_window $w
   grid $s.location.win_button -row 0 -column 1 -sticky wens
 
-  grid [checkbutton $s.location.local -height 1 -width 0 -variable info(analyze_selection) -onvalue "selection" -offvalue "all" -indicator on -selectcolor white -command "fill_enzymes_box .enz_selector.textframe.textbox .enz_selector.enz_comment \$enz_select_window" -justify right] -row 0 -column 2 -sticky wns
+  grid [checkbutton $s.location.local -height 1 -width 0 -variable info(analyze_selection) -onvalue "selection" -offvalue "all" -indicator on -selectcolor white -command "fill_enzymes_box .enz_selector.textframe.textbox .enz_selector.enz_comment \$enz_select_window" -justify right] -row 0 -column 2 -sticky wns 
   grid [label $s.location.labelssel -text  [mc "Selection: "] -font labelfont -justify right] -row 0 -column 3 -sticky wns
   grid [label $s.location.labelss -textvariable info($w,sel_start) -font labelfont] -row 0 -column 4 -sticky wns
   grid [label $s.location.labesdashl -text "-" -font labelfont] -row 0 -column 5 -sticky wns
@@ -13368,7 +13647,7 @@ proc enzyme_selection_dialog {w} {
   #trace add variable info($w,sel_start) write "fill_enzymes_box .enz_selector.textframe.textbox .enz_selector.enz_comment $w; #"
   #trace add variable info($w,sel_end) write "fill_enzymes_box .enz_selector.textframe.textbox .enz_selector.enz_comment $w; #"
   register_data_receiver $s <<SelectionChanged>> "enz_selection_dialog_sel_changed"
-
+  
   grid [checkbutton $s.location.methylation -text Dam/Dcm -variable info($enz_select_window,Dam_Dcm_methylated) -onvalue 1 -offvalue 0 -command {toggle_methylation $enz_select_window;fill_enzymes_box .enz_selector.textframe.textbox .enz_selector.enz_comment $enz_select_window} -selectcolor white] -row 0 -column 7 -sticky wns
   grid columnconfigure $s.location 1 -weight 1
 
@@ -13387,40 +13666,40 @@ proc enzyme_selection_dialog {w} {
 ##Enzyme Comment box
   grid [label $s.enz_comment -justify center] -row 3 -column 0 -sticky nswe
 
-###Select_enzymes frame
+###Select_enzymes frame 
   set enz_select_groups "All"
 
   grid [frame $s.groupsframe -relief ridge -borderwidth 3] -row 4 -column 0 -sticky nwe
   grid [label $s.groupsframe.label -text [mc "Select Enzymes"] -font boldlabelfont] -row 1 -column 0 -sticky w
 
   #number of sites menu button
-  menubutton $s.groupsframe.numsites
-    menu $s.groupsframe.numsites.menu
+  menubutton $s.groupsframe.numsites 
+    menu $s.groupsframe.numsites.menu 
     foreach label [list [mc "unique (1)"] [mc any] [mc "absent (0)"] [mc "present (>0)"] [mc "not unique (>1)"]] comparison [list "==1" ">-1" "==0" ">0" ">1"] {
-      $s.groupsframe.numsites.menu add radiobutton -label $label -value $comparison -command "set select_numsites_lab {$label}; tagmanage .enz_selector.textframe.textbox display {}" -variable select_numsites_comp
+      $s.groupsframe.numsites.menu add radiobutton -label $label -value $comparison -command "set select_numsites_lab {$label}; tagmanage .enz_selector.textframe.textbox display {}" -variable select_numsites_comp 
     }
-    menu $s.groupsframe.numsites.menu.lt
+    menu $s.groupsframe.numsites.menu.lt 
     foreach label [list <2 <3 <4 <5 <6 <7 <8 <9 <10 <11 <12 <13 <14 <15 <16] comparison [list <2 <3 <4 <5 <6 <7 <8 <9 <10 <11 <12 <13 <14 <15 <16] {
-      $s.groupsframe.numsites.menu.lt add radiobutton -label $label -value $comparison -command "set select_numsites_lab {$label}; tagmanage .enz_selector.textframe.textbox display {}" -variable select_numsites_comp
+      $s.groupsframe.numsites.menu.lt add radiobutton -label $label -value $comparison -command "set select_numsites_lab {$label}; tagmanage .enz_selector.textframe.textbox display {}" -variable select_numsites_comp 
     }
-    menu $s.groupsframe.numsites.menu.et
+    menu $s.groupsframe.numsites.menu.et 
     foreach label [list =2 =3 =4 =5 =6 =7 =8 =9 =10 =11 =12 =13 =14 =15 =16] comparison [list ==2 ==3 ==4 ==5 ==6 ==7 ==8 ==9 ==10 ==11 ==12 ==13 ==14 ==15 ==16] {
       $s.groupsframe.numsites.menu.et add radiobutton -label $label -value $comparison -command "set select_numsites_lab {$label}; tagmanage .enz_selector.textframe.textbox display {}" -variable select_numsites_comp
     }
-    menu $s.groupsframe.numsites.menu.gt
+    menu $s.groupsframe.numsites.menu.gt 
     foreach label [list >2 >3 >4 >5 >6 >7 >8 >9 >10 >11 >12 >13 >14 >15 >16] comparison [list >2 >3 >4 >5 >6 >7 >8 >9 >10 >11 >12 >13 >14 >15 >16] {
       $s.groupsframe.numsites.menu.gt add radiobutton -label $label -value $comparison -command "set select_numsites_lab {$label}; tagmanage .enz_selector.textframe.textbox display {}" -variable select_numsites_comp
     }
     $s.groupsframe.numsites.menu add cascade -label [mc "less than"] -menu $s.groupsframe.numsites.menu.lt
     $s.groupsframe.numsites.menu add cascade -label [mc "equal to"] -menu $s.groupsframe.numsites.menu.et
     $s.groupsframe.numsites.menu add cascade -label [mc "greater than"] -menu $s.groupsframe.numsites.menu.gt
-    # $s.groupsframe.numsites.menu add command -label [mc "Other..."] -command "enzyme_count_dialog"
+    # $s.groupsframe.numsites.menu add command -label [mc "Other..."] -command "enzyme_count_dialog" 
     $s.groupsframe.numsites configure -indicatoron 1 -relief raised -width 12 -textvariable select_numsites_lab -menu $s.groupsframe.numsites.menu
     $s.groupsframe.numsites.menu invoke 0
     bind $s.groupsframe.numsites.menu <<MenuSelect>> "focus $s"
-  grid $s.groupsframe.numsites -row 1 -column 1 -sticky w
+  grid $s.groupsframe.numsites -row 1 -column 1 -sticky w 
 
-  grid [frame $s.groupsframe.sec_window_frame] -row 0 -column 0 -columnspan 7 -sticky ew
+  grid [frame $s.groupsframe.sec_window_frame] -row 0 -column 0 -columnspan 7 -sticky ew 
   grid [label $s.groupsframe.sec_window_frame.label -text [mc "Diff Window"] -font boldlabelfont] -row 2 -column 0 -sticky w
   menubutton $s.groupsframe.sec_window_frame.win -menu $s.groupsframe.sec_window_frame.win.win_menu -textvariable wins_title
   menu $s.groupsframe.sec_window_frame.win.win_menu -background $info(menu_bg_color) -foreground $info(menu_fg_color) -activebackground $info(menu_select_bg_color) -activeforeground $info(menu_select_fg_color)
@@ -13431,14 +13710,14 @@ proc enzyme_selection_dialog {w} {
   set wins_title "[wm title $w]"
   grid $s.groupsframe.sec_window_frame.win -row 2 -column 1 -sticky we
 
-  grid [checkbutton $s.groupsframe.sec_window_frame.local2 -height 1 -width 10 -variable info(analyze_selection2) -text [mc "Selection Only"] -onvalue "selection" -offvalue "all" -indicator on -selectcolor white] -row 2 -column 2 -sticky wns
+  grid [checkbutton $s.groupsframe.sec_window_frame.local2 -height 1 -variable info(analyze_selection2) -text [mc "Selection Only"] -onvalue "selection" -offvalue "all" -indicator on -selectcolor white] -row 2 -column 2 -sticky wns 
   set info(analyze_selection2) all
   grid remove $s.groupsframe.sec_window_frame
 
 
   #enzyme groups menu button
   menubutton $s.groupsframe.groups_button
-    menu $s.groupsframe.groups_button.menu
+    menu $s.groupsframe.groups_button.menu 
     foreach element $enzinfo(enz_groups_list) {
       $s.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element -command "tagmanage .enz_selector.textframe.textbox display {}"
     }
@@ -13510,7 +13789,7 @@ proc enzyme_selection_dialog {w} {
     grid columnconfigure $s.location 4 -weight 1
 
     grid remove $s.groupsframe.label
-    grid $s.groupsframe.numsites -column 0 -columnspan 2  -sticky we
+    grid $s.groupsframe.numsites -column 0 -columnspan 2  -sticky we 
     grid $s.groupsframe.groups_button -columnspan 2 -sticky we
     grid $s.groupsframe.plus -row 2 -column 0 -sticky we
     grid $s.groupsframe.minus -row 2 -column 1 -columnspan 2 -sticky we
@@ -13583,7 +13862,7 @@ proc enzyme_selection_dialog_do {ok} {
     }
   }
 
-  unset -nocomplain select_numsites_lab select_numsites_comp
+  unset -nocomplain select_numsites_lab select_numsites_comp 
   trace remove variable enz_select_groups write  "global enz_select_groups; if {\$enz_select_groups == \"Difference...\"} {grid configure .enz_selector.groupsframe.sec_window_frame} else { grid remove .enz_selector.groupsframe.sec_window_frame}; #"
   set enz_select_groups "All"
   catch {
@@ -13669,7 +13948,7 @@ proc fill_enzymes_box {textbox commentbox w } {
              $textbox.popupmenu entryconfigure \"REBASE: enzyme search\" -command \"rebase_query \\\"$enzyme\\\" main\"
              $textbox.popupmenu entryconfigure \"REBASE: isoschizomer search\" -command \"rebase_query \\\"$enzyme\\\" similar\"
              $textbox.popupmenu entryconfigure \"REBASE: supplier search\" -command \"rebase_query \\\"$enzyme\\\" suppliers\"
-             tk_popup $textbox.popupmenu %X %Y 0"
+             tk_popup $textbox.popupmenu %X %Y 0" 
           $textbox tag bind $enzyme <Control-Button-1> [$textbox tag bind $enzyme <Button-2>]
         }
         set prepend "\t"
@@ -13690,7 +13969,7 @@ proc fill_enzymes_box {textbox commentbox w } {
 ## filter an incoming group for site number and return remaining elements
 #################
 proc enz_site_usage_filter {w {enzlist [list]} {comparison "==1"} {region all}} {
-  global info
+  global info 
 
   set templist [list]
   if {$enzlist != "Difference..."} {
@@ -13718,7 +13997,7 @@ proc enz_count {w enzyme region} {
     set start [ix2bp $w.textarea [lindex [$w.textarea tag ranges sel] 0]]
     incr start
     set end [ix2bp $w.textarea [lindex [$w.textarea tag ranges sel] 1]]
-    if {[llength [$w.textarea tag ranges sel]] > 2} {
+    if {[llength [$w.textarea tag ranges sel]] > 2} { 
       set start2 [ix2bp $w.textarea [lindex [$w.textarea tag ranges sel] 2]]
       incr start2
     }
@@ -13772,7 +14051,7 @@ proc enzyme_diffs2 {w} {
   menu $a.win.win_menu -background $info(menu_bg_color) -foreground $info(menu_fg_color) -activebackground $info(menu_select_bg_color) -activeforeground $info(menu_select_fg_color)
   foreach window [dnawindows_list 1] {
       $a.win.win_menu add radiobutton -label [wm title $window] -variable wins -value $window -command "set wins_title \{[wm title $window]\}"
-      if {[string length [wm title $window]] > $maxwidth} {set maxwidth [string length [wm title $window]]}
+      if {[string length [wm title $window]] > $maxwidth} {set maxwidth [string length [wm title $window]]}   
   }
   if {$maxwidth > 200} {set maxwidth 200}
   incr maxwidth 3
@@ -13782,7 +14061,7 @@ proc enzyme_diffs2 {w} {
   set wins_title "[wm title $w]"
   grid $a.win -row 2 -column 1 -sticky we
 
-  grid [checkbutton $a.local2 -height 1 -width 10 -variable analyze_selection -text [mc "Selection Only"] -onvalue "selection" -offvalue "all" -indicator on -selectcolor white] -row 2 -column 2 -sticky wns
+  grid [checkbutton $a.local2 -height 1 -width 10 -variable analyze_selection -text [mc "Selection Only"] -onvalue "selection" -offvalue "all" -indicator on -selectcolor white] -row 2 -column 2 -sticky wns 
   set analyze_selection all
 
   grid [button $a.ok -text "OK" -command "set ok2 1" -default active] -row 3 -column 1 -padx 10 -pady 3
@@ -13902,7 +14181,7 @@ proc tagmanage2 {textbox action {taglist [list]}} {
     booland {
        foreach etag $enzymes {
           if {[lsearch -exact $taglist $etag] == -1} {
-             $textbox tag configure $etag -background white
+             $textbox tag configure $etag -background white  
           }
        }
     }
@@ -13925,7 +14204,7 @@ proc tagmanage2 {textbox action {taglist [list]}} {
 #################
 proc tagmanage {textbox action {taglist [list]}} {
   global enzymes
-  global info
+  global info 
   global enzinfo enz_select_groups enz_select_window select_numsites_comp
 
   switch $action {
@@ -13955,7 +14234,7 @@ proc tagmanage {textbox action {taglist [list]}} {
           if {[lsearch -exact $taglist $enz] == -1} {
              if {[set i [lsearch $info(enz_currently_selected) $enz]] > -1} {
               set info(enz_currently_selected) [lreplace $info(enz_currently_selected) $i $i]
-            }
+            }  
           }
        }
     }
@@ -13998,7 +14277,7 @@ proc rebase_query {enz {type main}} {
     "main" {
       if {[set error [open_url "http://rebase.neb.com/cgi-bin/reb_get.pl?[::http::formatQuery enzname $enz]"]] != ""} {
 
-      }
+      } 
     }
     "suppliers" {
       if {[set error [open_url "http://rebase.neb.com/cgi-bin/ecget?$enz"]] != ""} {
@@ -14072,7 +14351,7 @@ proc list_enzymes_dialog {w} {
   grid [frame $dialog.f1 -relief ridge -borderwidth 3] -row 0 -column 0  -sticky nwe
   grid [label $dialog.f1.label1 -text [mc "Format:"] ] -row 0 -column 0 -sticky w
   grid [menubutton $dialog.f1.formatmbutton -direction below -indicatoron 1 -textvariable info(enz_list_mode) -menu $dialog.f1.formatmbutton.menu] -row 0 -column 1 -sticky w
-  menu $dialog.f1.formatmbutton.menu
+  menu $dialog.f1.formatmbutton.menu 
   foreach mode $modelist number {0 1 2 3} state {normal normal disabled disabled} {
     $dialog.f1.formatmbutton.menu add radiobutton -label $mode -variable info(enz_list_mode_number) -value $number -command "set info(enz_list_mode) \"$mode\"; $dialog.f1.colentry configure -state $state; $dialog.f1.label2 configure -state $state "
   }
@@ -14123,7 +14402,7 @@ proc list_enzymes_dialog {w} {
   }
   destroy $dialog
   bind . <<RaiseDialogs>> ""
-  unset ok
+  unset ok 
 
 }
 
@@ -14171,16 +14450,16 @@ proc list_enzymes_window {w {mode ""} {enz_list_type ""} {region ""}} {
 
   set a [new_analysis_window $w $title list_enzymes]
   create_textframe $a 120
-
+    
   catch {$a.textframe.text insert end "[clock format [clock seconds] -format $info(clock_format)]\n"}
   $a.textframe.text insert end "[wm title $w] \n"
   $a.textframe.text insert end "[mc From] $start [mc to] $end\. \n\n"
   $a.textframe.text insert end "[mc $title]\n\n"
   set text [list_enzymes_text $w $mode $enz_list_type $region]
 #mode: (sorted by *)
-#0:*name
-#1:*name, #_of_sites
-#2:name, comment, *#_of_sites, position
+#0:*name    
+#1:*name, #_of_sites       
+#2:name, comment, *#_of_sites, position  
 #3:*comment, name
   switch $mode {
     0 {
@@ -14200,7 +14479,7 @@ proc list_enzymes_window {w {mode ""} {enz_list_type ""} {region ""}} {
   $a.textframe.text configure -state disabled
 
   set outputmenu [add_output_menu $a.textframe.text "Text" text $w]
-  bind $a <Button-1> "focus $a.textframe.text"
+  bind $a <Button-1> "focus $a.textframe.text" 
   bindtags $a.textframe.text [list $a.textframe.text AnalysisText . all]
   wm deiconify $a
   if {[info exists info(last_analysis_xy)]} {
@@ -14236,7 +14515,7 @@ proc list_enzymes_text {w {mode ""} {enz_list_type ""} {region "all"} } {
 #selection used here -ok
     set start [ix2bp $w.textarea [lindex [$w.textarea tag ranges sel] 0]]
     set end [ix2bp $w.textarea [lindex [$w.textarea tag ranges sel] 1]]
-    if {[llength [$w.textarea tag ranges sel]] > 2} {
+    if {[llength [$w.textarea tag ranges sel]] > 2} { 
       set start2 [ix2bp $w.textarea [lindex [$w.textarea tag ranges sel] 2]]
     }
   }
@@ -14273,9 +14552,9 @@ proc list_enzymes_text {w {mode ""} {enz_list_type ""} {region "all"} } {
   }
   set result ""
 #mode: (sorted by *)
-#0:*name
-#1:*name, #_of_sites
-#2:name, comment, *#_of_sites, position
+#0:*name    
+#1:*name, #_of_sites       
+#2:name, comment, *#_of_sites, position  
 #3:*comment, name
   switch $mode {
     0 {
@@ -14291,7 +14570,7 @@ proc list_enzymes_text {w {mode ""} {enz_list_type ""} {region "all"} } {
             append result [format $format $colwidth [lindex $enzyme 0]]
           }
         }
-      }
+      } 
     }
     1 {
       set templist [lsort -index 0 $templist]
@@ -14357,14 +14636,14 @@ proc highlight_enzymes {w enz_list} {
     textarea_tag_delete $w.textarea $tag 0
   }
 
-  foreach enzyme $enz_list {
+  foreach enzyme $enz_list { 
     set length [string length $enzinfo(flatpat,$enzyme)]
     #set comment $enzinfo(enz_comment,$enzyme)
     if {$info($w,circular) == "circular"} {
       foreach site $info($w,$enzyme) {
         textarea_tag_add $w.textarea $enzyme [bp2ix $w.textarea [expr {$site -1}]] [bp2ix $w.textarea [expr {$site + $length -1}]] 0
         if {[expr {$site+$length}] > $seq_end} {
-          $w.textarea tag add $enzyme 1.0 [bp2ix $w.textarea [expr ($site + $length- $seq_end)]]
+          $w.textarea tag add $enzyme 1.0 [bp2ix $w.textarea [expr ($site + $length- $seq_end)]]      
         }
         $w.textarea tag configure $enzyme -background $bg_color -font $font -underline $underline
         #metadat format: (0)name, (1)special_info, (2)type, (3)fwd/rev, (4)annotations_string
@@ -14421,9 +14700,9 @@ proc new_dialog {w title {doit_text "CREATE"}} {
     bind $s <KeyPress-Escape> "event generate $s <<Cancel>>"
     raise $s
     bind . <<RaiseDialogs>> "wm deiconify $s; raise $s"
-    regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $w] wgeom winx winy
-    wm geometry $s "+[expr (($winx<0)?0:$winx)+3]+[expr (($winy<0)?0:$winy)+50]"
-
+    if {[regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $w] wgeom winx winy]} {
+      wm geometry $s "+[expr (($winx<0)?0:$winx)+3]+[expr (($winy<0)?0:$winy)+50]"
+    }
     set wgeomlist [split [wm geometry $w] "x+"]
     set sgeom "+[expr [lindex $wgeomlist 2]+3]+[expr [lindex $wgeomlist 3]+150]"
     wm geometry $s $sgeom
@@ -14473,12 +14752,13 @@ proc new_dialog {w title {doit_text "CREATE"}} {
 ##############
 proc add_menubar_to_dialog_mac {w s} {
   $s configure -menu [menu $s.menubar]
+  if {$w == "."} {set w ""}
   for {set i 0} {$i < [$w.menubar index end]} {incr i} {
     set original_cascade [$w.menubar entrycget $i -menu]
     regexp {\.[^\.]*(\..+)} $original_cascade - new_cascade
     set m [menu $s$new_cascade]
-    $s.menubar add cascade -menu $m -label [$w.menubar entrycget $i -label]
-    for {set j 0} {$j < [$original_cascade index end]} {incr j} {
+    $s.menubar add cascade -menu $m -label [$w.menubar entrycget $i -label] 
+    for {set j 0} {$j < [$original_cascade index end]} {incr j} { 
       if {[$original_cascade type $j] ne "separator"} {
         $m add [$original_cascade type $j] -label [$original_cascade entrycget $j -label] -state disabled
       } else {
@@ -14556,7 +14836,7 @@ proc create_textframe {a width {row 2} {column 0}} {
 ## return a geometry specifier for setting a toplevel to the size of the textbox
 ##############
 proc textbox_geometry {t xpos ypos} {
-  set x 0
+  set x 0 
   for {set line 1} {[$t compare $line.0 < end]} {incr line} {
     scan [$t index $line.0lineend] "%d.%d" l c
     set x [expr {max($x, $c)}]
@@ -14593,28 +14873,38 @@ proc add_output_menu {w label type return_window} {
     menu $top.menubar.filemenu.open_previous
     $top.menubar.filemenu add cascade -label [mc "Open Recent Files"] -menu $top.menubar.filemenu.open_previous
     if {[catch {update_open_previous_menu} err]} {tk_messageBox  -message "open previous: $err"}
+    $top.menubar.filemenu add command -label [mc "Close"] -accelerator "$modstring+W" -command "closewindow $top"
+    bind $top <$modifier-KeyPress-w> "closewindow $top"
+    $top.menubar.filemenu add command -label [mc "Save"] -accelerator "$modstring+S" -command "event generate $w <<Save>>"
+    bind $top <$modifier-KeyPress-s> "event generate $w <<Save>>"
 
     set outputmenu [menu $top.menubar.outputmenu]
     $top.menubar add cascade -menu $outputmenu -label [mc $label]
+
+    $top.menubar add cascade -menu [menu $top.menubar.windows] -label [mc "Window"]
+    update_windows_menu
+
     menu $top.menubar.help1
     $top.menubar add cascade -menu $top.menubar.help1 -label [mc "Help"]
+    $top.menubar.help1 add command -label [mc "Calculator..."] -accelerator "$modstring+1" -command "calc" 
+    $top.menubar.help1 add command -label [mc "Molecular Reaction Calculator..."] -accelerator "$modstring+2" -command "mol_calc" 
+    $top.menubar.help1 add separator
     $top.menubar.help1 add command -label [mc "Standard Genetic Code"] -command "genetic_code_dialog $top"
     $top.menubar.help1 add command -label [mc "AA Info"] -command "aa_info_dialog $top"
     if {[tk windowingsystem] == "aqua" && !$info(use_cocoa)} {
-      menu $top.menubar.apple
+      menu $top.menubar.apple 
       $top.menubar add cascade -menu $top.menubar.apple
       $top.menubar.apple add command -label [mc "About ApE"] -command "about_dialog $top"
       $top.menubar.apple add separator
         #$top.menubar.apple add command -label [mc "Preferences..."]  -command "configure_preferences $top" -accelerator "$modstring+,"
-    }
-    $top.menubar add cascade -menu [menu $top.menubar.windows] -label [mc "Window"]
-    update_windows_menu
+    } 
+
 
     $top configure -menu $top.menubar
     bind $w <Button-2> "tk_popup $outputmenu %X %Y"
     bind $w <Control-Button-1> "tk_popup $outputmenu %X %Y"
   } else {
-    ## android
+    ## android 
     bind $w <<Cancel>>  "event generate $w <<Return>>"
     bind $w <KeyPress-Break>  "event generate $w <<Return>>"
     set outputmenu [menu $top.menubar]
@@ -14631,7 +14921,7 @@ proc add_output_menu {w label type return_window} {
       if {$info(use_cocoa) || [info exists info(twapi_cf_html)]} {
         $outputmenu add command -label [mc "Copy Formatted"] -accelerator "$modstring+Shift+C" -command "event generate $w <<CopyFormatted>>"
       }
-      $outputmenu add command -label [mc "Save"] -accelerator "$modstring+S" -command "event generate $w <<Save>>"
+      #$outputmenu add command -label [mc "Save"] -accelerator "$modstring+S" -command "event generate $w <<Save>>"
       $outputmenu add separator
       $outputmenu add command -label [mc "Print"] -accelerator "$modstring+P" -command "event generate $w <<Print>>"
       if {([lsearch -glob [info loaded] "*MacCarbonPrint.dylib*"] > -1) ||  ([lsearch [package names] "wmf"] > -1)} {
@@ -14642,12 +14932,12 @@ proc add_output_menu {w label type return_window} {
       }
       $outputmenu add separator
       $outputmenu add command -label [mc "Raise Parent"] -accelerator "$modstring+Space" -command "event generate $w <<Return>>"
-      $outputmenu add command -label [mc "Close"] -accelerator "$modstring+W" -command "closewindow $top"
+
       bind $w <$modifier-KeyPress-c> "event generate $w <<Copy>>"
       bind $w <$modifier-Shift-KeyPress-c> "event generate $w <<CopyFormatted>>"
-      bind $w <$modifier-KeyPress-s> "event generate $w <<Save>>"
+
       bind $w <$modifier-KeyPress-p> "event generate $w <<Print>>"
-      bind $w <$modifier-KeyPress-w> "closewindow $top"
+
       bind $w <$modifier-KeyPress-space> "event generate $w <<Return>>"
       bind $w <Double-Button-1> "event generate $w <<Return>>; break"
       bind $w <<Save>> "text_save $w"
@@ -14671,7 +14961,7 @@ proc add_output_menu {w label type return_window} {
         bind $c <$modifier-KeyPress-c> "event generate $c <<CopyEMF>>"
         bind $c <<CopyEMF>> "canvas_to_metafile copy $c both"
       }
-      $outputmenu add command -label [mc "Save"] -accelerator "$modstring+S" -command "event generate $c <<Save>>"
+      #$outputmenu add command -label [mc "Save"] -accelerator "$modstring+S" -command "event generate $c <<Save>>"
       $outputmenu add separator
       $outputmenu add command -label [mc "Print"] -accelerator "$modstring+P" -command "event generate $c <<Print>>"
       if {([lsearch -glob [info loaded] "*MacCarbonPrint.dylib*"] > -1) ||  ([lsearch -exact [package names] "wmf"] > -1)} {
@@ -14691,11 +14981,11 @@ proc add_output_menu {w label type return_window} {
        # $outputmenu.scale add radiobutton -label [mc "300%"] -command "scale_canvas $c" -variable info($top,new_scale) -value 300
       #$outputmenu add separator
       $outputmenu add command -label [mc "Raise Parent"] -accelerator "$modstring+Space" -command "event generate $c <<Return>>"
-      $outputmenu add command -label [mc "Close"] -accelerator "$modstring+W" -command "closewindow $top"
+      #$outputmenu add command -label [mc "Close"] -accelerator "$modstring+W" -command "closewindow $top"
       bind $c <$modifier-KeyPress-s> "event generate $c <<Save>>"
       bind $c <$modifier-KeyPress-p> "event generate $c <<Print>>"
       bind $c <$modifier-KeyPress-space> "event generate $c <<Return>>"
-      bind $c <$modifier-KeyPress-w> "closewindow $top"
+      #bind $c <$modifier-KeyPress-w> "closewindow $top"
       bind $c <Double-Button-1> "event generate $c <<Return>>; break"
       bind $c <<Save>> "canvas_save $c"
       bind $c <<Print>> "print_canvas $c $c"
@@ -14708,11 +14998,11 @@ proc add_output_menu {w label type return_window} {
         bind $w <Button1-Motion> "$w scan dragto  %x %y 2"
         bind $w <Button-2> "$w scan mark  %x %y"
         bind $w <Button2-Motion> "$w scan dragto %x %y 2"
-      }
+      }   
     }
     list {
       $outputmenu add command -label [mc "Copy"] -accelerator "$modstring+C" -command "event generate $w <<Copy>>"
-      $outputmenu add command -label [mc "Save"] -accelerator "$modstring+S" -command "event generate $w <<Save>>"
+      #$outputmenu add command -label [mc "Save"] -accelerator "$modstring+S" -command "event generate $w <<Save>>"
       #$outputmenu add separator
       #$outputmenu add command -label [mc "Print"] -accelerator "$modstring+P" -command "event generate $w <<Print>>"
       #if {([lsearch -glob [info loaded] "*MacCarbonPrint.dylib*"] > -1) ||  ([lsearch [package names] "wmf"] > -1)} {
@@ -14723,11 +15013,11 @@ proc add_output_menu {w label type return_window} {
       #}
       $outputmenu add separator
       $outputmenu add command -label [mc "Raise Parent"] -accelerator "$modstring+Space" -command "event generate $w <<Return>>"
-      $outputmenu add command -label [mc "Close"] -accelerator "$modstring+W" -command "closewindow $top"
+      #$outputmenu add command -label [mc "Close"] -accelerator "$modstring+W" -command "closewindow $top"
       bind $w <$modifier-KeyPress-c> "event generate $w <<Copy>>"
       bind $w <$modifier-KeyPress-s> "event generate $w <<Save>>"
       #bind $w <$modifier-KeyPress-p> "event generate $w <<Print>>"
-      bind $w <$modifier-KeyPress-w> "closewindow $top"
+      #bind $w <$modifier-KeyPress-w> "closewindow $top"
       bind $w <$modifier-KeyPress-space> "event generate $w <<Return>>"
       bind $w <Double-Button-1> "event generate $w <<Return>>; break"
       bind $w <<Copy>> "treeview_copy $w"
@@ -14744,6 +15034,41 @@ proc add_output_menu {w label type return_window} {
     }
   }
   return $outputmenu
+}
+
+##############
+## Add the output menu to an analysis window
+##############
+proc add_help_menubar {w } {
+  global  modifier modstring tk_patchLevel
+
+    if {[tk windowingsystem] != "aqua"} {return}
+
+    set top $w
+    menu $top.menubar
+    $top configure -menu $top.menubar
+    set filemenu [menu $top.menubar.filemenu]
+    $top.menubar add cascade -menu $filemenu -label [mc "File"]
+    $top.menubar.filemenu add command -label [mc "New"] -accelerator "$modstring+N" -command "create_window"
+    $top.menubar.filemenu add command -label [mc "Open..."] -accelerator "$modstring+O"  -command "open_file_dialog"
+    menu $top.menubar.filemenu.open_previous
+    $top.menubar.filemenu add cascade -label [mc "Open Recent Files"] -menu $top.menubar.filemenu.open_previous
+    if {[catch {update_open_previous_menu} err]} {tk_messageBox  -message "open previous: $err"}
+    $top.menubar.filemenu add command -label [mc "Close"] -accelerator "$modstring+W" -command "closewindow $top"
+    bind $top <$modifier-KeyPress-w> "closewindow $top"
+
+    $top.menubar add cascade -menu [menu $top.menubar.windows] -label [mc "Window"]
+    update_windows_menu
+
+    menu $top.menubar.help1
+    $top.menubar add cascade -menu $top.menubar.help1 -label [mc "Help"]
+    $top.menubar.help1 add command -label [mc "Calculator..."] -accelerator "$modstring+1" -command "calc" 
+    $top.menubar.help1 add command -label [mc "Molecular Reaction Calculator..."] -accelerator "$modstring+2" -command "mol_calc" 
+    $top.menubar.help1 add separator
+    $top.menubar.help1 add command -label [mc "Standard Genetic Code"] -command "genetic_code_dialog $top"
+    $top.menubar.help1 add command -label [mc "AA Info"] -command "aa_info_dialog $top"
+
+
 }
 
 
@@ -14767,7 +15092,7 @@ proc enz_digest {w enz_list region {partial_list ""}} {
 
   #if {$enz_list == [list]} {
   #  enzyme_selection_dialog $w
-  #  return
+  #  return 
   #}
 
 
@@ -14777,9 +15102,9 @@ proc enz_digest {w enz_list region {partial_list ""}} {
     set total_length [ix2bp $w.textarea [$w.textarea index end-1chars]]
     set end $total_length
   } else {
-#selection used here
+#selection used here 
     set start [ix2bp $w.textarea [$w.textarea index sel.first]]
-    incr start
+    incr start 
     set end [ix2bp $w.textarea [$w.textarea index sel.last]]
     set total_length [expr {$end - $start+1}]
   }
@@ -14885,7 +15210,7 @@ proc enz_digest {w enz_list region {partial_list ""}} {
     append enz_list_label " et al."
   }
 
-  set a [new_analysis_window $w "[mc Digest] $enz_list_label" digest]
+  set a [new_analysis_window $w "[mc Digest] $enz_list_label" digest] 
   grid [set c [canvas $a.canvas -yscrollcommand "optionscrollbar $a.s" -xscrollcommand "optionscrollbar $a.s2" -width 500 -height 250 -background white]] -row 1 -column 0 -rowspan 2 -sticky nswe
 
   set outputmenu [add_output_menu $c "Image" image $w]
@@ -14910,7 +15235,7 @@ proc enz_digest {w enz_list region {partial_list ""}} {
   #set timestring ""
   #catch {set timestring [clock format [clock seconds] -format $info(clock_format)]}
 
-  #$c create text 0 0 -text "$timestring" -anchor nw -font [list $info(graphicfontfamily) $info(graphicfontsize)]-tags [list time table]
+  #$c create text 0 0 -text "$timestring" -anchor nw -font [list $info(graphicfontfamily) $info(graphicfontsize)]-tags [list time table] 
   #set textheight [expr {[lindex [$c bbox time] 3] - [lindex [$c bbox time] 1]}]
   set textheight 0
 
@@ -14927,7 +15252,7 @@ proc enz_digest {w enz_list region {partial_list ""}} {
   set cols [list]
   for {set cw 0} {$cw < 6} {incr cw} {
     lappend cols [expr {$cw * $colswidth}]
-  }
+  } 
   foreach ttext [list [mc "Size"] [mc "site1"] "" [mc "site2"] "" [mc "Mass %"]] tx $cols {
     $c create text $tx [expr {$i*$textheight}] -text $ttext -anchor nw -font [list $info(graphicfontfamily) $info(graphicfontsize)] -fill black -tags [list table title text lane1]
   }
@@ -14935,7 +15260,7 @@ proc enz_digest {w enz_list region {partial_list ""}} {
   set textright [lindex [$c bbox title] 2]
   $c create line 0 [lindex [$c bbox title] 3] [lindex [$c bbox title] 2] [lindex [$c bbox title] 3] -fill black -tags {table title line lane1}
 
-
+  
 
   #draw map area tick marks
   foreach site $templist {
@@ -15097,7 +15422,7 @@ proc enz_digest {w enz_list region {partial_list ""}} {
 
   #create hidden map line dummy for aligning incoming lanes to
   $c create line [expr {$textright + 5}] 30 [expr {$textright + 5}] 240 -tags [list dummy line scalable] -fill black -state hidden
-
+ 
   set info_text "[file root [wm title $w]] "
   if {($enz_list == [list])  || $enz_list == [list no_digest]} {
     append info_text [mc "uncut"]
@@ -15116,8 +15441,8 @@ proc enz_digest {w enz_list region {partial_list ""}} {
     } else {
         append info_text "[mc {>3 enzymes}]\n"
     }
-    append info_text [join $fragtexts {, }]
-  }
+    append info_text [join $fragtexts {, }] 
+  } 
 
 
   ## make feature bands thicker on Andoid
@@ -15194,7 +15519,7 @@ proc enz_digest {w enz_list region {partial_list ""}} {
   bind $c <$modifier-KeyPress-C> "event generate $c <<CopyText>>"
   bind $c <<CopyText>> "clipboard clear;clipboard append \[enz_digest_get_table_text $c\]"
   bindtags $c [list $c $a all]
-  bind $a <Button-1> "focus $c"
+  bind $a <Button-1> "focus $c" 
   wm deiconify $a
   foreach {x0 y0 x1 y1} [$c bbox all] {}
   if {[info exists info(last_analysis_xy)]} {
@@ -15230,7 +15555,7 @@ proc enz_digest_get_table_text {c} {
     if {[$c itemcget $item -state] eq "normal"} {
       set frag [lsearch -inline -regexp [$c itemcget $item -tags] {frag.*}]
       if {[lsearch -exact $fraglist $frag] == -1} {lappend fraglist $frag}
-      lappend line($frag) [$c itemcget $item -text]
+      lappend line($frag) [$c itemcget $item -text] 
     }
   }
   if {$fraglist != [list]} {
@@ -15240,7 +15565,7 @@ proc enz_digest_get_table_text {c} {
     }
     set result "$result[join $t \n]"
     return $result
-  }
+  } 
   return ""
 }
 
@@ -15273,7 +15598,7 @@ proc enz_digest_partial_dialog {w} {
     if {$info(use_tile)} {
       grid [ttk::scale $a.enz_frame.scale_$enz -from 0 -to 100 -command "set part($enz) \[expr {round(\$part($enz))}\];#" -orient horizontal -variable part($enz)] -row $r -column 2 -sticky nswe
     } else {
-      grid [scale $a.enz_frame.scale_$enz -from 0 -to 100 -sliderrelief raised -showvalue 0 -resolution 1 -troughcolor white -background $info(bg_color) -width 10  -command "set part($enz) \[expr {round(\$part($enz))}\];#" -orient horizontal -variable part($enz)] -row 0 -column 1 -sticky nswe
+      grid [scale $a.enz_frame.scale_$enz -from 0 -to 100 -sliderrelief raised -showvalue 0 -resolution 1 -troughcolor white -background $info(bg_color) -width 10  -command "set part($enz) \[expr {round(\$part($enz))}\];#" -orient horizontal -variable part($enz)] -row 0 -column 1 -sticky nswe 
     }
     set part($enz) 100
     incr r
@@ -15343,7 +15668,7 @@ proc enz_digest_dialog2 {w} {
       }
       $submenu add radiobutton -label [lindex $enzymes $k] -value [lindex $enzymes $k] -variable digarray(enz$i)
     }
-
+ 
     set digarray(enz$i) $enz
 
     grid [entry $s.row0.enz$i.percent -width 3 -textvariable digarray(enz$i,percent)] -row 1 -column 0
@@ -15460,7 +15785,7 @@ proc enz_digest_dialog2_add_all_dnas {s} {
 #################
 proc enz_digest_dialog2_add_dna_diagonal {s row} {
   global digarray info listmove
-
+  
   #reset current row to first enzyme selected
   for {set j 1} {[winfo exists $s.row0.enz$j]} {incr j} {
     set  digarray($s.row$row.enz$j) 0
@@ -15469,7 +15794,7 @@ proc enz_digest_dialog2_add_dna_diagonal {s row} {
   enz_digest_dialog2_show_checkbox $s.row$row 1
   enz_digest_dialog2_recolor_row $s.row$row
 
-  set type_info $digarray($s.row$row.lanedata)
+  set type_info $digarray($s.row$row.lanedata) 
   set grid_row [dict get [grid info $s.row$row] -row]
   for {set j 2} {[winfo exists $s.row0.enz$j]} {incr j} {
     set new_row [enz_digest_dialog2_add_row $s [expr {$grid_row + $j -1}]  $type_info ""]
@@ -15482,9 +15807,9 @@ proc enz_digest_dialog2_add_dna_diagonal {s row} {
 ##
 #################
 proc enz_digest_dialog2_clone_row {s row_frame} {
-  global digarray
+  global digarray  
 
-  set type_info $digarray($row_frame.lanedata)
+  set type_info $digarray($row_frame.lanedata) 
   set grid_row [dict get [grid info $row_frame] -row]
   enz_digest_dialog2_add_row $s [expr {$grid_row +1}] $type_info $row_frame
 }
@@ -15493,7 +15818,7 @@ proc enz_digest_dialog2_clone_row {s row_frame} {
 ##
 #################
 proc enz_digest_dialog2_delete_row {s row_frame} {
-  global digarray
+  global digarray  
   #sputs here delete  $row_frame
   set grid_row [dict get [grid info $row_frame] -row]
   for {set i [expr {$grid_row}]} {$i < [expr {[llength [grid slaves $s]]-2}]} {incr i} {
@@ -15538,7 +15863,7 @@ proc enz_digest_dialog2_add_row {s row type_info clone_data_from_row} {
   grid [label $s.row$i.lanebuttonframe.lanelabel -text "Lane $i"] -row 0 -column 1 -sticky e
 
   grid [menubutton $s.row$i.lanebuttonframe.lanebutton -textvariable digarray($s.row$i.lanelabel) -menu $s.row$i.lanebuttonframe.lanebutton.menu] -row 0 -column 2 -sticky we
-  menu $s.row$i.lanebuttonframe.lanebutton.menu
+  menu $s.row$i.lanebuttonframe.lanebutton.menu 
   $s.row$i.lanebuttonframe.lanebutton.menu add radiobutton -label [mc "None"] -value "None" -variable digarray($s.row$i.lanelabel) -command "set digarray($s.row$i.lanedata) {}; enz_digest_dialog2_show_checkbox $s.row$i 0"
   $s.row$i.lanebuttonframe.lanebutton.menu add cascade -label [mc "Ladder"] -menu $s.row$i.lanebuttonframe.lanebutton.menu.laddermenu
   menu $s.row$i.lanebuttonframe.lanebutton.menu.laddermenu
@@ -15622,7 +15947,7 @@ proc enz_digest_dialog2_add_row {s row type_info clone_data_from_row} {
       grid [checkbutton $new_col -variable digarray($new_col) -command "enz_digest_dialog2_process_checkbox $new_col"] -row 0 -column $j
       set clone_checked 0
       if {$clone_data_from_row != ""} {
-        set digarray($new_col) $digarray($clone_data_from_row[file extension $new_col])
+        set digarray($new_col) $digarray($clone_data_from_row[file extension $new_col]) 
         set clone_checked [expr {$clone_checked | $digarray($new_col)}]
       } else {
         set digarray($new_col) 0
@@ -15678,8 +16003,8 @@ proc enz_digest_dialog2_recolor_row {row} {
   global digarray info
   set color [expr {[dict get [grid info $row] -row]%2?"#d0d0ff":$info(bg_color)}]
 
-  set row_0 [regsub {[0-9+]} $row 0]
-
+  set row_0 [regsub {[0-9+]+} $row 0]
+  
   set i 1
   while {[winfo exists $row.enz$i]} {
     set columnwidth [expr {int(1.2*[winfo reqwidth $row_0.enz$i.enzbutton])}]
@@ -15691,7 +16016,7 @@ proc enz_digest_dialog2_recolor_row {row} {
   $row.lanebuttonframe.lanelabel configure -text "Lane [dict get [grid info $row] -row]"
   #      set columnwidth [expr {int(1.2*[winfo reqwidth $row_0.enz$i.enzbutton])}]
  # grid columnconfigure $s.row0 $i -minsize $columnwidth -weight 0
-
+  
 
   if {$digarray($row.lanedata) == ""} {
     #set color gray40
@@ -15937,9 +16262,9 @@ proc enz_digest2 {w lane_list} {
     }
   }
   if {$wlist != [list]} {
-    set a [new_analysis_window $wlist "[mc Digest]" digest]
+    set a [new_analysis_window $wlist "[mc Digest]" digest]  
   } else {
-    set a [new_analysis_window $w "[mc Digest]" digest]
+    set a [new_analysis_window $w "[mc Digest]" digest]  
   }
 
 
@@ -15976,14 +16301,14 @@ proc enz_digest2 {w lane_list} {
 #xxx bbox map
   $canvas move band [expr {[lindex [$canvas bbox map] 2]+10}] 0
   $canvas move lanelabel [expr {[lindex [$canvas bbox map] 2]+10}] 0
-
+  
   digest_manage_band_migration $a
 
   #create hidden map line dummy for aligning incoming lanes to
 #xxx bbox title
   set textright [lindex [$canvas bbox title] 2]
   $canvas create line [expr {$textright + 5}] 30 [expr {$textright + 5}] 240 -tags [list dummy line scalable] -state hidden
-
+ 
   #create the info text item
   $canvas create text 0 0 -anchor nw -font [list $info(graphicfontfamily) $info(graphicfontsize)] -fill black -width [expr {[lindex [$canvas bbox map] 2]+10}] -tags [list infotext text] -state hidden
   catch {$canvas itemconfigure infotext&&text -text [wrap_text [join $info_text_list "\n\n"] [$canvas itemcget infotext&&text -font] [$canvas itemcget infotext&&text -width]]}
@@ -15994,7 +16319,7 @@ proc enz_digest2 {w lane_list} {
   $canvas bind band  <Any-Leave> " if {\[winfo exists .bandsizetooltip\]} {destroy .bandsizetooltip}"
 
   $canvas bind band <B1-Motion> "digest_peel_bands $canvas %X %Y"
-  $canvas bind band <ButtonRelease-1> "sputs release; catch {unset tooltip_x tooltip_y}; if {(\[winfo containing %X %Y\] != \"\") && \[winfo exists .w_tooltip\]} {destroy .w_tooltip; digest_move_lane $canvas %X %Y move} else {digest_action_item_manager $canvas button-1}"
+  $canvas bind band <ButtonRelease-1> "catch {unset tooltip_x tooltip_y}; if {(\[winfo containing %X %Y\] != \"\") && \[winfo exists .w_tooltip\]} {destroy .w_tooltip; digest_move_lane $canvas %X %Y move} else {digest_action_item_manager $canvas button-1}"
   $canvas bind band <Shift-ButtonRelease-1> "catch {unset tooltip_x tooltip_y}; if {(\[winfo containing %X %Y\] != \"\") && \[winfo exists .w_tooltip\]} {destroy .w_tooltip; digest_move_lane $canvas %X %Y move} else {digest_action_item_manager $canvas shift-button-1}"
   $canvas bind band <$modifier-ButtonRelease-1> "catch {unset tooltip_x tooltip_y}; if {(\[winfo containing %X %Y\] != \"\") && \[winfo exists .w_tooltip\]} {destroy .w_tooltip; digest_move_lane $canvas %X %Y copy} else {digest_action_item_manager $canvas button-1}"
   if {[tk windowingsystem] eq "aqua"} {$canvas bind band <Option-ButtonRelease-1> [$canvas bind band <$modifier-ButtonRelease-1>]}
@@ -16049,7 +16374,7 @@ proc enz_digest2 {w lane_list} {
   bind $canvas <$modifier-KeyPress-C> "event generate $canvas <<CopyText>>"
   bind $canvas <<CopyText>> "clipboard clear;clipboard append \[enz_digest_get_table_text $canvas\]"
   bindtags $canvas [list $canvas $a all]
-  bind $a <Button-1> "focus $canvas"
+  bind $a <Button-1> "focus $canvas" 
   $canvas itemconfigure !band -state hidden ; $canvas itemconfigure infotext -state normal
   wm deiconify $a
   foreach {x0 y0 x1 y1} [$canvas bbox all] {}
@@ -16073,9 +16398,9 @@ proc digest_make_fraglist {w enz_list region {partial_list ""}} {
     set total_length [ix2bp $w.textarea [$w.textarea index end-1chars]]
     set end $total_length
   } else {
-#selection used here
+#selection used here 
     set start [ix2bp $w.textarea [$w.textarea index sel.first]]
-    incr start
+    incr start 
     set end [ix2bp $w.textarea [$w.textarea index sel.last]]
     set total_length [expr {$end - $start+1}]
   }
@@ -16205,7 +16530,7 @@ global info
   set cols [list]
   for {set cw 0} {$cw < 6} {incr cw} {
     lappend cols [expr {$cw * $colswidth}]
-  }
+  } 
   foreach ttext [list [mc "Size"] [mc "site1"] "" [mc "site2"] "" [mc "Mass %"]] tx $cols {
     $canvas create text $tx [expr {$i*$textheight}] -text $ttext -anchor nw -font [list $info(graphicfontfamily) $info(graphicfontsize)] -fill black -tags [list table title text $lane]
   }
@@ -16328,8 +16653,8 @@ global info
     } else {
         append info_text "[mc {>3 enzymes}]\n"
     }
-    append info_text [join $fragtexts {, }]
-  }
+    append info_text [join $fragtexts {, }] 
+  } 
 
   if {$info(android)} {
     $canvas itemconfigure band -width 8
@@ -16347,7 +16672,7 @@ global info
 ##
 ################
 proc digest_draw_ladder {a ladder_name lane_num} {
-  global info
+  global info 
   ##draw ladder
   if {!$info(android)} {
     set bandwidth 50
@@ -16371,7 +16696,7 @@ proc digest_draw_ladder {a ladder_name lane_num} {
     set cols [list]
     for {set cw 0} {$cw < 6} {incr cw} {
       lappend cols [expr {$cw * $colswidth}]
-    }
+    } 
     foreach ttext [list [mc "Size"] [mc "site1"] "" [mc "site2"] "" [mc "Mass %"]] tx $cols {
       $canvas create text $tx [expr {0}] -text $ttext -anchor nw -font [list $info(graphicfontfamily) $info(graphicfontsize)] -fill black -tags [list table title text delete $lane]
     }
@@ -16401,7 +16726,7 @@ proc digest_draw_ladder {a ladder_name lane_num} {
 
     set ladder_text "$ladder_name\n[mc Sizes:] [join [lsort -unique -integer $dig_ladder] {, }]"
     $canvas bind $lane <<Info>> [list info_text $ladder_text min_size [lindex $dig_ladder end] max_size [lindex $dig_ladder 0]]
-
+ 
   }
 }
 
@@ -16522,12 +16847,12 @@ proc digest_action_item_manager {c event} {
       #$c itemconfigure $lanestring&&$fragstring&&band -fill red -width $bandhighlightheight
       $c itemconfigure $lanestring&&$fragstring&&band -fill red
       $c itemconfigure $lanestring&&$fragstring&&table_text -fill red
-      $c raise $fragstring
+      $c raise $fragstring 
     }
     leave {
       $c itemconfigure $lanestring&&$fragstring&&map -fill black -width $bandheight
       if {[$c bind [$c find withtag $lanestring&&$fragstring&&band] <<Gray_fill>>] != ""} {
-        $c itemconfigure $lanestring&&$fragstring&&band -fill gray[expr {100-[$c bind [$c find withtag $lanestring&&$fragstring&&band] <<Gray_fill>>]}] -width $bandheight
+        $c itemconfigure $lanestring&&$fragstring&&band -fill gray[expr {100-[$c bind [$c find withtag $lanestring&&$fragstring&&band] <<Gray_fill>>]}] -width $bandheight    
       } else {
         $c itemconfigure $lanestring&&$fragstring&&band -fill black -width $bandheight
       }
@@ -16592,7 +16917,7 @@ proc digest_action_item_manager {c event} {
 proc digest_move_lane {from_canvas X Y {mode move}} {
 
   global from_lane current_band info
-
+  
 
   if {[catch {set to_window [winfo toplevel [winfo containing $X $Y]]}]} {
     set to_window ""
@@ -16620,7 +16945,7 @@ proc digest_move_lane {from_canvas X Y {mode move}} {
       set cols [list]
       for {set cw 0} {$cw < 6} {incr cw} {
         lappend cols [expr {$cw * $colswidth}]
-      }
+      } 
 
       #draw the table header
       foreach ttextitem [$from_canvas find withtag table&&title&&text&&$from_lane] tx $cols {
@@ -16651,7 +16976,7 @@ proc digest_move_lane {from_canvas X Y {mode move}} {
       set mapscale [expr {1.0 * ($map_max_y - $map_min_y) / ($from_map_max_y - $from_map_min_y)}]
       foreach from_tic [$from_canvas find withtag map&&line&&$from_lane] {
         $to_canvas create line $map_x [set tic_y [expr {1.0 * $map_min_y + $mapscale * ([lindex [$from_canvas coords $from_tic] 1] - $from_map_min_y)}]] [expr {$map_x + 10}] $tic_y -tags  [list {*}[lsearch -all -inline -regexp -not [$from_canvas itemcget $from_tic -tags] {lane[0-9]+}] $to_lane]
-        # text is next item
+        # text is next item 
         incr from_tic
         $to_canvas create text [expr {$map_x + 12}] $tic_y -anchor w -text [$from_canvas itemcget $from_tic -text] -tags  [list {*}[lsearch -all -inline -regexp -not [$from_canvas itemcget $from_tic -tags] {lane[0-9]+}] $to_lane]
       }
@@ -16659,7 +16984,7 @@ proc digest_move_lane {from_canvas X Y {mode move}} {
       #draw map area fetaure lines
       foreach from_feature [$from_canvas find withtag map&&feature&&$from_lane] {
         $to_canvas create line [expr {$map_x + [lindex [$from_canvas coords $from_feature] 0] - $from_map_x}] [expr {1.0 * $map_min_y + $mapscale * ([lindex [$from_canvas coords $from_feature] 1] - $from_map_min_y)}] [expr {$map_x + [lindex [$from_canvas coords $from_feature] 0] - $from_map_x}] [expr {1.0 * $map_min_y + $mapscale * ([lindex [$from_canvas coords $from_feature] 3] - $from_map_min_y)}] -tags  [list {*}[lsearch -all -inline -regexp -not [$from_canvas itemcget $from_feature -tags] {lane[0-9]+}] $to_lane] -fill [$from_canvas itemcget $from_feature -fill]  -width [$from_canvas itemcget $from_feature -width]
-      }
+      } 
 
       #draw map area fragment lines
       foreach from_map_line [$from_canvas find withtag map&&action_item&&$from_lane] {
@@ -16672,11 +16997,11 @@ proc digest_move_lane {from_canvas X Y {mode move}} {
     foreach {map_x map_min_y map_x2 map_max_y} [$to_canvas coords dummy&&line] {}
     #foreach {band_x band_min_y band_x2 band_max_y} [$to_canvas bbox band] {}
 
-    set band_max_y 0
+    set band_max_y 0 
     set band_min_y 100000000
     foreach b [$to_canvas find withtag band] {
-      set band_max_y [expr {max($band_max_y, [lindex [$to_canvas coords $b] 1])}]
-      set band_min_y [expr {min($band_min_y, [lindex [$to_canvas coords $b] 1])}]
+      set band_max_y [expr {max($band_max_y, [lindex [$to_canvas coords $b] 1])}] 
+      set band_min_y [expr {min($band_min_y, [lindex [$to_canvas coords $b] 1])}] 
     }
 
     set to_info_dict [bind $to_canvas <<Info>>]
@@ -16734,18 +17059,18 @@ proc digest_move_lane {from_canvas X Y {mode move}} {
     $to_canvas dtag current current
     $from_canvas dtag current current
     $to_canvas itemconfigure !band -state hidden ; $to_canvas itemconfigure infotext -state normal
-    set to_lane_old_x [lindex [$to_canvas coords [lindex [$to_canvas find withtag $to_lane&&band] 0]] 0]
+    set to_lane_old_x [lindex [$to_canvas coords [lindex [$to_canvas find withtag $to_lane&&band] 0]] 0] 
   } else {
     #make the to_lane == $from_lane- move the lane only
     set to_lane $from_lane
-    set to_lane_old_x [lindex [$from_canvas coords [lindex [$from_canvas find withtag $from_lane&&band] 0]] 0]
+    set to_lane_old_x [lindex [$from_canvas coords [lindex [$from_canvas find withtag $from_lane&&band] 0]] 0] 
     set to_info_dict [bind $to_canvas <<Info>>]
     set band_spacing [dict get $to_info_dict band_spacing]
     foreach {band_x1 band_y band_x2 band_y2} [$to_canvas coords band] {}
     set bandwidth [expr {$band_x2 - $band_x1}]
 
   }
-  ## move to_lane bands into proper x position
+  ## move to_lane bands into proper x position 
   set to_canvasx [expr {$X - [winfo rootx $to_canvas] + [$to_canvas canvasx 0]}]
   set to_canvasy [expr {$Y - [winfo rooty $to_canvas] + [$to_canvas canvasy 0]}]
 
@@ -16764,7 +17089,7 @@ proc digest_move_lane {from_canvas X Y {mode move}} {
     foreach band [$to_canvas find withtag band] {
       set lane [lsearch -regexp -inline [$to_canvas gettags $band] {lane[0-9+]}]
       if {($lane != $to_lane)} {
-        lappend all_x [lindex [$to_canvas coords $band] 0]
+        lappend all_x [lindex [$to_canvas coords $band] 0] 
         if {([lindex [$to_canvas coords $band] 2] > $to_canvasx)} {
           lappend right_x [lindex [$to_canvas coords $band] 0]
           $to_canvas move $band [expr {(1.0+$band_spacing) * $bandwidth }] 0
@@ -16845,7 +17170,7 @@ proc digest_peel_bands {c x y} {
     if {([tk windowingsystem] == "aqua")} {
      # tk::unsupported::MacWindowStyle style .w_tooltip help {noActivates noUpdates}
       tk::unsupported::MacWindowStyle style .w_tooltip help {}; after 40 raise .w_tooltip
-    } else {
+    } else { 
       wm overrideredirect .w_tooltip 1
     }
     catch {wm attributes .w_tooltip -alpha .4}
@@ -16853,7 +17178,7 @@ proc digest_peel_bands {c x y} {
     foreach band [$c find withtag band&&$from_lane] {
       .w_tooltip.c create line {*}[$c coords $band] -width 3
     }
-    .w_tooltip.c configure -scrollregion [$c bbox band&&$from_lane] -width [expr {[lindex [$c bbox band&&$from_lane] 2] - [lindex [$c bbox band&&$from_lane] 0]}] -height [expr {[lindex [$c bbox band&&$from_lane] 3] - [lindex [$c bbox band&&$from_lane] 1]}]
+    .w_tooltip.c configure -scrollregion [$c bbox band&&$from_lane] -width [expr {[lindex [$c bbox band&&$from_lane] 2] - [lindex [$c bbox band&&$from_lane] 0]}] -height [expr {[lindex [$c bbox band&&$from_lane] 3] - [lindex [$c bbox band&&$from_lane] 1]}] 
     set tooltip_x [expr {round($x - [winfo rootx $c] + [$c canvasx 0] - [lindex [$c bbox band&&$from_lane] 0])}]
     set tooltip_y [expr {round($y -  [winfo rooty $c] + [$c canvasy 0]- [lindex [$c bbox band&&$from_lane] 1])}]
     wm geometry .w_tooltip +[expr {$x-$tooltip_x}]+[expr {$y-$tooltip_y}]
@@ -17003,7 +17328,7 @@ proc enz_text_map {w {dialog 1}} {
           grid [checkbutton $dialog.dna.copyhighlight -text [mc "Copy Highlighting"] -onvalue 1 -offvalue 0 -variable info(enz_text_copy_highlight) -selectcolor white -activebackground $info(bg_color)] -row 1 -column 0 -sticky w
           grid [frame $dialog.dna.lineframe -relief flat] -row 2 -column 0 -columnspan 2
           grid [label $dialog.dna.lineframe.widthlabel -text [mc "Characters/line:"]] -row 0 -column 0 -sticky w
-          grid [entry $dialog.dna.lineframe.width -width 4 -textvariable info(enz_text_width) -validate key -vcmd "check_char %S"] -row 0 -column 1 -sticky w
+          grid [ttk::spinbox $dialog.dna.lineframe.width -width 4 -textvariable info(enz_text_width) -from 10 -to 5000 -validate key -validatecommand "check_char %S"] -row 0 -column 1 -sticky w
           grid [label $dialog.dna.lineframe.numberslabel -text [mc "Line Numbers:"]] -row 0 -column 2 -sticky e
           #need line #s on left for alignlink to work, but not for alignlink2
           set line_num_menu [tk_optionMenu $dialog.dna.lineframe.numbers info(enz_text_dna_numbers) None Left Right Both]
@@ -17056,7 +17381,7 @@ proc enz_text_map {w {dialog 1}} {
           grid $dialog.index.char1 -row 1 -column 0 -sticky w
           #grid [entry $dialog.index.char1 -width 1  -textvariable info(enz_text_index_char1)] -row 1 -column 0 -sticky w
           grid [label $dialog.index.l1a -text [mc "character every"]] -row 1 -column 1 -sticky w
-          grid [entry $dialog.index.spacing1 -width 3  -textvariable info(enz_text_index_spacing1) -validate key -vcmd "check_char %S"] -row 1 -column 2 -sticky w
+          grid [ttk::spinbox $dialog.index.spacing1 -width 3  -textvariable info(enz_text_index_spacing1) -from 0 -to 5000 -validate key -validatecommand "check_char %S"] -row 1 -column 2 -sticky w
           grid [label $dialog.index.l1b -text [mc "bases."]] -row 1 -column 3 -sticky w
           grid [checkbutton $dialog.index.nums -text [mc "Numbers"]  -onvalue 1 -offvalue 0 -variable info(enz_text_index_nums) -selectcolor white -activebackground $info(bg_color)] -row 1 -column 4 -sticky w
 
@@ -17068,7 +17393,7 @@ proc enz_text_map {w {dialog 1}} {
           grid $dialog.index.char2 -row 2 -column 0 -sticky w
           #grid [entry $dialog.index.char2 -width 1  -textvariable info(enz_text_index_char2)] -row 2 -column 0 -sticky w
           grid [label $dialog.index.l2a -text [mc "character every"]] -row 2 -column 1 -sticky w
-          grid [entry $dialog.index.spacing2 -width 3  -textvariable info(enz_text_index_spacing2) -validate key -vcmd "check_char %S"] -row 2 -column 2 -sticky w
+          grid [ttk::spinbox $dialog.index.spacing2 -width 3  -textvariable info(enz_text_index_spacing2) -from 0 -to 5000 -validate key -validatecommand "check_char %S"] -row 2 -column 2 -sticky w
           grid [label $dialog.index.l2b -text [mc "bases."]] -row 2 -column 3 -sticky w
           #set char3_menu [tk_optionMenu $dialog.index.char3 info(enz_text_index_char3) " " "+" "*" ":" "|" "." "^" " -"]
           #grid $dialog.index.char3 -row 3 -column 0 -sticky w
@@ -17113,7 +17438,7 @@ bind $dialog.$frame <ButtonRelease-1> {if {[winfo exists .w_tooltip]} {destroy .
 
     if {!$info(android)} {
       grid [frame $dialog.okframe -relief flat -borderwidth 1] -row $i -column 0  -sticky nwe
-      #grid [button $dialog.okframe.raise_dialog -command text_map_dialog_frame_listbox -text [mc "Stacking Order"]] -padx 10 -row 1 -column 0 -sticky n -pady 3
+      #grid [button $dialog.okframe.raise_dialog -command text_map_dialog_frame_listbox -text [mc "Stacking Order"]] -padx 10 -row 1 -column 0 -sticky n -pady 3 
       grid [label $dialog.okframe.raise_instr -text [mc "Drag frames to set the display order"]] -row 0 -column 0 -sticky n -columnspan 3
       grid [button $dialog.okframe.cancel -command {set ok -1} -text [mc "Cancel"]] -padx 10  -pady 3 -row 1 -column 1 -sticky n
       grid [button $dialog.okframe.ok -command {set ok 1} -text [mc "OK"]  -default active] -padx 10  -pady 3 -row 1 -column 2 -sticky n -padx 10 -pady 3
@@ -17151,7 +17476,7 @@ bind $dialog.$frame <ButtonRelease-1> {if {[winfo exists .w_tooltip]} {destroy .
       set enzlist $enzymes
      }
   }
-  do_text_map $w $enzlist $analyze_selection
+  do_text_map $w $enzlist $analyze_selection 
 }
 
 #############
@@ -17183,7 +17508,7 @@ proc text_map_frame_drag {drag_frame drop_x drop_y} {
     regexp {\.dialog\.(.*)} $drag_frame none drag_frame
     set drag_frame_index [lsearch -exact $info(enz_text_dialog_order) $drag_frame]
     set info(enz_text_dialog_order) [lreplace $info(enz_text_dialog_order) $drag_frame_index $drag_frame_index]
-    set info(enz_text_dialog_order) [linsert $info(enz_text_dialog_order) $drop_frame_index $drag_frame]
+    set info(enz_text_dialog_order) [linsert $info(enz_text_dialog_order) $drop_frame_index $drag_frame]   
   }
   set i 0
   foreach frame $info(enz_text_dialog_order) {
@@ -17291,7 +17616,7 @@ proc do_text_map {w enzlist analyze_selection} {
     set end $total_length
     set text [textarea_get $w.textarea [bp2ix $w.textarea $start] [bp2ix $w.textarea $end]]
   } else {
-#selection used here
+#selection used here 
     if {[llength [$w.textarea tag ranges sel]] == 2} {
       set start [ix2bp $w.textarea [$w.textarea index sel.first]]
       set end [ix2bp $w.textarea [$w.textarea index sel.last]]
@@ -17322,7 +17647,7 @@ proc do_text_map {w enzlist analyze_selection} {
     switch $info(enz_text_trans) {
       off {set trans [list]}
       "1_1" {
-        set trans [list [translate $text 1 1 2]]
+        set trans [list [translate $text 1 1 2]]  
       }
       "3_1" {
         set trans [list "[translate $text 1 1 2]" " [translate [string range $text 1 end] 1 1 2]" "  [translate [string range $text 2 end] 1 1 2]"]
@@ -17344,7 +17669,7 @@ proc do_text_map {w enzlist analyze_selection} {
 
   if {$info(enz_text_show_features)} {
    ## work here for selection through origin- selection used here
-    set tag_list [get_tags $w.textarea [list [bp2ix $w.textarea $start] [bp2ix $w.textarea $end]]]
+    set tag_list [get_tags_exact $w.textarea [list [bp2ix $w.textarea $start] [bp2ix $w.textarea $end]]]
     foreach {tag data} $tag_list {
       if {[regexp {f[0-9]+#} $tag]} {
 	if {[$w.textarea tag cget $tag -background] =={} && !$info(enz_text_show_hidden_features) } {
@@ -17473,9 +17798,9 @@ proc do_text_map {w enzlist analyze_selection} {
           set textline [string range $text $x [expr {$x+$linelength-1}]]
           set line_start_index [expr {seq_len_mod($x+$start+1, $seq_length)}]
           if {($info(enz_text_dna_numbers) == "Left") || ($info(enz_text_dna_numbers) == "Both")} {
-            $a.textframe.text insert end "[string repeat " " [expr {6-[string length $line_start_index]}]]$line_start_index "
+            $a.textframe.text insert end "[string repeat " " [expr {6-[string length $line_start_index]}]]$line_start_index " 
           } else {
-            $a.textframe.text insert end "[string repeat " " 7]"
+            $a.textframe.text insert end "[string repeat " " 7]" 
           }
           set lstag "ls$line_start_index\_1"
           $a.textframe.text insert end $textline [list dnatag $lstag]
@@ -17523,7 +17848,7 @@ proc do_text_map {w enzlist analyze_selection} {
               set numline "[string range $numline 0 [expr {7-1+$i-([string length $first_num] / 2)}]]$first_num"
               incr first_num $info(enz_text_index_spacing1)
             }
-
+      
             if {$index_line_above} {
               if {$info(enz_text_index_nums)} {
                 $a.textframe.text insert end "$numline\n"
@@ -17549,7 +17874,7 @@ proc do_text_map {w enzlist analyze_selection} {
             set fea_char(1) "<"
             set gap_char(0) "."
             set gap_char(1) "."
-            set tag_list [get_tags $w.textarea [list [bp2ix $w.textarea [expr {$x+$start}]] [bp2ix $w.textarea [expr {$x+$start+$linelength}]]]]
+            set tag_list [get_tags_exact $w.textarea [list [bp2ix $w.textarea [expr {$x+$start}]] [bp2ix $w.textarea [expr {$x+$start+$linelength}]]]]
             set i 0
             set sorting_tag_list [list]
             foreach {tag data} $tag_list {
@@ -17578,7 +17903,7 @@ proc do_text_map {w enzlist analyze_selection} {
                 while {([info exists fea_line($i)]) && (([expr {[string length $fea_line($i)]+$tag_space-1}] >= $start_index) || ([expr {[string length $name_line($i)]+$tag_space-1}] >= $start_index))} {
                   incr i
                 }
-
+                
                 if {![info exists fea_line($i)]} {
                   set fea_line($i) ""
                   set name_line($i) ""
@@ -17645,11 +17970,11 @@ proc do_text_map {w enzlist analyze_selection} {
             set j 0
             while {[info exists fea_line($j)]} {
               if {[info exists trans_line($j)] && ($trans_line($j) != "")} {
-                $a.textframe.text insert end "[string repeat " " 7]$trans_line($j)\n"
-                $a.textframe.text insert end "[string repeat " " 7]$trans_index_line($j)\n"
+                $a.textframe.text insert end "[string repeat " " 7]$trans_line($j)\n" 
+                $a.textframe.text insert end "[string repeat " " 7]$trans_index_line($j)\n" 
               }
               set tag_index [$a.textframe.text index "end-1char linestart"]
-              $a.textframe.text insert end "[string repeat " " 7]$fea_line($j)\n"
+              $a.textframe.text insert end "[string repeat " " 7]$fea_line($j)\n" 
               foreach tag_data $tag_line($j) {
                 foreach {tag start_tag end_tag} $tag_data {}
                 if {[$a.textframe.text tag ranges $tag] == {}} {
@@ -17658,9 +17983,9 @@ proc do_text_map {w enzlist analyze_selection} {
                 $a.textframe.text tag add $tag [$a.textframe.text index "$tag_index+[expr {$start_tag+7}]\chars"] [$a.textframe.text index "$tag_index+[expr {$end_tag+7}]\chars"]
               }
               if {$info(enz_text_crop_features)} {
-                $a.textframe.text insert end "[string repeat " " 7][string range $name_line($j) 0 [expr {$info(enz_text_width)-1}]]\n"
+                $a.textframe.text insert end "[string repeat " " 7][string range $name_line($j) 0 [expr {$info(enz_text_width)-1}]]\n" 
               } else {
-                $a.textframe.text insert end "[string repeat " " 7]$name_line($j)\n"
+                $a.textframe.text insert end "[string repeat " " 7]$name_line($j)\n" 
               }
               incr j
             }
@@ -17702,7 +18027,7 @@ proc do_text_map {w enzlist analyze_selection} {
   $a.textframe.text tag configure highlite -background red
 #####
   set outputmenu [add_output_menu $a.textframe.text "Text" text $w]
-  bind $a <Button-1> "focus $a.textframe.text"
+  bind $a <Button-1> "focus $a.textframe.text" 
   bindtags $a.textframe.text [list $a.textframe.text AnalysisText . all]
   wm deiconify $a
   $a.textframe.text configure -state disabled
@@ -17737,7 +18062,7 @@ proc uppercase_cdna {dna} {
   set intronlist [lsort -unique -integer -index 1 $intronlist]
   set sizelist [list]
   set sum 0
-  foreach intron $intronlist {
+  foreach intron $intronlist { 
     set dna [string replace $dna [expr {[lindex $intron 0]-$sum}] [expr {[lindex $intron 1]-$sum}] ""]
     lappend sizelist [list [expr {[lindex $intron 0]-$sum}] [expr {[lindex $intron 1]-[lindex $intron 0]+1}]]
     incr sum [expr {[lindex $intron 1]-[lindex $intron 0]+1}]
@@ -17757,7 +18082,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
   global modifier modifier2
   global modstring
 
-  set enz_list $info($user\enz_currently_selected)
+  set enz_list $info($user\enz_currently_selected) 
   set region $info(analyze_selection)
   if {[$w.textarea tag ranges sel] == ""} {set region "all"}
 
@@ -17812,7 +18137,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
       }
     }
 
-    $c create oval [expr {-$radius}] [expr {-$radius}] $radius $radius -width $circular_baseline_fg_width -outline $circular_baseline_fg_color -tags circle
+    $c create oval [expr {-$radius}] [expr {-$radius}] $radius $radius -width $circular_baseline_fg_width -outline $circular_baseline_fg_color -tags circle 
     $c create oval [expr {-$radius}] [expr {-$radius}] $radius $radius -width [expr {$circular_baseline_fg_width + 2 * $circular_baseline_bg_width}] -outline $circular_baseline_bg_color -tags circle_background
     $c raise circle circle_background
 
@@ -17845,7 +18170,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
     set lastloc -1
     foreach {pair} $templist  {
       set loc [lindex $pair 0]
-      set label_dict [lindex $pair 1]
+      set label_dict [lindex $pair 1]    
       set angle [expr {2*$pi*$loc/$total_length}]
       set tag [dict get $label_dict tag]
       set tag2 $tag
@@ -17862,7 +18187,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
       #connector line
       set connectorid [$c create line [expr {0.5 + ($radius+10)*sin($angle)}] [expr {0.5 - ($radius+10)*cos($angle)}] [expr {($radius+15)*sin($angle)}] $y -state [expr {$info(draw_graphic_connectors)?"normal":"hidden"}] -tags [list $tag [dict get $label_dict type] connector]]
 
-
+    
       if {[dict get $label_dict type] eq "enzyme"} {
         #enzyme label text
         set id [$c create text [expr {($radius+15)*sin($angle)}] $y -text "[dict get $label_dict location_start] [dict get $label_dict name] ([dict get $label_dict count])" -anchor $anchor -font [list $info(graphicfontfamily) $info(graphicfontsize)]]
@@ -17888,15 +18213,15 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
         set bottom_cut_site [expr {($loc + [lindex [enz_cut_offset [dict get $label_dict name] 0 [dict get $label_dict dir]] 1] -1) % $total_length}]
 
 
-        $c bind $id <Button-1> "textsetcursor $w \[bp2ix $w.textarea $cut_site\]; $w.textarea tag remove tempsel 1.0 end; send_data <<EnzymeClick>> \[list [dict get $label_dict name] $c\]"
-        $c bind $id <Shift-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $cut_site\]"
+        $c bind $id <Button-1> "textsetcursor $w \[bp2ix $w.textarea $cut_site\]; $w.textarea tag remove tempsel 1.0 end; send_data <<EnzymeClick>> \[list [dict get $label_dict name] $c\]" 
+        $c bind $id <Shift-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $cut_site\]" 
         $c bind $id <Shift-Double-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $cut_site\]; event generate $c <<Return>>;break"
-        $c bind $id <$modifier2-Button-1> " textsetcursor $w \[bp2ix $w.textarea $bottom_cut_site\]; $w.textarea tag remove tempsel 1.0 end"
-        $c bind $id <$modifier2-Shift-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $bottom_cut_site\]"
+        $c bind $id <$modifier2-Button-1> " textsetcursor $w \[bp2ix $w.textarea $bottom_cut_site\]; $w.textarea tag remove tempsel 1.0 end" 
+        $c bind $id <$modifier2-Shift-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $bottom_cut_site\]" 
         $c bind $id <$modifier2-Shift-Double-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $bottom_cut_site\]; event generate $c <<Return>>;break"
         lappend info($w,linked_events) [list $c $id <Button-1>] [list $c $id <Shift-Button-1>] [list $c $id <Shift-Double-Button-1>] [list $c $id <$modifier2-Button-1>] [list $c $id <$modifier2-Shift-Button-1>] [list $c $id <$modifier2-Shift-Double-Button-1>]
       } else {
-        #feature label drawing
+        #feature label drawing        
         set direction [lindex [$w.textarea tag bind $tag <<Metadata>>] 3]
         set gformat_dict [lindex [$w.textarea tag bind $tag <<Metadata>>] 1]
 #sputs read gformat $gformat_dict
@@ -17913,8 +18238,8 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
           set label_color [format "\#%04X%04X%04X" {*}[winfo rgb . [lindex [$w.textarea tag bind $tag <<Revcolors>>] $direction]]]
         }
 
-        set id [$c create text [expr {($radius+15)*sin($angle)}] $y -text "[dict get $label_dict name]" -anchor $anchor -font $font  -fill $label_color -tags [list feature $tag label moveablelabel dir$direction]]
-
+        set id [$c create text [expr {($radius+15)*sin($angle)}] $y -text "[dict get $label_dict name]" -anchor $anchor -font $font  -fill $label_color -tags [list feature $tag label moveablelabel dir$direction]] 
+   
         if { [dict exists $gformat_dict use_arc]} {
           set use_arc [dict get $gformat_dict use_arc]
         } else {
@@ -17948,7 +18273,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
         $c bind $tag <<Gformat>> $gformat_dict
         $c bind 1 <<Feature_list>> [concat [$c bind 1 <<Feature_list>>] $tag]
       }
-
+      
       #scan [$c bbox $id] "%u %u %u %u" x1 y1 x2 y2
       #if {$x1 < $minx} {set minx $x1}
       #if {$y1 < $miny} {set miny $y1}
@@ -17971,7 +18296,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
 	set arc_text_radius  [expr {[font metrics $font -ascent] * 1 + $info(circ_map_radius)}]
       }
       canvas_circular_text $c [regsub fn $tag f] $arc_text_radius
-
+      
       ## move labels if they were explicitly moved in the gformat_dict
       if {[dict exists $gformat_dict circular_label_pos] && [set item [$c find withtag $tag&&moveablelabel]] !={}} {
 	unset -nocomplain lx
@@ -18032,7 +18357,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
       #  $c itemconfigure $lineid -tags [concat [$c itemcget $lineid -tags] [lindex $pair 1]]
       #}
       set lastloc [lindex $pair 0]
-
+      
       if {$x > $xright} {
         set y 335
         set nexty [expr 335+$bump]
@@ -18042,12 +18367,12 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
       }
       while {[$c find overlapping $x [expr {$y-1}] [expr {$x+1}] [expr {$y-2}]] != ""} {
         set y $nexty
-        set nexty [expr $nexty+$bump]
+        set nexty [expr $nexty+$bump]      
       }
       set id [$c create text $x $y -text "[lindex $pair 0] [lindex $pair 1] \([llength $info($w,[lindex $pair 1])]\)" -anchor "sw" -font [list $info(graphicfontfamily) $info(graphicfontsize)] -tags [list [lindex $pair 1] moveableboxlabel enzyme label]]
       $c create line $x 340 $x 350 -tags [list [lindex $pair 1] $id.tick visible]
-      $c create line $x 340 $x $y -state [expr {$info(draw_graphic_connectors)?"normal":"hidden"}] -tags [list [lindex $pair 1] $id.connector connector]
-      set boxid [$c create rectangle [lindex [$c bbox $id] 0] [lindex [$c bbox $id] 1] [lindex [$c bbox $id] 2] [lindex [$c bbox $id] 3] -fill [$c cget -background] -outline {}  -tags [list $id.box box]]
+      $c create line $x 340 $x $y -state [expr {$info(draw_graphic_connectors)?"normal":"hidden"}] -tags [list [lindex $pair 1] $id.connector connector] 
+      set boxid [$c create rectangle [lindex [$c bbox $id] 0] [lindex [$c bbox $id] 1] [lindex [$c bbox $id] 2] [lindex [$c bbox $id] 3] -fill [$c cget -background] -outline {}  -tags [list $id.box box]] 
       $c raise $id $boxid
       if {[lsearch -exact $enz_list [lindex $pair 1]] > -1} {
         $c bind $id <<Colors>> {black red}
@@ -18065,12 +18390,12 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
       set cut_site [expr {([lindex [enz_cut_offset [lindex $pair 1] [lindex $pair 0] [lindex $pair 2]] 0]-1) % $seq_length}]
       set bottom_cut_site [expr {([lindex [enz_cut_offset [lindex $pair 1] [lindex $pair 0] [lindex $pair 2]] 1]-1) % $seq_length}]
       $c bind $id <<Label>> [list type enzyme location_start [lindex $pair 0] name [lindex $pair 1] tag [lindex $pair 1] count [llength $info($w,[lindex $pair 1])] dir [lindex $pair 2]]
-      $c bind $id <Button-1> "textsetcursor $w \[bp2ix $w.textarea $cut_site\]; $w.textarea tag remove tempsel 1.0 end; send_data <<EnzymeClick>> \[list [lindex $pair 1] $c\]"
-      $c bind $id <Shift-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $cut_site\]"
-      $c bind $id <Shift-Double-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $cut_site\]; event generate $c <<Return>>; break"
-      $c bind $id <$modifier2-Button-1> "textsetcursor $w \[bp2ix $w.textarea $bottom_cut_site\]; $w.textarea tag remove tempsel 1.0 end; "
-      $c bind $id <$modifier2-Shift-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $bottom_cut_site\]"
-      $c bind $id <$modifier2-Shift-Double-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $bottom_cut_site\]; event generate $c <<Return>>; break"
+      $c bind $id <Button-1> "textsetcursor $w \[bp2ix $w.textarea $cut_site\]; $w.textarea tag remove tempsel 1.0 end; send_data <<EnzymeClick>> \[list [lindex $pair 1] $c\]" 
+      $c bind $id <Shift-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $cut_site\]" 
+      $c bind $id <Shift-Double-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $cut_site\]; event generate $c <<Return>>; break" 
+      $c bind $id <$modifier2-Button-1> "textsetcursor $w \[bp2ix $w.textarea $bottom_cut_site\]; $w.textarea tag remove tempsel 1.0 end; " 
+      $c bind $id <$modifier2-Shift-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $bottom_cut_site\]" 
+      $c bind $id <$modifier2-Shift-Double-Button-1> "select_region $w \[$w.textarea index insert\] \[bp2ix $w.textarea $bottom_cut_site\]; event generate $c <<Return>>; break" 
       lappend info($w,linked_events) [list $c $id <Button-1>] [list $c $id <Shift-Button-1>] [list $c $id <Shift-Double-Button-1>] [list $c $id <$modifier2-Button-1>] [list $c $id <$modifier2-Shift-Button-1>] [list $c $id <$modifier2-Shift-Double-Button-1>]
 
       scan [$c bbox $id] "%u %u %u %u" x1 y1 x2 y2
@@ -18139,7 +18464,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
     #need to set the minimum size here to save room for a scrollbar, to prevent infinite loops with autoscaling size (see <Configure> above)
     grid columnconfigure  $a 1 -minsize 17
     grid configure $c -row 2 -column 0 -sticky nsew
-    grid configure [scrollbar $a.yscroll -command "$c yview " ] -row 2 -column 1 -sticky nes
+    grid configure [scrollbar $a.yscroll -command "$c yview " ] -row 2 -column 1 -sticky nes 
     grid configure  [scrollbar $a.xscroll -orient horizontal -command "$c xview"] -row 3 -column 0 -sticky wse
 
     wm deiconify $a
@@ -18201,7 +18526,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
       foreach fea [%W find withtag feature&&label] {
         linear_feature_draw_arrow %W [lsearch -regexp -inline [%W gettags $fea] {f[0-9]+#}]
       }
-      unset -nocomplain fea
+      unset -nocomplain fea 
       unset -nocomplain new_scale
       linear_map_reset_all_features %W
       linear_map_bump_all_features %W
@@ -18289,7 +18614,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
   #if {$scale_index != ""} {
   #  $outputmenu delete $scale_index
     #and the separator
-   # $outputmenu delete $scale_index
+   # $outputmenu delete $scale_index    
   #}
 
 
@@ -18297,7 +18622,7 @@ proc enz_graphic_map {w {numsites "none"} {user {}}} {
   bind $c <Shift-MouseWheel> {%W xview scroll [expr {int(10.0 * %D/-$info(mousewheelunits))}] units}
   bind $a <MouseWheel> {[winfo toplevel %W].canvas yview scroll [expr {int(10.0 * %D/-$info(mousewheelunits))}] units}
   bind $a <Shift-MouseWheel> {[winfo toplevel %W].canvas xview scroll [expr {int(10.0 *%D/-$info(mousewheelunits))}] units}
-  bind $a <Button-1> "focus $c"
+  bind $a <Button-1> "focus $c" 
 
   if {[info exists info(last_analysis_xy)]} {
     wm geometry [winfo toplevel $a] +[lindex $info(last_analysis_xy) 0]+[lindex $info(last_analysis_xy) 1]
@@ -18356,7 +18681,6 @@ proc drag_moveablelabel {c item dx x dy y} {
   #} else {
   #  set new_cx2  [expr {($lx1+$lx2)/2.0}]
   #}
-sputs anchor $anchor
   $c coords $connector $tx2 $ty2 $new_cx2 $new_cy2
   $c itemconfigure $item -anchor $anchor
 
@@ -18372,7 +18696,7 @@ sputs anchor $anchor
 }
 
 ######
-##
+## 
 proc circular_map_add_scale {c} {
   global info
   ## option of ticks in degrees?, option of label for ticks?, option of dividing ticks by 1000?
@@ -18389,7 +18713,7 @@ proc circular_map_add_scale {c} {
 
     for {set i 0} {$i < [expr {$total_length}] } {set i [expr {$i+1.0* $circular_map_index_max_tick_spacing /($circular_index_min_tick_per_max+1)}]} {
       set angle [expr {$i / $total_length * 2*pi()}]
-      if {[expr {(int($i) % $circular_map_index_max_tick_spacing == 0)}]} {
+      if {[expr {(int($i) % $circular_map_index_max_tick_spacing == 0)}]} { 
         set tx1 [expr {$radius * (1 + $circular_map_index_offset) * sin($angle)}]
         set tx2 [expr {$radius * (1 + $circular_map_index_offset + $tick_direction *  $circular_index_max_tick_length) * sin($angle)}]
         set ty1 [expr { $radius * (1 + $circular_map_index_offset) * -cos($angle)}]
@@ -18436,7 +18760,7 @@ proc circular_map_add_scale {c} {
 	  "1 k" {if {[expr {int($i)% 1000}] != 0 } {set tick_text "[expr {$i/ 1000.0}] k" } else {set tick_text "[expr {int($i)/ 1000}] k"} }
 	  default {set tick_text [expr {int($i)}]}
 	}
-        set id [$c create text $tx2 $ty2 -text $tick_text -anchor $anchor -font $circular_index_max_tick_font -tags [list scale_text]  -fill $circular_index_text_color]
+        set id [$c create text $tx2 $ty2 -text $tick_text -anchor $anchor -font $circular_index_max_tick_font -tags [list scale_text]  -fill $circular_index_text_color] 
       } else {
 	set tx1 [expr {$radius * (1 + $circular_map_index_offset) * sin($angle)}]
         set tx2 [expr {$radius * (1 + $circular_map_index_offset + $tick_direction *  $circular_index_min_tick_length) * sin($angle)}]
@@ -18447,7 +18771,7 @@ proc circular_map_add_scale {c} {
 
     }
 
-
+    
     $c bind scale_text <Button-1> "set tick_move_offset \[expr { \[circular_map_get_scale_radius $c\] - sqrt(\[$c canvasx %x\]**2 +  \[$c canvasy %y\]**2)}\]"
     $c bind scale_text <B1-Motion> "if {\[info exists tick_move_offset\]} {circular_map_change_scale_radius $c \[expr { \$tick_move_offset+ sqrt(\[$c canvasx %x\]**2 +  \[$c canvasy %y\]**2)}\]}"
     $c bind scale_text <ButtonRelease-1> "unset -nocomplain tick_move_offset"
@@ -18534,7 +18858,7 @@ proc circular_map_change_scale_radius {c r} {
         if {[llength [set ov_list [$c find overlapping {*}[$c bbox $textid]]]] > 0} {
           foreach item $ov_list {
             if {$item ne $textid && $item in $text_items} {
-              #sputs overlapping $textid $item $ov_list
+              #sputs overlapping $textid $item $ov_list 
               $c itemconfigure $textid -state hidden
                break
             }
@@ -18543,7 +18867,7 @@ proc circular_map_change_scale_radius {c r} {
       }
     }
 
-  }
+  } 
 }
 
 
@@ -18615,7 +18939,7 @@ proc circular_map_bump_moveablelabel_find_overlap_and_move {c item {exclude {}}}
       circular_map_bump_moveablelabel_move $c $item [expr {$by1-$ly2-$spacing}]
     } else {
       #if {[expr {$by2-$ly1+$spacing}]<=0} {#break}
-      circular_map_bump_moveablelabel_move $c $item [expr {$by2-$ly1+$spacing}]
+      circular_map_bump_moveablelabel_move $c $item [expr {$by2-$ly1+$spacing}]  
     }
     lset exclude [lsearch $exclude $i] {}
     circular_map_bump_moveablelabel_find_overlap_and_move $c $item $exclude
@@ -18643,7 +18967,7 @@ proc circular_map_bump_all_moveablelabel {c {item ""} {avoid_connectors 1}} {
 }
 
 ##### reset all labels
-proc circular_map_reset_all_moveablelabel {c} {
+proc circular_map_reset_all_moveablelabel {c} { 
   foreach i [$c find withtag moveablelabel] {
     circular_map_reset_moveablelabel $c $i
     $c bind $i <<Moved>> ""
@@ -18666,7 +18990,7 @@ proc circular_map_configure_dialog {c item} {
       wm geometry $w "$width\x[expr {min([winfo screenheight $w], $height + [winfo height $w.f_config])}]"
       grid configure $w.f_config
       return
-    }
+    } 
     grid [set dialog [frame $w.f_config]] -row 3 -column 0 -sticky nswe
     bind $w.f_config <Destroy> "array unset temp_circ_config_info $c,*"
     bind $dialog <<OK>> "grid remove $dialog; regexp {(\[0-9\]+)x(\[0-9\]+)} \[wm geometry $w\] - width height; wm geometry $w \"\$width\\x\[expr {\$height - \[winfo height $w.f_config\]}\]\"; unset -nocomplain width height"
@@ -18678,7 +19002,7 @@ proc circular_map_configure_dialog {c item} {
   bind $dialog <<Cancel>> "set ok -1"
 
 
-
+  
   #bind . <<RaiseDialogs>> "wm deiconify $dialog; raise $dialog"
   set ok 0
 
@@ -18694,7 +19018,7 @@ proc circular_map_configure_dialog {c item} {
 
   grid [ttk::frame $dialog.tabframe.texts.frame1 -relief flat] -row 0 -column 0 -sticky nswe
   set f $dialog.tabframe.texts.frame1
-
+  
   set t $f.tv
   set sc $f.sc
   ttk::treeview $t -yscrollcommand "optionscrollbar $sc" -height 5
@@ -18731,7 +19055,7 @@ proc circular_map_configure_dialog {c item} {
 
   grid [checkbutton $dialog.tabframe.texts.frame3.visible -text [mc "Visible"] -variable temp_circ_config_info($c,text_visible) -command "if {\[info exists temp_circ_config_info($c,text_visible)\]} {event generate $dialog <<changed_text>>}" ] -row 0 -column 1 -columnspan 2 -sticky nw
   grid [label $dialog.tabframe.texts.frame3.fontfam_label -text [mc "Label:"]] -row 1 -column 1 -sticky nw
-
+  
   set temp_circ_config_info($c,text_label_color) #000000
   grid [color_button $dialog.tabframe.texts.frame3.label_color temp_circ_config_info($c,text_label_color) 18] -row 1 -column 2 -sticky nw
   bind $dialog.tabframe.texts.frame3.label_color <<color_picked>> "set temp_circ_config_info($c,text_label_color_set) 1; event generate $dialog <<changed_text>>"
@@ -18744,7 +19068,7 @@ proc circular_map_configure_dialog {c item} {
     } else {
       for {set fi 0} {$fi < [llength $info(allfontlist)]} {incr fi 20} {
         if {[set fj [expr {$fi + 19}]] > [llength $info(allfontlist)]} {set fj [expr {[llength $info(allfontlist)]-1}]}
-        $dialog.tabframe.texts.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.texts.frame3.fontfam.menu.menu$fi
+        $dialog.tabframe.texts.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.texts.frame3.fontfam.menu.menu$fi 
         menu $dialog.tabframe.texts.frame3.fontfam.menu.menu$fi
         foreach fontfam [lrange $info(allfontlist) $fi $fj] {
           $dialog.tabframe.texts.frame3.fontfam.menu.menu$fi add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_circ_config_info($c,text_fontfamily) -command "event generate $dialog <<changed_text>>";# -font [list $fontfam 10]
@@ -18829,7 +19153,7 @@ proc circular_map_configure_dialog {c item} {
 #$c find withtag enzyme&&label
 #$c find withtag feature&&label
 #$c find withtag feature&&label&&dir0
-#$c bind $id <<Colors>>
+#$c bind $id <<Colors>> 
 #$c bind $id <<Label>> ($label_dict)
 #enzymes: $label_dict:  type name location_start count tag
 #features: $label_dict: type name location_start location_end tag direction
@@ -18844,7 +19168,7 @@ proc circular_map_configure_dialog {c item} {
 
   grid [ttk::frame $dialog.tabframe.enzymes.frame1 -relief flat] -row 0 -column 0 -sticky nswe
   set f $dialog.tabframe.enzymes.frame1
-
+  
   set t $f.tv
   set sc $f.sc
   ttk::treeview $t -yscrollcommand "optionscrollbar $sc" -height 5
@@ -18902,7 +19226,7 @@ proc circular_map_configure_dialog {c item} {
     } else {
       for {set fi 0} {$fi < [llength $info(allfontlist)]} {incr fi 20} {
         if {[set fj [expr {$fi + 19}]] > [llength $info(allfontlist)]} {set fj [expr {[llength $info(allfontlist)]-1}]}
-        $dialog.tabframe.enzymes.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.enzymes.frame3.fontfam.menu.menu$fi
+        $dialog.tabframe.enzymes.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.enzymes.frame3.fontfam.menu.menu$fi 
         menu $dialog.tabframe.enzymes.frame3.fontfam.menu.menu$fi
         foreach fontfam [lrange $info(allfontlist) $fi $fj] {
           $dialog.tabframe.enzymes.frame3.fontfam.menu.menu$fi add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_circ_config_info($c,enz_fontfamily) -command "event generate $dialog <<changed_enzymes>>";# -font [list $fontfam 10]
@@ -18931,7 +19255,7 @@ proc circular_map_configure_dialog {c item} {
 
   grid [ttk::frame $dialog.tabframe.features.frame1 -relief flat] -row 0 -column 0 -sticky nswe
   set f $dialog.tabframe.features.frame1
-
+  
   set t $f.tv
   set sc $f.sc
   ttk::treeview $t -yscrollcommand "optionscrollbar $sc" -height 5
@@ -18991,7 +19315,7 @@ proc circular_map_configure_dialog {c item} {
     $dialog.tabframe.features.frame3.label_color_percent.menu add command -label "Mix with $perc\% Fill Color" -command "circular_config_fea_treeview_apply_tag_color_to_label $t $c $perc $dialog"
   }
   $dialog.tabframe.features.frame3.label_color_percent.menu add command -label "Set to Fill Color" -command "circular_config_fea_treeview_apply_tag_color_to_label $t $c 100 $dialog"
-
+  
   grid [menubutton $dialog.tabframe.features.frame3.fontfam -menu $dialog.tabframe.features.frame3.fontfam.menu -textvariable temp_circ_config_info($c,fea_fontfamily)] -row 1 -column 4 -sticky nw
    menu $dialog.tabframe.features.frame3.fontfam.menu
     if {[llength $info(allfontlist)] <= 20} {
@@ -19001,7 +19325,7 @@ proc circular_map_configure_dialog {c item} {
     } else {
       for {set fi 0} {$fi < [llength $info(allfontlist)]} {incr fi 20} {
         if {[set fj [expr {$fi + 19}]] > [llength $info(allfontlist)]} {set fj [expr {[llength $info(allfontlist)]-1}]}
-        $dialog.tabframe.features.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.features.frame3.fontfam.menu.menu$fi
+        $dialog.tabframe.features.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.features.frame3.fontfam.menu.menu$fi 
         menu $dialog.tabframe.features.frame3.fontfam.menu.menu$fi
         foreach fontfam [lrange $info(allfontlist) $fi $fj] {
           $dialog.tabframe.features.frame3.fontfam.menu.menu$fi add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_circ_config_info($c,fea_fontfamily) -command "event generate $dialog <<changed_features>>";# -font [list $fontfam 10]
@@ -19101,7 +19425,7 @@ proc circular_map_configure_dialog {c item} {
 
   grid [ttk::frame  $dialog.tabframe.index.frame2.major] -row 1 -column 0 -sticky nwe
   grid [label $dialog.tabframe.index.frame2.major.maj_label -text [mc "Major Tick"]] -row 1 -column 0  -sticky nw
-
+  
   grid [ttk::frame $dialog.tabframe.index.frame2.major.bp_frame] -row 2 -column 0 -columnspan 7 -sticky nwe
   grid [label $dialog.tabframe.index.frame2.major.bp_frame.m_label -text "Base Pair per Tick:"] -row 1 -column 0 -sticky nw
   grid [ttk::menubutton $dialog.tabframe.index.frame2.major.bp_frame.mmb -textvariable temp_circ_config_info($c,bp_per_max) -menu  $dialog.tabframe.index.frame2.major.bp_frame.mmb.menu] -row 1 -column 1 -sticky nw
@@ -19119,7 +19443,7 @@ proc circular_map_configure_dialog {c item} {
     $dialog.tabframe.index.frame2.major.format_frame.fb.menu add radiobutton -label $m -variable temp_circ_config_info($c,index_label_format) -value $m -command "circular_config_index_apply $c"
   }
   set temp_circ_config_info($c,index_label_format) [dict get $tick_dict index_label_format]
-
+  
 
   grid [ttk::frame $dialog.tabframe.index.frame2.major.max_font_frame] -row 4 -column 0 -columnspan 7 -sticky nwe
   grid [label $dialog.tabframe.index.frame2.major.max_font_frame.m_label -text "Label:"] -row 1 -column 0 -sticky nw
@@ -19136,7 +19460,7 @@ proc circular_map_configure_dialog {c item} {
     } else {
       for {set fi 0} {$fi < [llength $info(allfontlist)]} {incr fi 20} {
         if {[set fj [expr {$fi + 19}]] > [llength $info(allfontlist)]} {set fj [expr {[llength $info(allfontlist)]-1}]}
-        $dialog.tabframe.index.frame2.major.max_font_frame.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.index.frame2.major.max_font_frame.fontfam.menu.menu$fi
+        $dialog.tabframe.index.frame2.major.max_font_frame.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.index.frame2.major.max_font_frame.fontfam.menu.menu$fi 
         menu $dialog.tabframe.index.frame2.major.max_font_frame.fontfam.menu.menu$fi
         foreach fontfam [lrange $info(allfontlist) $fi $fj] {
           $dialog.tabframe.index.frame2.major.max_font_frame.fontfam.menu.menu$fi add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_circ_config_info($c,tick_fontfamily) -command "circular_config_index_apply $c";# -font [list $fontfam 10]
@@ -19213,7 +19537,7 @@ grid [ttk::scale $dialog.tabframe.index.frame2.minor.width_frame.ch_fg_width -or
 # all length measures are as % of enzymes circle
 
   ## parameters frame
-# parameter: label bump overlap
+# parameter: label bump overlap 
 # parameter: bump connectors
 # parameter: bump moved ojects (don't ignore in bump proc)
 # button: reset moved objects
@@ -19230,7 +19554,7 @@ grid [ttk::scale $dialog.tabframe.index.frame2.minor.width_frame.ch_fg_width -or
     $dialog.frame2.apply_button.menu add command -label [mc "Apply Feature Colors to Sequence"] -command "" -state disabled
     $dialog.frame2.apply_button.menu add command -label [mc "Apply Feature Show/ Hide to Sequence"] -command "" -state disabled
     $dialog.frame2.apply_button.menu  add command -label [mc "Apply Formatting to Defaults"] -state disabled
-
+    
     grid [button $dialog.frame2.ok -text [mc "OK"] -command "event generate $dialog <<OK>>" -default active] -row 0 -column 1 -padx 5 -pady 3 -sticky nw
     grid columnconfigure $dialog.frame2 0 -weight 1
     grid columnconfigure $dialog.frame2 1 -weight 1
@@ -19244,7 +19568,7 @@ grid [ttk::scale $dialog.tabframe.index.frame2.minor.width_frame.ch_fg_width -or
 
   regexp {([0-9]+)x([0-9]+)} [wm geometry $w] - width height
   wm geometry $w "$width\x[expr {min([winfo screenheight $w], $height + [winfo height $w.f_config])}]"
-
+      
 
   if {$info(android)} {
     vwait ok
@@ -19303,7 +19627,7 @@ proc canvas_circular_text {c tag r {dir 0}} {
   for {set i 0} {$i < [llength $items]} {incr i} {
     set item [lindex $items $i]
     $c coords $item [expr {$r*cos($item_angle)}] [expr {-1*$r*sin($item_angle)}]
-    $c itemconfigure $item -anchor center -angle [expr {180/pi()*($item_angle-$dir*pi()/2.0)}]
+    $c itemconfigure $item -anchor center -angle [expr {180/pi()*($item_angle-$dir*pi()/2.0)}] 
     set angle_incr [expr {-1*([font measure $font [string range $text $i [expr {$i+1}]]])/2.0/($r-$height)}]
     set item_angle [expr {$item_angle + $dir*$angle_incr}]
   }
@@ -19336,7 +19660,7 @@ proc enz_graphic_map_resize_labels {c mode direction} {
         set i [expr {[llength $font_size_list]-1}]
         while {([lindex $font_size_list $i] > $fontsize) && ($i > 1)} {incr i -1}
       }
-    }
+    }  
     $c itemconfigure $text -font [list $fontfam [lindex $font_size_list $i] $fontweight]
   }
   #reset circular label spacings
@@ -19512,10 +19836,10 @@ proc circular_config_baseline_apply {c} {
   }
 
   set crosshair_length [expr {$temp_circ_config_info($c,crosshair_length) /100.0 * [lindex [$c coords circle] 2]}]
-  $c coords crosshair&&vert  0 [expr {-$crosshair_length}] 0 $crosshair_length
-  $c coords crosshair&&horiz [expr {-$crosshair_length}] 0 $crosshair_length 0
-  $c coords crosshair_background&&vert 0 [expr {-$crosshair_length}] 0 $crosshair_length
-  $c coords crosshair_background&&horiz [expr {-$crosshair_length}] 0 $crosshair_length 0
+  $c coords crosshair&&vert  0 [expr {-$crosshair_length}] 0 $crosshair_length 
+  $c coords crosshair&&horiz [expr {-$crosshair_length}] 0 $crosshair_length 0  
+  $c coords crosshair_background&&vert 0 [expr {-$crosshair_length}] 0 $crosshair_length 
+  $c coords crosshair_background&&horiz [expr {-$crosshair_length}] 0 $crosshair_length 0 
 }
 
 #############
@@ -19572,7 +19896,7 @@ proc circular_config_enz_fill_treeview {tv c} {
     $tv insert {} end -id $tag -text [dict get $label_dict name] -tag $tag
     $tv set $tag Location [dict get $label_dict location_start]
     $tv set $tag Count [dict get $label_dict count]
-    $tv tag configure $tag -background white -foreground [$c itemcget $tag -fill]
+    $tv tag configure $tag -background white -foreground [$c itemcget $tag -fill] 
     if {[$c itemcget $tag -state] == "hidden"} {
       $tv move $tag hidden end
     }
@@ -19809,7 +20133,7 @@ proc circular_config_fea_treeview_manageselection {t c dialog} {
         set fea_label_ffg_color [expr {$this_fea_fg_color== $this_fea_label_color}]
     } elseif {$fea_label_ffg_color != [expr {$this_fea_fg_color== $this_fea_label_color}]} {
         set fea_label_ffg_color -1
-    }
+    } 
     if {$fea_bg_color == ""} {
       set fea_bg_color [$c itemcget $tag&&outline&&exon -outline]
     } elseif {$fea_bg_color != [$c itemcget $tag&&outline&&exon -outline]} {
@@ -19827,11 +20151,11 @@ proc circular_config_fea_treeview_manageselection {t c dialog} {
       set fea_outline -1
     }
 
-#sputs tag $tag [$c bind $tag <<Direction>>] [$c bind $tag <<Arrow_list>>] [$c bind $tag <<Gformat>>]
-
+#sputs tag $tag [$c bind $tag <<Direction>>] [$c bind $tag <<Arrow_list>>] [$c bind $tag <<Gformat>>] 
+    
     set this_fea_fwd_arrow [lindex [$c bind $tag <<Arrow_list>>] 0]
     set this_fea_rev_arrow [lindex [$c bind $tag <<Arrow_list>>] 1]
-
+    
     if {$fea_fwd_arrow ==  "Empty"} {
       set fea_fwd_arrow $this_fea_fwd_arrow
     } elseif {$this_fea_fwd_arrow != $fea_fwd_arrow} {
@@ -19842,7 +20166,7 @@ proc circular_config_fea_treeview_manageselection {t c dialog} {
     } elseif {$this_fea_rev_arrow != $fea_rev_arrow} {
       set fea_rev_arrow "NoArrow"
     }
-
+    
   }
 
   if {$fea_visible == -1} {
@@ -19931,7 +20255,7 @@ proc circular_config_fea_treeview_manageselection {t c dialog} {
 }
 
 ################
-##
+## 
 ################
 proc circular_config_fea_treeview_apply {t c} {
   global temp_circ_config_info
@@ -19946,7 +20270,7 @@ proc circular_config_fea_treeview_apply {t c} {
     set direction [$c bind $tag <<Direction>>]
 
     if {[info exists temp_circ_config_info($c,fea_visible)]} {
-      ## visible is set or unset, not the mixed tri state
+      ## visible is set or unset, not the mixed tri state 
       if {[dict exists $label_dict use_arc]} {
         set use_arc [dict get $label_dict use_arc]
       } else {
@@ -20022,7 +20346,7 @@ proc circular_config_fea_treeview_apply {t c} {
       set this_fea_fg_color [$c itemcget $tag&&foreground&&exon -outline]
     }
 
-
+    
     if { $temp_circ_config_info($c,fea_bg_color_set)} {
       #set this_fea_bg_color [mix_color $this_fea_fg_color $temp_circ_config_info($c,fea_bg_color) $temp_circ_config_info($c,fea_bg_color_percent)]
       set this_fea_bg_color  $temp_circ_config_info($c,fea_bg_color)
@@ -20077,7 +20401,7 @@ proc circular_config_fea_treeview_apply {t c} {
       $c bind $tag <<Arrow_list>> $arrow_list
       dict set gformat_dict arrow_data $arrow_list
     }
-
+ 
     $c bind $tag <<Gformat>> $gformat_dict
 
     if {$temp_circ_config_info($c,apply)} {
@@ -20111,7 +20435,7 @@ proc circular_config_fea_treeview_apply {t c} {
 }
 
 ################
-##
+## 
 ################
 proc circular_config_fea_treeview_apply_tag_color_to_label {t c percent dialog} {
   global temp_circ_config_info
@@ -20136,7 +20460,7 @@ proc circular_config_fea_treeview_apply_tag_color_to_label {t c percent dialog} 
 }
 
 ################
-##
+## 
 ################
 proc circular_config_fea_treeview_apply_tag_color_to_outline {t c percent dialog} {
   global temp_circ_config_info
@@ -20158,21 +20482,21 @@ proc circular_config_fea_treeview_apply_tag_color_to_outline {t c percent dialog
 
 
 ################
-##
+## 
 ################
 proc circular_config_formatting_to_seq {c} {
   global info undo
-
+  
   #set w [bind $c <<Window>>]
   set w $info([winfo toplevel $c],linked_windows)
   if { $w == {}} {tk_messageBox -message [mc "The window this map refers to has been modified. The formatting can't be applied."];return}
   set edited 0
   set radius [lindex [$c coords [$c find withtag circle]] 2]
-
+  
   foreach tag [lsearch -inline -all -regexp [$w.textarea tag names] {f[0-9]+#}] {
     set gformat_dict  [$c bind $tag <<Gformat>>]
     if {$gformat_dict  == {}} {continue}
-
+    
     ## add feature radius to gformat_dict here
     set f_radius [expr { [lindex [$c coords [lindex [$c find withtag exon&&$tag] 0]] 2] / $radius}]
     dict set gformat_dict feature_radius $f_radius
@@ -20239,7 +20563,7 @@ proc circular_config_formatting_to_seq {c} {
 }
 
 ################
-##
+## 
 ################
 proc linear_config_fea_treeview_apply_tag_color_to_label {t c percent dialog} {
   global temp_linear_config_info
@@ -20261,7 +20585,7 @@ proc linear_config_fea_treeview_apply_tag_color_to_label {t c percent dialog} {
 }
 
 ################
-##
+## 
 ################
 proc linear_config_fea_treeview_apply_tag_color_to_outline {t c percent dialog} {
   global temp_linear_config_info
@@ -20282,7 +20606,7 @@ proc linear_config_fea_treeview_apply_tag_color_to_outline {t c percent dialog} 
 }
 
 ################
-##
+## 
 ################
 proc linear_map_configure_dialog {c item} {
   global info temp_linear_config_info  dialogblock ok  enz_list fea_list
@@ -20319,7 +20643,7 @@ proc linear_map_configure_dialog {c item} {
 
   grid [ttk::frame $dialog.tabframe.texts.frame1 -relief flat] -row 0 -column 0 -sticky nswe
   set f $dialog.tabframe.texts.frame1
-
+  
   set t $f.tv
   set sc $f.sc
   ttk::treeview $t -yscrollcommand "optionscrollbar $sc" -height 5
@@ -20368,7 +20692,7 @@ proc linear_map_configure_dialog {c item} {
     } else {
       for {set fi 0} {$fi < [llength $info(allfontlist)]} {incr fi 20} {
         if {[set fj [expr {$fi + 19}]] > [llength $info(allfontlist)]} {set fj [expr {[llength $info(allfontlist)]-1}]}
-        $dialog.tabframe.texts.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.texts.frame3.fontfam.menu.menu$fi
+        $dialog.tabframe.texts.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.texts.frame3.fontfam.menu.menu$fi 
         menu $dialog.tabframe.texts.frame3.fontfam.menu.menu$fi
         foreach fontfam [lrange $info(allfontlist) $fi $fj] {
           $dialog.tabframe.texts.frame3.fontfam.menu.menu$fi add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_linear_config_info($c,text_fontfamily) -command "event generate $dialog <<changed_text>>";# -font [list $fontfam 10]
@@ -20395,7 +20719,7 @@ proc linear_map_configure_dialog {c item} {
 #$c find withtag enzyme&&label
 #$c find withtag feature&&label
 #$c find withtag feature&&label&&dir0
-#$c bind $id <<Colors>>
+#$c bind $id <<Colors>> 
 #$c bind $id <<Label>> ($label_dict)
 #enzymes: $label_dict:  type name location_start count tag
 #features: $label_dict: type name location_start location_end tag direction
@@ -20410,7 +20734,7 @@ proc linear_map_configure_dialog {c item} {
 
   grid [ttk::frame $dialog.tabframe.enzymes.frame1 -relief flat] -row 0 -column 0 -sticky nswe
   set f $dialog.tabframe.enzymes.frame1
-
+  
   set t $f.tv
   set sc $f.sc
   ttk::treeview $t -yscrollcommand "optionscrollbar $sc" -height 5
@@ -20468,7 +20792,7 @@ proc linear_map_configure_dialog {c item} {
     } else {
       for {set fi 0} {$fi < [llength $info(allfontlist)]} {incr fi 20} {
         if {[set fj [expr {$fi + 19}]] > [llength $info(allfontlist)]} {set fj [expr {[llength $info(allfontlist)]-1}]}
-        $dialog.tabframe.enzymes.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.enzymes.frame3.fontfam.menu.menu$fi
+        $dialog.tabframe.enzymes.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.enzymes.frame3.fontfam.menu.menu$fi 
         menu $dialog.tabframe.enzymes.frame3.fontfam.menu.menu$fi
         foreach fontfam [lrange $info(allfontlist) $fi $fj] {
           $dialog.tabframe.enzymes.frame3.fontfam.menu.menu$fi add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_linear_config_info($c,enz_fontfamily) -command "event generate $dialog <<changed_enzymes>>";# -font [list $fontfam 10]
@@ -20496,7 +20820,7 @@ proc linear_map_configure_dialog {c item} {
   }
   set temp_linear_config_info($c,enz_label_angle) "---"
 
-
+  
   linear_config_enz_fill_treeview $t $c
 
   ####features frame
@@ -20506,7 +20830,7 @@ proc linear_map_configure_dialog {c item} {
 
   grid [ttk::frame $dialog.tabframe.features.frame1 -relief flat] -row 0 -column 0 -sticky nswe
   set f $dialog.tabframe.features.frame1
-
+  
   set t $f.tv
   set sc $f.sc
   ttk::treeview $t -yscrollcommand "optionscrollbar $sc" -height 5
@@ -20555,20 +20879,20 @@ proc linear_map_configure_dialog {c item} {
   grid [ttk::frame $dialog.tabframe.features.frame3_dummy -relief ridge -borderwidth 2] -row 2 -column 0 -sticky nswe
 
   grid [checkbutton $dialog.tabframe.features.frame3.visible -text [mc "Visible"] -variable temp_linear_config_info($c,fea_visible) -command "if {\[info exists temp_linear_config_info($c,fea_visible)\]} {event generate $dialog <<changed_features>>}" ] -row 0 -column 1 -columnspan 2 -sticky nw
-
+  
   grid [label $dialog.tabframe.features.frame3.fontfam_label -text [mc "Label:"]] -row 1 -column 1 -sticky nw
     set temp_linear_config_info($c,fea_label_color) #000000
   grid [color_button $dialog.tabframe.features.frame3.label_color  temp_linear_config_info($c,fea_label_color) 18] -row 1 -column 2 -sticky nw
   set temp_linear_config_info($c,fea_label_color_set) 0
   bind $dialog.tabframe.features.frame3.label_color <<color_picked>> "set temp_linear_config_info($c,fea_label_color_set) 1;set temp_linear_config_info($c,fea_label_ffg_color) 0; event generate $dialog <<changed_features>>"
-
+  
       grid [menubutton $dialog.tabframe.features.frame3.label_color_percent -menu $dialog.tabframe.features.frame3.label_color_percent.menu -text "%"] -row 1 -column 3 -sticky nw
   menu $dialog.tabframe.features.frame3.label_color_percent.menu
   foreach perc [list 20 40 50 60 80] {
     $dialog.tabframe.features.frame3.label_color_percent.menu add command -label "Mix with $perc\% Fill Color" -command "linear_config_fea_treeview_apply_tag_color_to_label $t $c $perc $dialog"
   }
   $dialog.tabframe.features.frame3.label_color_percent.menu add command -label "Set to Fill Color" -command "linear_config_fea_treeview_apply_tag_color_to_label $t $c 100 $dialog"
-
+  
   grid [menubutton $dialog.tabframe.features.frame3.fontfam -menu $dialog.tabframe.features.frame3.fontfam.menu -textvariable temp_linear_config_info($c,fea_fontfamily)] -row 1 -column 4 -sticky nw
    menu $dialog.tabframe.features.frame3.fontfam.menu
     if {[llength $info(allfontlist)] <= 20} {
@@ -20578,7 +20902,7 @@ proc linear_map_configure_dialog {c item} {
     } else {
       for {set fi 0} {$fi < [llength $info(allfontlist)]} {incr fi 20} {
         if {[set fj [expr {$fi + 19}]] > [llength $info(allfontlist)]} {set fj [expr {[llength $info(allfontlist)]-1}]}
-        $dialog.tabframe.features.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.features.frame3.fontfam.menu.menu$fi
+        $dialog.tabframe.features.frame3.fontfam.menu add cascade -label "[lindex $info(allfontlist) $fi]-[lindex $info(allfontlist) $fj]" -menu $dialog.tabframe.features.frame3.fontfam.menu.menu$fi 
         menu $dialog.tabframe.features.frame3.fontfam.menu.menu$fi
         foreach fontfam [lrange $info(allfontlist) $fi $fj] {
           $dialog.tabframe.features.frame3.fontfam.menu.menu$fi add radiobutton -label $fontfam -indicatoron 1 -value $fontfam -variable temp_linear_config_info($c,fea_fontfamily) -command "event generate $dialog <<changed_features>>";# -font [list $fontfam 10]
@@ -20603,7 +20927,7 @@ proc linear_map_configure_dialog {c item} {
     $dialog.tabframe.features.frame3.text_angle.menu add radiobutton -label $label_angle -indicatoron 1 -value $label_angle -variable temp_linear_config_info($c,fea_label_angle)  -command "event generate $dialog <<changed_features>>"
   }
   set temp_linear_config_info($c,fea_label_angle) "---"
-
+  
   grid [ttk::frame $dialog.tabframe.features.frame3.ffg_frame] -row 2 -column 1 -columnspan 7 -sticky nwe
   grid [label $dialog.tabframe.features.frame3.ffg_frame.ffg_label -text [mc "Fill:"] -state normal] -row 2 -column 1 -columnspan 1 -sticky nw
   set temp_linear_config_info($c,fea_fg_color) gray80
@@ -20628,7 +20952,7 @@ proc linear_map_configure_dialog {c item} {
     $dialog.tabframe.features.frame3.ffg_frame.fbg_frame.fbg_color.menu add command -label "Mix with $perc\% Fill Color" -command "linear_config_fea_treeview_apply_tag_color_to_outline $t $c $perc $dialog"
   }
   $dialog.tabframe.features.frame3.ffg_frame.fbg_frame.fbg_color.menu add command -label "Set to Fill Color" -command "linear_config_fea_treeview_apply_tag_color_to_outline $t $c 100 $dialog"
-
+  
   #set temp_linear_config_info($c,fea_bg_color_percent) 0
   #grid [ttk::scale $dialog.tabframe.features.frame3.ffg_frame.fbg_frame.fbg_color_percent -orient horizontal -from 0 -to 100 -variable temp_linear_config_info($c,fea_bg_color_percent) -command "event generate $dialog <<changed_features>>; set temp_linear_config_info($c,fea_bg_color_percent) \[expr {round(\$temp_linear_config_info($c,fea_bg_color_percent))}\]; #"] -row 3 -column 4 -sticky nw
   #grid [label $dialog.tabframe.features.frame3.ffg_frame.fbg_frame.fbg_color_percent_label -textvariable temp_linear_config_info($c,fea_bg_color_percent)] -row 3 -column 5 -sticky nw
@@ -20668,7 +20992,7 @@ proc linear_map_configure_dialog {c item} {
 
   ####circle frame
 # show enzymes circle: width, color
-# show features circle (features height is relative to features circle): radius, width, color,
+# show features circle (features height is relative to features circle): radius, width, color, 
 # show crosshairs: width, color
 # show index marks: radius, spacing, font, size, color, with 0's, angle, in/out
 # show GC circle: radius, accumulation window, low-color, mid-color, high color, >%, <%
@@ -20676,7 +21000,7 @@ proc linear_map_configure_dialog {c item} {
 # all radius measures are as % of enzymes circle
 
   ## parameters frame
-# parameter: label bump overlap
+# parameter: label bump overlap 
 # parameter: bump connectors
 # parameter: bump moved ojects (don't ignore in bump proc)
 # button: reset moved objects
@@ -20699,7 +21023,7 @@ proc linear_map_configure_dialog {c item} {
     $dialog.frame2.apply_button.menu add command -label [mc "Apply Feature Show/ Hide to Sequence"] -command "" -state disabled
     $dialog.frame2.apply_button.menu  add command -label [mc "Apply Formatting to Defaults"] -state disabled
 
-
+    
     grid [button $dialog.frame2.ok -text [mc "OK"] -command "event generate $dialog <<OK>>" -default active] -row 0 -column 1 -padx 5 -pady 3 -sticky nw
     grid columnconfigure $dialog.frame2 0 -weight 1
     grid columnconfigure $dialog.frame2 1 -weight 1
@@ -20772,7 +21096,7 @@ proc linear_config_text_treeview_manageselection {t c dialog} {
   }
   foreach e [$t selection] {
     if {$e eq "hidden"} {continue}
-    set itemfont [$c itemcget $e -font]
+    set itemfont [$c itemcget $e -font] 
     if {$itemfont == ""} {
       sputs error $e
       continue
@@ -20886,7 +21210,7 @@ proc linear_config_enz_fill_treeview {tv c} {
     $tv insert {} end -id $tag -text [dict get $label_dict name] -tag $tag
     $tv set $tag Location [dict get $label_dict location_start]
     $tv set $tag Count [dict get $label_dict count]
-    $tv tag configure $tag -background white -foreground [$c itemcget $tag -fill]
+    $tv tag configure $tag -background white -foreground [$c itemcget $tag -fill] 
     if {[$c itemcget $tag -state] == "hidden"} {
       $tv move $tag hidden end
     }
@@ -20904,7 +21228,7 @@ proc linear_config_enz_treeview_manageselection {t c dialog} {
   set enz_fontsize "---"
   set enz_label_color ""
   set enz_label_angle "---"
-
+  
   if {[$t selection] == {}} {
     grid configure $dialog.tabframe.enzymes.frame3_dummy
     return
@@ -20939,7 +21263,7 @@ proc linear_config_enz_treeview_manageselection {t c dialog} {
     } elseif {$enz_label_angle != [expr {int([$c itemcget $e -angle])}]} {
       set enz_visible -720
     }
-
+    
   }
 
   if {$enz_visible == -1} {
@@ -21058,7 +21382,7 @@ proc linear_config_fea_fill_treeview {tv c} {
     $tv insert {} end -id $tag -text [dict get $label_dict name] -tag $tag
     $tv set $tag Location [dict get $label_dict location_start]
     $tv set $tag Direction [expr {[dict get $label_dict direction]?"<<<":">>>"}]
-    $tv set $tag Type [dict get $label_dict type]
+    $tv set $tag Type [dict get $label_dict feature_type]
     $tv set $tag Length [expr {abs([dict get $label_dict location_start]-[dict get $label_dict location_end])+1}]
 
     $tv tag configure $tag -background white -foreground [$c itemcget $ftag -fill]
@@ -21124,7 +21448,7 @@ proc linear_config_fea_treeview_manageselection {t c dialog} {
     } elseif {$fea_label_angle != [expr {int([$c itemcget $e -angle])}]} {
       set fea_label_angle -720
     }
-
+    
     set this_fea_label_color [$c itemcget $e -fill]
     if {$fea_label_color == ""} {
       set fea_label_color [$c itemcget $e -fill]
@@ -21145,7 +21469,7 @@ proc linear_config_fea_treeview_manageselection {t c dialog} {
         set fea_label_ffg_color [expr {$this_fea_fg_color== $this_fea_label_color}]
     } elseif {$fea_label_ffg_color != [expr {$this_fea_fg_color== $this_fea_label_color}]} {
         set fea_label_ffg_color -1
-    }
+    } 
     if {$fea_bg_color == ""} {
       set fea_bg_color [$c itemcget $tag&&outline&&exon -outline]
     } elseif {$fea_bg_color != [$c itemcget $tag&&outline&&exon -outline]} {
@@ -21168,10 +21492,10 @@ proc linear_config_fea_treeview_manageselection {t c dialog} {
     } elseif {$fea_outline != [expr {([$c itemcget $tag&&outline&&exon -width]) /2}]} {
       set fea_outline -1
     }
-
+      
     set this_fea_fwd_arrow [lindex [dict get $gformat_dict arrow_data] 0]
     set this_fea_rev_arrow [lindex [dict get $gformat_dict arrow_data] 1]
-
+      
     if {$fea_fwd_arrow ==  "Empty"} {
       set fea_fwd_arrow $this_fea_fwd_arrow
     } elseif {$this_fea_fwd_arrow != $fea_fwd_arrow} {
@@ -21185,7 +21509,7 @@ proc linear_config_fea_treeview_manageselection {t c dialog} {
   }
 
 
-
+    
   if {$fea_visible == -1} {
     unset -nocomplain temp_linear_config_info($c,fea_visible)
   } else {
@@ -21206,7 +21530,7 @@ proc linear_config_fea_treeview_manageselection {t c dialog} {
   } else {
     set temp_linear_config_info($c,fea_label_angle) $fea_label_angle
   }
-
+  
   if {$fea_label_color == -1 || $fea_label_color ==""} {
     set temp_linear_config_info($c,fea_label_color) gray80
     set temp_linear_config_info($c,fea_label_color_set) 0
@@ -21269,11 +21593,11 @@ proc linear_config_fea_treeview_manageselection {t c dialog} {
     set temp_linear_config_info($c,r_arrow_text) "----"
     set temp_linear_config_info($c,r_arrow) -1
   }
-
+    
 }
 
 ################
-##
+## 
 ################
 proc linear_config_fea_treeview_apply {t c} {
     global temp_linear_config_info
@@ -21328,7 +21652,7 @@ proc linear_config_fea_treeview_apply {t c} {
       $c itemconfigure $tag&&linear_label -angle  $temp_linear_config_info($c,fea_label_angle) -anchor $anchor
       dict set gformat_dict fea_label_angle $temp_linear_config_info($c,fea_label_angle)
     }
-
+    
     if {$temp_linear_config_info($c,fea_fg_color_set)} {
       $c itemconfigure $tag&&foreground -fill $temp_linear_config_info($c,fea_fg_color)
       $c itemconfigure $tag&&foreground -fill $temp_linear_config_info($c,fea_fg_color)
@@ -21338,7 +21662,7 @@ proc linear_config_fea_treeview_apply {t c} {
     } else {
       set this_fea_fg_color [$c itemcget $tag&&foreground&&exon -fill]
     }
-
+      
     if {$temp_linear_config_info($c,fea_bg_color_set)} {
       #set this_fea_bg_color [mix_color $this_fea_fg_color $temp_linear_config_info($c,fea_bg_color) $temp_linear_config_info($c,fea_bg_color_percent)]
       set this_fea_bg_color  $temp_linear_config_info($c,fea_bg_color)
@@ -21353,7 +21677,7 @@ proc linear_config_fea_treeview_apply {t c} {
        #### set fg_box [$c create rectangle [expr {$x1}] [expr {$y-$width/2.0}] [expr {$x2}] [expr {$y+$width/2.0}] -tag [concat $tags exon foreground] -fill $tag_color -state $state -outline {}
        #### $c create line [expr {$x2+0}] [expr {$y+$width/2.0}] [expr {($x1+$x2)/2.0}]  [expr {$y+$width/2.0+5}] [expr {$x1}] [expr {$y+$width/2.0}] -tag [concat $tags intron] -state $state -fill $tag_color -width 2
        ####   linear_feature_draw_arrow $c $tag
-       #### $c bind $tag <<Coord_list>> [list [list $first_exon $first_exon_bg $first_exon_coords] [list $last_exon $last_exon_bg $last_exon_coords]]
+       #### $c bind $tag <<Coord_list>> [list [list $first_exon $first_exon_bg $first_exon_coords] [list $last_exon $last_exon_bg $last_exon_coords]] 
       set exons [$c find withtag $tag&&exon]
       set this_fea_width [expr {round($temp_linear_config_info($c,fea_width))}]
       if {[llength $exons] >0} {
@@ -21376,7 +21700,7 @@ proc linear_config_fea_treeview_apply {t c} {
           lset coords 5 $y_bottom
           $c coords $intron $coords
         }
-
+        
         dict set gformat_dict width $this_fea_width
 
         set coord_list [$c bind $tag <<Coord_list>>]
@@ -21404,7 +21728,7 @@ proc linear_config_fea_treeview_apply {t c} {
 	set redraw 1
         #linear_feature_draw_arrow $c $tag
       }
-    }
+    } 
 
     if {[string is double $temp_linear_config_info($c,fea_outline)]} {
       set fea_outline [expr {round($temp_linear_config_info($c,fea_outline))}]
@@ -21472,11 +21796,11 @@ proc linear_config_fea_treeview_apply {t c} {
 }
 
 ################
-##
+## 
 ################
 proc linear_config_formatting_to_seq {c} {
   global info
-
+  
   #set w [bind $c <<Window>>]
   set w $info([winfo toplevel $c],linked_windows)
   if { $w == {}} {tk_messageBox -message [mc "The window this map refers to has been modified. The formatting can't be applied."];return}
@@ -21484,10 +21808,10 @@ proc linear_config_formatting_to_seq {c} {
   foreach tag [lsearch -inline -all -regexp [$w.textarea tag names] {f[0-9]+#}] {
     set gformat_dict  [$c bind $tag <<Gformat>>]
     if {$gformat_dict  == {}} {continue}
-
+    
     ## add feature label pos x,y to gformat_dict here
     if {[set item [$c find withtag $tag&&feature&&label]] !={} && [$c bind $item <<Moved>>] == 1} {
-
+ 
     }
 
     ## Replace the gformat data in the sequence
@@ -21505,7 +21829,7 @@ proc linear_config_formatting_to_seq {c} {
     features_to_tree_view $w
     register_undo_separator $w "Edit Feature"
   }
-
+  
   ## add baseline, crosshair and index data here
   set seq_gformat_dict $info($w,gformat_data)
 
@@ -21532,7 +21856,7 @@ proc mix_color {color1 color2 percent} {
 proc draw_circular_feature {w c tag} {
   global modifier info
       #tag the labels with the tag name too
-      #$c addtag $tag withtag "$tag\_label"
+      #$c addtag $tag withtag "$tag\_label" 
 
       if {[string match fn* $tag]} {
         regsub "fn" $tag "f" tag2
@@ -21550,7 +21874,7 @@ proc draw_circular_feature {w c tag} {
 
       #if across origin
       if {[llength [set ranges [$w.textarea tag ranges $tag]]] > 2} {
-        $c bind $tag2 <Shift-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 2]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 3]]\]"
+        $c bind $tag2 <Shift-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 2]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 3]]\]" 
        # $c bind $id <Shift-Double-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 2]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 3]]\]; event generate $c <<Return>>;break"
         lappend info($w,linked_events) [list $c $tag2 <Shift-Button-1>] [list $c $tag2 <Shift-Double-Button-1>]
       }
@@ -21564,7 +21888,7 @@ proc draw_circular_feature {w c tag} {
         set start_i_i [lsearch -exact $ranges $start_i]
         #rotate ranges to start with first exon
         set ranges [concat [lrange $ranges $start_i_i end] [lrange $ranges 0 [expr {$start_i_i - 1}]]]
-        #check for exon across origin
+        #check for exon across origin 
         if {([set one_i [lsearch -exact $ranges 1.0]] > -1) && ([lindex $ranges [expr {$one_i -1}]] eq [$w.textarea index end-1chars])} {
           set ranges [lreplace $ranges [expr {$one_i -1}] $one_i]
         }
@@ -21576,7 +21900,7 @@ proc draw_circular_feature {w c tag} {
 
       set total_length [ix2bp $w.textarea [$w.textarea index end-1chars]]
       set direction [lindex [$w.textarea tag bind $tag2 <<Metadata>>] 3]
-
+      
 
 
 
@@ -21588,13 +21912,13 @@ proc draw_circular_feature {w c tag} {
       set arrow_list [dict get $gformat arrow_data]
       set radius_offset [dict get $gformat offset]
       if {![string is integer -strict $radius_offset]} {set radius_offset 0}
-
+  
       if {[dict exists $gformat graphic_fg_color_$direction]} {
         set tag_color [dict get $gformat graphic_fg_color_$direction]
       } else {
 	set tag_color [lindex [$w.textarea tag bind $tag2 <<Revcolors>>] [lindex [$w.textarea tag bind $tag2 <<Metadata>>] 3]]
       }
-
+  
       if {[dict exists $gformat outline_color_$direction]} {
         set tag_bg_color [dict get $gformat outline_color_$direction]
       } else {
@@ -21606,7 +21930,7 @@ proc draw_circular_feature {w c tag} {
       } else {
         set tag_outline_width 1
       }
-
+  
       set radius [lindex [$c coord circle] 2]
       if {[dict exists $gformat feature_radius]} {
         set radius [expr {[dict get $gformat feature_radius] * $radius}]
@@ -21636,10 +21960,10 @@ proc draw_circular_feature {w c tag} {
       }
       $c raise foreground outline
       #make dummy arrow items - coordinates are set later
-      $c create polygon 0 0 -outline $tag_bg_color -width [expr {2 * $tag_outline_width -1}] -tags [list $tag2 fwd_arrow outline]
+      $c create polygon 0 0 -outline $tag_bg_color -width [expr {max (0,2 * $tag_outline_width -1)}] -tags [list $tag2 fwd_arrow outline]
       $c create polygon 0 0 -fill $tag_color  -tags [list $tag2 fwd_arrow foreground]
                      #$c create line 0 0 0 0 -fill $tag_bg_color -width 2 -tags [list $tag2 fwd_arrow outline]
-      $c create polygon 0 0 -outline $tag_bg_color -width [expr {2 * $tag_outline_width -1}] -tags [list $tag2 rev_arrow outline]
+      $c create polygon 0 0 -outline $tag_bg_color -width [expr {max(0,2 * $tag_outline_width -1)}] -tags [list $tag2 rev_arrow outline]
       $c create polygon 0 0 -fill $tag_color -tags [list $tag2 rev_arrow foreground]
                        #$c create line 0 0 0 0 -fill $tag_bg_color -width 2 -tags [list $tag2 rev_arrow outline]
   if {([dict exists $gformat circular_state] && [dict get $gformat circular_state] eq "hidden")  || (![dict exists $gformat circular_state] && [$w.textarea tag cget $tag2 -background] == {})} {
@@ -21659,17 +21983,17 @@ proc draw_circular_feature {w c tag} {
       if {$info(android)} {
         $c bind $tag2&&(exon||intron||fwd_arrow||rev_arrow) <Button-1> [ $c bind $tag2&&(exon||intron||fwd_arrow||rev_arrow) <$modifier-Button1-Motion>]
       }
-
+ 
       regsub "fn" $tag "f" tag
       set label_dict [$c bind $tag <<Label>>]
       $c bind $tag <Enter> "+ if {!\[info exists move_delay\]} {$c itemconfigure seqtext -text {[dict get $label_dict name] [dict get $label_dict location_start]..[dict get $label_dict location_end]}}"
       $c bind $tag <Leave> "+$c itemconfigure seqtext -text {}"
       $c bind $tag <<Colors>> [list $tag_color red $tag_bg_color]
       $c bind $tag <$modifier-Button-1> continue
-      $c bind $tag <Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 0]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges end]]\]"
-      $c bind $tag <Double-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 0]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges end]]\]; event generate $c <<Return>>;break"
+      $c bind $tag <Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 0]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges end]]\]" 
+      $c bind $tag <Double-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges 0]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $ranges end]]\]; event generate $c <<Return>>;break" 
       lappend info($w,linked_events) [list $c $tag <Button-1>] [list $c $tag <Double-Button-1>]
-}
+} 
 
 ################
 ## Drag a circular feature- moves feturre, labels and circular_labels
@@ -21923,7 +22247,7 @@ proc circ_enz_sort {w enz_list len} {
       ^^^^^^^^^ NOT THIS  ^^^^^^^^^
     } else {
       set coord_text [feature_coords_text $w $ttg]
-      set  location_start [regexp -inline {^[0-9]+} $coord_text]
+      set  location_start [regexp -inline {^[0-9]+} $coord_text] 
       set location_end [regexp -inline {[0-9]+$} $coord_text]
       if {$info(circ_map_feature_names_centered)} {
         set loc [expr {($location_start > $location_end) ? (($location_end + $location_start + $len) / 2) % $len  : ($location_end + $location_start) / 2}]
@@ -22022,7 +22346,7 @@ proc linear_feature_draw {c y w start end x_offset total_length tag {tags [list]
   if {$end > $seq_len} {
     foreach part $ranges {
       if {[lindex $part 0] < 0} {
-        lappend ranges $part
+        lappend ranges $part   
       } else {
         lappend ranges [list [expr {[lindex $part 0]+$seq_len}] [expr {[lindex $part 1]+$seq_len}] ]
       }
@@ -22040,7 +22364,7 @@ proc linear_feature_draw {c y w start end x_offset total_length tag {tags [list]
     set state "normal"
   }
 
-
+ 
 
   set direction [lindex [$w.textarea tag bind $tag <<Metadata>>] 3]
   set label [lindex [$w.textarea tag bind $tag <<Metadata>>] 0]
@@ -22070,26 +22394,26 @@ proc linear_feature_draw {c y w start end x_offset total_length tag {tags [list]
   } else {
     set font_color black
   }
-
+  
   if { [dict exists $gformat fea_label_angle]} {
     set label_angle [dict get $gformat fea_label_angle]
   } else {
     set label_angle 0
   }
-
+  
   if {[dict exists $gformat graphic_fg_color_$direction]} {
     set tag_color [dict get $gformat graphic_fg_color_$direction]
   } else {
     set tag_color [format "\#%04X%04X%04X" {*}[winfo rgb . [lindex [$w.textarea tag bind $tag <<Revcolors>>] [lindex [$w.textarea tag bind $tag <<Metadata>>] 3]]]]
   }
-
+  
   if {[dict exists $gformat outline_color_$direction]} {
     set tag_bg_color [dict get $gformat outline_color_$direction]
   } else {
     set tag_bg_color [gray_color $tag_color]
   }
 
-
+  
   set arrow_list [dict get $gformat arrow_data]
   set fntag [regsub f $tag fn]
   set x_left 0
@@ -22224,10 +22548,10 @@ proc linear_feature_draw {c y w start end x_offset total_length tag {tags [list]
 
     #                    $c create line 0 $y 0 $y -tag  [concat $tags fwd_arrow outline]  -fill $tag_bg_color -width [expr {2*$tag_outline_width}] -state normal
 
-    set item [$c create polygon 0 $y -tag  [concat $tags fwd_arrow outline]  -fill $tag_bg_color -outline $tag_bg_color -width [expr {2*$tag_outline_width-1}] -state normal]
+    set item [$c create polygon 0 $y -tag  [concat $tags fwd_arrow outline]  -fill $tag_bg_color -outline $tag_bg_color -width [expr {max(0,2*$tag_outline_width-1)}] -state normal]
   $c create polygon 0 $y -tag  [concat $tags fwd_arrow foreground]  -fill $tag_color  -state normal
-  #                    $c create line 0 $y 0 $y -tag  [concat $tags rev_arrow outline]  -fill $tag_bg_color -width [expr {2*$tag_outline_width}] -state normal
-  $c create polygon 0 $y -tag  [concat $tags rev_arrow outline]  -fill $tag_bg_color  -outline $tag_bg_color -width [expr {2*$tag_outline_width-1}] -state normal
+  #                    $c create line 0 $y 0 $y -tag  [concat $tags rev_arrow outline]  -fill $tag_bg_color -width [expr {max(2*$tag_outline_width}] -state normal
+  $c create polygon 0 $y -tag  [concat $tags rev_arrow outline]  -fill $tag_bg_color  -outline $tag_bg_color -width [expr {max(0,2*$tag_outline_width-1)}] -state normal
   $c create polygon 0 $y -tag  [concat $tags rev_arrow foreground]  -fill $tag_color  -state normal
 
   if {([dict exists $gformat linear_state] && [dict get $gformat linear_state] eq "hidden") || (![dict exists $gformat linear_state] && [$w.textarea tag cget $tag -background] == {})} {
@@ -22240,15 +22564,15 @@ proc linear_feature_draw {c y w start end x_offset total_length tag {tags [list]
   $c bind $tag <<Direction>> $direction
   $c bind $tag <<Colors>> [list $tag_color red $tag_bg_color]
 
-
+  
   linear_feature_draw_arrow $c $tag
-
+  
   $c lower intron exon
-
+  
   if {[dict get $gformat linear_state] eq "hidden"} {
     $c itemconfigure $tag -state hidden
   }
-
+      
   #bindings
   if {[info exists featurelabelid]} {
     $c bind $tag <Any-Enter> "$c itemconfigure $tag&&feature&&label -fill \[lindex \[$c bind $featurelabelid <<Colors>>\] 1\];$c itemconfigure seqtext -text \{[lindex [$w.textarea tag bind $tag <<Metadata>>] 0]([join $exon_list ,])\}; $c itemconfigure $tag&&outline&&exon -outline \[lindex \[$c bind $tag <<Colors>>\] 1\]; $c itemconfigure $tag&&outline&&(fwd_arrow||rev_arrow) -outline \[lindex \[$c bind $tag <<Colors>>\] 1\]"
@@ -22277,18 +22601,18 @@ proc linear_feature_draw {c y w start end x_offset total_length tag {tags [list]
   set linkranges [$w.textarea tag ranges $linktag]
   ## needs work here for selection through origin - should each exon/ intron get a link now?
   if {$end < $seq_len && [$w.textarea compare [lindex $linkranges 1] < [bp2ix $w.textarea $start]]} {
-    set linkranges [lrange $linkranges 2 3]
+    set linkranges [lrange $linkranges 2 3] 
   }
   if {([llength $linkranges] > 2) && [$w.textarea compare [lindex $linkranges 2] > [bp2ix $w.textarea $end]]} {
-    set linkranges [lrange $linkranges 0 1]
+    set linkranges [lrange $linkranges 0 1] 
   }
   if {[$w.textarea compare [lindex $linkranges 0] < [bp2ix $w.textarea $start]]} {
-    set linkranges [lreplace $linkranges 0 0 [bp2ix $w.textarea $start]]
+    set linkranges [lreplace $linkranges 0 0 [bp2ix $w.textarea $start]] 
   }
   if {$end < $seq_len && ([llength $linkranges] > 2) && [$w.textarea compare [lindex $linkranges 3] > [bp2ix $w.textarea $end]]} {
-    set linkranges [lreplace $linkranges 3 3 [bp2ix $w.textarea $end]]
+    set linkranges [lreplace $linkranges 3 3 [bp2ix $w.textarea $end]] 
   } elseif {$end < $seq_len && ([llength $linkranges] == 2) && [$w.textarea compare [lindex $linkranges 1] > [bp2ix $w.textarea $end]]} {
-    set linkranges [lreplace $linkranges 1 1 [bp2ix $w.textarea $end]]
+    set linkranges [lreplace $linkranges 1 1 [bp2ix $w.textarea $end]] 
   }
 
   $c bind $tag <Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 0]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 1]]\]"
@@ -22296,8 +22620,8 @@ proc linear_feature_draw {c y w start end x_offset total_length tag {tags [list]
   lappend info($w,linked_events) [list $c $tag <Button-1>] [list $c $tag <Double-Button-1>]
 
   if {[llength $linkranges] == 4} {
-    $c bind $tag <Shift-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 2]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 3]]\]"
-    $c bind $tag <Shift-Double-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 2]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 3]]\]; event generate $c <<Return>>; break"
+    $c bind $tag <Shift-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 2]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 3]]\]" 
+    $c bind $tag <Shift-Double-Button-1> "select_region $w \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 2]]\] \[bp2ix $w.textarea [ix2bp $w.textarea [lindex $linkranges 3]]\]; event generate $c <<Return>>; break" 
     lappend info($w,linked_events) [list $c $tag <Shift-Button-1>] [list $c $tag <Shift-Double-Button-1>]
   }
 }
@@ -22408,7 +22732,7 @@ proc linear_feature_draw_arrow {c tag} {
       } else {
         $c coords rev_arrow&&outline&&$tag $fx0 $fy0 $fx0 $fy0
       }
-
+    
   } elseif {$first_exon_coords != {}} {
     foreach {rx0 ry0 rx1 ry1 } $first_exon_coords {}
     set first_w [expr {$rx1 - $rx0}]
@@ -22473,7 +22797,7 @@ proc linear_map_bump_features_find_overlap_and_move {c item {exclude {}}} {
     set ftag [lsearch -regexp -inline [$c gettags $i] {f[0-9]+#}]
     if {(($ftag == $item) || [lsearch $exclude $ftag] == -1 || ($ftag == {}))} {continue}
     foreach {bx1 by1 bx2 by2} [$c bbox $ftag] {}
-    $c move $item 0 [expr {$by2-$ly1+$spacing}]
+    $c move $item 0 [expr {$by2-$ly1+$spacing}]  
 
     lset exclude [lsearch $exclude $ftag] {}
     linear_map_bump_features_find_overlap_and_move $c $item $exclude
@@ -22482,7 +22806,7 @@ proc linear_map_bump_features_find_overlap_and_move {c item {exclude {}}} {
 }
 
 ################
-##
+## 
 ################
 proc linear_map_bump_all_features {c {item ""}} {
   set exclude [list $item]
@@ -22494,7 +22818,7 @@ proc linear_map_bump_all_features {c {item ""}} {
 }
 
 ################
-##
+## 
 ################
 proc linear_map_reset_all_features {c} {
   if {[catch {set top_of_features [expr {370+ 2* [font metrics [$c itemcget title -font] -displayof . -linespace]}]}]} {
@@ -22524,7 +22848,7 @@ proc linear_map_reset_all_features {c} {
 }
 
 ################
-##
+## 
 ################
 proc linear_map_bump_boxlabels_find_overlap_and_move {c item {exclude {}}} {
   ## don't bump previously moved items:[$c bind $item <<Moved>>] == 1
@@ -22540,9 +22864,9 @@ proc linear_map_bump_boxlabels_find_overlap_and_move {c item {exclude {}}} {
     ## if overlapping an excluded (locked in) item, move out of the way of that item
     if {(($id == $item) || [lsearch $exclude $id] == -1 || ($id == {}))} {continue}
     foreach {bx1 by1 bx2 by2} [$c bbox $id] {}
-    $c move $item 0 [expr {$by1-$ly2-$spacing}]
+    $c move $item 0 [expr {$by1-$ly2-$spacing}]  
     set boxid [$c find withtag "$item.box"]
-    $c move $boxid 0 [expr {$by1-$ly2-$spacing}]
+    $c move $boxid 0 [expr {$by1-$ly2-$spacing}]  
     set connectorid [$c find withtag "$item.connector"]
     $c coords $connectorid [lreplace [$c coords $connectorid] 3 3 [expr {$by1-$spacing}] ]
     lset exclude [lsearch $exclude $id] {}
@@ -22552,7 +22876,7 @@ proc linear_map_bump_boxlabels_find_overlap_and_move {c item {exclude {}}} {
 }
 
 ################
-##
+## 
 ################
 proc linear_map_bump_all_boxlabels {c {item ""}} {
   set exclude [list $item]
@@ -22563,7 +22887,7 @@ proc linear_map_bump_all_boxlabels {c {item ""}} {
 }
 
 ################
-##
+## 
 ################
 proc linear_map_reset_all_boxlabels {c} {
   set bottom_of_features [expr {335}]
@@ -22921,7 +23245,7 @@ proc tagdepth_features {text start end} {
   set result {}
   foreach tag [$text tag names] {
     if {[regexp {f[0-9]+#} $tag]} {
-      set new_tag_range [list]
+      set new_tag_range [list] 
       foreach {a b} [$text tag ranges $tag] {
         if {!([$text compare $start > $b] || [$text compare $end < $a] )} {
           if {[$text compare $start < $a]} {
@@ -22946,7 +23270,7 @@ proc tagdepth_features {text start end} {
         foreach {a b} $new_tag_range {
           foreach {c d} $ll {
             if {!([$text compare $b <= $c] || [$text compare $a >= $d] )} {
-              set overlap 1
+              set overlap 1 
               break
             }
           }
@@ -22992,7 +23316,7 @@ proc tagdepth_features_window {text} {
         foreach {a b} $tag_range {
           foreach {c d} $ll {
             if {!([$text compare $b <= $c] || [$text compare $a >= $d] )} {
-              set overlap 1
+              set overlap 1 
               break
             }
           }
@@ -23061,12 +23385,12 @@ proc scale_canvas {c} {
     set new_font_size [expr {int($info(graphicfontsize) * 1.0 *$new_scale/100.0)}]
     foreach item [$c find all] {
       if {[$c type $item] == "text"} {
-        $c itemconfigure $item -font [list $info(graphicfontfamily) $new_font_size [font actual [$c itemcget $item -font] -weight]]
+        $c itemconfigure $item -font [list $info(graphicfontfamily) $new_font_size [font actual [$c itemcget $item -font] -weight]] 
         if {[$c itemcget $item -width] != ""} {
           $c itemconfigure $item -width [expr {1.0 * $new_scale / $old_scale * [$c itemcget $item -width]}]
         }
       } elseif {[$c type $item] == "arc"} {
-        $c itemconfigure $item -width [expr {[$c itemcget $item -width] * $new_scale / $old_scale}]
+        $c itemconfigure $item -width [expr {[$c itemcget $item -width] * $new_scale / $old_scale}] 
       }
     }
     $c configure -scrollregion [$c bbox all]
@@ -23099,8 +23423,8 @@ proc select_region {w from_index to_index} {
     $w.textarea tag add tempsel tk::anchor$w.textarea insert
     $w.textarea tag add sel tk::anchor$w.textarea insert
   } else {
-    $w.textarea tag add tempsel insert tk::anchor$w.textarea
-    $w.textarea tag add sel insert tk::anchor$w.textarea
+    $w.textarea tag add tempsel insert tk::anchor$w.textarea 
+    $w.textarea tag add sel insert tk::anchor$w.textarea 
 #selection used here - set
   }
   $w.textarea see insert
@@ -23212,7 +23536,7 @@ proc optionscrollbar {s args} {
           grid configure $s
           update idletasks
        }
-    }
+    } 
   }
   $s set {*}$args
 #sputs here $s [grid info $s]
@@ -23234,7 +23558,7 @@ proc optionxscrollbar {s args} {
       wm geometry [winfo toplevel $s] "$x\x[expr {$y+[$s cget -width]}]"
       grid configure $s
       update idletasks
-    }
+    } 
   }
   $s set {*}$args
 }
@@ -23255,7 +23579,7 @@ proc optionyscrollbar {s args} {
       wm geometry [winfo toplevel $s] "[expr {$x+[$s cget -width]+1}]x$y"
       grid configure $s
       update idletasks
-    }
+    } 
   }
   $s set {*}$args
 }
@@ -23278,15 +23602,16 @@ proc toggle_comment {w} {
 proc open_abi {filename {interactive_opening 1}} {
   global abi_info abiwinum
 
-  if {$interactive_opening} {
-    foreach win [lsearch -all -inline -regexp [winfo children .] {.abi_window[0-9]+$}] {
-      if {$abi_info($win,filename) == $filename} {
+
+  foreach win [lsearch -all -inline -regexp [winfo children .] {.abi_window[0-9]+$}] {
+    if {$abi_info($win,filename) == $filename} {
+      if {$interactive_opening} {
         tk_messageBox -message [mc "The file is already being edited."] -type ok -icon info
-        wm deiconify $win
-        raise $win
-        after 100 "focus $win"
-        return $win
       }
+      wm deiconify $win
+      raise $win
+      after 100 "focus $win"
+      return $win
     }
   }
 
@@ -23376,10 +23701,10 @@ proc read_abi_info {filename w} {
               seek $fid $rec_data
               binary scan [read $fid [expr {2*$num_ele}]] S* abi_info($w,processed_data,$track)
             }
-          }
+          } 
           FWO_ {#filter wheel order
             set abi_info($w,filter_wheel) [binary format I $rec_data]
-          }
+          } 
           PBAS {#basecalls
             if {$tag_number == 1 } {
               set type edited
@@ -23415,7 +23740,7 @@ proc read_abi_info {filename w} {
             binary scan [read $fid 8] SSSS abi_info($w,scale_track,0) abi_info($w,scale_track,1) abi_info($w,scale_track,2) abi_info($w,scale_track,3)
           }
           PCON {
-          #KB basecaller phred confidence
+          #KB basecaller phred confidence 
             if {$tag_number == 1 } {
               set type edited
             } else {
@@ -23508,7 +23833,7 @@ proc read_abi_info {filename w} {
 
     if {$version >= 3.00} {
     #read V 3 files
-      #read sample points section
+      #read sample points section 
 sputs reading scf ver 3
       seek $fid $samples_offset
 
@@ -23584,7 +23909,7 @@ sputs reading scf ver 2
     }
   } else {
     set error_status "Wrong Filetype- ABIF not found"
-  }
+  } 
   if {$abi_info($w,basecall_prob_called,edited) == [list]} {
      set abi_info($w,basecall_prob_a,edited) [lrepeat [string length $abi_info($w,basecall,edited)] 0]
      set abi_info($w,basecall_prob_called,edited) $abi_info($w,basecall_prob_a,edited)
@@ -23686,7 +24011,7 @@ proc new_abi_window {w} {
   $b.filemenu add command -label [mc "Print"] -accelerator "$modstring+P" -command "print_abi $w.c"
   bind $w <$modifier-KeyPress-p> "print_abi $w.c"
   $b.filemenu add command -label [mc "New DNA from basecalls"] -accelerator "$modstring+Shift+N" -command "create_window \$abi_info($w,sequence) \"\" \"\[file tail \$abi_info($w,filename)\] basecalls\" linear 0 1 \"\[file tail \$abi_info($w,filename)\] basecalls\""
-  bind $w <Shift-$modifier-KeyPress-n> "create_window \$abi_info($w,sequence) \"\" \"\[file tail \$abi_info($w,filename)\] basecalls\" linear 0 1 \"\[file tail \$abi_info($w,filename)\] basecalls\""
+  bind $w <Shift-$modifier-KeyPress-N> "create_window \$abi_info($w,sequence) \"\" \"\[file tail \$abi_info($w,filename)\] basecalls\" linear 0 1 \"\[file tail \$abi_info($w,filename)\] basecalls\""
   $b.filemenu add separator
   $b.filemenu add command -label [mc "File Info"] -command "after $bugdelay abi_file_info $w"
   $b.filemenu add separator
@@ -23695,10 +24020,17 @@ proc new_abi_window {w} {
 
   ##edit menu
   $b add cascade -menu [menu $b.editbmenu] -label [mc "Edit"]
+  $b.editbmenu add command -label [mc "Copy"] -command "after $bugdelay abi_clip_copy $w" -accelerator "$modstring+C"
+  bind $w <$modifier-KeyPress-c> "after $bugdelay abi_clip_copy $w"
+  bind $w.c <$modifier-KeyPress-c> "after $bugdelay abi_clip_copy $w"
+  $b.editbmenu add command -label [mc "Copy Rev-Com"] -command "after $bugdelay abi_clip_copy $w rev-com" -accelerator "$modstring+Shift+C"
+  bind $w <$modifier-Shift-KeyPress-C> "after $bugdelay abi_clip_copy $w rev-com"
+  bind $w.c <$modifier-Shift-KeyPress-C> "after $bugdelay abi_clip_copy $w rev-com"
   if {([lsearch -exact [package names] "wmf"] > -1)} {
     $b.editbmenu add command -label [mc "Copy as Metafile"] -accelerator "$modstring+C" -command "event generate $w.c <<CopyEMF>>"
   }
 
+  $b.editbmenu add separator
   if {[tk windowingsystem] != "aqua"} {
     $b.editbmenu add command -label [mc "Preferences..."] -command "configure_preferences $w" -accelerator "$modstring+,"
     bind $w <$modifier-KeyPress-comma> "configure_preferences $w"
@@ -23709,7 +24041,7 @@ proc new_abi_window {w} {
   if {[tk windowingsystem] != "aqua"} {
     $b.editbmenu add checkbutton -label [mc "Reverse-Complement"] -command "abi_revcom $w" -variable abi_info($w,rev_com) -onvalue 1 -offvalue 0 -accelerator "$modstring+/"
   } else {
-    $b.editbmenu add checkbutton -label [mc "Reverse-Complement"] -command "abi_revcom $w" -variable abi_info($w,rev_com) -onvalue 1 -offvalue 0
+    $b.editbmenu add checkbutton -label [mc "Reverse-Complement"] -command "abi_revcom $w" -variable abi_info($w,rev_com) -onvalue 1 -offvalue 0 
   }
   bind $w <$modifier-KeyPress-slash> "set abi_info($w,rev_com) \[expr {!\$abi_info($w,rev_com)}\];abi_revcom $w"
   $b.editbmenu add separator
@@ -23720,10 +24052,10 @@ proc new_abi_window {w} {
     $b.editbmenu add command -label [mc "Start/Stop Speak Text..."] -accelerator "" -command "if {!\[info exists info($w,speak_cancel)\]} {speak $w 0} else {speak $w stop}"
 
   }
-
+ 
   $b.editbmenu add separator
   $b.editbmenu add command -label [mc "Toggle Phred"] -accelerator "" -command "abi_toggle_phred $w"
-
+ 
 if {!$info(android)} {
   #add Windows menu stub (menu items are maintained by update_windows_menu procedure)
   $b add cascade -menu [menu $b.windows] -label [mc "Window"]
@@ -23734,6 +24066,9 @@ if {!$info(android)} {
 
   ##help menu
   $b add cascade -menu [menu $b.help1] -label [mc "Help"]
+  $b.help1 add command -label [mc "Calculator..."] -accelerator "$modstring+1" -command "calc" 
+  $b.help1 add command -label [mc "Molecular Reaction Calculator..."] -accelerator "$modstring+2" -command "mol_calc" 
+  $b.help1 add separator
   $b.help1 add command -label [mc "Standard Genetic Code"] -command "after $bugdelay genetic_code_dialog $w"
   $b.help1 add command -label [mc "AA Info"] -command "after $bugdelay aa_info_dialog $w"
 
@@ -23748,17 +24083,17 @@ if {!$info(android)} {
     $b.help1 add command -label [mc "About ApE..."] -command "about_dialog $w"
   } else {
     if {!$info(use_cocoa)} {
-      menu $b.apple
+      menu $b.apple 
       $b add cascade -menu $b.apple
       $b.apple add command -label [mc "About ApE"] -command "about_dialog $w"
       $b.apple add separator
     } else {
     }
-    catch {.menubar.filemenu entryconfigure [mc "New"] -state disabled}
-    catch {.menubar.filemenu entryconfigure [mc "Open..."] -state disabled}
-    catch {  .menubar.filemenu entryconfigure [mc "Open Recent Files"] -state disabled}
+    #catch {.menubar.filemenu entryconfigure [mc "New"] -state disabled}
+    #catch {.menubar.filemenu entryconfigure [mc "Open..."] -state disabled}
+    #catch {  .menubar.filemenu entryconfigure [mc "Open Recent Files"] -state disabled}
       #.menubar.apple entryconfigure [mc "Preferences..."] -state disabled
-     catch { .menubar.apple entryconfigure [mc "About ApE"] -state disabled}
+    # catch { .menubar.apple entryconfigure [mc "About ApE"] -state disabled}
 
     ##set the new window coordinates
     wm geometry $w "+$info(newaquax)+$info(newaquay)"
@@ -23781,12 +24116,15 @@ if {!$info(android)} {
   }
 
   set outputmenu [menu $w.c.outputmenu]
-  $outputmenu add command -label [mc "Save Window"] -accelerator "$modstring+S" -command "abi_save_eps $w.c"
+  $outputmenu add command -label [mc "Copy"] -command "after $bugdelay abi_clip_copy $w" -accelerator "$modstring+C"
+  $outputmenu  add command -label [mc "Copy Rev-Com"] -command "after $bugdelay abi_clip_copy $w rev-com" -accelerator "$modstring+C"
   if {([lsearch -exact [package names] "wmf"] > -1)} {
     $outputmenu add command -label [mc "Copy as Metafile"] -accelerator "$modstring+C" -command "event generate $w.c <<CopyEMF>>"
     bind $w.c <$modifier-KeyPress-c> "event generate $w.c <<CopyEMF>>"
     bind $w.c <<CopyEMF>> "abi_copy_metafile $w.c both"
   }
+  $outputmenu add separator
+  $outputmenu add command -label [mc "Save Window"] -accelerator "$modstring+S" -command "abi_save_eps $w.c" 
   $outputmenu add command -label [mc "Print"] -accelerator "$modstring+P" -command "print_abi $w.c"
   $outputmenu add command -label [mc "New DNA from basecalls"] -accelerator "$modstring+Shift+N" -command "create_window \$abi_info($w,sequence) \"\" \"\[file tail \$abi_info($w,filename)\] basecalls\" linear 0 1 \"\[file tail \$abi_info($w,filename)\] basecalls\""
 
@@ -23794,7 +24132,7 @@ if {!$info(android)} {
   if {[tk windowingsystem] != "aqua"} {
     $outputmenu add checkbutton -label [mc "Reverse-Complement"] -command "abi_revcom $w" -variable abi_info($w,rev_com) -onvalue 1 -offvalue 0 -accelerator "$modstring+/"
   } else {
-    $outputmenu add checkbutton -label [mc "Reverse-Complement"] -command "abi_revcom $w" -variable abi_info($w,rev_com) -onvalue 1 -offvalue 0
+    $outputmenu add checkbutton -label [mc "Reverse-Complement"] -command "abi_revcom $w" -variable abi_info($w,rev_com) -onvalue 1 -offvalue 0 
   }
   $outputmenu add separator
   $outputmenu add command -label [mc "Toggle Phred"] -accelerator "" -command "abi_toggle_phred $w"
@@ -23814,7 +24152,7 @@ if {!$info(android)} {
       #set trace [concat $trace $i [expr {300-$point/8.0}]]
       set trace [concat $trace $i $point]
       incr i
-    }
+    } 
     set trace [$w.c create line $trace -fill $abi_info(colors,[string index $abi_info($w,filter_wheel) $track]) -tags [list scalable trace [string index $abi_info($w,filter_wheel) $track]]]
     $w.c scale $trace 0 0 1 -0.125
   }
@@ -23833,26 +24171,26 @@ if {!$info(android)} {
 
   if {$info(android)} {
     $w.c itemconfigure trace -width 3
-
+  
   }
 
    set trace_top [lindex [$w.c bbox trace] 1]
    set trace_bottom [lindex [$w.c bbox trace] 3]
-   $w.c move trace 0 [expr {35-$trace_top}]
+   $w.c move trace 0 [expr {35-$trace_top}] 
    $w.c scale trace  0 35 1 [expr {($info(abi_default_canvas_height)-45.0)/($trace_bottom-$trace_top*1.0)}]
 
 
   #bug in canvas scale?
     #w set trace_top [lindex [$w.c bbox trace] 1]
     #w set trace_bottom [lindex [$w.c bbox trace] 3]
-    #w $w.c move trace 0 [expr {35-$trace_top}]
+    #w $w.c move trace 0 [expr {35-$trace_top}] 
     #w $w.c scale trace  0 35 1 [expr {($info(abi_default_canvas_height)-45.0)/($trace_bottom-$trace_top)}]
 
    #create fred_graph polygon item (graphs the phred score)
    set phred_graph [$w.c create polygon {-2 300 -2 300 -2 300} -fill {} -outline {} -tags [list phred_graph scalable]]
    $w.c lower $phred_graph
     abi_draw_phred $w
-
+ 
   #create edit box and editing bindings
   $w.c create rectangle 0 0 0 0 -tag editbox -fill {} -outline {}
   $w.c lower editbox
@@ -23879,7 +24217,7 @@ if {!$info(android)} {
   }
 
   bind $w.c <Configure> "if {\[winfo height $w.c\] > 80} {
-    $w.c scale scalable  0 35 1 \[expr {(\[winfo height $w.c\]-45.0)/(\[lindex \[$w.c bbox trace\] 3\]-\[lindex \[$w.c bbox trace\] 1\])*\$abi_info($w,vert_scale)}\]
+    $w.c scale scalable  0 35 1 \[expr {(\[winfo height $w.c\]-45.0)/(\[lindex \[$w.c bbox trace\] 3\]-\[lindex \[$w.c bbox trace\] 1\])*\$abi_info($w,vert_scale)}\] 
     $w.c scale selection 0 -2 1 \[expr {\[winfo height $w.c\]/\[lindex \[$w.c coords selection\] 3\]}\]
     set info(abi_default_canvas_height) \[winfo height $w.c\]
     set info(abi_default_canvas_width) \[winfo width $w.c\]
@@ -23894,7 +24232,7 @@ if {!$info(android)} {
   $w.c lower selection
   $w.c lower $phred_graph
   if {$info(android)} {
-    bind $w <<<<PinchToZoom>> "android_abi_pinch %x %y %s $w"
+    bind $w <<<<PinchToZoom>> "android_abi_pinch %x %y %s $w" 
     bind $w.c <Button-2> "$w.c scan mark \[expr {%x}\]  0"
     bind $w.c <Button2-Motion> "$w.c scan dragto \[expr {%x}\] 0"
     bind $w.c <Button-1> "$w.c scan mark \[expr {%x}\] 0"
@@ -23904,7 +24242,7 @@ if {!$info(android)} {
     bind $w.c <Button-1> "abi_click_select $w.c %x"
     bind $w.c <Shift-Button-1> "abi_shift_select $w.c %x"
   }
-
+ 
   if {([tk windowingsystem] == "win32") && ([lsearch -exact [package names] "tkdnd"] > -1)} {
     dnd bindtarget $w Files <Drop> {HandleFileDrop  %D %T}
   }
@@ -23915,6 +24253,26 @@ if {!$info(android)} {
   update_windows_menu
   set info(open_previous) [linsert $info(open_previous) 0 $abi_info($w,filename)]
   update_open_previous_menu
+}
+
+###########
+## abi copy text
+###########
+proc abi_clip_copy {w  {direction normal}} {
+  global info
+  global tcl_platform
+
+  set text [lindex [abi_get_seq $w sel.first sel.last] 1]
+  if {$direction == "rev-com"} {
+        set text [revcom $text]
+  }
+  clipboard clear 
+  clipboard append -displayof $w $text
+  set info(clipboard_text) $text
+  if {($tcl_platform(platform) == "unix") && ([tk windowingsystem] != "aqua")} {
+    selection own -selection CUT_BUFFER0 $w
+    selection own -selection CLIPBOARD $w
+  }
 }
 
 ###########
@@ -23931,13 +24289,13 @@ proc abi_drag {w x y} {
     toplevel .abitooltip -borderwidth 1 -background black
     if {([tk windowingsystem] == "aqua")} {
       tk::unsupported::MacWindowStyle style .abitooltip help {}; after 40 "catch {raise .abitooltip}"
-    } else {
+    } else { 
       wm overrideredirect .abitooltip 1
     }
     catch {wm attributes .abitooltip -alpha .4}
     grid [set c [canvas .abitooltip.c]] -row 0 -column 0 -sticky nswe
     .abitooltip.c create image 0 0 -image $toolbar_images(button_link)
-    .abitooltip.c configure -scrollregion [$c bbox 1] -width [expr {[lindex [$c bbox 1] 2] - [lindex [$c bbox 1] 0]}] -height [expr {[lindex [$c bbox 1] 3] - [lindex [$c bbox 1] 1]}]
+    .abitooltip.c configure -scrollregion [$c bbox 1] -width [expr {[lindex [$c bbox 1] 2] - [lindex [$c bbox 1] 0]}] -height [expr {[lindex [$c bbox 1] 3] - [lindex [$c bbox 1] 1]}] 
     #set tooltip_x [expr {round($x - [winfo rootx $w])}]
     #set tooltip_y [expr {round($y - [winfo rooty $w])}]
     wm geometry .abitooltip +[expr {$x-$tooltip_x}]+[expr {$y-$tooltip_y}]
@@ -23971,7 +24329,7 @@ proc link_abi {w abi} {
       } else {
         lappend result [list [binary format S* $abi_info($abi,$element\,edited)] [binary format S* $abi_info($abi,$element\,original)]]
       }
-    } elseif {$element eq "basecall"} {
+    } elseif {$element eq "basecall"} {  
       if {$abi_info($abi,$element\,edited) == $abi_info($abi,$element\,original)} {
         lappend result [list $abi_info($abi,$element\,edited) [list]]
       } else {
@@ -24025,7 +24383,7 @@ proc open_linked_abi {w index} {
         binary scan [lindex $data 0] S* abi_info($abi,$element\,edited)
         binary scan [lindex $data 1] S* abi_info($abi,$element\,original)
       }
-    } elseif {$element eq "basecall"} {
+    } elseif {$element eq "basecall"} {  
       if {[lindex $data 1] == [list]} {
         set abi_info($abi,$element\,edited) [lindex $data 0]
         set abi_info($abi,$element\,original) [lindex $data 0]
@@ -24152,7 +24510,7 @@ proc encode_abi {w index} {
 ######
 proc decode_abi {text} {
   global info data_list basecall return_list
-
+  
   set data_list [split [regsub -all {ORIGIN} $text \x0] \x0]
   set header [lindex $data_list 0]
   regsub -all \n $header "" header
@@ -24186,7 +24544,7 @@ proc abi_draw_phred {w} {
   set y1 [lindex [$c bbox $atrace] 3]
   set x0 [lindex [$c bbox $atrace] 0]
   set x1 [lindex [$c bbox $atrace] 2]
-  set y0 [lindex [$c bbox [lindex [$c find withtag basecall] 0]] 3]
+  set y0 [lindex [$c bbox [lindex [$c find withtag basecall] 0]] 3] 
   set yrange [expr {$y1 - $y0 *1.0}]
   if {!$abi_info($w,rev_com)} {
     set phred_coord_list [list $x1 $y1 $x0 $y1 $x0 [expr {$y1-[lindex $abi_info($w,basecall_prob_called,edited) 0]/100.0*$yrange}]]
@@ -24341,8 +24699,12 @@ proc abi_indices {c x {dir +}} {
 proc abi_get_seq {w from to} {
   global abi_info
 
-  foreach {x0 i x1 j} [$w.c bbox all] {break}
-  foreach {s0 i s1 j} [$w.c coords selection] {break}
+  foreach {x0 i x1 j} [$w.c bbox all] {}
+  foreach {s0 i s1 j} [$w.c coords selection] {}
+  if {$s0 == $s1} {
+    set s0 $x0
+    set s1 $x1
+  }
 
   set from [string map "start $x0 end $x1 sel.first $s0 sel.last $s1" $from]
   set to [string map "start $x0 end $x1 sel.first $s0 sel.last $s1" $to]
@@ -24350,7 +24712,7 @@ proc abi_get_seq {w from to} {
   if {$from > $to} {
     set i $from
     set from $to
-    set to $i
+    set to $i   
   }
 
   set seq ""
@@ -24434,7 +24796,7 @@ proc android_abi_pinch {zoom angle state w} {
   global abi_info
   if {$state == 1} {
     set abi_info(android_pinch_start_zoom) $zoom
-    set abi_info(android_pinch_start_x_scale) $abi_info($w,horiz_scale)
+    set abi_info(android_pinch_start_x_scale) $abi_info($w,horiz_scale) 
   } elseif {[info exists abi_info(android_pinch_start_zoom)]} {
     # set degtorad 0.017453292522222223
     if {1 || [expr {abs(cos($angle / 64.0 * $degtorad))}] > 0.82 } {
@@ -24468,7 +24830,7 @@ proc abi_x_scale {w new_scale} {
   global abi_info
     set new_scale [expr {$new_scale/10.0}]
     if {![winfo exists $w.c] || ![winfo exists $w.xs]} {return}
-    set left [lindex [$w.c cget -scrollregion] 0]
+    set left [lindex [$w.c cget -scrollregion] 0] 
     set center [expr {([lindex [$w.xs get] 1] + [lindex [$w.xs get] 0]) / 2.0}]
     set ratio [expr {$new_scale/$abi_info($w,horiz_scale)}]
     $w.c scale all  0 0 $ratio 1
@@ -24500,12 +24862,12 @@ proc abi_file_info {w} {
     $w.info.text insert end "[mc Scaling:][string index $abi_info($w,filter_wheel) 0]:$abi_info($w,scale_track,0),[string index $abi_info($w,filter_wheel) 1]:$abi_info($w,scale_track,1),[string index $abi_info($w,filter_wheel) 2]:$abi_info($w,scale_track,2),[string index $abi_info($w,filter_wheel) 3]:$abi_info($w,scale_track,3)\n"
     $w.info.text insert end "[mc {Run began:}][clock format [clock scan "$abi_info($w,run_date,1) $abi_info($w,run_time,1)"] -format "%l:%M%p %a,%b %d, %Y"]\n"
     $w.info.text insert end "[mc {Run ended:}][clock format [clock scan "$abi_info($w,run_date,2) $abi_info($w,run_time,2)"] -format "%l:%M%p %a,%b %d, %Y"]\n"
-    wm deiconify $w.info
+    wm deiconify $w.info 
   }
 }
 
 ###########
-## returns new canvas with copy of abi trace canvas c from x1 to x2.
+## returns new canvas with copy of abi trace canvas c from x1 to x2.  
 ###########
 proc abi_copy_region {fromc fromx1 fromx2 toc tox1 toy1 xscale yscale {clip_y 0}} {
   global abi_info
@@ -24527,10 +24889,10 @@ proc abi_copy_region {fromc fromx1 fromx2 toc tox1 toy1 xscale yscale {clip_y 0}
 
  ##do all traces at once so you can do only the x region between fromx1 to fromx2
 
-  set Aline [$fromc find withtag {trace && A}]
-  set Cline [$fromc find withtag {trace && C}]
-  set Gline [$fromc find withtag {trace && G}]
-  set Tline [$fromc find withtag {trace && T}]
+  set Aline [$fromc find withtag {trace && A}] 
+  set Cline [$fromc find withtag {trace && C}] 
+  set Gline [$fromc find withtag {trace && G}] 
+  set Tline [$fromc find withtag {trace && T}] 
   set newAcoords [list]
   set newCcoords [list]
   set newGcoords [list]
@@ -24543,11 +24905,11 @@ proc abi_copy_region {fromc fromx1 fromx2 toc tox1 toy1 xscale yscale {clip_y 0}
 #concat over lappend here?
          lappend newAcoords [expr {($xA-$fromx1)*$xscale+$tox1}] [expr {$yA*$yscale+$toy1}]
          if {$yC < $clip_y} {set yC $clip_y}
-         lappend newCcoords [expr {($xC-$fromx1)*$xscale+$tox1}] [expr {$yC*$yscale+$toy1}]
+         lappend newCcoords [expr {($xC-$fromx1)*$xscale+$tox1}] [expr {$yC*$yscale+$toy1}] 
          if {$yG < $clip_y} {set yG $clip_y}
-         lappend newGcoords [expr {($xG-$fromx1)*$xscale+$tox1}] [expr {$yG*$yscale+$toy1}]
+         lappend newGcoords [expr {($xG-$fromx1)*$xscale+$tox1}] [expr {$yG*$yscale+$toy1}] 
          if {$yT < $clip_y} {set yT $clip_y}
-         lappend newTcoords [expr {($xT-$fromx1)*$xscale+$tox1}] [expr {$yT*$yscale+$toy1}]
+         lappend newTcoords [expr {($xT-$fromx1)*$xscale+$tox1}] [expr {$yT*$yscale+$toy1}]     
       }
     }
   } else {
@@ -24557,11 +24919,11 @@ proc abi_copy_region {fromc fromx1 fromx2 toc tox1 toy1 xscale yscale {clip_y 0}
          if {$yA < $clip_y} {set yA $clip_y}
          lappend newAcoords [expr {($xA-$fromx1)*$xscale+$tox1}] [expr {$yA*$yscale+$toy1}]
          if {$yC < $clip_y} {set yC $clip_y}
-         lappend newCcoords [expr {($xC-$fromx1)*$xscale+$tox1}] [expr {$yC*$yscale+$toy1}]
+         lappend newCcoords [expr {($xC-$fromx1)*$xscale+$tox1}] [expr {$yC*$yscale+$toy1}] 
          if {$yG < $clip_y} {set yG $clip_y}
-         lappend newGcoords [expr {($xG-$fromx1)*$xscale+$tox1}] [expr {$yG*$yscale+$toy1}]
+         lappend newGcoords [expr {($xG-$fromx1)*$xscale+$tox1}] [expr {$yG*$yscale+$toy1}] 
          if {$yT < $clip_y} {set yT $clip_y}
-         lappend newTcoords [expr {($xT-$fromx1)*$xscale+$tox1}] [expr {$yT*$yscale+$toy1}]
+         lappend newTcoords [expr {($xT-$fromx1)*$xscale+$tox1}] [expr {$yT*$yscale+$toy1}]     
       }
     }
   }
@@ -24601,7 +24963,7 @@ proc abi_save_scf {w} {
   set fid [open $filename w]
   fconfigure $fid -translation binary
   puts -nonewline $fid $header
-
+  
   #write trace info (samples section)
   foreach track [list 0 1 2 3] base [split $abi_info($w,filter_wheel) ""] {
     set p_delta 0
@@ -24659,7 +25021,7 @@ proc abi_edit_base {w item call} {
   if {[regexp {Shift_L|Alt_L|Meta_L|Ctrl_L} $call]} return
 
   set bclist [$c find withtag basecall]
-  set i [lsearch -exact -integer $bclist $item]
+  set i [lsearch -exact -integer $bclist $item] 
   if {$i == -1} {sputs $item not found in abi_edit; return}
   #need to set $i if rev_com):
   if {$abi_info($w,rev_com)} {
@@ -24843,11 +25205,11 @@ global info abi_info
       }
     }
 
-
+   
     set print_width [expr {($page_width-$pm_left-$pm_right)/1000.0}]
     set print_height [expr {($page_height-$pm_top-$pm_bottom)/1000.0}]
     set line_height_inches [expr {1.0*($print_height)/$info(print_abi_lines_per_page)-0.5}]
-    set line_width_abi_pixels [expr {int($print_width * ($ymax-$ymin)/$line_height_inches)}]
+    set line_width_abi_pixels [expr {int($print_width * ($ymax-$ymin)/$line_height_inches)}] 
     set total_lines [expr {int(ceil (1.0*($xmax- $xmin) / $line_width_abi_pixels))}]
     set total_pages [expr {int(ceil (1.0*$total_lines/$info(print_abi_lines_per_page)))}]
 
@@ -24863,7 +25225,7 @@ global info abi_info
       set header_height_inches 0.5
 
       set line_height_inches [expr {1.0*($print_height-$header_height_inches+0.5)/$info(print_abi_lines_per_page)-0.5}]
-      set line_width_abi_pixels [expr {int($print_width * ($ymax-$ymin)/$line_height_inches)}]
+      set line_width_abi_pixels [expr {int($print_width * ($ymax-$ymin)/$line_height_inches)}] 
       set total_lines [expr {int(ceil (1.0*($xmax- $xmin) / $line_width_abi_pixels))}]
       set total_pages [expr {int(ceil (1.0*$total_lines/$info(print_abi_lines_per_page)))}]
       switch $print_flag {
@@ -24873,7 +25235,7 @@ global info abi_info
           set xmin [expr {int([lindex [$c coords selection] 0])}]
           set xmax [expr {int([lindex [$c coords selection] 2])}]
           if {$xmin == $xmax} {
-            foreach {xmin i xmax j} [$c bbox all] {}
+            foreach {xmin i xmax j} [$c bbox all] {} 
           }
         }
         pagenums {
@@ -24881,15 +25243,15 @@ global info abi_info
             set xmax_temp [expr {$xmin + ($last_page- $first_page + 1)  * $info(print_abi_lines_per_page) * $line_width_abi_pixels}]
             set xmax [expr {($xmax < $xmax_temp) ? $xmax : $xmax_temp}]
         }
-      }
+      } 
 
       set first_line 1
       set last_line [expr {int(ceil (1.0*($xmax- $xmin) / $line_width_abi_pixels))}]
 
-      set Aline [$c find withtag {trace && A}]
-      set Cline [$c find withtag {trace && C}]
-      set Gline [$c find withtag {trace && G}]
-      set Tline [$c find withtag {trace && T}]
+      set Aline [$c find withtag {trace && A}] 
+      set Cline [$c find withtag {trace && C}] 
+      set Gline [$c find withtag {trace && G}] 
+      set Tline [$c find withtag {trace && T}] 
 
 
       if {$abi_info($w,rev_com)} {
@@ -24906,7 +25268,7 @@ global info abi_info
           lappend newAcoords($trace_i) [expr {$xA-$temp_line_start}] [expr {($yA<0)?0: $yA}]
           lappend newCcoords($trace_i) [expr {$xC-$temp_line_start}] [expr {($yC<0)?0: $yC}]
           lappend newGcoords($trace_i) [expr {$xG-$temp_line_start}] [expr {($yG<0)?0: $yG}]
-          lappend newTcoords($trace_i) [expr {$xT-$temp_line_start}] [expr {($yT<0)?0: $yT}]
+          lappend newTcoords($trace_i) [expr {$xT-$temp_line_start}] [expr {($yT<0)?0: $yT}]    
         }
       } else {
         set temp_line_start $xmin
@@ -24924,7 +25286,7 @@ global info abi_info
           lappend newAcoords($trace_i) [expr {$xA-$temp_line_start}] [expr {($yA<0)?0: $yA}]
           lappend newCcoords($trace_i) [expr {$xC-$temp_line_start}] [expr {($yC<0)?0: $yC}]
           lappend newGcoords($trace_i) [expr {$xG-$temp_line_start}] [expr {($yG<0)?0: $yG}]
-          lappend newTcoords($trace_i) [expr {$xT-$temp_line_start}] [expr {($yT<0)?0: $yT}]
+          lappend newTcoords($trace_i) [expr {$xT-$temp_line_start}] [expr {($yT<0)?0: $yT}]    
         }
       }
       set element [lindex [$c find withtag basecall] 0]
@@ -24932,7 +25294,7 @@ global info abi_info
         set print_font [list [font actual [$c itemcget $element -font] -family] [expr {int ([font actual [$c itemcget $element -font] -size]/  ($line_width_abi_pixels/$print_width)*([tk scaling]*72) +0.5)}]]
       } else {
         set print_font [list Courier [expr {int (10 /($line_width_abi_pixels/$print_width)*([tk scaling]*72) +0.5)}]]
-      }
+      } 
 sputs $hDC
       printer job -hdc $hDC start
       toplevel .printer_notifier
@@ -24943,7 +25305,7 @@ sputs $hDC
       wm title .printer_notifier "Printing..."
       regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $w] wgeom winx winy
       wm geometry .printer_notifier "+[expr (($winx<0)?0:$winx)+100]+[expr (($winy<0)?0:$winy)+100]"
-      pack [frame .printer_notifier.frame -relief ridge -bd 3 -width 200]
+      pack [frame .printer_notifier.frame -relief ridge -bd 3 -width 200]      
       pack [label .printer_notifier.frame.message -text "" -width 50 -height 4]
       for {set copies_spooled 1} {$copies_spooled <= $spool_copies} {incr copies_spooled} {
         for {set next_line $first_line} {$next_line <= $last_line} {incr next_line $info(print_abi_lines_per_page)} {
@@ -24958,7 +25320,7 @@ sputs $hDC
                 .printer_notifier.frame.message configure -text "Printing page [expr {$next_line/$info(print_abi_lines_per_page)+1}] of [expr {int(ceil(1.0*$last_line/$info(print_abi_lines_per_page)))}]."
               } else {
                 .printer_notifier.frame.message configure -text "Printing page [expr {$next_line/$info(print_abi_lines_per_page)+1}] of [expr {int(ceil(1.0*$last_line/$info(print_abi_lines_per_page)))}], copy $copies_spooled of $spool_copies."
-              }
+              } 
             } else {
                 .printer_notifier.frame.message configure -text "Printing page [expr {$next_line/$info(print_abi_lines_per_page)+1}] of [expr {int(ceil(1.0*$last_line/$info(print_abi_lines_per_page)))}], copy $copies_printed of $copies."
             }
@@ -24968,7 +25330,7 @@ sputs $hDC
             set current_page_line 0
               #put header at top of page
             gdi map $hDC -logical [expr {int ($line_width_abi_pixels/$print_width)}] -physical $ppi_x -offset [list [expr {int(($pm_left* $ppi_x / 1000))}] [expr {int(($pm_top* $ppi_x / 1000))}]]
-            gdi text $hDC 0 0 -text [regsub -all {%P} $header_text [expr {$next_line/$info(print_abi_lines_per_page)+1}]] -font [list [font actual dnafont -family] 8] -anchor nw -justify left
+            gdi text $hDC 0 0 -text [regsub -all {%P} $header_text [expr {$next_line/$info(print_abi_lines_per_page)+1}]] -font [list [font actual dnafont -family] 8] -anchor nw -justify left 
 
             for {set current_line $next_line} {$current_line <= $last_page_line} {incr current_line} {
               set line_xmin [expr {$xmin + ($current_line - 1) * $line_width_abi_pixels}]
@@ -25037,20 +25399,20 @@ proc print_abi_cocoa {c} {
 
   #set ppi [expr {1.0* ($ymax-$ymin)/$line_height_inches}]
   set ppi [expr {1.0* ([winfo height $c])/$line_height_inches}]
-  set line_width_abi_pixels [expr {int($print_width * $ppi)}]
+  set line_width_abi_pixels [expr {int($print_width * $ppi)}] 
   set total_lines [expr {int(ceil (1.0*($xmax- $xmin) / $line_width_abi_pixels))}]
   set total_pages [expr {int(ceil (1.0*$total_lines/$info(print_abi_lines_per_page)))}]
   set print_x0 0
   set print_dir [tempdir]
   set Aline [$c coords [$c find withtag {trace && A}]]
   set Cline [$c coords [$c find withtag {trace && C}]]
-  set Gline [$c coords [$c find withtag {trace && G}]]
-  set Tline [$c coords [$c find withtag {trace && T}]]
+  set Gline [$c coords [$c find withtag {trace && G}]] 
+  set Tline [$c coords [$c find withtag {trace && T}]] 
   if {$abi_info($w,rev_com)} {
     set trace_i 1
     set Aline [lreverse $Aline]
     set Cline [lreverse $Cline]
-    set Gline [lreverse $Gline]
+    set Gline [lreverse $Gline] 
     set Tline [lreverse $Tline]
   } else {
     set trace_i 0
@@ -25129,10 +25491,10 @@ proc abi_find_dialog {w} {
   #label $s.parent_info -text "[mc Find]:"
   entry $s.find -width 50
   $s.find insert 0 $abi_info(last_find)
-  frame $s.mod_frame
+  frame $s.mod_frame 
     pack [checkbutton  $s.mod_frame.revcom -text [mc "Also find rev-com of string"] -onvalue 1 -offvalue 0 -variable abi_info(find_revcom)] -side left
-    pack [checkbutton  $s.mod_frame.exact -text [mc "As literal"] -onvalue 1 -offvalue 0 -variable abi_info(find_literal) ] -side left
-    pack [checkbutton  $s.mod_frame.wrap -text [mc "Wrap"] -onvalue 1 -offvalue 0 -variable abi_info(find_wrap) ] -side left
+    pack [checkbutton  $s.mod_frame.exact -text [mc "As literal"] -onvalue 1 -offvalue 0 -variable abi_info(find_literal) ] -side left 
+    pack [checkbutton  $s.mod_frame.wrap -text [mc "Wrap"] -onvalue 1 -offvalue 0 -variable abi_info(find_wrap) ] -side left 
   frame $s.action_frame
     pack [button $s.action_frame.next -text [mc "find next"] -command "set abi_info(last_find) \[$s.find get\]; abi_do_find $w \$abi_info(last_find) \$abi_info(find_revcom) \$abi_info(find_literal) \$abi_info(find_wrap) " -default active] -side left  -padx 10 -pady 3
     pack [button $s.action_frame.prev -text [mc "find previous"] -command "set abi_info(last_find) \[$s.find get\]; abi_do_find $w \$abi_info(last_find) \$abi_info(find_revcom) \$abi_info(find_literal) \$abi_info(find_wrap) prev"] -side left  -padx 10 -pady 3
@@ -25142,7 +25504,7 @@ proc abi_find_dialog {w} {
   pack $s.find -side top -fill x -expand true
   pack $s.mod_frame -side top -fill x -expand true
   pack $s.action_frame -side top -fill x -expand true
-
+ 
 
   bind $s <Key-Return> "$s.action_frame.next invoke"
   focus $s
@@ -25232,7 +25594,7 @@ proc abi_do_find {w search_text revcom find_literal wrap {dir next}} {
         if {$wrap} {
           set index [lindex $index_list 0]
         } else {
-          bell
+          bell 
           return
         }
       } else {
@@ -25250,7 +25612,7 @@ proc abi_do_find {w search_text revcom find_literal wrap {dir next}} {
         } elseif {$wrap} {
           set index [lindex $index_list end]
         } else {
-          bell
+          bell 
           return
         }
       }
@@ -25321,7 +25683,7 @@ proc abi_do_find {w search_text revcom find_literal wrap {dir next}} {
     }
     proc ::base64::encode {args} {
 	set base64_en $::base64::base64_en
-
+	
 	# Set the default wrapchar and maximum line length to match
 	# the settings for MIME encoding (RFC 3548, RFC 2045). These
 	# are the settings used by Trf as well. Various RFCs allow for
@@ -25357,7 +25719,7 @@ proc abi_do_find {w search_text revcom find_literal wrap {dir next}} {
 	    # FRINK: nocheck
 	    set [string range [lindex $optionStrings $index] 1 end] $val
 	}
-
+    
 	# [string is] requires Tcl8.2; this works with 8.0 too
 	if {[catch {expr {$maxlen % 2}}]} {
 	    return -code error "expected integer but got \"$maxlen\""
@@ -25446,11 +25808,11 @@ proc abi_do_find {w search_text revcom find_literal wrap {dir next}} {
 		    set c [expr {(($z & 0x3) << 6) | $y}]
 		    append output [binary format ccc $a $b $c]
 		    set nums {}
-		}
+		}		
 	    } elseif {$bits == -1} {
 		# = indicates end of data.  Output whatever chars are left.
 		# The encoding algorithm dictates that we can only have 1 or 2
-		# padding characters.  If x=={}, we must (*) have 12 bits of input
+		# padding characters.  If x=={}, we must (*) have 12 bits of input 
 		# (enough for 1 8-bit output).  If x!={}, we have 18 bits of
 		# input (enough for 2 8-bit outputs).
 		#
@@ -25469,13 +25831,13 @@ proc abi_do_find {w search_text revcom find_literal wrap {dir next}} {
 		} else {
 		    set b [expr {(($w & 0xF) << 4) | (($z & 0x3C) >> 2)}]
 		    append output [binary format cc $a $b]
-		}
+		}		
 		break
 	    } else {
 		# RFC 2045 says that line breaks and other characters not part
 		# of the Base64 alphabet must be ignored, and that the decoder
 		# can optionally emit a warning or reject the message.  We opt
-		# not to do so, but to just ignore the character.
+		# not to do so, but to just ignore the character. 
 		continue
 	    }
 	}
@@ -25504,7 +25866,7 @@ namespace eval ::sha1 {
 	initK
     }
 
-
+ 
 
     proc ::sha1::sha1 {msg} {
 	variable K
@@ -25531,7 +25893,7 @@ namespace eval ::sha1 {
 	# 4c. append 64-bit length
 	# Our implementation obviously limits string length to 32bits.
 	append msg \0\0\0\0[binary format "I" [expr {8*$msgLen}]]
-
+    
 	#
 	# 7. COMPUTING THE MESSAGE DIGEST
 	#
@@ -25654,7 +26016,7 @@ namespace eval ::sha1 {
 
     # hmac: hash for message authentication
     proc ::sha1::hmac {key text} {
-	# if key is longer than 64 bytes, reset it to SHA1(key).  If shorter,
+	# if key is longer than 64 bytes, reset it to SHA1(key).  If shorter, 
 	# pad it out with null (\x00) chars.
 	set keyLen [string length $key]
 	if {$keyLen > 64} {
@@ -25676,7 +26038,7 @@ namespace eval ::sha1 {
 	    append k_ipad [binary format i [expr {$i ^ 0x36363636}]]
 	    append k_opad [binary format i [expr {$i ^ 0x5c5c5c5c}]]
 	}
-
+    
 	# Perform inner sha1, appending its results to the outer key
 	append k_ipad $text
 	append k_opad [binary format H* [sha1 $k_ipad]]
@@ -25804,7 +26166,7 @@ incr font_size
       if {([$text tag cget $tag -background] != "") && ($tag ne "sel")} {
         lappend bg_formatted_tags $tag
       }
-    }
+    } 
     set char_x [$pdf getCharWidth A]
     set char_y [$pdf getFontMetric height]
     set char_y_descent 0;# [expr {[$pdf getFontMetric bboxt]*1}]
@@ -25830,7 +26192,7 @@ incr font_size
             $pdf rectangle [expr {$col1*$char_x}] [expr {($i-$startline)*$char_y-$char_y_descent}] [expr {(($col2-$col1)*$char_x)}] [expr {$char_y}] -filled 1 -stroke 0
           }
         }
-      }
+      } 
       $pdf setFillColor black
       for {set i $startline} {[$text compare $i <= $endline]} {set i [$text index "$i+1line"]} {
         $pdf setTextPosition 0 $pdf_y
@@ -25856,19 +26218,19 @@ incr font_size
     set line_height_inches [expr {1.0*($print_height-$linespace*($info(print_abi_lines_per_page)-1))/$info(print_abi_lines_per_page)}]
 
     set ppi [expr {1.0* ($ymax-$ymin)/$line_height_inches}]
-    set line_width_abi_pixels [expr {int($print_width * $ppi)}]
+    set line_width_abi_pixels [expr {int($print_width * $ppi)}] 
     set total_lines [expr {int(ceil (1.0*($xmax- $xmin) / $line_width_abi_pixels))}]
     set total_pages [expr {int(ceil (1.0*$total_lines/$info(print_abi_lines_per_page)))}]
     set print_x0 0
     set Aline [$c coords [$c find withtag {trace && A}]]
     set Cline [$c coords [$c find withtag {trace && C}]]
-    set Gline [$c coords [$c find withtag {trace && G}]]
-     set Tline [$c coords [$c find withtag {trace && T}]]
+    set Gline [$c coords [$c find withtag {trace && G}]] 
+     set Tline [$c coords [$c find withtag {trace && T}]] 
     if {$abi_info($w,rev_com)} {
       set trace_i 1
       set Aline [lreverse $Aline]
       set Cline [lreverse $Cline]
-      set Gline [lreverse $Gline]
+      set Gline [lreverse $Gline] 
       set Tline [lreverse $Tline]
     } else {
       set trace_i 0
@@ -25955,7 +26317,7 @@ proc pdf_make_font {tk_font} {
             sputs pdf error:$basefont $err
             return ""
           } else {
-            return $basefont_use
+            return $basefont_use 
           }
         }
       }
@@ -26147,7 +26509,7 @@ proc labarchive_login {w} {
       sputs no LA ID found
       set la_uid {}
     } else {
-      set la_uid [dict get $d users id]
+      set la_uid [dict get $d users id] 
     }
     set info(la_uid) $la_uid
   }
@@ -26269,7 +26631,7 @@ proc labarchive_upload_dialog {w} {
   global info ok dialogblock abi_info
 
   if {![info exists info(la_uid)] || $info(la_uid) eq {} } {
-    labarchive_login $w
+    labarchive_login $w 
   }
 
   if {![info exists info(la_uid)] || $info(la_uid) eq {} } {
@@ -26364,7 +26726,7 @@ sputs $win [info exists  abi_info($win,filename)]
   destroy $s
   set dialogblock 0
   bind . <<RaiseDialogs>> ""
-  unset ok
+  unset ok 
 }
 
 
@@ -26392,7 +26754,7 @@ proc labarchive_generate_containers {t} {
       file mkdir $cont_dir
       set w [lindex [$t item $w_item -values] 0]
       set index_content {}
-      set child_items [$t children $w_item]
+      set child_items [$t children $w_item] 
       if {[string match ".abi_window*" $w]} {
         set child_items [concat $w_item $child_items]
         if {[info exists abi_info($w,filename)] && [file exists $abi_info($w,filename)]} {
@@ -26509,7 +26871,7 @@ proc speak_dialog {w} {
   speak $w stop
   set dialogblock 0
   bind . <<RaiseDialogs>> ""
-  destroy $s
+  destroy $s 
 }
 
 ##############
@@ -26622,6 +26984,7 @@ proc calc {} {
     grid [label .calc.result ] -row 2 -column 1 -sticky nwe
     grid columnconfigure .calc 1 -weight 1
     bind .calc <$modifier-Key-c> "clipboard clear; if {\[.calc.e1 selection present\]} {clipboard append \"\[tk::EntryGetSelection .calc.e1\]\"} else {clipboard append \"\[.calc.result cget -text\]\"}"
+    add_help_menubar .calc
   } else {
     raise .calc
   }
@@ -26658,6 +27021,860 @@ proc calc_update {text} {
 
 return 1
 }
+
+
+
+
+
+
+set info(calc_molar_raction_dict) [list "HiFi 2-3 fragment" [list [list frag1 "" "" 1 frag2 "" "" 1 frag3 "" "" 1] 4 40 fmole 0.3 2 "6 to 40 fmole per 4ul. linear:equimolar, insertion:3-to-1,<200 bp ins:5-to-1"] "HiFi 4-6 fragment" [list [list frag1 "" "" 1 frag3 "" "" 1 frag2 "" "" 1 frag4 "" "" 1 frag5 "" "" 1 frag6 "" "" 1] 4 60 fmole 0.3 2 "40 to 100 fmol per 4ul. linear:equimolar, insertion:3-to-1,<200 bp ins:5-to-1"]  "Gibson 2-3 fragment" [list [list frag1 "" "" 1 frag2 "" "" 1 frag3 "" "" 1] 4 40 fmole 0.3 1.333 "6 to 40 fmole per 4ul. linear:equimolar, insertion:3-to-1,<200 bp ins:5-to-1"] "Gibson 4-6 fragment" [list [list frag1 "" "" 1 frag3 "" "" 1 frag2 "" "" 1 frag4 "" "" 1 frag5 "" "" 1 frag6 "" "" 1] 4 60 fmole 0.3 1.333 "40 to 200 fmole per 4ul. linear:equimolar, insertion:3-to-1,<200 bp ins:5-to-1"] "SapTrap" [list [list plasmid1 "" "" 1 plasmid2 "" "" 1 plasmid3 "" "" 1 oligo1 0.06 16.5 3 oligo2 0.06 16.5 3 oligo3 0.06 16.5  3] 2.5 30 nM 0.3 1.25 "oligos:plasmid at 3:1"]  "Golden Gate" [list [list frag1 "" "" 1 frag2 "" "" 1 frag3 "" "" 1 frag4 "" "" 1 frag5 "" "" 1] 10 6 nM 0.3 5 "adjust final conc. to 3 nM each fragment"] "T4 Ligation" [list [list vector "" "" 1 insert "" "" 3] 10 10 ng/ul 0.3 5 "DNA should be 1-10ng/ul. V:I reatio should be between 1:1 and 1:10."]  "NEB Quick Ligation" [list [list vector "" "" 1 insert "" "" 3] 20 10 ng/ul 0.3 2 "DNA should be 1-10ng/ul. V:I reatio should be between 1:2 and 1:6."]]
+set info(calc_mm_raction_dict) [list "Phusion" [list primer .25 primer .25 enzyme .5 dNTP 1 water 38 buffer 10]]
+set info(calc_defaults) [list stock_conc 1 final_conc 1 final_volume 1  stock_units mM  final_conc_units mM  final_vol_units L molar_reaction_name "HiFi 2-3 fragment" mm_reaction_name "Phusion" num_reactions 1 add_perc 0 molar_first 1 molar_unit1 mg molar_vol1 "/mL" molar_unit2 mole molar_vol2 /L mol_wt 1000 molar_unit_MW g/mol molar_vol 1 molar_unit_vol mL]
+
+####################
+#### Molar calculations
+####################
+## todo:
+## show equation
+## output recipe to printer/ clipboard
+## output to clipboard tab delimited
+## output QR to text
+## +/- buttons
+## ok: add description of (X) in molar ratio calculator
+## ok:molar calculator-> mole/ng
+## ok: bigger output text
+proc mol_calc {} {
+  global info temp_info
+  if {[winfo exists .mol_calc]} {
+    raise .mol_calc
+    return
+  }
+
+  array set temp_info $info(calc_defaults)
+  set a [toplevel .mol_calc]
+  wm title .mol_calc [mc "Molecular Biology Calculator"]
+  add_help_menubar .mol_calc
+  grid [ttk::notebook $a.n] -row 1 -column 1 -sticky nswe
+  grid rowconfigure $a 1 -weight 1
+  grid columnconfigure $a 1 -weight 1
+
+
+
+#### Molar Ratio Reaction
+  $a.n add [set t [frame $a.n.tab2]] -sticky nswe -text [mc "Molar Ratio Reaction"]
+
+  grid [label $t.l1 -text "Reaction"] -row 1 -column 1 -sticky e
+  grid [ttk::menubutton $t.reaction -menu $t.reaction.m -textvariable temp_info(molar_reaction_name)] -row 1 -column 2 -sticky w
+  menu $t.reaction.m
+  foreach r_name [dict keys $info(calc_molar_raction_dict)] {
+    $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_change_reaction $t"
+  }
+  $t.reaction.m add separator
+  $t.reaction.m add radiobutton -label "Save New Reaction..." -value [mc "New Reaction"] -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_new_reaction $t 0"
+  $t.reaction.m add command -label "Delete This Reaction..." -command "calc_molar_reaction_new_reaction $t -1"
+
+  grid [set f [frame $t.new_reaction]] -row 1 -column 3 -sticky nwe
+  grid columnconfigure $f 2 -weight 1
+  grid [ttk::entry $f.name  -textvariable temp_info(molar_new_name)] -row 1 -column 2 -sticky we
+  set temp_info(molar_new_name) ""
+  grid [ttk::button $f.save  -text [mc "Save"]  -command "calc_molar_reaction_new_reaction $t 1"] -row 1 -column 3 -sticky we
+
+  grid columnconfigure $t 3 -weight 1
+  grid [set f [frame $t.frags_frame]] -row 2 -column 1 -columnspan 3 -sticky nswe
+  grid [label $f.l1 -text "Fragment Name"] -row 1 -column 1 -sticky w
+  grid [label $f.l2 -text "Size (kb)"] -row 1 -column 2 -sticky w
+  grid [label $f.l3 -text "ng/ul"] -row 1 -column 3 -sticky w
+  grid [label $f.l4 -text "ratio"] -row 1 -column 4 -sticky w
+  grid [label $f.l5_1 -textvariable temp_info(molar_mol_label)] -row 1 -column 5 -sticky w
+  grid [label $f.l5 -text "volume (ul)"] -row 1 -column 6 -sticky w
+  for {set i 0} {$i < 10} {incr i} {
+    grid [ttk::entry $f.name_$i -width 20 -textvariable temp_info(frag_name,$i)] -row [expr {$i+2}] -column 1 -sticky w
+    grid [ttk::spinbox $f.frag_size_$i -width 4 -from 0 -to 100 -increment .1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molar_reaction frag_size,$i" -textvariable temp_info(frag_size,$i)] -row [expr {$i+2}] -column 2 -sticky w
+    grid [ttk::spinbox $f.frag_conc_$i -width 4 -from 10 -to 3000 -increment 10 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molar_reaction frag_conc,$i" -textvariable temp_info(frag_conc,$i)] -row [expr {$i+2}] -column 3 -sticky w
+    grid [ttk::spinbox $f.frag_ratio_$i -width 4 -from 1 -to 20 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molar_reaction frag_ratio,$i" -textvariable temp_info(frag_ratio,$i)] -row [expr {$i+2}] -column 4 -sticky w
+    grid [label $f.u_$i -textvariable temp_info(molar_mol,$i)] -row [expr {$i+2}]  -column 5 -sticky w
+    grid [label $f.v_$i -textvariable temp_info(molar_frag_volume,$i) -font boldlabelfont] -row [expr {$i+2}]  -column 6 -sticky w
+  }
+  grid [label $f.l6 -text "Water"] -row 12 -column 2 -columnspan 4 -sticky e
+  grid [label $f.l7 -textvariable temp_info(total_water) -font boldlabelfont] -row 12 -column 6 -sticky w
+  grid [label $f.l8 -text "DNA Mix Intermediate Volume"] -row 13 -column 2 -columnspan 4 -sticky e
+  grid [label $f.l9 -textvariable temp_info(DNA_intermediate_volume) -font boldlabelfont] -row 13 -column 6 -sticky w
+
+  grid [ttk::separator $t.s1 -orient horizontal] -row 3 -column 1  -columnspan 3 -sticky nswe
+  grid [set f [frame $t.volumes_frame]] -row 4 -column 1 -columnspan 3 -sticky nswe
+  grid [label $f.l1 -text "Reaction Volume (ul)"] -row 1 -column 1 -sticky w
+  grid [ttk::spinbox $f.reaction_volume -width 4 -from 0 -to 100 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molar_reaction reaction_volume" -textvariable temp_info(reaction_volume)] -row 1 -column 2 -sticky w
+  grid [label $f.l2 -text "DNA Mix Volume (ul)"] -row 2 -column 1 -sticky w
+  grid [label $f.l3 -textvariable temp_info(total_dna_volume) -font boldlabelfont] -row 2 -column 2 -sticky w
+  grid [label $f.l4 -text "Enzyme+Buffer Mix Volume"] -row 3 -column 1 -sticky w
+  grid [label $f.l5 -textvariable temp_info(total_enz_volume) -font boldlabelfont] -row 3 -column 2 -sticky w
+
+  grid [ttk::separator $t.s2 -orient horizontal] -row 5 -column 1  -columnspan 3 -sticky nswe
+  grid [set f [frame $t.conditions_frame]] -row 6 -column 1 -columnspan 3 -sticky nswe
+  grid columnconfigure $f 4 -weight 1
+  grid [label $f.l0 -text "Reaction Conditions"] -row 0 -column 1 -sticky w
+  grid [label $f.l1 -text "Final DNA ammount/concentration"] -row 1 -column 1 -sticky w
+  grid [ttk::spinbox $f.dna_conc -width 3 -from 1 -to 1000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molar_reaction final_DNA_conc" -textvariable temp_info(final_DNA_conc)] -row 1 -column 2 -sticky w
+  grid [ttk::menubutton $f.final_dna_units -menu $f.final_dna_units.m -textvariable temp_info(final_DNA_units)] -row 1 -column 3 -sticky w
+  menu $f.final_dna_units.m
+  foreach m [list nM fmole ng ng/ul] {
+    $f.final_dna_units.m add radiobutton -label $m -value $m -variable temp_info(final_DNA_units) -command "calc_molar_reaction final_DNA_units"
+  }
+  grid [label $f.l1_1 -text "1 nM= 1 fmole/ul = 0.001 pmole/ul"] -row 1 -column 4 -columnspan 2 -sticky w 
+  grid [label $f.l2 -text "Minimum pipette volume (ul)"] -row 2 -column 1 -sticky w
+  grid [ttk::spinbox $f.pipette_vol -width 3 -from 0 -to 1 -increment .1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molar_reaction minimum_pipette_volume" -textvariable temp_info(minimum_pipette_volume)] -row 2 -column 2 -sticky w
+  grid [label $f.l4 -text "Enzyme Stock concentration (X)"] -row 3 -column 1 -sticky w
+
+  grid [ttk::menubutton $f.enz_stock_mb -menu $f.enz_stock_mb.m -textvariable temp_info(enz_stock_label)] -row 3 -column 2 -columnspan 2 -sticky we
+  menu $f.enz_stock_mb.m
+    set temp_info(enz_stock_label) ""
+    set temp_info(enz_conc_x) 10
+    foreach {label value} [list "10x (1:9)" 10 "5x (1:4)" 5 "2x (1:1)" 2 "1.33x (3:1)" 1.333 "1.25x (4:1)" 1.25  "DNA Only" 1]  {
+      $f.enz_stock_mb.m add radiobutton -label  $label -value $label -variable temp_info(enz_stock_label) -command "set temp_info(enz_conc_x) $value; grid remove $f.enz_stock;calc_molar_reaction enz_conc_x"
+      if {$temp_info(enz_conc_x) == $value} {
+        set temp_info(enz_stock_label) $label
+      }
+    }
+    $f.enz_stock_mb.m add radiobutton -label "Custom..." -value "" -variable temp_info(enz_stock_label) -command "set temp_info(enz_conc_x) 10; grid configure $f.enz_stock;calc_molar_reaction enz_conc_x"
+
+  grid [ttk::spinbox $f.enz_stock -width 3 -from 1 -to 100 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molar_reaction enz_conc_x" -textvariable temp_info(enz_conc_x)] -row 3 -column 4 -sticky w
+  if {$temp_info(enz_stock_label) ne {}} {
+    grid remove $f.enz_stock
+  }
+  #grid [label $f.l5 -text "10x= 1:9, 2x= 1:1, 1.333x=3:1 etc."] -row 3 -column 5 -columnspan 2 -sticky w
+  grid [set f1 [frame $f.notesframe]] -row 4 -column 1 -columnspan 6 -sticky nwe
+  grid columnconfigure $f1 2 -weight 1
+  grid [label $f1.l6 -text "Reaction Notes"] -row 4 -column 1 -sticky w
+  grid [ttk::entry $f1.com -xscrollcommand "optionscrollbar $f1.com_scroll" -textvariable temp_info(molar_comment) ] -row 4 -column 2  -columnspan 4 -sticky we
+  grid [scrollbar $f1.com_scroll -orient horizontal -command "$f1.com xview"] -row 5 -column 2  -columnspan 4 -sticky we
+  calc_molar_reaction_change_reaction $t
+  
+#### Master Mix Multiplier 
+  $a.n add [set t [frame $a.n.tab3]] -sticky nswe -text [mc "Master Mix Multiplier"]
+  grid [label $t.l1 -text "Reaction"] -row 1 -column 1 -sticky e
+  grid [ttk::menubutton $t.reaction -menu $t.reaction.m -textvariable temp_info(mm_reaction_name)] -row 1 -column 2 -sticky w
+  menu $t.reaction.m
+  foreach r_name [dict keys $info(calc_mm_raction_dict)] {
+    $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_change_reaction $t"
+  }
+  $t.reaction.m add separator
+  $t.reaction.m add radiobutton -label "Save New Reaction..." -value [mc "New Reaction"] -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_new_reaction $t 0"
+  $t.reaction.m add command -label "Delete This Reaction..." -command "calc_mm_reaction_new_reaction $t -1"
+
+  grid [set f [frame $t.new_reaction]] -row 1 -column 3 -sticky nwe
+  grid columnconfigure $f 2 -weight 1
+  grid [ttk::entry $f.name  -textvariable temp_info(new_name)] -row 1 -column 2 -sticky we
+  set temp_info(new_name) ""
+  grid [ttk::button $f.save  -text [mc "Save"]  -command "calc_mm_reaction_new_reaction $t 1"] -row 1 -column 3 -sticky we
+
+  grid columnconfigure $t 3 -weight 1
+
+  grid [set f [frame $t.reac]] -row 2 -column 1 -columnspan 3 -sticky nwe
+  grid [label $f.l6 -text "Single Reaction Volume"] -row 2 -column 1 -sticky e
+  grid [ttk::spinbox $f.reaction_vol -width 6 -from 1 -to 1000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_mm_reaction single_reaction_volume" -textvariable temp_info(single_reaction_volume)] -row 2 -column 2 -sticky w
+  grid [label $f.l2 -text "# Reactions"] -row 3 -column 1 -sticky e
+  grid [ttk::spinbox $f.reactions -width 3 -from 1 -to 1000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_mm_reaction num_reactions" -textvariable temp_info(num_reactions)] -row 3 -column 2 -sticky w
+  grid [label $f.l3 -text "plus %"] -row 4 -column 1 -sticky e
+  grid [ttk::spinbox $f.add_perc -width 3 -from 0 -to 100 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_mm_reaction add_perc" -textvariable temp_info(add_perc)] -row 4 -column 2 -sticky w
+ 
+  grid [set f [frame $t.frags_frame]] -row 5 -column 1 -columnspan 3 -sticky nswe
+  grid [label $f.l1 -text "Component Name"] -row 1 -column 1 -sticky w
+  grid [label $f.l2 -text "Volume/ Reaction"] -row 1 -column 2 -sticky w
+  grid [label $f.l3 -text "Volume"] -row 1 -column 3 -sticky w
+  for {set i 0} {$i < 10} {incr i} {
+    grid [ttk::entry $f.name_$i -width 20 -textvariable temp_info(component_name,$i)] -row [expr {$i+2}] -column 1 -sticky w
+    grid [ttk::spinbox $f.frag_vol_$i -width 4 -from 0 -to 1000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_mm_reaction frag_vol,$i" -textvariable temp_info(frag_vol,$i)] -row [expr {$i+2}] -column 2 -sticky n
+    grid [label $f.v_$i -textvariable temp_info(mm_frag_volume,$i) -font boldlabelfont] -row [expr {$i+2}]  -column 3 -sticky w
+  }
+  grid [label $f.l4 -text "Total Mix Volume"] -row 13 -column 2 -sticky e
+  grid [label $f.l5 -textvariable temp_info(total_mm_volume) -font boldlabelfont] -row 13 -column 3 -sticky w
+  calc_mm_reaction_change_reaction $t
+
+#### Molar Multiplier Calculator
+  $a.n add [set t [frame $a.n.tab4]] -sticky nswe -text [mc "Molarity"]
+
+  grid [ttk::spinbox $t.first -width 4 -from 1 -to 1000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molarity $t molar_first" -textvariable temp_info(molar_first)] -row 1 -column 1 -sticky w
+  grid [ttk::menubutton $t.unit1 -menu $t.unit1.m -textvariable temp_info(molar_unit1)] -row 1 -column 2 -sticky w
+  menu $t.unit1.m
+  foreach m [list g mg ug ng pg mole mmole umole nmole pmole] {
+    $t.unit1.m add radiobutton -label $m -value $m -variable temp_info(molar_unit1) -command "calc_molarity $t unit1"
+  }
+  grid [ttk::menubutton $t.vol1 -menu $t.vol1.m -textvariable temp_info(molar_vol1)] -row 1 -column 3 -sticky w
+  menu $t.vol1.m
+  foreach m [list "" /L /mL /uL] {
+    $t.vol1.m add radiobutton -label $m -value $m -variable temp_info(molar_vol1) -command "calc_molarity $t molar_vol1"
+  }
+
+  grid [label $t.l1 -text "="] -row 1 -column 4 -sticky w
+
+  grid [label $t.l2 -textvariable temp_info(molar_second)] -row 1 -column 5 -sticky w
+  grid [ttk::menubutton $t.unit2 -menu $t.unit2.m -textvariable temp_info(molar_unit2)] -row 1 -column 6 -sticky w
+  menu $t.unit2.m
+  foreach m [list g mg ug ng pg mole mmole umole nmole pmole] {
+    $t.unit2.m add radiobutton -label $m -value $m -variable temp_info(molar_unit2) -command "calc_molarity $t unit2"
+  }
+  grid [ttk::menubutton $t.vol2 -menu $t.vol2.m -textvariable temp_info(molar_vol2)] -row 1 -column 7 -sticky w
+  menu $t.vol2.m
+  foreach m [list /L /mL /uL] {
+    $t.vol2.m add radiobutton -label $m -value $m -variable temp_info(molar_vol2) -command "calc_molarity $t molar_vol2"
+  }
+
+  grid columnconfigure $t 8 -weight 1
+  grid [set f [frame $t.mw_frame]] -row 2 -column 1 -columnspan 8 -sticky nswe
+  grid [ttk::spinbox $f.mol_wt -width 4 -from 1 -to 1000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molarity $t mol_wt" -textvariable temp_info(mol_wt)] -row 2 -column 1 -sticky w
+  grid [ttk::menubutton $f.unitmw -menu $f.unitmw.m -textvariable temp_info(molar_unit_MW)] -row 2 -column 2 -sticky w
+  menu $f.unitmw.m
+  foreach m [list g/mol "bases ssDNA" "base pairs dsDNA" "bases RNA"] {
+    $f.unitmw.m add radiobutton -label $m -value $m -variable temp_info(molar_unit_MW) -command "calc_molarity $t unit_MW"
+  }
+
+  grid [set f [frame $t.vol_frame]] -row 3 -column 1 -columnspan 8 -sticky nswe
+  grid [ttk::spinbox $f.vol -width 4 -from 1 -to 1000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_molarity $t molar_vol" -textvariable temp_info(molar_vol)] -row 1 -column 1 -sticky w
+  grid [ttk::menubutton $f.unitv -menu $f.unitv.m -textvariable temp_info(molar_unit_vol)] -row 1 -column 2 -sticky w
+  menu $f.unitv.m
+  foreach m [list L mL uL mole mmole umole nmole g mg ug ng] {
+    $f.unitv.m add radiobutton -label $m -value $m -variable temp_info(molar_unit_vol) -command "calc_molarity $t unit_vol"
+  }
+  grid [label $f.l1 -textvariable temp_info(molar_g_per_l)] -row 1 -column 3 -sticky w
+
+
+  ### Stock dilution Calc
+  #$a.n add [set t [frame $a.n.tab1]] -sticky nswe -text [mc "Stock Dilution"]
+  grid [ttk::separator $t.s1 -orient horizontal] -row 3 -column 1  -columnspan 8 -sticky nswe
+
+  grid [set f [frame $t.dil_frame]] -row 4 -column 1 -columnspan 8 -sticky nswe
+  grid [label $f.l1 -text "Stock Concentration"] -row 1 -column 1 -sticky e
+  grid [ttk::spinbox $f.stock -width 4 -from 0 -to 10000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_stock_dilution_update stock_conc" -textvariable temp_info(stock_conc)] -row 1 -column 2 -sticky w
+  grid [ttk::menubutton $f.stock_units -menu $f.stock_units.m -textvariable temp_info(stock_units)] -row 1 -column 3 -sticky w
+  menu $f.stock_units.m
+  foreach m [list X M mM uM nM pM] {
+    $f.stock_units.m add radiobutton -label $m -value $m -variable temp_info(stock_units) -command "calc_stock_dilution_update stock_units"
+  }
+
+  grid [label $f.l2 -text "Final Concentration"] -row 2 -column 1 -sticky e
+  grid [ttk::spinbox $f.final_conc -width 4 -from 0 -to 10000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_stock_dilution_update final_conc" -textvariable temp_info(final_conc)] -row 2 -column 2 -sticky w
+  grid [ttk::menubutton $f.final_conc_units -menu $f.final_conc_units.m -textvariable temp_info(final_conc_units)] -row 2 -column 3 -sticky w
+  menu $f.final_conc_units.m
+  foreach m [list X M mM uM nM pM] {
+    $f.final_conc_units.m add radiobutton -label $m -value $m -variable temp_info(final_conc_units) -command "calc_stock_dilution_update final_conc_units"
+  }
+
+  grid [label $f.l3 -text "Final Volume"] -row 3 -column 1 -sticky e
+  grid [ttk::spinbox $f.final_vol -width 4 -from 0 -to 10000 -increment 1 -validate key -validatecommand "spinbox_validate %W %P" -command "calc_stock_dilution_update final_volume" -textvariable temp_info(final_volume)] -row 3 -column 2 -sticky w
+  grid [ttk::menubutton $f.final_vol_units -menu $f.final_vol_units.m -textvariable temp_info(final_vol_units)] -row 3 -column 3 -sticky w
+  menu $f.final_vol_units.m
+  foreach m [list L mL uL] {
+    $f.final_vol_units.m add radiobutton -label $m -value $m -variable temp_info(final_vol_units) -command "calc_stock_dilution_update final_vol_units"
+  }
+
+  grid [label $f.l4 -text "Stock"] -row 4 -column 1 -sticky e
+  grid [label $f.stock_vol -textvariable temp_info(stock_volume)  -font boldlabelfont] -row 4 -column 2 -sticky w
+  ##grid [label $f.stock_vol_units  -textvariable temp_info(stock_volume_units)] -row 4 -column 3 -sticky w
+
+  grid [label $f.l5 -text "Water"] -row 5 -column 1 -sticky e
+  grid [label $f.water_volume  -textvariable temp_info(water_volume)  -font boldlabelfont] -row 5 -column 2 -sticky w
+  ##grid [label $f.water_volume_units  -textvariable temp_info(water_volume_units)] -row 5 -column 3 -sticky w
+  calc_stock_dilution_update start
+
+}
+
+
+###########
+proc spinbox_validate {s p} {
+  if {($p ne {} && $p ne {.}) &&  (![string is double $p] || $p < 0)} {
+    return 0
+  } else {
+    after 10 [$s cget -command]
+    return 1
+  }
+}
+
+
+#################
+proc calc_stock_dilution_update {s {p "nn"}} {
+  global temp_info
+  if {[catch {expr {$temp_info(final_volume) *$temp_info(final_conc) * $temp_info(stock_conc)}}] || $temp_info(stock_conc) ==0} {
+    set temp_info(stock_volume) ""
+    set temp_info(water_volume) ""
+    return
+  }
+  if {$p != "nn"} {
+    if {![string is double $p] || $p==""} {
+      return 0
+    }
+    if {[info exists temp_info($s)]} {
+      set temp_info($s) $p
+    }
+  }
+  if {$s eq "stock_units"} {
+    if {$temp_info(stock_units) eq "X"} {
+      set temp_info(final_conc_units) "X"
+    } elseif {$temp_info(final_conc_units) eq "X"} {
+      set temp_info(final_conc_units) $temp_info(stock_units)
+    }
+  }
+  if {$s eq "final_conc_units"} {
+    if {$temp_info(final_conc_units) eq "X"} {
+      set temp_info(stock_units) "X"
+    } elseif {$temp_info(stock_units) eq "X"} {
+      set temp_info(stock_units) $temp_info(final_conc_units)
+    }
+  }
+
+  set unit_diff [expr {10.0** (3* ([lsearch [list M mM uM nM pM X] $temp_info(stock_units)] - [lsearch [list M mM uM nM pM X] $temp_info(final_conc_units)]) )}]
+
+#calculate
+
+   set stock_volume [expr {$temp_info(final_volume) * $temp_info(final_conc) *  $unit_diff /$temp_info(stock_conc)}]
+   set stock_adj_vol_units $temp_info(final_vol_units)
+   set adj_stock_volume $stock_volume
+   while {$adj_stock_volume < 1 && $stock_adj_vol_units ne "uL"} {
+     set adj_stock_volume [expr {1000.0 * $adj_stock_volume}]
+     if {$stock_adj_vol_units eq "L"} {
+       set stock_adj_vol_units "mL"
+     } elseif {$stock_adj_vol_units eq "mL"} {
+       set stock_adj_vol_units "uL"
+     }
+   }
+   set adj_stock_volume [expr {round($adj_stock_volume * 100.0) / 100.0}]
+   set temp_info(stock_volume) "$adj_stock_volume $stock_adj_vol_units"
+
+   set water_volume [expr {($temp_info(final_volume) - $stock_volume)}]
+   set water_adj_vol_units $temp_info(final_vol_units)
+   set adj_water_volume $water_volume
+   while {$adj_water_volume < 1 && $water_adj_vol_units ne "uL"} {
+     set adj_water_volume [expr {1000.0 * $adj_water_volume}]
+     if {$water_adj_vol_units eq "L"} {
+       set water_adj_vol_units "mL"
+     } elseif {$water_adj_vol_units eq "mL"} {
+       set water_adj_vol_units "uL"
+     }
+   }
+   set adj_water_volume [expr {round (100.0 * $adj_water_volume) / 100.0}]
+
+
+   if {$water_volume < 0} {
+      set temp_info(stock_volume) "Error"
+      set temp_info(water_volume) ""
+   } else {
+     set temp_info(water_volume) "$adj_water_volume $water_adj_vol_units"
+   }
+#stock_volume (+stock_volume_units )
+#water_volume (+water_volume_units)
+  calc_update_defaults
+}
+
+#################
+proc calc_molar_reaction_change_reaction {t} {
+  global info temp_info
+
+  grid remove $t.new_reaction
+  set reaction_name $temp_info(molar_reaction_name)
+  if {$reaction_name == "" || ![dict exists $info(calc_molar_raction_dict) $reaction_name]} {
+    set reaction_data  [list [list frag1 0 0 1 frag2 0 0 1] 4 40 nM 0.5 10]
+  } else {
+    set reaction_data  [dict get $info(calc_molar_raction_dict) $reaction_name]
+  }
+  for {set i 0} {$i <10} {incr i} {
+    set temp_info(frag_name,$i) [lindex $reaction_data 0 [expr {$i*4}]]
+    set temp_info(frag_size,$i) [lindex $reaction_data 0 [expr {$i*4+1}]]
+    set temp_info(frag_conc,$i) [lindex $reaction_data 0 [expr {$i*4+2}]]
+    set temp_info(frag_ratio,$i) [lindex $reaction_data 0 [expr {$i*4+3}]]
+  }
+   set temp_info(reaction_volume) [lindex $reaction_data 1]
+   set temp_info(final_DNA_conc) [lindex $reaction_data 2]
+   set temp_info(final_DNA_units) [lindex $reaction_data 3]
+   set temp_info(minimum_pipette_volume) [lindex $reaction_data 4]
+   set temp_info(enz_conc_x) [lindex $reaction_data 5]
+   set temp_info(enz_stock_label) ""
+   grid configure $t.conditions_frame.enz_stock
+   foreach {label value} [list "10x (1:9)" 10 "5x (1:4)" 5 "2x (1:1)" 2 "1.33x (3:1)" 1.333 "1.25x (4:1)" 1.25  "DNA Only" 1]  {
+      if {$temp_info(enz_conc_x) == $value} {
+        set temp_info(enz_stock_label) $label
+        grid remove $t.conditions_frame.enz_stock
+      }
+    }
+
+   set temp_info(molar_comment) [lindex $reaction_data 6]
+
+    $t.reaction.m delete 0 end
+    foreach r_name [dict keys $info(calc_molar_raction_dict)] {
+       $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_change_reaction $t"
+    }
+    $t.reaction.m add separator
+    $t.reaction.m add radiobutton -label "Save New Reaction..." -value [mc "New Reaction"] -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_new_reaction $t 0"
+    $t.reaction.m add command -label "Delete This Reaction..." -command "calc_molar_reaction_new_reaction $t -1"
+    calc_molar_reaction ""
+}
+
+############
+# set info(calc_molar_raction_dict) [list "HiFi" [list [list frag1 1 100 1 frag2 2 200 1] 4 40 nM 0.5 1.333 ""]  "Gibson"  [list [list frag1 3 300 3 frag2 4 400 1] 4 40 nM 0.5 2 ""]]
+proc calc_molar_reaction_new_reaction {t v} {
+  global info temp_info
+  switch $v {
+    0 {
+      grid configure $t.new_reaction
+      $t.reaction.m delete 0 end
+      foreach r_name [dict keys $info(calc_molar_raction_dict)] {
+         $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_change_reaction $t"
+      }
+    }
+    1 {
+     set reaction_name [string trim $temp_info(molar_new_name) " "]
+     if {$reaction_name == ""} {
+        tk_messageBox -message [mc "Please Name the Reaction"] -type ok
+        return
+      } elseif {[dict exists $info(calc_molar_raction_dict) $reaction_name]} {
+        if {[tk_messageBox -message [mc "Overwrite the Reaction: %1s" $reaction_name] -type okcancel] eq "cancel"} {return}  
+      }  
+      set result [list]
+
+      for {set i 0} {$i <10} {incr i} {
+        if {[info exists temp_info(frag_size,$i)] && [info exists  temp_info(frag_conc,$i)] && [info exists temp_info(frag_ratio,$i)] && ![catch {set p [expr {$temp_info(frag_size,$i) * $temp_info(frag_conc,$i) * $temp_info(frag_ratio,$i)}]}] && $p > 0 } {
+          lappend result $temp_info(frag_name,$i) $temp_info(frag_size,$i)  $temp_info(frag_conc,$i) $temp_info(frag_ratio,$i)
+        }
+      }
+
+      dict set info(calc_molar_raction_dict) $temp_info(molar_new_name) [list $result $temp_info(reaction_volume) $temp_info(final_DNA_conc) $temp_info(final_DNA_units) $temp_info(minimum_pipette_volume) $temp_info(enz_conc_x) $temp_info(molar_comment)]
+      set temp_info(molar_reaction_name) $temp_info(molar_new_name)
+      $t.reaction.m delete 0 end
+      foreach r_name [dict keys $info(calc_molar_raction_dict)] {
+         $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_change_reaction $t"
+      }
+      $t.reaction.m add separator
+      $t.reaction.m add radiobutton -label "Save New Reaction..." -value [mc "New Reaction"] -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_new_reaction $t 0"
+      $t.reaction.m add command -label "Delete This Reaction..." -command "calc_molar_reaction_new_reaction $t -1"
+      grid remove $t.new_reaction
+      calc_molar_reaction ""
+    }
+    -1 {
+      set reaction_name $temp_info(molar_reaction_name)
+      if {$reaction_name == "" || ![dict exists $info(calc_molar_raction_dict) $reaction_name]} {
+        set reaction_data  [list "" 0 ]
+        set temp_info(molar_reaction_name) ""
+      } else {
+        dict unset info(calc_molar_raction_dict) $reaction_name
+        $t.reaction.m delete 0 end
+        foreach r_name [dict keys $info(calc_molar_raction_dict)] {
+           $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_change_reaction $t "
+        }
+        $t.reaction.m add separator
+        $t.reaction.m add radiobutton -label "Save New Reaction..." -value [mc "New Reaction"] -variable temp_info(molar_reaction_name) -command "calc_molar_reaction_new_reaction $t 0"
+        $t.reaction.m add command -label "Delete This Reaction..." -command "calc_molar_reaction_new_reaction $t -1"
+        set temp_info(molar_reaction_name) [lindex [dict keys $info(calc_molar_raction_dict)] 0]
+        calc_molar_reaction_change_reaction $t
+      }
+    }
+  }
+
+}
+
+
+#################
+proc calc_molar_reaction {s} {
+  global info temp_info
+#calculate:
+
+
+  set ratio_sum 0
+  for {set i 0} {$i <10} {incr i} {
+    if {![catch {set p [expr {$temp_info(frag_size,$i) * $temp_info(frag_conc,$i) * $temp_info(frag_ratio,$i)}]}] && $p > 0 } {
+      set ratio_sum [expr {$ratio_sum + $temp_info(frag_ratio,$i)}]
+      set valid($i) 1
+    } else {
+      set valid($i) 0
+      set temp_info(molar_frag_volume,$i) ""
+      set temp_info(molar_mol_label) ""
+      set temp_info(molar_mol,$i) ""
+    }
+  }
+
+  if {[catch {set p [expr {$temp_info(final_DNA_conc) * $temp_info(reaction_volume)}]}] || $p <=0 || $temp_info(final_DNA_conc) < 0} {
+    set ratio_sum 0
+  }
+
+  if {$ratio_sum ==0} {
+    foreach var [list total_water  DNA_intermediate_volume  total_dna_volume  total_enz_volume] {
+      set temp_info($var) ""
+    }
+    return
+  }
+  
+
+  if {$temp_info(enz_conc_x) > 1} {
+    set enz_conc_x $temp_info(enz_conc_x)
+  } else {
+    set enz_conc_x 0
+  }
+  
+  if {$enz_conc_x > 1} {
+    set temp_info(total_enz_volume) [expr { round(100.0*$temp_info(reaction_volume) / $temp_info(enz_conc_x))/100.0}]
+    set temp_info(total_dna_volume) [expr { round(100.0*$temp_info(reaction_volume) * (1- 1.0/$temp_info(enz_conc_x)))/100.0 }]
+    set temp_info(DNA_intermediate_volume) [expr { $temp_info(total_dna_volume)}]
+  } else {
+    set temp_info(total_enz_volume) 0
+    set temp_info(total_dna_volume) $temp_info(reaction_volume)
+    set temp_info(DNA_intermediate_volume) [expr { $temp_info(total_dna_volume)}]
+  }
+
+  set min 10000
+  set dna_sum 0
+  set ng_sum 0
+  for {set i 0} {$i <10} {incr i} {
+    if {$valid($i)}  {
+      switch $temp_info(final_DNA_units) {
+        uM {
+          set dna_vol($i) [expr {1.0 *$temp_info(final_DNA_conc)* $temp_info(reaction_volume)  *  $temp_info(frag_ratio,$i) / $ratio_sum   * $temp_info(frag_size,$i) * 650   / $temp_info(frag_conc,$i) }]
+        }
+        nM {
+          set dna_vol($i) [expr {1.0* $temp_info(final_DNA_conc)/1000* $temp_info(reaction_volume) *  $temp_info(frag_ratio,$i) / $ratio_sum  * $temp_info(frag_size,$i) * 650   / $temp_info(frag_conc,$i) }]
+          set temp_info(molar_mol,$i) [expr {1.0 * 1000 * $dna_vol($i) * $temp_info(frag_conc,$i)/($temp_info(frag_size,$i) * 650) }]
+        }
+        fmole {
+          set dna_vol($i) [expr {1.0* $temp_info(final_DNA_conc)/1000 *  $temp_info(frag_ratio,$i) / $ratio_sum  * $temp_info(frag_size,$i) * 650   / $temp_info(frag_conc,$i) }]
+          set temp_info(molar_mol,$i) [expr {1.0 * 1000 * $dna_vol($i) * $temp_info(frag_conc,$i)/($temp_info(frag_size,$i) * 650) }]
+        }
+        ng {
+          set dna_vol($i) [expr {1.0*   $temp_info(frag_ratio,$i) / $ratio_sum  * $temp_info(frag_size,$i)  / $temp_info(frag_conc,$i) }]
+          set ng_sum [expr {$ng_sum + $dna_vol($i) *$temp_info(frag_conc,$i) }]
+        }
+        ng/ul {
+          set dna_vol($i) [expr {1.0*   $temp_info(frag_ratio,$i) / $ratio_sum  * $temp_info(frag_size,$i)  / $temp_info(frag_conc,$i) }]
+          set ng_sum [expr {$ng_sum + $dna_vol($i) *$temp_info(frag_conc,$i) }]
+        }
+        default {
+          set dna_vol($i) 0
+        }
+      }
+      set min [expr {min($min, $dna_vol($i))}]
+      set dna_sum [expr {$dna_sum + $dna_vol($i) }]
+      set temp_info(molar_frag_volume,$i) [format %.2f [expr {round(100*$dna_vol($i))/100.0}]]
+      set temp_info(molar_mol_label) "fmoles"
+    } else {
+      set temp_info(molar_frag_volume,$i) ""
+      set temp_info(molar_mol,$i) ""
+    }
+  }
+
+  ## adjust to total ng if ng/ul concentration (can be done with just sum of fragment sizes, but this eems more intuitive)
+  if {$temp_info(final_DNA_units) eq "ng/ul" || $temp_info(final_DNA_units) eq "ng"} {
+    set min 10000
+    for {set i 0} {$i <10} {incr i} {
+      if {$valid($i)}  {
+        if {$temp_info(final_DNA_units) eq "ng"} {
+          set dna_vol($i) [expr {$temp_info(final_DNA_conc)/ $ng_sum * $dna_vol($i)}]
+        } else {
+          set dna_vol($i) [expr {$temp_info(reaction_volume)* $temp_info(final_DNA_conc)/ $ng_sum * $dna_vol($i)}]
+        }
+        set temp_info(molar_mol,$i) [expr {$temp_info(frag_conc,$i) * $dna_vol($i)}]
+        set min [expr {min($min, $dna_vol($i))}]
+        set dna_sum [expr {$dna_sum + $dna_vol($i) }]
+        set temp_info(molar_frag_volume,$i) [format %.2f [expr {round(100*$dna_vol($i))/100.0}]]
+      }
+    } 
+      set temp_info(molar_mol_label) "ng"
+  }
+
+  set temp_info(total_water) [expr {$temp_info(DNA_intermediate_volume) - $dna_sum}]
+  if {$temp_info(total_water) >= .01} {
+    set min [expr {min($min, $temp_info(total_water))}]
+  }
+
+
+  # adjust to minimum 
+  if {$min < $temp_info(minimum_pipette_volume)} {
+    for {set i 0} {$i <10} {incr i} {
+      if {$valid($i) && $min > 0}  {
+sputs $i $temp_info(minimum_pipette_volume) / $min *  $dna_vol($i)
+        set dna_vol($i) [expr {$temp_info(minimum_pipette_volume) / $min * $dna_vol($i)}]
+        set temp_info(molar_mol,$i) [expr {$temp_info(minimum_pipette_volume)/ $min * $temp_info(molar_mol,$i)}]
+        set dna_sum [expr {$dna_sum + $dna_vol($i) }]
+        set temp_info(molar_frag_volume,$i) [format %.2f [expr {round(100*$dna_vol($i))/100.0}]]
+
+      }
+    }
+
+    set temp_info(DNA_intermediate_volume) [expr {$temp_info(minimum_pipette_volume) / $min * $temp_info(DNA_intermediate_volume)}]
+    set temp_info(total_water) [expr {$temp_info(minimum_pipette_volume) / $min * $temp_info(total_water)}]
+  }
+
+  for {set i 0} {$i <10} {incr i} {
+    if { $temp_info(molar_mol,$i) ne ""} {
+        set temp_info(molar_mol,$i) [format %.2f [expr {round(100 * $temp_info(molar_mol,$i))/100.0}]]
+    }
+  }
+
+
+  if {[catch {set temp_info(DNA_intermediate_volume) [format %.2f [expr {round(100 * $temp_info(DNA_intermediate_volume))/100.0}]]}] || [catch {set temp_info(total_water) [format %.2f [expr {round(100 * $temp_info(total_water))/100.0}]]}] || $temp_info(total_water) < 0} {
+    set temp_info(total_water) ""
+    set temp_info(DNA_intermediate_volume) ""
+    set temp_info(total_enz_volume) ""
+    for {set i 0} {$i <10} {incr i} {
+        set temp_info(molar_mol,$i) ""
+        set temp_info(molar_frag_volume,$i) ""
+    }
+    set temp_info(total_dna_volume)  "Input DNA concentrations are too low to meet final DNA concentration"
+  }
+  #molar_frag_volume,$i
+#total_water
+#DNA_intermediate_volume
+#total_dna_volume
+#total_enz_volume
+
+  calc_update_defaults
+## show new reaction if modified
+}
+
+
+#################
+proc calc_mm_reaction_change_reaction {t} {
+  global info temp_info
+
+  grid remove $t.new_reaction
+  set reaction_name $temp_info(mm_reaction_name)
+  if {$reaction_name == "" || ![dict exists $info(calc_mm_raction_dict) $reaction_name]} {
+    set reaction_data  [list "" 0 ]
+  } else {
+    set reaction_data  [dict get $info(calc_mm_raction_dict) $reaction_name]
+  }
+  set sum 0
+  for {set i 0} {$i <10} {incr i} {
+    set temp_info(component_name,$i) [lindex $reaction_data [expr {$i*2}]]
+    set temp_info(frag_vol,$i) [lindex $reaction_data [expr {$i*2+1}]]
+    if {$temp_info(frag_vol,$i) != "" && [string is double $temp_info(frag_vol,$i)]} {
+      catch {set sum [expr {$sum + $temp_info(frag_vol,$i)}]}
+    }
+  }
+  set temp_info(single_reaction_volume) $sum
+  $t.reaction.m delete 0 end
+  foreach r_name [dict keys $info(calc_mm_raction_dict)] {
+     $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_change_reaction $t"
+  }
+  $t.reaction.m add separator
+  $t.reaction.m add radiobutton -label "Save New Reaction..." -value [mc "New Reaction"] -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_new_reaction $t 0"
+  $t.reaction.m add command -label "Delete This Reaction..." -command "calc_mm_reaction_new_reaction $t -1"
+
+  calc_mm_reaction ""
+}
+
+
+
+############
+proc calc_mm_reaction_new_reaction {t v} {
+  global info temp_info
+  switch $v {
+    0 {
+      grid configure $t.new_reaction
+      $t.reaction.m delete 0 end
+      foreach r_name [dict keys $info(calc_mm_raction_dict)] {
+         $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_change_reaction $t"
+      }
+    }
+    1 {
+     set reaction_name [string trim $temp_info(new_name) " "]
+     if {$reaction_name == ""} {
+        tk_messageBox -message [mc "Please Name the Reaction"] -type ok
+        return
+      } elseif {[dict exists $info(calc_mm_raction_dict) $reaction_name]} {
+        if {[tk_messageBox -message [mc "Overwrite the Reaction: %1s" $reaction_name] -type okcancel] eq "cancel"} {return}  
+      }  
+      set result [list]
+      set sum 0
+      for {set i 0} {$i <10} {incr i} {
+        if {[info exists temp_info(frag_vol,$i)] && $temp_info(frag_vol,$i) !="" && [string is double $temp_info(frag_vol,$i)]} {
+          lappend result $temp_info(component_name,$i) $temp_info(frag_vol,$i)
+          catch {set sum [expr {$sum + $temp_info(frag_vol,$i)}]}
+        }
+      }
+      set temp_info(single_reaction_volume) $sum
+      dict set info(calc_mm_raction_dict) $temp_info(new_name) $result
+      set temp_info(mm_reaction_name) $temp_info(new_name)
+      $t.reaction.m delete 0 end
+      foreach r_name [dict keys $info(calc_mm_raction_dict)] {
+         $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_change_reaction $t"
+      }
+      $t.reaction.m add separator
+      $t.reaction.m add radiobutton -label "Save New Reaction..." -value [mc "New Reaction"] -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_new_reaction $t 0"
+      $t.reaction.m add command -label "Delete This Reaction..." -command "calc_mm_reaction_new_reaction $t -1"
+      grid remove $t.new_reaction
+      calc_mm_reaction ""
+    }
+    -1 {
+      set reaction_name $temp_info(mm_reaction_name)
+      if {$reaction_name == "" || ![dict exists $info(calc_mm_raction_dict) $reaction_name]} {
+        set reaction_data  [list "" 0 ]
+        set temp_info(mm_reaction_name) ""
+      } else {
+        dict unset info(calc_mm_raction_dict) $reaction_name
+        $t.reaction.m delete 0 end
+        foreach r_name [dict keys $info(calc_mm_raction_dict)] {
+           $t.reaction.m add radiobutton -label $r_name -value $r_name -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_change_reaction $t"
+        }
+        $t.reaction.m add separator
+        $t.reaction.m add radiobutton -label "Save New Reaction..." -value [mc "New Reaction"] -variable temp_info(mm_reaction_name) -command "calc_mm_reaction_new_reaction $t 0"
+        $t.reaction.m add command -label "Delete This Reaction..." -command "calc_mm_reaction_new_reaction $t -1"
+        set temp_info(mm_reaction_name) [lindex [dict keys $info(calc_mm_raction_dict)] 0]
+        calc_mm_reaction_change_reaction $t
+      }
+    }
+  }
+
+}
+
+
+
+###########
+proc calc_mm_reaction {s} {
+  global temp_info
+
+ # if {$temp_info(single_reaction_volume) <= 0 || $temp_info(num_reactions) <= 0} {return}
+#calculate:
+  set sum 0
+  for {set i 0} {$i <10} {incr i} {
+    if {[info exists temp_info(frag_vol,$i)] && $temp_info(frag_vol,$i) !="" && [string is double $temp_info(frag_vol,$i)]} {
+     catch {set sum [expr {$sum + $temp_info(frag_vol,$i)}]}
+    }
+  }
+
+  if {[regexp {frag_vol*} $s] } {
+    set temp_info(single_reaction_volume) [expr {round(100.0 * $sum) /100.0}]
+  }
+#frag_volume,$i (based on single_reaction_volume)
+  set sum2 0
+  for {set i 0} {$i <10} {incr i} {
+    if {[info exists temp_info(frag_vol,$i)] && $temp_info(frag_vol,$i) ne {} && $temp_info(single_reaction_volume) ne {} && $temp_info(single_reaction_volume)  >0 && $temp_info(num_reactions) ne {}  && $temp_info(num_reactions) > 0   &&  [string is double $temp_info(frag_vol,$i)] && $sum >0} {
+      if {$s eq "single_reaction_volume"} {
+        set temp_info(frag_vol,$i) [expr {round(100.0 * $temp_info(frag_vol,$i) * $temp_info(single_reaction_volume) / $sum) / 100.0}]
+      }
+      if {$temp_info(add_perc) ne ""} {
+        set temp_info(mm_frag_volume,$i) [expr {round($temp_info(frag_vol,$i) * $temp_info(num_reactions) * (1.0+$temp_info(add_perc)/100.0)*100) /100.0}]
+      } else {
+        set temp_info(mm_frag_volume,$i) [expr {round($temp_info(frag_vol,$i) * $temp_info(num_reactions) * (1.0+0/100.0)*100) /100.0}]
+     }
+      set sum2 [expr {$sum2 + $temp_info(mm_frag_volume,$i)}]
+    } else {
+        set temp_info(mm_frag_volume,$i) ""
+    }
+  }
+#total_mm_volume
+  set temp_info(total_mm_volume) [expr {round(100*$sum2)/100.0}]
+  calc_update_defaults
+
+## change to new reaction if components are edited
+}
+
+
+###########
+proc calc_molarity {t s} {
+  global temp_info
+
+#molar_first
+#molar_unit1
+#molar_vol1
+#molar_unit2
+#molar_vol2 $t.vol2
+
+#calc:molar_second
+
+
+if {($temp_info(molar_unit1) in [list g mg ug ng pg] &&  $temp_info(molar_unit2) in [list mole mmole umole nmole pmole]) || ($temp_info(molar_unit2) in [list g mg ug ng pg] &&  $temp_info(molar_unit1) in [list mole mmole umole nmole pmole])} {
+  grid configure $t.mw_frame
+} else {
+  grid remove $t.mw_frame
+}
+
+  set vol_conv1 1
+  set vol_conv2 1
+  if {$temp_info(molar_vol1) in [list /L /mL /uL]} {
+    grid configure $t.vol2
+    grid configure $t.vol_frame
+    set vol_conv1 [string map [list /L 1 /mL 1e3 /uL 1e6] $temp_info(molar_vol1)]
+    set vol_conv2 [string map [list  /L 1 /mL 1e3 /uL 1e6] $temp_info(molar_vol2)]
+  } else {
+    grid remove $t.vol2
+    grid remove $t.vol_frame
+  }
+
+
+  ## check for blank fields
+  if {[catch {expr {$temp_info(molar_first) * $temp_info(mol_wt) * $temp_info(molar_vol)} }]} {
+    set temp_info(molar_second) ""
+    set temp_info(molar_g_per_l) ""
+    return
+  }
+
+
+set mw_conv 1
+set mw_conv [string map [list g/mol 1 "bases ssDNA" 330 "base pairs dsDNA" 650 "bases RNA" 330] $temp_info(molar_unit_MW)]
+set molecular_weight [expr {1.0 * $temp_info(mol_wt) * $mw_conv}]
+
+set unit_conv1 1
+set unit_conv1 [string map [list g 1 mg 1e-3 ug 1e-6 ng 1e-9 pg 1e-12 mole 1 mmole 1e-3 umole 1e-6 nmole 1e-9 pmole 1e-12] $temp_info(molar_unit1)]
+set unit_conv2 1
+set unit_conv2 [string map [list g 1 mg 1e-3 ug 1e-6 ng 1e-9 pg 1e-12 mole 1 mmole 1e-3 umole 1e-6 nmole 1e-9 pmole 1e-12] $temp_info(molar_unit2)]
+
+if {($temp_info(molar_unit1) in [list g mg ug ng pg] &&  $temp_info(molar_unit2) in [list mole mmole umole nmole pmole])} {
+  set mol2 [expr {1.0 * $temp_info(molar_first) / $molecular_weight * $unit_conv1 / $unit_conv2 * $vol_conv1 / $vol_conv2}]
+} elseif  {($temp_info(molar_unit2) in [list g mg ug ng pg] &&  $temp_info(molar_unit1) in [list mole mmole umole nmole pmole])} {
+  set mol2 [expr {1.0 * $temp_info(molar_first) * $molecular_weight * $unit_conv1 / $unit_conv2 * $vol_conv1 / $vol_conv2}]
+} else {
+  set mol2 [expr {1.0 * $temp_info(molar_first) * $unit_conv1 / $unit_conv2 * $vol_conv1 / $vol_conv2}]
+}
+
+set sig_dig [expr {round(log($mol2)/log(10))}] 
+if {$sig_dig < 0} {
+  set fmt "%.[expr {abs($sig_dig-2)}]f"
+  set mol2 [expr {1.0*round($mol2*10**abs($sig_dig-2)) /10**abs($sig_dig-2)}]
+} else {
+  set fmt "%.2f"
+  set mol2 [expr {round($mol2*100) /100.0}]
+}
+
+set temp_info(molar_second) [format $fmt $mol2]
+
+
+
+  ## set menu $t.vol_frame.unitv.m to units of molar_unit2
+  set f $t.vol_frame
+  $f.unitv.m delete 0 end
+  if {$temp_info(molar_unit2) in [list g mg ug ng pg]} {
+    foreach m [list L mL uL g mg ug ng] {
+      $f.unitv.m add radiobutton -label $m -value $m -variable temp_info(molar_unit_vol) -command "calc_molarity $t unit_vol"
+    }
+    if {$temp_info(molar_unit_vol) ni [list L mL uL g mg ug ng]} {
+      set temp_info(molar_unit_vol) mL
+    }
+  } else {
+    foreach m [list L mL uL mole mmole umole nmole pmole] {
+      $f.unitv.m add radiobutton -label $m -value $m -variable temp_info(molar_unit_vol) -command "calc_molarity $t unit_vol"
+   }
+    if {$temp_info(molar_unit_vol) ni [list L mL uL mole mmole umole nmole pmole]} {
+      set temp_info(molar_unit_vol) mL
+    }
+  }
+#calculate:
+  set unit_conv3 [string map [list  L 1 mL 1e3 uL 1e6 g 1 mg 1e3 ug 1e6 ng 1e9 pg 1e12 mole 1 mmole 1e-3 umole 1e-6 nmole 1e-9 pmole 1e-12] $temp_info(molar_unit_vol)]
+  if {$temp_info(molar_unit_vol) in [list L mL uL]} {
+    set temp_info(molar_g_per_l) " [expr { $temp_info(molar_vol) * $mol2 * $vol_conv2 / $unit_conv3}] $temp_info(molar_unit2)"
+  } else {
+    set temp_info(molar_g_per_l) " [expr { $temp_info(molar_vol) / $mol2 * $vol_conv2 / $unit_conv3}] [string map [list /L L /mL mL /uL uL] $temp_info(molar_vol2)]"
+  }
+#molar_g_per_l
+  calc_update_defaults
+}
+
+###########
+proc calc_update_defaults {} {
+  global temp_info info  
+
+  foreach key $info(calc_defaults) {
+    if {[info exists temp_info($key)]} {
+      dict set info(calc_defaults) $key $temp_info($key)
+    }
+  }
+}
+
+
 
 ##############
 ## show all sites that can be generated keeping the same translation
@@ -26775,7 +27992,7 @@ proc silent_sites {w selected_enzymes} {
 
   bind $a <MouseWheel> {[winfo toplevel %W].text yview scroll [expr {int(1.0 * %D/-$info(mousewheelunits))}] units}
   set outputmenu [add_output_menu $a.textframe.text "Text" text $w]
-  bind $a <Button-1> "focus $a.textframe.text"
+  bind $a <Button-1> "focus $a.textframe.text" 
   bindtags $a.textframe.text [list $a.textframe.text AnalysisText . all]
   wm deiconify $a
   if {[info exists info(last_analysis_xy)]} {
@@ -26787,7 +28004,7 @@ proc silent_sites {w selected_enzymes} {
   $a.textframe.text configure -state disabled
   window_on_screen $a
   focus $a.textframe.text
-}
+} 
 
 ##############
 ## Utility function of Silent sites- coordinate the original seq and enzyme sequence to give the smallest change that has the same translation
@@ -26925,7 +28142,7 @@ proc add_daignostic_site_dialog {w} {
   }
   destroy $dialog
   bind . <<RaiseDialogs>> ""
-  unset ok
+  unset ok 
 
 }
 
@@ -26949,9 +28166,11 @@ proc do_diagnostic_site {w} {
     set end [ix2bp $w.textarea [lindex [$w.textarea tag ranges sel] 1]]
     set DNA "[textarea_get $w.textarea [bp2ix $w.textarea $start] end][textarea_get $w.textarea 1.0 [bp2ix $w.textarea $end]]"
   }
+ 
     #selection used here - ok
   set text_list [split [string toupper $DNA] ""]
   set found [list]
+  findenzymes $w
   ## Find sites and sequences
   switch $info(enz_make_diag_enz) {
     "selected" {
@@ -26963,10 +28182,11 @@ proc do_diagnostic_site {w} {
   }
   set update_counter 0
   set ok 0
+ 
   foreach enz $enz_list {
-    if {![expr {$update_counter %2}]} {update}
+   # if {![expr {$update_counter %2}]} {update}
     # skip metylation requiring enzymes
-    if {$enz in [list BisI BlsI GlaI GluI KroI MalI PcsI DpnI SgeI FspEI LpnPI MspJI MteI PkrI]} {continue}
+    if {$enz in [list AbaSI AoxI BisI BlsI DpnI FspEI GlaI GluI KroI LpnPI MalI MspJI MteI PcsI PkrI SgeI]} {continue}
     set flatpat $enzinfo(flatpat,$enz)
     foreach pat [expr {$flatpat eq [revcom $flatpat] ? [list $flatpat]:[list $flatpat [revcom $flatpat]]}] {
       set pat_list [string map {B BYSKCGT D DRWKAGT H HMWYACT K KGT M MAC N NBDHVKMRYWSACGT R RAG S SGC V VMSRACG W WAT Y YCT b byskcgt d drwkagt h hmwyact k kgt m mac n nbdhvkmrywsacgt r rag s sgc v vmsracg w wat y yct} [split $pat ""]]
@@ -26984,7 +28204,7 @@ proc do_diagnostic_site {w} {
         }
       }
     }
-    incr update_counter
+    incr update_counter 
     if {$ok} {break}
   }
 
@@ -27041,7 +28261,7 @@ proc do_diagnostic_site {w} {
 
     bind $a <MouseWheel> {[winfo toplevel %W].text yview scroll [expr {int(1.0 * %D/-$info(mousewheelunits))}] units}
     set outputmenu [add_output_menu $a.textframe.text "Text" text $w]
-    bind $a <Button-1> "focus $a.textframe.text"
+    bind $a <Button-1> "focus $a.textframe.text" 
     bindtags $a.textframe.text [list $a.textframe.text AnalysisText . all]
     wm deiconify $a
     if {[info exists info(last_analysis_xy)]} {
@@ -27115,7 +28335,7 @@ proc orf_map {w region} {
     lappend potslist([expr {[lindex $pots 0] % 3}]) [list pots [lindex $pots 0]]
   }
 
-  set a [new_analysis_window $w "ORF Map" orf_map]
+  set a [new_analysis_window $w "ORF Map" orf_map]  
 
   grid [canvas $a.c -yscrollcommand "optionscrollbar $a.sy" -xscrollcommand "optionscrollbar $a.sx" -width 700 -height 450 -background white] -row 0 -column 0 -sticky nswe
   grid [scrollbar $a.sy -orient vertical -command "$a.c yview"] -row 0 -column 1 -sticky nswe
@@ -27168,7 +28388,7 @@ proc orf_map {w region} {
     $a.c create line 50 $y $x_right $y -fill black
   }
   $a.c create text 50 405 -text "$info($w,filename)" -anchor nw  -fill black
-  $a.c create text 50 417 -text "ORF Map from $start to [expr {seq_len_mod($end, $seq_len)}]" -anchor nw -fill black
+  $a.c create text 50 417 -text "ORF Map from $start to [expr {seq_len_mod($end, $seq_len)}]" -anchor nw -fill black 
 
   ##make the top row tick marks
   set x [expr {$start-(($start-1) % $tick_incr)-1+$tick_incr}]
@@ -27238,7 +28458,7 @@ proc orf_map {w region} {
         }
         incr j -1
         if {[lindex $rev $j 0] eq "tem" } {
-          set e [$a.c create rectangle $x_pos [expr {250+50*$frame}] [expr {50+[lindex $rev $j 1]*$scale}] [expr {275+50*$frame}] -tags [list orf rev_met_orf] -outline {} -fill $rev_m_s_color -activefill red -disabledfill white]
+          set e [$a.c create rectangle $x_pos [expr {250+50*$frame}] [expr {50+[lindex $rev $j 1]*$scale}] [expr {275+50*$frame}] -tags [list orf rev_met_orf] -outline {} -fill $rev_m_s_color -activefill red -disabledfill white] 
           $a.c bind $e <<Link>> [list [expr {[lindex $rev $j 1] - [lindex $item 1]}] [expr {($start-1) +[lindex $item 1]}] [expr {($start-1) + 3 +[lindex $rev $j 1]}]]
         }
       }
@@ -27247,7 +28467,7 @@ proc orf_map {w region} {
 
 
 
-  $a.c lower orf
+  $a.c lower orf 
   $a.c bind orf <Button-1> "orf_map_link $a $w"
 
   lappend info($w,linked_events) [list $a.c orf <Button-1>]
@@ -27259,7 +28479,7 @@ proc orf_map {w region} {
   bind $a <<ShowLegend>> "$a.c itemconfigure legend -state normal ; $a.c configure -scrollregion \[$a.c bbox all\];  $a.c xview moveto $leg_left"
   bind $a <<HideLegend>> "$a.c itemconfigure legend -state hidden ; $a.c configure -scrollregion \[$a.c bbox all\];  $a.c xview moveto 50"
 
-
+  
   set info($a,orf_show_legend) 1
   if {$info($a,orf_show_legend)} {
     $a.c configure -scrollregion [list $x0 $y0 $x1 $y1] -height [expr {$y1-$y0}]
@@ -27278,7 +28498,7 @@ proc orf_map {w region} {
   bind $a <Shift-MouseWheel> {[winfo toplevel %W].c xview scroll [expr {int(1.0 *%D/-$info(mousewheelunits))}] units}
 
   bind $a <Destroy> "array unset info $a,*"
-  bind $a <Button-1> "focus $a.c"
+  bind $a <Button-1> "focus $a.c" 
   wm deiconify $a
 
   if {[info exists info(last_analysis_xy)]} {
@@ -27300,7 +28520,7 @@ proc orf_map_update_colors {a size} {
     if {$link_list ne {}} {
       if {[lindex $link_list 0] > $size} {
         $a.c itemconfigure $e -state normal
-      } else {
+      } else { 
         $a.c itemconfigure $e -state disabled
       }
     }
@@ -27347,7 +28567,7 @@ proc translation_window {w} {
     set translate_source_text [mc Selection]
     set translate_source sel
   }
-  set tag_list [get_tags $w.textarea [list 1.0 end]]
+  set tag_list [get_tags_exact $w.textarea [list 1.0 end]]
   foreach {tag data} $tag_list {
     if {[regexp {f[0-9]+#} $tag]} {
       set metadata_index [lsearch -exact [lindex $data 2] <<Metadata>>]
@@ -27380,7 +28600,7 @@ proc translation_window {w} {
   grid [radiobutton $dialog.f3.dnone -text [mc "None"] -variable info(translation_window_dna_line) -value none -selectcolor white -activebackground $info(bg_color)] -row 2 -column 1 -sticky w
   grid [radiobutton $dialog.f3.dabove -text [mc "Above"] -variable info(translation_window_dna_line) -value above -selectcolor white -activebackground $info(bg_color)] -row 2 -column 2 -sticky w
   grid [radiobutton $dialog.f3.dbelow -text [mc "Below"] -variable info(translation_window_dna_line) -value below -selectcolor white -activebackground $info(bg_color)] -row 2 -column 3 -sticky w
-  grid [checkbutton $dialog.f3.dcopyhigh -text [mc "Copy Highlight"] -variable info(translation_window_copy_highlight) -onvalue 1 -offvalue 0 -selectcolor white -activebackground $info(bg_color)] -row 3 -column 0 -sticky w
+  grid [checkbutton $dialog.f3.dcopyhigh -text [mc "Copy Highlight"] -variable info(translation_window_copy_highlight) -onvalue 1 -offvalue 0 -selectcolor white -activebackground $info(bg_color)] -row 3 -column 0 -sticky w 
 
   if {!$info(android)} {
     grid [button $dialog.ok -command {set ok 1} -text [mc "OK"] -default active] -row 4 -column 0 -sticky n -padx 10 -pady 3
@@ -27408,7 +28628,7 @@ proc translation_window {w} {
       set start 0
       set end [ix2bp $w.textarea [$w.textarea index end-1chars]]
     } else {
-#selection used here
+#selection used here 
       set  start [ix2bp $w.textarea [$w.textarea index sel.first]]
       set end [ix2bp $w.textarea [$w.textarea index sel.last]]
     }
@@ -27429,7 +28649,7 @@ proc translation_window {w} {
     set start 1
     set end [string length $dna]
   }
-
+ 
 
   regexp {(^[^*]*)\*?(.*)} [translate $dna 1 1 0] temp mwaa mwxs
   set dna [regexp -inline {(?:...)*} $dna]
@@ -27499,7 +28719,7 @@ proc translation_window {w} {
     } else {
       set lineend [expr {$info(translation_window_revcom)?$start:$end}]
     }
-    if {$info(translation_window_dna_line) == "above"} {
+    if {$info(translation_window_dna_line) == "above"} { 
       if {($info(translation_window_line_numbers) == "left") ||($info(translation_window_line_numbers) == "both")} {
         $a.textframe.text insert end "[format {%7u } $linestart]"
       }
@@ -27525,7 +28745,7 @@ proc translation_window {w} {
       $a.textframe.text insert end "\n"
     }
 
-    if {$info(translation_window_dna_line) == "below"} {
+    if {$info(translation_window_dna_line) == "below"} { 
       if {($info(translation_window_line_numbers) == "left") ||($info(translation_window_line_numbers) == "both")} {
         $a.textframe.text insert end "[format {%7u } $linestart]"
       }
@@ -27552,7 +28772,7 @@ proc translation_window {w} {
            $a.textframe.text tag raise $tag
          }
       }
-    }
+    }    
     $a.textframe.text tag bind linktag <Double-Button-1> "alignlink2 $a.textframe.text $w \[$a.textframe.text index @%x,%y\] goto 1; break"
     $a.textframe.text tag bind linktag <Shift-Double-Button-1> "alignlink2 $a.textframe.text $w \[$a.textframe.text index @%x,%y\] select 1; break"
     $a.textframe.text tag bind linktag <Button-1> "alignlink2 $a.textframe.text $w \[$a.textframe.text index @%x,%y\] goto 0; break"
@@ -27568,7 +28788,7 @@ proc translation_window {w} {
 
   bind $a <MouseWheel> {[winfo toplevel %W].textframe.text yview scroll [expr {int(1.0 * %D/-$info(mousewheelunits))}] units}
   set outputmenu [add_output_menu $a.textframe.text "Text" text $w]
-  bind $a <Button-1> "focus $a.textframe.text"
+  bind $a <Button-1> "focus $a.textframe.text" 
   bindtags $a.textframe.text [list $a.textframe.text AnalysisText . all]
   wm deiconify $a
   $a.textframe.text configure -state disabled
@@ -27589,7 +28809,7 @@ proc canvas_save {c {type ""}} {
   global tcl_platform ps_fontmap
 
   if {[set coords [$c bbox all]] != [list]} {
-    set filetypes {{"Encapsulated Postscript" {.eps}} {"Scalable Vector Graphics" {.svg}} {"Portable Document Format" {.pdf}}}
+    set filetypes {{"Encapsulated Postscript" {.eps}} {"Scalable Vector Graphics" {.svg}} {"Portable Document Format" {.pdf}} {"Power Point Slide" {.pptx}}} 
     if {$tcl_platform(platform) == "windows"} {
       lappend filetypes {"Enhanced Metafile" {.emf}}
     }
@@ -27603,6 +28823,7 @@ proc canvas_save {c {type ""}} {
         emf {set filename "$filename\.emf"}
         svg {set filename "$filename\.svg"}
         pdf {set filename "$filename\.pdf"}
+        pptx {set filename "$filename\.pptx"}
         default {set filename "$filename\.eps"}
       }
     }
@@ -27611,6 +28832,7 @@ proc canvas_save {c {type ""}} {
       .emf {set type ".emf"}
       .svg {set type ".svg"}
       .pdf {set type ".pdf"}
+      .pptx {set type ".pptx"}
       default {set type ".eps"}
     }
 
@@ -27623,8 +28845,8 @@ proc canvas_save {c {type ""}} {
         array unset ps_fontmap *
         get_canv_fontmap $c ps_fontmap
         $c postscript -file $filename -fontmap ps_fontmap -height [expr ($y2-$y1)] -width [expr ($x2-$x1)] -x $x1 -y $y1
-      }
-      .emf {
+      } 
+      .emf {      
         if {([lsearch -exact [package names] "wmf"] > -1)} {
           set hDCname [wmf open]
           set hDC [hdc addr $hDCname]
@@ -27646,7 +28868,19 @@ proc canvas_save {c {type ""}} {
         pdf write -file  $filename
         pdf destroy
       }
-    }
+      .pptx {
+	global info
+        set temp_dir [tempdir]
+        if {[file exists [file join $info(Accdir) blank_ppt_file]]} {
+          if {[catch {file delete -force [file join $temp_dir blank_ppt_file]}]} {return}
+          file copy [file join $info(Accdir) blank_ppt_file] [file join $temp_dir blank_ppt_file]
+          set file [open [file join $temp_dir blank_ppt_file ppt slides slide1.xml] w]
+          puts $file "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><p:sld xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:p=\"http://schemas.openxmlformats.org/presentationml/2006/main\"><p:cSld><p:spTree><p:nvGrpSpPr><p:cNvPr id=\"1\" name=\"\"/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm><a:off x=\"0\" y=\"0\"/><a:ext cx=\"0\" cy=\"0\"/><a:chOff x=\"0\" y=\"0\"/><a:chExt cx=\"0\" cy=\"0\"/></a:xfrm></p:grpSpPr>[canvas_to_xml $c]</p:spTree><p:extLst><p:ext uri=\"{BB962C8B-B14F-4D97-AF65-F5344CB8AC3E}\"><p14:creationId xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\" val=\"3505383029\"/></p:ext></p:extLst></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>"
+          close $file
+          zip::mkzip $filename -directory [file join $temp_dir blank_ppt_file]
+        }
+      }
+    } 
   }
 }
 
@@ -27668,7 +28902,7 @@ proc get_canv_fontmap {c fontmap} {
         if {[lsearch -exact $tk_fonts "$family\_$weight"] > -1} {
           set ps_font [lindex $ps_fonts [lsearch -exact $tk_fonts "$family\_$weight"]]
         } elseif {[font metrics $font -fixed]} {
-          set ps_font Courier
+          set ps_font Courier  
         } else {
           set ps_font Helvetica
         }
@@ -27694,7 +28928,7 @@ proc print_canvas {c {dialog_parent ""}} {
     if {[winfo ismapped $c]} {
       set dialog_parent $c
     } else {
-      tk_messageBox -message "bad window parent: $c" -icon error
+      tk_messageBox -message "bad window parent: $c" -icon error 
       return
     }
   }
@@ -27880,7 +29114,7 @@ proc print_text_win32 {t} {
         }
         selection {
           if {[$t tag ranges sel] != ""} {
-#selection used here
+#selection used here 
             set first_line [expr {int([$t index sel.first\linestart])}]
             set last_line [expr {int([$t index sel.last\linestart])}]
           } else {
@@ -27892,7 +29126,7 @@ proc print_text_win32 {t} {
             set first_line [expr {int((($first_page-1)*$lines_per_page)+1.0)}]
             set last_line [expr {int(($last_page)*$lines_per_page*1.0)}]
         }
-      }
+      } 
       printer job -hdc $hDC start
       toplevel .printer_notifier
       #wm attributes .printer_notifier -topmost 1
@@ -27903,7 +29137,7 @@ proc print_text_win32 {t} {
       wm title .printer_notifier "Printing..."
       regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry [winfo toplevel $t]] wgeom winx winy
       wm geometry .printer_notifier "+[expr (($winx<0)?0:$winx)+100]+[expr (($winy<0)?0:$winy)+100]"
-      pack [frame .printer_notifier.frame -relief ridge -bd 3 -width 200]
+      pack [frame .printer_notifier.frame -relief ridge -bd 3 -width 200]      
       pack [label .printer_notifier.frame.message -text "" -width 50 -height 4]
       for {set copies_spooled 1} {$copies_spooled <= $spool_copies} {incr copies_spooled} {
         for {set next_line $first_line} {$next_line <= $last_line} {set next_line [expr {$next_line+$lines_per_page}]} {
@@ -27921,7 +29155,7 @@ proc print_text_win32 {t} {
                 .printer_notifier.frame.message configure -text "Printing page [expr {$next_line/$lines_per_page+1}] of [expr {int(1.0*$last_line/$lines_per_page+0.5)}]."
               } else {
                 .printer_notifier.frame.message configure -text "Printing page [expr {$next_line/$lines_per_page+1}] of [expr {int(1.0*$last_line/$lines_per_page+0.5)}], copy $copies_spooled of $spool_copies."
-              }
+              } 
             } else {
                 .printer_notifier.frame.message configure -text "Printing page [expr {$next_line/$lines_per_page+1}] of [expr {int(1.0*$last_line/$lines_per_page+0.5)}], copy $copies_printed of $copies."
             }
@@ -27932,13 +29166,13 @@ proc print_text_win32 {t} {
               if {$info(print_formatted)} {
                 foreach colorblock [get_text_line_props $t $current_line $bg_formatted_tags] {
                   foreach {color start end} $colorblock {
-                    gdi rectangle $hDC [expr {$start*$char_x}] $line_top_y [expr {($end*$char_x)}] [expr {$line_bottom_y}] -fill $color -outline $color
+                    gdi rectangle $hDC [expr {$start*$char_x}] $line_top_y [expr {($end*$char_x)}] [expr {$line_bottom_y}] -fill $color -outline $color 
                   }
                 }
                 for {set i 0} {[$t compare $current_line.$i < $current_line.0\lineend]} {incr i} {
                   #foreach {font bg} [get_text_chraracter_props $t $current_line.$i] {
                   #  if {$bg != {}} {
-                  #    gdi rectangle $hDC [expr {$i*$char_x}] $line_top_y [expr {(($i+1)*$char_x)}] [expr {$line_bottom_y}] -fill $bg -outline $bg
+                  #    gdi rectangle $hDC [expr {$i*$char_x}] $line_top_y [expr {(($i+1)*$char_x)}] [expr {$line_bottom_y}] -fill $bg -outline $bg 
                   #  }
                   #  if {$font == {}} {
                   #    set font $print_font
@@ -27968,7 +29202,7 @@ proc print_text_win32 {t} {
 }
 
 ############
-## Return font and bg color for an index of a text window
+## Return font and bg color for an index of a text window 
 ############
 proc get_text_chraracter_props {text index} {
   set font {}
@@ -27986,7 +29220,7 @@ proc get_text_chraracter_props {text index} {
 }
 
 ############
-## Return list of colors and indices with that color for a row of a text window
+## Return list of colors and indices with that color for a row of a text window 
 ############
 proc get_text_line_props {text line tags} {
   set result [list]
@@ -28305,7 +29539,7 @@ proc canvas_to_hdc {c hdc {bug_workaround 1}} {
             set cmd "$cmd -width $width"
           }
         }
-      }
+      } 
       bitmap {
         #sputs "No handler for item type: Bitmap"
       }
@@ -28433,7 +29667,7 @@ proc text_to_canvas {t startline endline} {
       if {($i >= $startline) && ($i<= $endline)} {
         $c create rectangle [expr {$col1*$char_x}] [expr {($i-$startline)*$char_y-$char_y_descent}] [expr {($col2*$char_x)}] [expr {($i-$startline+1)*$char_y-$char_y_descent}] -fill $color -outline $color
       }
-    }
+    } 
   }
   for {set i $startline} {$i <= $endline} {incr i} {
     for {set j 0} {$j< $linewidth} {incr j} {
@@ -28499,6 +29733,15 @@ proc color_to_svgrgb {color} {
     format #%02x%02x%02x [expr {$r/256}] [expr {$g/256}] [expr {$b/256}]
 }
 
+##############
+## convert named color to xml rgb value
+##############
+proc color_to_xmlrgb {color} {
+    if {$color == ""} {return none}
+    foreach {r g b} [winfo rgb . $color] {}
+  string toupper [format %02x%02x%02x [expr {$r/256}] [expr {$g/256}] [expr {$b/256}]]
+}
+
 proc color_to_keysvgrgb {color} {
     if {$color == ""} {return none}
     foreach {r g b} [winfo rgb . $color] {}
@@ -28510,13 +29753,13 @@ proc color_to_keysvgrgb {color} {
 ##############
 proc canvas_to_svg {c} {
   foreach {x0 y0 x1 y1} [$c bbox all] {}
+  set deg2rad [expr {3.14159/180}]
   set result "<svg id=\"svgbox\" width=\"[expr {$x1-$x0}]px\" height=\"[expr {$y1-$y0}]px\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" preserveAspectRatio=\"xMidYMid meet\" viewBox=\"[lindex [$c bbox all] 0] [lindex [$c bbox all] 1] [expr {[lindex [$c bbox all] 2] - [lindex [$c bbox all] 0]}] [expr {[lindex [$c bbox all] 3] - [lindex [$c bbox all] 1]}]\">\n"
   foreach item [$c find all] {
     if {[$c itemcget $item -state] == "hidden"} {
       continue
     }
     set coords [$c coords $item]
-    set deg2rad [expr {3.14159/180}]
 
     switch [$c type $item] {
       arc {
@@ -28539,7 +29782,7 @@ proc canvas_to_svg {c} {
         set ecoords "[expr {$x0+cos($stop_angle)*$xr}],[expr {$y0-sin($stop_angle)*$yr}]"
 
         set cmd "<path d=\"M $mcoords A$xr,$yr 0 [expr {(abs([$c itemcget $item -extent])>180)?1:0}] 0 $ecoords\" stroke-width=\"[$c itemcget $item -width]\" stroke=\"[color_to_svgrgb [$c itemcget $item -outline]]\" fill=\"[color_to_svgrgb [$c itemcget $item -fill]]\"/>\n"
-      }
+      } 
       bitmap {
         #sputs "No handler for item type: Bitmap"
         set cmd ""
@@ -28668,7 +29911,7 @@ proc canvas_to_rtf {c} {
         set cmd "{\\shp{\\*\\shpinst\\shpleft$x0\\shptop$y0\\shpright$x1\\shpbottom$y1\\shpfhdr0\\shpbxcolumn\\shpbxignore\\shpbypara\\shpbyignore\\shpwr4\\shpwrk0\\shpfblwtxt0\\shpz$z_height\\shplid$shape_id{\\sp{\\sn shapeType}{\\sv 95}}{\\sp{\\sn rotation}{\\sv $start_angle}}{\\sp{\\sn adjustValue}{\\sv $extent_angle}}{\\sp{\\sn adjust2Value}{\\sv $internal_radius}}{\\sp{\\sn fillColor}{\\sv $outline_color}}{\\sp{\\sn fUseShapeAnchor}{\\sv 0}}{\\sp{\\sn fFilled}{\\sv 1}}{\\sp{\\sn fNoFillHitTest}{\\sv 1}}{\\sp{\\sn lineColor}{\\sv 4626167}}{\\sp{\\sn lineWidth}{\\sv 00}}{\\sp{\\sn fLine}{\\sv 0}}}{\\shprslt}}"
         incr shape_id
         incr z_height
-      }
+      } 
       bitmap {
         #sputs "No handler for item type: Bitmap"
         set cmd ""
@@ -28689,7 +29932,7 @@ proc canvas_to_rtf {c} {
           set y0 [expr {int(([lindex $coords 1] + $y_offset) * 20)}]
           set x1 [expr {int(([lindex $coords 2] + $x_offset) * 20)}]
           set y1 [expr {int(([lindex $coords 3] + $y_offset) * 20)}]
-
+         
           set cmd "{\\shp{\\*\\shpinst\\shpleft$x0\\shptop$y0\\shpright$x1\\shpbottom$y1\\shpfhdr0\\shpbxcolumn\\shpbxignore\\shpbypara\\shpbyignore\\shpwr4\\shpwrk0\\shpfblwtxt0\\shpz$z_height\\shplid$shape_id{\\sp{\\sn shapeType}{\\sv 20}}
 {\\sp{\\sn lineColor}{\\sv $line_color}}{\\sp{\\sn lineWidth}{\\sv $line_width}}{\\sp{\\sn fArrowheadsOK}{\\sv 1}}{\\sp{\\sn fLine}{\\sv 1}}{\\sp{\\sn lineType}{\\sv 0}}{\\sp{\\sn fUseShapeAnchor}{\\sv 0}}{\\sp{\\sn fFilled}{\\sv 0}}{\\sp{\\sn fNoFillHitTest}{\\sv 1}}}{\\shprslt}}"
           incr shape_id
@@ -28782,7 +30025,7 @@ proc canvas_to_rtf {c} {
           set ymax [expr {max($ymax,$ycoord)}]
           set ymin [expr {min($ymin,$ycoord)}]
         }
-        set line_vert [list 8 [expr {([llength $coords]+2)/2}]]
+        set line_vert [list 8 [expr {([llength $coords]+2)/2}]] 
         foreach {xcoord ycoord} $coords {
           lappend line_vert "([expr {int(20*($xcoord-$xmin))}],[expr {int(20*($ycoord-$ymin))}])"
         }
@@ -28903,6 +30146,427 @@ $result\\par}"
 }
 
 
+
+###########
+## from tcl wiki, zip a directory into a gzip file, modified. Used to save a directory as a zipped pptx file (skipping .DS_Store files)
+###########
+ namespace eval zip {}
+ # zip::timet_to_dos
+ #
+ #        Convert a unix timestamp into a DOS timestamp for ZIP times.
+ #
+ #   DOS timestamps are 32 bits split into bit regions as follows:
+ #                  24                16                 8                 0
+ #   +-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+
+ #   |Y|Y|Y|Y|Y|Y|Y|m| |m|m|m|d|d|d|d|d| |h|h|h|h|h|m|m|m| |m|m|m|s|s|s|s|s|
+ #   +-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+
+ #
+ proc zip::timet_to_dos {time_t} {
+     set s [clock format $time_t -format {%Y %m %e %k %M %S}]
+     scan $s {%d %d %d %d %d %d} year month day hour min sec
+     expr {(($year-1980) << 25) | ($month << 21) | ($day << 16) 
+           | ($hour << 11) | ($min << 5) | ($sec >> 1)}
+ }
+ 
+ # zip::pop --
+ #
+ #        Pop an element from a list
+ #
+ proc zip::pop {varname {nth 0}} {
+     upvar $varname args
+     set r [lindex $args $nth]
+     set args [lreplace $args $nth $nth]
+     return $r
+ }
+ 
+ # zip::walk --
+ #
+ #        Walk a directory tree rooted at 'path'. 
+ #
+proc zip::walk {base {path {}}} {
+     set result {}
+     set files [glob -nocomplain -tails -types f -directory $base [file join $path *]]
+     lappend files {*}[glob -nocomplain -tails -types f -directory $base [file join $path .*]]
+     foreach file $files {
+       lappend result $file
+     }
+     foreach dir [glob -nocomplain -tails -types d -directory $base [file join $path *]] {
+         set subdir [walk $base  $dir]
+         if {[llength $subdir]>0} {
+             set result [concat $result [list $dir] $subdir]
+         } else {
+             set result [concat $result [list $dir]]
+         }
+     }
+     return $result
+ }
+ 
+ # zip::mkzipfile --
+ #
+ #        Add a single file to a zip archive. The zipchan channel should
+ #        already be open and binary. You may provide a comment for the
+ #        file The return value is the central directory record that
+ #        will need to be used when finalizing the zip archive.
+ #
+ # FIX ME: should  handle the current offset for non-seekable channels
+ #
+ proc zip::mkzipfile {zipchan base path {comment ""}} {
+     set fullpath [file join $base $path]
+     set mtime [timet_to_dos [file mtime $fullpath]]
+     set utfpath [encoding convertto utf-8 $path]
+     set utfcomment [encoding convertto utf-8 $comment]
+     set flags [expr {(1<<11)}] ;# utf-8 comment and path
+     set method 0               ;# store 0, deflate 8
+     set attr 0                 ;# text or binary (default binary)
+     set version 20             ;# minumum version req'd to extract
+     set extra ""
+     set crc 0
+     set size 0
+     set csize 0
+     set data ""
+     set seekable [expr {[tell $zipchan] != -1}]
+     if {[file isdirectory $fullpath]} {
+         set attrex 0x41ff0010  ;# 0o040777 (drwxrwxrwx)
+         append path /
+         set utfpath [encoding convertto utf-8 $path]
+     } elseif {[file executable $fullpath]} {
+         set attrex 0x81ff0080  ;# 0o100777 (-rwxrwxrwx)
+     } else {
+         set attrex 0x81b60020  ;# 0o100666 (-rw-rw-rw-)
+         if {[file extension $fullpath] in {".tcl" ".txt" ".c"}} {
+             set attr 1         ;# text
+         }
+     }
+ 
+     if {[file isfile $fullpath]} {
+         set size [file size $fullpath]
+         if {!$seekable} {set flags [expr {$flags | (1 << 3)}]}
+     }
+ 
+     set offset [tell $zipchan]
+     set local [binary format a4sssiiiiss PK\03\04 \
+                    $version $flags $method $mtime $crc $csize $size \
+                    [string length $utfpath] [string length $extra]]
+     append local $utfpath $extra
+     puts -nonewline $zipchan $local
+ 
+     if {[file isfile $fullpath]} {
+         # If the file is under 2MB then zip in one chunk, otherwize we use
+         # streaming to avoid requiring excess memory. This helps to prevent
+         # storing re-compressed data that may be larger than the source when
+         # handling PNG or JPEG or nested ZIP files.
+         if {$size < 0x00200000} {
+             set fin [open $fullpath rb]
+             set data [read $fin]
+             set crc [zlib crc32 $data]
+             set cdata [zlib deflate $data]
+             if {[string length $cdata] < $size} {
+                 set method 8
+                 set data $cdata
+             }
+             close $fin
+             set csize [string length $data]
+             puts -nonewline $zipchan $data
+         } else {
+             set method 8
+             set fin [open $fullpath rb]
+             set zlib [zlib stream deflate]
+             while {![eof $fin]} {
+                 set data [read $fin 4096]
+                 set crc [zlib crc32 $data $crc]
+                 $zlib put $data
+                 if {[string length [set zdata [$zlib get]]]} {
+                     incr csize [string length $zdata]
+                     puts -nonewline $zipchan $zdata
+                 }
+             }
+             close $fin
+             $zlib finalize
+             set zdata [$zlib get]
+             incr csize [string length $zdata]
+             puts -nonewline $zipchan $zdata
+             $zlib close
+         }
+     
+         if {$seekable} {
+             # update the header if the output is seekable
+             set local [binary format a4sssiiii PK\03\04 \
+                            $version $flags $method $mtime $crc $csize $size]
+             set current [tell $zipchan]
+             seek $zipchan $offset
+             puts -nonewline $zipchan $local
+             seek $zipchan $current
+         } else {
+             # Write a data descriptor record
+             set ddesc [binary format a4iii PK\7\8 $crc $csize $size]
+             puts -nonewline $zipchan $ddesc
+         }
+     }
+ 
+     set hdr [binary format a4ssssiiiisssssii PK\01\02 0x0317 \
+                  $version $flags $method $mtime $crc $csize $size \
+                  [string length $utfpath] [string length $extra]\
+                  [string length $utfcomment] 0 $attr $attrex $offset]
+     append hdr $utfpath $extra $utfcomment
+     return $hdr
+ }
+ 
+ # zip::mkzip --
+ #
+ #        Create a zip archive in 'filename'. If a file already exists it will be
+ #        overwritten by a new file. If '-directory' is used, the new zip archive
+ #        will be rooted in the provided directory.
+ #        -runtime can be used to specify a prefix file. For instance, 
+ #        zip myzip -runtime unzipsfx.exe -directory subdir
+ #        will create a self-extracting zip archive from the subdir/ folder.
+ #        The -comment parameter specifies an optional comment for the archive.
+ #
+ #        eg: zip my.zip -directory Subdir -runtime unzipsfx.exe *.txt
+ # 
+ proc zip::mkzip {filename args} {
+     array set opts {
+         -comment "" -directory ""
+     }
+     
+     while {[string match -* [set option [lindex $args 0]]]} {
+         switch -exact -- $option {
+             -comment { set opts(-comment) [encoding convertto utf-8 [pop args 1]] }
+             -directory {set opts(-directory) [file normalize [pop args 1]] }
+             -- { pop args ; break }
+             default {
+                 break
+             }
+         }
+         pop args
+     }
+ 
+     set zf [open $filename wb]
+     
+     set count 0
+     set cd ""
+
+     if {$opts(-directory) ne ""} {
+         set paths [walk $opts(-directory)]
+     } else {
+         set paths [glob -nocomplain {*}$args]
+     }
+     foreach path $paths {
+         if {[file tail $path] eq ".DS_Store"} {continue}
+         append cd [mkzipfile $zf $opts(-directory) $path]
+         incr count
+     }
+     set cdoffset [tell $zf]
+     set endrec [binary format a4ssssiis PK\05\06 0 0 \
+                     $count $count [string length $cd] $cdoffset\
+                     [string length $opts(-comment)]]
+     append endrec $opts(-comment)
+     puts -nonewline $zf $cd
+     puts -nonewline $zf $endrec
+     close $zf
+
+     return
+  }
+
+
+##############
+## print a canvas to open xml 
+##############
+proc canvas_to_xml {c} {
+  foreach {x0 y0 x1 y1} [$c bbox all] {}
+    set result ""
+    set emuperpixel [expr {int(12700/ [tk scaling])}]
+  set i 1
+  foreach  {canvx0 canvy0 canvx1 canvy1} [$c cget -scrollregion] {}
+  foreach var {canvx0 canvy0 canvx1 canvy1} {set $var [expr {int($emuperpixel * [set $var])}]}
+    
+    foreach item [$c find all] {
+    if {[$c itemcget $item -state] == "hidden"} {
+      continue
+    }
+    foreach {bbx0 bby0 bbx1 bby1} [$c bbox $item] {}
+    foreach var {bbx0 bby0 bbx1 bby1} {set $var [expr {int($emuperpixel * [set $var])}]}
+    set cx [expr {$bbx1 - $bbx0}]
+    set cy [expr {$bby1 - $bby0}]
+
+    switch [$c type $item] {
+	arc {
+	   # continue
+        if {[set outline_color [color_to_xmlrgb [$c itemcget $item -outline]]] eq "none"} continue
+	set start_angle [expr {round([$c itemcget $item -start]* -60000) % (360 * 60000)}]
+	if {[$c itemcget $item -extent] != 0} {
+	    set extent_angle [expr {round([$c itemcget $item -extent]* -60000)}]
+	} else {
+	    set extent_angle 20000
+	}
+        set stop_angle [expr {($start_angle + $extent_angle) % (360 * 60000)}]
+        set line_width [expr {round([$c itemcget $item -width])  * 12700}]
+        foreach {bbx0 bby0 bbx1 bby1} [$c coords $item] {}
+        foreach var {bbx0 bby0 bbx1 bby1} {set $var [expr {round($emuperpixel * [set $var])}]}
+        set cx [expr {$bbx1 - $bbx0}]
+        set cy [expr {$bby1 - $bby0}]
+        set cmd "<p:sp><p:nvSpPr><p:cNvPr id=\"$i\" name=\"\"></p:cNvPr><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x=\"[expr {$bbx0 - $canvx0}]\" y=\"[expr {$bby0 - $canvy0}]\"/><a:ext cx=\"$cx\" cy=\"$cy\"/></a:xfrm><a:prstGeom prst=\"arc\"><a:avLst><a:gd name=\"adj1\" fmla=\"val $start_angle\"/><a:gd name=\"adj2\" fmla=\"val $stop_angle\"/></a:avLst></a:prstGeom><a:ln w=\"$line_width\"><a:solidFill><a:srgbClr val=\"$outline_color\"/></a:solidFill></a:ln></p:spPr></p:sp>\n"
+      }
+	line {
+	   # continue
+        if {[set outline_color [color_to_xmlrgb [$c itemcget $item -fill]]] eq "none"} continue
+        set line_width [expr {round([$c itemcget $item -width]  *12700)}]
+        set first_pt 1
+        set path_text ""
+	set coords [$c coords $item]
+	set minx [lindex $coords 0]
+	set miny [lindex $coords 1]
+	set maxx [lindex $coords 0]
+	set maxy [lindex $coords 1]
+        foreach {xpt ypt} $coords {
+	  set minx [expr {min($minx,$xpt)}]
+	  set miny [expr {min($miny,$ypt)}]
+	  set maxx [expr {max($maxx,$xpt)}]
+	  set maxy [expr {max($maxy,$ypt)}]
+        }
+        foreach {xpt ypt} $coords {
+          if {$first_pt} {
+            append path_text "<a:moveTo><a:pt x=\"[expr {round($emuperpixel * ($xpt-$minx))}]\" y=\"[expr {round($emuperpixel * ($ypt-$miny))}]\"/></a:moveTo>"
+            set first_pt 0
+          } else {
+            append path_text "<a:lnTo><a:pt x=\"[expr {round($emuperpixel * ($xpt-$minx))}]\" y=\"[expr {round($emuperpixel * ($ypt-$miny))}]\"/></a:lnTo>"
+          }
+        }
+	    set cmd "<p:sp><p:nvSpPr><p:cNvPr id=\"$i\" name=\"\"></p:cNvPr><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x=\"[expr {round($emuperpixel * ($minx)) - $canvx0}]\" y=\"[expr {round($emuperpixel * ($miny)) - $canvy0}]\"/><a:ext cx=\"[expr {round($emuperpixel* ($maxx-$minx+2*[$c itemcget $item -width]))}]\" cy=\"[expr {round($emuperpixel* ($maxy-$miny+2*[$c itemcget $item -width]))}]\"/></a:xfrm><a:custGeom><a:pathLst><a:path w=\"$cx\" h=\"$cy\">$path_text</a:path></a:pathLst></a:custGeom><a:noFill/><a:ln w=\"$line_width\"><a:solidFill><a:srgbClr val=\"$outline_color\"/></a:solidFill></a:ln></p:spPr></p:sp>\n"
+      }
+      oval {
+        set outline_color [color_to_xmlrgb [$c itemcget $item -outline]]
+        set fill_color [color_to_xmlrgb [$c itemcget $item -fill]]
+        if {$outline_color eq "none" && $fill_color eq "none"} continue
+        if {$outline_color eq "none"} {
+          set outline_text "<a:noFill/>"
+        } else {
+          set outline_text "<a:solidFill><a:srgbClr val=\"$outline_color\"/></a:solidFill>"
+        }
+        if {$fill_color eq "none"} {
+          set fill_text "<a:noFill/>"
+        } else {
+          set fill_text "<a:solidFill><a:srgbClr val=\"$fill_color\"/></a:solidFill>"
+        }
+        set line_width [expr {round([$c itemcget $item -width] * 12700)}]
+	foreach {bbx0 bby0 bbx1 bby1} [$c coords $item] {}
+        foreach var {bbx0 bby0 bbx1 bby1} {set $var [expr {round($emuperpixel * [set $var])}]}
+        set cx [expr {$bbx1 - $bbx0}]
+        set cy [expr {$bby1 - $bby0}]
+        set cmd "<p:sp><p:nvSpPr><p:cNvPr id=\"$i\" name=\"\"></p:cNvPr><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x=\"[expr {$bbx0 - $canvx0}]\" y=\"[expr {$bby0 - $canvy0}]\"/><a:ext cx=\"$cx\" cy=\"$cy\"/></a:xfrm><a:prstGeom prst=\"ellipse\"><a:avLst/></a:prstGeom>$fill_text<a:ln w=\"$line_width\">$outline_text</a:ln></p:spPr></p:sp>\n"
+      }
+	polygon {
+	  #  continue
+        set outline_color [color_to_xmlrgb [$c itemcget $item -outline]]
+        set fill_color [color_to_xmlrgb [$c itemcget $item -fill]]
+	    if {$outline_color eq "none" && $fill_color eq "none"} {sputs no fill $item;continue}
+        if {[$c coords $item] == ""} continue
+        if {$outline_color eq "none"} {
+          set outline_text "<a:noFill/>"
+        } else {
+          set outline_text "<a:solidFill><a:srgbClr val=\"$outline_color\"/></a:solidFill>"
+        }
+        if {$fill_color eq "none"} {
+          set fill_text "<a:noFill/>"
+        } else {
+          set fill_text "<a:solidFill><a:srgbClr val=\"$fill_color\"/></a:solidFill>"
+        }
+        set line_width [expr {round([$c itemcget $item -width] *  12700)}]
+        set first_pt 1
+        set path_text ""
+ 	set coords [$c coords $item]
+	set minx [lindex $coords 0]
+	set miny [lindex $coords 1]
+	set maxx [lindex $coords 0]
+	set maxy [lindex $coords 1]
+        foreach {xpt ypt} $coords {
+	  set minx [expr {min($minx,$xpt)}]
+	  set miny [expr {min($miny,$ypt)}]
+	  set maxx [expr {max($maxx,$xpt)}]
+	  set maxy [expr {max($maxy,$ypt)}]
+        }
+        foreach {xpt ypt} $coords {
+          if {$first_pt} {
+            append path_text "<a:moveTo><a:pt x=\"[expr {round($emuperpixel * ($xpt-$minx))}]\" y=\"[expr {round($emuperpixel * ($ypt-$miny))}]\"/></a:moveTo>"
+            set first_pt 0
+          } else {
+            append path_text "<a:lnTo><a:pt x=\"[expr {round($emuperpixel * ($xpt-$minx))}]\" y=\"[expr {round($emuperpixel * ($ypt-$miny))}]\"/></a:lnTo>"
+          }
+        }
+	set cmd "<p:sp><p:nvSpPr><p:cNvPr id=\"$i\" name=\"\"></p:cNvPr><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x=\"[expr {round($emuperpixel * $minx) - $canvx0}]\" y=\"[expr {round($emuperpixel * $miny) - $canvy0}]\"/><a:ext cx=\"[expr {round($emuperpixel* ($maxx-$minx+2*[$c itemcget $item -width]))}]\" cy=\"[expr {round($emuperpixel* ($maxy-$miny+2*[$c itemcget $item -width]))}]\"/></a:xfrm><a:custGeom><a:pathLst><a:path w=\"$cx\" h=\"$cy\">$path_text<a:close/></a:path></a:pathLst></a:custGeom>$fill_text<a:ln w=\"$line_width\">$outline_text</a:ln></p:spPr></p:sp>\n"
+      }
+	rectangle {
+	   # continue
+        set outline_color [color_to_xmlrgb [$c itemcget $item -outline]]
+        set fill_color [color_to_xmlrgb [$c itemcget $item -fill]]
+        if {$outline_color eq "none" && $fill_color eq "none"} continue
+        if {$outline_color eq "none"} {
+          set outline_text "<a:noFill/>"
+        } else {
+          set outline_text "<a:solidFill><a:srgbClr val=\"$outline_color\"/></a:solidFill>"
+        }
+        if {$fill_color eq "none"} {
+          set fill_text "<a:noFill/>"
+        } else {
+          set fill_text "<a:solidFill><a:srgbClr val=\"$fill_color\"/></a:solidFill>"
+        }
+        set line_width [expr {round([$c itemcget $item -width] * 12700)}]
+        set cmd "<p:sp><p:nvSpPr><p:cNvPr id=\"$i\" name=\"\"></p:cNvPr><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x=\"[expr {$bbx0 - $canvx0}]\" y=\"[expr {$bby0 - $canvy0}]\"/><a:ext cx=\"$cx\" cy=\"$cy\"/></a:xfrm><a:prstGeom prst=\"rect\"><a:avLst/></a:prstGeom>$fill_text<a:ln w=\"$line_width\">$outline_text</a:ln></p:spPr></p:sp>\n"
+      }
+	text {
+	    #continue
+        if {[$c itemcget $item -text] != "" && [set bbox [$c bbox $item]] !={}} {
+          if {[set angle [$c itemcget $item -angle]] == 0} {
+            set rot ""
+          } else {
+            set rot " rot=\"[expr {round($angle* -60000) % (360 * 60000)}]\""
+          }
+          set text [$c itemcget $item -text] 
+          set font [$c itemcget $item -font]
+          set font_size [expr {round(100*[font actual $font -size])}]
+          set font_family [font actual $font -family]
+          set font_color [color_to_xmlrgb [$c itemcget $item -fill]]
+	  if {[$c itemcget $item -width] ==0} {
+	    set wrap_text  "wrap=\"none\""
+	  } else {
+	    set wrap_text  "wrap=\"square\""
+	  }
+	   if {[$c itemcget $item -justify] eq "center"} {
+	    set align_text  "algn=\"ctr\""
+	  } elseif {[$c itemcget $item -justify] eq "right"} {
+	    set align_text  "algn=\"r\""
+	  } else {
+	    set align_text ""
+	  }
+          set cmd "<p:sp><p:nvSpPr><p:cNvPr id=\"$i\" name=\"\"></p:cNvPr><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm$rot><a:off x=\"[expr {($bbx0-500) - $canvx0}]\" y=\"[expr {($bby0) - $canvy0}]\"/><a:ext cx=\"[expr {$cx+1000}]\" cy=\"$cy\"/></a:xfrm><a:prstGeom prst=\"rect\"><a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody><a:bodyPr $wrap_text rtlCol=\"0\" bIns=\"0\" tIns=\"0\" lIns=\"0\" rIns=\"0\"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p><a:pPr $align_text/><a:r><a:rPr lan=\"en-US\" dirty=\"0\" sz=\"$font_size\" b=\"0\" i=\"0\" smtClean=\"0\"><a:solidFill><a:srgbClr val=\"$font_color\"/></a:solidFill><a:latin typeface=\"$font_family\"/></a:rPr><a:t>$text</a:t></a:r></a:p></p:txBody></p:sp>\n"
+        } else {
+          set cmd ""
+        }
+      } 
+      bitmap {
+        #sputs "No handler for item type: Bitmap"
+        set cmd ""
+      }
+      image {
+        #sputs "No handler for item type: Image"
+        set cmd ""
+      }
+      window {
+        #sputs "No handler for item type: Window"
+        set cmd ""
+      }
+      default {
+        #sputs "No handler for item type:[$c type $item]"
+        set cmd ""
+      }
+    }
+    append result $cmd
+    incr i
+  }
+  append result "\n"
+  return $result
+}
+
+
 ##############
 ## print a canvas to a keynote simplified svg string
 ##############
@@ -28937,7 +30601,7 @@ proc canvas_to_keysvg {c} {
 
         set cmd "<path d=\"M $mcoords A$xr,$yr 0 [expr {(abs([$c itemcget $item -extent])>180)?1:0}] 0 $ecoords\" stroke-width=\"[$c itemcget $item -width]\" stroke=\"[color_to_keysvgrgb [$c itemcget $item -outline]]\" fill=\"[color_to_keysvgrgb [$c itemcget $item -fill]]\"/>\n"
 set cmd ""
-      }
+      } 
       bitmap {
         #sputs "No handler for item type: Bitmap"
         set cmd ""
@@ -28982,7 +30646,7 @@ set cmd ""
             append coordstring  " L $a $b"
           }
           append coordstring " Z"
-          set cmd "<shape path=\"$coordstring\""
+          set cmd "<shape path=\"$coordstring\"" 
           if {[$c itemcget $item -outline] != ""} {
             append cmd "stroke-width=\"[$c itemcget $item -width]\" stroke-color =\"[color_to_keysvgrgb [$c itemcget $item -outline]] 1\">  <styles> <fill-style fill-type=\"color\"  fill-color=\"[color_to_keysvgrgb [$c itemcget $item -fill]] 1\"/> <dash-style pattern=\"solid\"/> </styles> </shape> \n"
            } else {
@@ -29025,11 +30689,11 @@ global errorInfo
 }
 
 ##############
-## scanner for feature_scan- replaces old regexp search
+## scanner for feature_scan- replaces old regexp search 
 ##############
 proc feature_find_mm {start fea text {slower 0}} {
 
-
+  
   if {!$slower && ![regexp {/[1-9]} $fea]} {
     set regexpfwd "([string toupper $fea])"
     ## take out mm and dividers
@@ -29069,7 +30733,7 @@ proc feature_find_mm {start fea text {slower 0}} {
       set max_mm 0
     }
     set found 0
-
+  
     set endix [expr {[string length $text] - [string length $s_pat]}]
 
     set mm 0
@@ -29104,7 +30768,7 @@ proc feature_find_mm {start fea text {slower 0}} {
 }
 
 ##############
-## scans a dna window textbox and adds feature tags and metainfo
+## scans a dna window textbox and adds feature tags and metainfo 
 ##############
 #<<Metadata>>:(0)name, (1) format info, (2) type, (3)fwd/rev, (4) annotations_string annotations_string (qualifiers data), (5) groups list
 #<<Revcolors>>: binding used for the color if the sequence is reversed
@@ -29122,8 +30786,8 @@ proc feature_scan {w} {
   $w configure -cursor watch
   $w.textarea configure -cursor watch
   regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $w] wgeom winx winy
-
-  set f_scan_i 0
+ 
+  set f_scan_i 0 
   if {$info(use_tile)} {
     grid [label $w.pleasewait -width 50 -bg yellow -text "Searching for Features, Please wait..."] -row 2 -column 0  -columnspan 3  -sticky new
     grid [ttk::progressbar $w.pleasewait_prog -maximum [llength $fea_info(library)] -variable f_scan_i -orient horizontal -mode determinate] -row 3 -column 1  -sticky new
@@ -29164,7 +30828,7 @@ if {0} {
           if {[set rc_dif [expr {[lindex [lindex $found_list 0] end] - [lindex [lindex $rc_found 0] end]}]] > $start} {
              #sputs feature find: $found_list $rc_found , $rc_dif,  $start
              set start $rc_dif
-             continue
+             continue 
           }
         }
 }
@@ -29210,14 +30874,14 @@ if {0} {
             }
             set found_list $temp_list
           }
-          set found_list [lreplace $found_list 0 1 [list $i [lindex [lindex $found_list 0] 1]] [list $i [lindex [lindex $found_list 1] 1]]]
+          set found_list [lreplace $found_list 0 1 [list $i [lindex [lindex $found_list 0] 1]] [list $i [lindex [lindex $found_list 1] 1]]] 
         }
 
         if {$postseq != ""} {
           set last [lindex [lindex $found_list 0] 1]
           set postf [string toupper [string range $temp_text [expr {$last + 1}] [expr {$last + [string length $postseq]}]]]
           set i 0
-          while {($i < [string length $postseq]) && ([expr {(~[dict get $dhash [string index $postf $i] ] | [dict get $dhash [string index $postseq $i]])}] == -1)} { incr i}
+          while {($i < [string length $postseq]) && ([expr {(~[dict get $dhash [string index $postf $i] ] | [dict get $dhash [string index $postseq $i]])}] == -1)} { incr i} 
           ##add the extension
           set found_list [lreplace $found_list 0 0 [list [lindex [lindex $found_list 0] 0] [expr {[lindex [lindex [K $found_list [set found_list {}]] 0] 1]+$i}]]]
           set found_list [lreplace $found_list end end [list [lindex [lindex $found_list end] 0] [expr {[lindex [lindex [K $found_list [set found_list {}]] end] 1]+$i}]]]
@@ -29281,7 +30945,7 @@ if {0} {
   }
   register_undo_separator $w "Feature Scan"
   features_to_tree_view $w
-  #destroy .wait
+  #destroy .wait 
   #bind . <<RaiseDialogs>> ""
   set dialogblock 0
   destroy $w.pleasewait
@@ -29292,7 +30956,7 @@ if {0} {
 }
 
 ##############
-## scans a dna window textbox and adds feature tags and metainfo
+## scans a dna window textbox and adds feature tags and metainfo 
 ##############
 #<<Metadata>>:(0)name, (1) format info, (2) type, (3)fwd/rev, (4) annotations_string (qualifiers data), (5) groups list
 #<<Revcolors>>: binding used for the color if the sequence is reversed
@@ -29314,8 +30978,8 @@ set time_list [list]
   $w configure -cursor watch
   $w.textarea configure -cursor watch
   regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $w] wgeom winx winy
-
-  set f_scan_i 0
+ 
+  set f_scan_i 0 
   if {$info(use_tile)} {
     grid [label $w.pleasewait -width 50 -bg yellow -text "Searching for Features, Please wait..."] -row 2 -column 0  -columnspan 3  -sticky new
     grid [ttk::progressbar $w.pleasewait_prog -maximum [llength $fea_info(library)] -variable f_scan_i -orient horizontal -mode determinate] -row 3 -column 1  -sticky new
@@ -29359,7 +31023,7 @@ set time_list [list]
           if {[set rc_dif [expr {[lindex [lindex $found_list 0] end] - [lindex [lindex $rc_found 0] end]}]] > $start} {
              #sputs feature find: $found_list $rc_found , $rc_dif,  $start
              set start $rc_dif
-             continue
+             continue 
           }
         }
 
@@ -29402,14 +31066,14 @@ set time_list [list]
             }
             set found_list $temp_list
           }
-          set found_list [lreplace $found_list 0 1 [list $i [lindex [lindex $found_list 0] 1]] [list $i [lindex [lindex $found_list 1] 1]]]
+          set found_list [lreplace $found_list 0 1 [list $i [lindex [lindex $found_list 0] 1]] [list $i [lindex [lindex $found_list 1] 1]]] 
         }
 
         if {$postseq != ""} {
           set last [lindex [lindex $found_list 0] 1]
           set postf [string toupper [string range $temp_text [expr {$last + 1}] [expr {$last + [string length $postseq]}]]]
           set i 0
-          while {($i < [string length $postseq]) && (([string index $postseq $i] == [string index $postf $i]) || ([string index $postseq $i] == "N"))} {incr i}
+          while {($i < [string length $postseq]) && (([string index $postseq $i] == [string index $postf $i]) || ([string index $postseq $i] == "N"))} {incr i} 
           ##add the extension
           set found_list [lreplace $found_list 0 0 [list [lindex [lindex $found_list 0] 0] [expr {[lindex [lindex [K $found_list [set found_list {}]] 0] 1]+$i}]]]
           set found_list [lreplace $found_list end end [list [lindex [lindex $found_list end] 0] [expr {[lindex [lindex [K $found_list [set found_list {}]] end] 1]+$i}]]]
@@ -29472,7 +31136,7 @@ set time_list [list]
 
   register_undo_separator $w "Feature Scan"
   features_to_tree_view $w
-  #destroy .wait
+  #destroy .wait 
   #bind . <<RaiseDialogs>> ""
   set dialogblock 0
   destroy $w.pleasewait
@@ -29489,18 +31153,18 @@ proc feature_cleanup {text} {
   set deleted [list]
   foreach text_tag [$text tag names] {
     if {([regexp {fn?[0-9]+#} $text_tag]) && ([$text tag ranges $text_tag] == {})} {
-      $text tag delete $text_tag
+      $text tag delete $text_tag 
       lappend deleted $text_tag
     }
   }
   features_to_tree_view [winfo toplevel $text]
-  return
+  return 
 }
 proc feature_cleanup {text} {
 }
 
 ##############
-## returns all features with elements between c1 and c2 as a list of feature names and tag names
+## returns all features with elements between c1 and c2 as a list of feature names and tag names 
 ##############
 proc feature_find {w {c1 -1} {c2 -1}} {
   if {$c1 == -1} {
@@ -29552,7 +31216,7 @@ proc feature_find {w {c1 -1} {c2 -1}} {
 proc feature_coords {w fea {c1 -1} {c2 -1}} {
   if {$c1 == -1} {
     set c1 0
-  }
+  } 
   if {$c2 == -1} {
     set c2 [ix2bp $w.textarea [$w.textarea index end-1c]]
   }
@@ -29576,7 +31240,7 @@ proc feature_coords {w fea {c1 -1} {c2 -1}} {
         } else {
           lappend result [list $c1 $c2]
         }
-      }
+      } 
     }
   }
   set fntag_ranges [$w.textarea tag ranges [regsub f $fea fn]]
@@ -29671,7 +31335,7 @@ proc listbox_multiple {w el} {
 ## Configure display properties of features in a window
 ##############
 proc configure_features {w} {
-  global info
+  global info 
   global ok modifier
   global mem deleted dialogblock
   if {$dialogblock == 1} {return}
@@ -29770,7 +31434,7 @@ proc configure_features {w} {
         set mem($i) $mem([expr {$i-1}])
         incr i -1
         .dialog.frame1.list insert $i $nstore
-        .dialog.frame1.list itemconfigure $i -background $cstore
+        .dialog.frame1.list itemconfigure $i -background $cstore       
         set mem($i) $tstore
         .dialog.frame1.list selection set $i
       }
@@ -29778,7 +31442,7 @@ proc configure_features {w} {
     if {[.dialog.frame1.list curselection] != {}} {
       .dialog.frame1.list see [lindex [.dialog.frame1.list curselection] 0]
     }
-  }
+  } 
 
   bind .dialog <<lower>> {
     for {set j [expr {[llength [.dialog.frame1.list curselection]]-1}]} {$j > -1} {incr j -1} {
@@ -29791,7 +31455,7 @@ proc configure_features {w} {
         set mem($i) $mem([expr {$i+1}])
         incr i 1
         .dialog.frame1.list insert $i $nstore
-        .dialog.frame1.list itemconfigure $i -background $cstore
+        .dialog.frame1.list itemconfigure $i -background $cstore       
         set mem($i) $tstore
         .dialog.frame1.list selection set $i
       }
@@ -29813,7 +31477,7 @@ proc configure_features {w} {
         set mem($i) $mem([expr {$i+1}])
         incr i
       }
-      array unset mem $i
+      array unset mem $i 
     }
 #sputs $last_sel_index [.dialog.frame1.list index end]
     while {$last_sel_index >= [.dialog.frame1.list index end]} {incr last_sel_index -1}
@@ -29823,7 +31487,7 @@ proc configure_features {w} {
       .dialog.frame1.list selection anchor [expr {$first_sel_index}]
     }
     #.dialog.frame1.list selection clear 0 end
-  }
+  } 
 
   bind .dialog <<hide>> "
     foreach i \[.dialog.frame1.list curselection\] {
@@ -29917,7 +31581,7 @@ proc feature_from_found {w} {
         textarea_tag_add $w.textarea $feature $start $end
         dict set temp_info(format) arrow_data [list $temp_info(f_arrow) $temp_info(r_arrow) $temp_info(arrow_flip)]
         dict set temp_info(format) width $temp_info(g_width)
-
+    
         textarea_tag_bind $w.textarea $feature <<Revcolors>> [list $temp_info(fwd_color) $temp_info(rev_color)]
         textarea_tag_bind $w.textarea $feature <<Metadata>> [list $temp_info(name) $temp_info(format) $temp_info(type) $dir $temp_info(qual_list)]
         if {$dir == 0} {
@@ -29938,7 +31602,7 @@ proc feature_from_found {w} {
 
     if {$temp_info(apply_default)} {
       set info(feature_default_type_colors) [array get temp_colors]
-      #dict set info(feature_default_type_gformat)  $temp_info(type) $temp_info(format)
+      #dict set info(feature_default_type_gformat)  $temp_info(type) $temp_info(format) 
     }
   }
 
@@ -29946,8 +31610,8 @@ proc feature_from_found {w} {
   destroy $a
   bind . <<RaiseDialogs>> ""
   set dialogblock 0
-  array unset temp_info
-  unset ok2
+  array unset temp_info 
+  unset ok2 
 }
 
 ##############
@@ -29966,7 +31630,7 @@ proc add_sel_feature_file_dialog {w} {
     set tagname "f$fea_info($w,count)#"
 
     incr fea_info($w,count)
-#selection used here
+#selection used here 
     textarea_tag_create $w.textarea $tagname
     textarea_tag_add $w.textarea $tagname sel.first sel.last
 ##metadata here
@@ -29997,8 +31661,8 @@ proc add_sel_feature_file {w} {
     set tagname "f$fea_info($w,count)#"
 
     incr fea_info($w,count)
-#selection used here
-    textarea_tag_create $w.textarea $tagname
+#selection used here 
+    textarea_tag_create $w.textarea $tagname 
     textarea_tag_add $w.textarea $tagname sel.first sel.last
 ##metadata here
     textarea_tag_bind $w.textarea $tagname <<Metadata>> [list "New Feature" $info(feature_default_gformat) "misc_feature" 0 ""]
@@ -30023,8 +31687,8 @@ proc add_sel_feature_file {w} {
 ##############
 ## Edit feature properties
 ##############
-proc edit_feature_dialog {parent w feature {qualifier_number 0} {subwindow 0}} {
-  global dialogblock ok2 temp_info info
+proc edit_feature_dialog {parent w feature {qualifier_number ""} {subwindow 0}} {
+  global dialogblock ok2 temp_info info 
   if {$feature == ""} return
   if {!$subwindow && $dialogblock == 1} {return}
   if {$info($w,locked)} {
@@ -30039,16 +31703,28 @@ proc edit_feature_dialog {parent w feature {qualifier_number 0} {subwindow 0}} {
   set temp_info(type) [lindex [$w.textarea tag bind $feature <<Metadata>>] 2]
   set temp_info(dir) [lindex [$w.textarea tag bind $feature <<Metadata>>] 3]
   set temp_info(qual_list) [lindex [$w.textarea tag bind $feature <<Metadata>>] 4]
-  set temp_info(qual_active) [expr {2*$qualifier_number}]
+  if {$qualifier_number ne "" && [string is integer $qualifier_number]} {
+    set temp_info(qual_active) [expr {2*$qualifier_number}]
+  } else {
+    set temp_info(qual_active) 0
+  }
   set temp_info(fwd_color) [lindex [$w.textarea tag bind $feature <<Revcolors>>] 0]
   set temp_info(rev_color) [lindex [$w.textarea tag bind $feature <<Revcolors>>] 1]
 
   set temp_info(loc) [feature_coords_text $w $feature]
   set original_loc $temp_info(loc)
   if {$temp_info(dir) == 0} {set original_color $temp_info(fwd_color)} else {set original_color $temp_info(rev_color)}
-
+  
   set a [edit_feature_dialog_make_dialog $parent $w $feature]
-
+  
+  if {$qualifier_number ne "" && $qualifier_number > -1} {
+    $a.textframe.name selection clear
+    $a.textframe.name icursor 0
+    $a.qualifiersframe.f2.name selection range 0 end
+    $a.qualifiersframe.f2.name icursor end
+    focus $a.qualifiersframe.f2.name
+  }
+    
   vwait ok2
   if {$ok2 == 1} {
   ###execute changes
@@ -30080,11 +31756,11 @@ proc edit_feature_dialog {parent w feature {qualifier_number 0} {subwindow 0}} {
 
     register_undo_separator $w "Edit Feature"
     features_to_tree_view $w
-
+    
     set return "ok"
     if {$temp_info(apply_default)} {
       dict set info(feature_default_type_colors) $temp_info(type) [list $temp_info(fwd_color) $temp_info(rev_color)]
-      #dict set info(feature_default_type_gformat)  $temp_info(type) $temp_info(format)
+      #dict set info(feature_default_type_gformat)  $temp_info(type) $temp_info(format) 
     }
   } else {
   ##cancel changes
@@ -30105,7 +31781,7 @@ proc edit_feature_dialog {parent w feature {qualifier_number 0} {subwindow 0}} {
 }
 
 ##############
-## Edit feature -make the dialog window
+## Edit feature -make the dialog window 
 ##############
 proc edit_feature_dialog_make_dialog {parent w feature} {
 global ok2 temp_info info genbank_divided_typelist genbank_typelist
@@ -30121,7 +31797,7 @@ global ok2 temp_info info genbank_divided_typelist genbank_typelist
     ::tk::unsupported::MacWindowStyle style $a document {closeBox}
   }
     set ok2 0
-
+    
   if {[tk windowingsystem] == "aqua"} {
     add_menubar_to_dialog_mac $w $a
   }
@@ -30183,7 +31859,7 @@ global ok2 temp_info info genbank_divided_typelist genbank_typelist
   grid [entry $a.qualifiersframe.f2.name -textvariable temp_info(qual_value) -validate key -validatecommand "edit_feature_dialog_manage_qualifiers $a update %P" -font dnafont -width 40 -xscrollcommand "optionscrollbar $a.qualifiersframe.f2.sc"] -row 0 -column 2 -sticky swe
   grid [menubutton $a.qualifiersframe.f2.name_menubutton -textvariable temp_info(qual_value) -width 20 -menu $a.qualifiersframe.f2.name_menubutton.menu] -row 0 -column 2 -sticky nwe
   menu $a.qualifiersframe.f2.name_menubutton.menu
-  grid [label $a.qualifiersframe.f2.nonstandard_flag -text "*Nonstandard"] -row 1 -column 1 -sticky w
+  grid [label $a.qualifiersframe.f2.nonstandard_flag -text "*Nonstandard"] -row 1 -column 1 -sticky w 
   grid [scrollbar $a.qualifiersframe.f2.sc -command "$a.qualifiersframe.f2.name xview" -orient horizontal] -row 1 -column 2 -sticky nwe
   edit_feature_dialog_manage_qualifiers $a "show"
 
@@ -30249,7 +31925,7 @@ global ok2 temp_info info genbank_divided_typelist genbank_typelist
       set temp_info(place_above_name) [mc {Place on bottom}]
     }
   }
-
+  
   ## Don't set the graphic parameters here- do it in the graphic map config
   if {0} {
   set temp_info(f_arrow) [lindex [dict get $temp_info(format) arrow_data] 0]
@@ -30354,21 +32030,21 @@ global temp_info genbank_feature_key_qualifiers
         if {[dict exists $genbank_feature_key_qualifiers $temp_info(type)]} {
           set found 0
           foreach q [dict get $genbank_feature_key_qualifiers $temp_info(type)] {
-            $a.qualifiersframe.f2.type.menu add radiobutton -variable temp_info(qual_type) -label $q -value $q -command "edit_feaure_dialog_change_qual_type $a"
+            $a.qualifiersframe.f2.type.menu add radiobutton -variable temp_info(qual_type) -label $q -value $q -command "edit_feature_dialog_change_qual_type $a"
             if {$temp_info(qual_type) eq $q} {
               set found 1
               grid remove $a.qualifiersframe.f2.nonstandard_flag
             }
           }
           if {!$found} {
-            $a.qualifiersframe.f2.type.menu add radiobutton -variable temp_info(qual_type) -label $temp_info(qual_type) -value $temp_info(qual_type) -command "edit_feaure_dialog_change_qual_type $a"
+            $a.qualifiersframe.f2.type.menu add radiobutton -variable temp_info(qual_type) -label $temp_info(qual_type) -value $temp_info(qual_type) -command "edit_feature_dialog_change_qual_type $a"
             grid configure $a.qualifiersframe.f2.nonstandard_flag
           }
         } else {
           set temp_info(qual_type) "note"
           $a.qualifiersframe.f2.type.menu add radiobutton -variable temp_info(qual_type) -label note -value note
         }
-        edit_feaure_dialog_change_qual_type $a
+        edit_feature_dialog_change_qual_type $a
       }
     }
     "prev" {
@@ -30399,7 +32075,7 @@ global temp_info genbank_feature_key_qualifiers
 ##########
 ## Manage qualifiers display: update the temp_info(qual_value), grid name_menubutton or name entry, set the tooltip for entry, check for valid data
 ##########
-proc edit_feaure_dialog_change_qual_type {a} {
+proc edit_feature_dialog_change_qual_type {a} {
 global temp_info genbank_qualifier_values
 
   if {[dict exists $genbank_qualifier_values $temp_info(qual_type)]} {
@@ -30411,14 +32087,17 @@ global temp_info genbank_qualifier_values
   if {$val_list eq "none"} {
     grid remove $a.qualifiersframe.f2.name
     grid remove $a.qualifiersframe.f2.name_menubutton
+    grid remove $a.qualifiersframe.f2.sc
     set temp_info(qual_value) {}
     lset temp_info(qual_list) [expr {1 + $temp_info(qual_active)}] $temp_info(qual_value)
   } elseif {$val_list eq "text"} {
     grid configure $a.qualifiersframe.f2.name
+    grid configure $a.qualifiersframe.f2.sc
     grid remove $a.qualifiersframe.f2.name_menubutton
         tooltip_install $a.qualifiersframe.f2.name "Free Text"
   } elseif {[llength $val_list] >  1} {
     grid remove $a.qualifiersframe.f2.name
+    grid remove $a.qualifiersframe.f2.sc
     grid configure $a.qualifiersframe.f2.name_menubutton
     $a.qualifiersframe.f2.name_menubutton.menu delete 0 end
     foreach v $val_list {
@@ -30430,11 +32109,12 @@ global temp_info genbank_qualifier_values
     }
   } else {
     grid configure $a.qualifiersframe.f2.name
+    grid configure $a.qualifiersframe.f2.sc
     grid remove $a.qualifiersframe.f2.name_menubutton
     tooltip_install $a.qualifiersframe.f2.name [lindex $val_list 0]
   }
   lset temp_info(qual_list) $temp_info(qual_active) $temp_info(qual_type)
-##
+##  
 }
 
 ##########
@@ -30447,7 +32127,7 @@ proc locations_plus_selection {w loc_list_text mode} {
 
   set sel_start [expr {[ix2bp $w.textarea [$w.textarea index sel.first]] +1}]
   set sel_end [ix2bp $w.textarea [$w.textarea index sel.last]]
-#selection used here
+#selection used here 
   set loc_list [split [regsub -all {\.+} $loc_list_text ,] ".,"]
   set start_i [llength $loc_list]
   set end_i [llength $loc_list]
@@ -30462,7 +32142,7 @@ proc locations_plus_selection {w loc_list_text mode} {
   #for features split at the origin, need to check for sel_start in the exons at the begining of the sequenc
   if {([lindex $loc_list 0] > [lindex $loc_list end]) && ($start_i == 0) && ($sel_start < [lindex $loc_list end])} {
     while {([lindex $loc_list $i] > [lindex $loc_list [expr {$i-1}]]) && ($i < [llength $loc_list])} {
-      incr i
+      incr i 
     }
    for {set i $i} {$i < [llength $loc_list]} {incr i} {
     #find point in loc_list that sel_start is between (need to check if it is in the intron of a feature split at the origin)
@@ -30494,7 +32174,7 @@ proc locations_plus_selection {w loc_list_text mode} {
     #eliminate empty list elements
     set loc_list [lsearch -all -inline -not $loc_list {}]
     #fuse adjacent exons
-    set loc_list2 [lindex $loc_list 0]
+    set loc_list2 [lindex $loc_list 0] 
     for {set i 1} {$i < [expr {[llength $loc_list] -1}]} {incr i} {
       if {[expr {$i % 2}] && ([expr {[lindex $loc_list $i] + 1}] >= [lindex $loc_list [expr {$i +1}]])} {
         incr i 1
@@ -30518,7 +32198,7 @@ proc locations_plus_selection {w loc_list_text mode} {
     #eliminate empty list elements
     set loc_list [lsearch -all -inline -not $loc_list {}]
     #delete empty exons
-    set loc_list2 [list]
+    set loc_list2 [list] 
     for {set i 0} {$i < [llength $loc_list]} {incr i} {
       if {(![expr {$i % 2}]) && ([lindex $loc_list $i] > [lindex $loc_list [expr {$i +1}]])} {
         incr i 1
@@ -30533,7 +32213,7 @@ proc locations_plus_selection {w loc_list_text mode} {
       set res_text "[lindex $loc_list2 0]..[lindex $loc_list2 1]"
       foreach {a b} [lrange $loc_list2 2 end] {
         set res_text "$res_text,$a..$b"
-      }
+      } 
       return $res_text
    } else {
      return $loc_list_text
@@ -30557,7 +32237,7 @@ proc locations_upper {w loc_list_text} {
     set res_text "[lindex $res_list 0]..[lindex $res_list 1]"
     foreach {a b} [lrange $res_list 2 end] {
       set res_text "$res_text,$a..$b"
-    }
+    } 
     return $res_text
   } else {
     return $loc_list_text
@@ -30604,7 +32284,7 @@ proc fill_favs_menu {w menu fwd_color_var rev_color_var} {
   }
   #$menu add separator
   #$menu add command -label [mc "Edit Favorites"] -command "edit_color_favorites $w"
-
+  
 }
 
 
@@ -30654,9 +32334,9 @@ proc feature_table_to_taglist {table {circular 0} {dna_length 0}} {
   lappend table "     end   end"
 if {1} {
 ###better:
-#regsub -all {\n                     /} $table \u001 table
+#regsub -all {\n                     /} $table \u0001 table
 #regsub -all {\n                     } $table " " table
-## now each feature is on a new line, split by \u001
+## now each feature is on a new line, split by \u0001
   foreach line $table {
     if {[regexp { {21,23}/([^=]*)=(.*)} $line line next_subtype next_subdata] || [regexp { {21,23}/(.*)} $line line next_subtype]} {
       ##store the sub data
@@ -30781,7 +32461,7 @@ if {1} {
         if {($circular== "circular")} {
           set new_range [join $new_range " "]
         } else {
-          #this shouldn't be necessary, but wormbase (and possibly others) export unsorted joins- it can't be done on circular, because spanning the origin makes a range unsorted
+          #this shouldn't be necessary, but wormbase (and possibly others) export unsorted joins- it can't be done on circular, because spanning the origin makes a range unsorted 
           set new_range [lsort -integer -increasing [join $new_range " "]]
         }
         ##need to assign the name based on the sub-data
@@ -30835,7 +32515,7 @@ if {1} {
           set fwd_color [lindex $clist 0]
           set rev_color [lindex $clist 1]
         }
-
+        
         #assign gformat based on type
         if {[catch {set ad [dict get $Apeinfo_gformat arrow_data]; dict get $Apeinfo_gformat width; dict get $Apeinfo_gformat offset}] || [llength $ad] !=3 || ([llength [lindex $ad 0]] % 2)|| ([llength [lindex $ad 1]] % 2) } {
           if {[catch {set Apeinfo_gformat [dict get $info(feature_default_type_gformat) $type]}]} {
@@ -30848,7 +32528,7 @@ if {1} {
             regexp {"(.*)"} $subdata - subdata
             set subdata [regsub -all {""} $subdata \"]
             if {$subtype eq "translation"} {
-              set subdata [regsub -all " " $subdata ""]
+              set subdata [regsub -all " " $subdata ""] 
             }
             lappend genbank_list $subtype $subdata
         }
@@ -30863,8 +32543,8 @@ if {1} {
 ##metadata here
         set actionlist [list [list $fwd_color $rev_color] [list $name $Apeinfo_gformat $type $dir $genbank_list $ApEinfo_group]]
 
-        ###create the feature data
-        if {[llength $new_range] > 0} {
+        ###create the feature data 
+        if {[llength $new_range] > 0} { 
           if {[llength $new_range] > 2} {
             if {($circular== "circular") && ([lindex $new_range 0] > [lindex $new_range end])} {
               #crosses the origin
@@ -31032,7 +32712,7 @@ proc pdraw_features_to_taglist {pdrawlist} {
 
 sputs here1
 ##############
-## reads a new feature library and stores the feature list in fea_info(library)
+## reads a new feature library and stores the feature list in fea_info(library) 
 ##############
 #file format(tab sep): (0)name (1)plain text def (2)type (3)fwd_color (4)rev_color (5)bold (6)ital (7) annotations_string (qualifiers data) (8) groups list
 #library list: (0)name (1)regexp_fwd(flanked by paren) (2)regexp_rev (3)preseq (4)postseq (5)plain_text_def (6)type (7)fwd_color (8)rev_color (9)bold (10)ital (11)annotations_string (qualifiers data) (12) groups list
@@ -31097,13 +32777,13 @@ proc open_feature_library {{filename ""} {mode "new"} {msg 1}} {
     if {$info(featuredir_follows_open)} {
       set info(default_featuredir) [file dirname $filename]
     }
-  }
+  } 
 
   set dialogblock 0
 }
 
 ##############
-## reads a feature library and returns it as list
+## reads a feature library and returns it as list 
 ##############
 #file format(tab sep): (0)name (1)plain_text_def (2)type (3)fwd_color (4)rev_color (5)bold (6)ital (7)annotations_string (qualifiers data)
 #library list: (0)name (1)regexp_fwd(flanked by paren) (2)regexp_rev (3)preseq (4)postseq (5)plain_text_def (6)type (7)fwd_color (8)rev_color (9)bold (10)ital (11)annotations_string (qualifiers data)
@@ -31132,7 +32812,7 @@ proc read_feature_library {filename} {
             ######set the regexp strings
             set regexpfwd [lindex $nextfea 1]
             #for all lower case, set to all upper case
-            if {![regexp {[A-Z]} $regexpfwd]} {set regexpfwd [string toupper $regexpfwd]}
+            if {![regexp {[A-Z]} $regexpfwd]} {set regexpfwd [string toupper $regexpfwd]}   
             if {![regexp {(.*)<(.*)} $regexpfwd a preseq regexpfwd]} {
               set preseq ""
               ######for primer sequences, set the preseq to all leading lower case chars
@@ -31173,7 +32853,7 @@ proc read_feature_library {filename} {
             set regexprev [revcom_regexp $regexpfwd]
             regsub -all {\?\*\.} $regexprev .*? regexprev
           } else {
-            ####### mm search in feature_scan
+            ####### mm search in feature_scan 
             set preseq [string toupper $preseq]
             set postseq [string toupper $postseq]
             regsub -all {\s} $regexpfwd "" regexpfwd
@@ -31232,7 +32912,7 @@ proc read_feature_library {filename} {
 }
 
 ##############
-## lists feature tags found in a DNA window
+## lists feature tags found in a DNA window 
 ##############
 proc list_features {w {text_only 0}} {
   global info toolbar_images
@@ -31309,7 +32989,7 @@ proc list_features {w {text_only 0}} {
 
   if {!$text_only} {
     set outputmenu [add_output_menu $a.textframe.text "Text" text $w]
-    bind $a <Button-1> "focus $a.textframe.text"
+    bind $a <Button-1> "focus $a.textframe.text" 
     bindtags $a.textframe.text [list $a.textframe.text AnalysisText . all]
     wm deiconify $a
     if {[info exists info(last_analysis_xy)]} {
@@ -31422,7 +33102,7 @@ proc edit_feature_in_library {w feature_number} {
 
   bind $a.textframe.regexp <<toupper>> "
     if {\[$a.textframe.regexp tag ranges sel\] != {}} {
-      set temptext \[$a.textframe.regexp get sel.first sel.last\]
+      set temptext \[$a.textframe.regexp get sel.first sel.last\] 
       $a.textframe.regexp delete sel.first sel.last
 # selection used here
       $a.textframe.regexp insert insert \[string toupper \$temptext\]
@@ -31432,7 +33112,7 @@ proc edit_feature_in_library {w feature_number} {
   "
   bind $a.textframe.regexp <<tolower>> "
     if {\[$a.textframe.regexp tag ranges sel\] != {}} {
-      set temptext \[$a.textframe.regexp get sel.first sel.last\]
+      set temptext \[$a.textframe.regexp get sel.first sel.last\] 
       $a.textframe.regexp delete sel.first sel.last
 # selection used here
       $a.textframe.regexp insert insert \[string tolower \$temptext\]
@@ -31465,11 +33145,11 @@ proc edit_feature_in_library {w feature_number} {
     ###execute changes
     if {$ok2 == 1} {
       set featuretext [$a.textframe.regexp get 1.0 end]
-      regsub -all "\ +" $featuretext "" featuretext
-      regsub -all "\n+" $featuretext "" featuretext
+      regsub -all "\ +" $featuretext "" featuretext 
+      regsub -all "\n+" $featuretext "" featuretext 
       set regexpfwd $featuretext
       #for all lower case, set to all upper case
-      if {![regexp {[A-Z]} $regexpfwd]} {set regexpfwd [string toupper $regexpfwd]}
+      if {![regexp {[A-Z]} $regexpfwd]} {set regexpfwd [string toupper $regexpfwd]}   
       if {![regexp {(.*)<(.*)} $regexpfwd fill preseq regexpfwd]} {
         set preseq ""
         ######for primer sequences, set the preseq to all leading lower case chars
@@ -31481,7 +33161,7 @@ proc edit_feature_in_library {w feature_number} {
         }
       }
       if {![regexp {(.*)>(.*)} $regexpfwd blank regexpfwd postseq]} {set postseq ""}
-
+  
           if {1} {
             ###### for using regexp search in feature_scan
             set regexpfwd "($regexpfwd)"
@@ -31511,7 +33191,7 @@ proc edit_feature_in_library {w feature_number} {
             set regexprev [revcom_regexp $regexpfwd]
             regsub -all {\?\*\.} $regexprev .*? regexprev
           } else {
-            ####### mm search in feature_scan
+            ####### mm search in feature_scan 
             set preseq [string toupper $preseq]
             set postseq [string toupper $postseq]
             regsub -all {\s} $regexpfwd "" regexpfwd
@@ -31560,7 +33240,7 @@ proc edit_feature_in_library {w feature_number} {
 
       } else {
         bell
-        tk_messageBox -message "$preseq<$regexpfwd>$postseq isn't valid, try again." -icon warning -type ok
+        tk_messageBox -message "$preseq<$regexpfwd>$postseq isn't valid, try again." -icon warning -type ok 
         set ok2 0
         set continue 1
 
@@ -31585,7 +33265,7 @@ proc edit_feature_in_library {w feature_number} {
   set info(feature_default_type_colors) [array get temp_colors]
 
   unset ok2 clip_sel
-  array unset temp_info
+  array unset temp_info 
   array unset temp_colors
   set return $return
 }
@@ -31602,7 +33282,7 @@ proc add_sel_feature_library {w} {
 
   if {[$w.textarea tag ranges sel] != {}} {
     set text [textarea_get $w.textarea sel.first sel.last]
-#selection used here
+#selection used here 
     set regexpfwd $text
     regsub -all {[a-z]+} $regexpfwd ")&(" regexpfwd
     regsub -all {[nN\*]} $regexpfwd "." regexpfwd
@@ -31672,7 +33352,7 @@ proc edit_feature_library {w {new_fea ""}} {
     #.dialog.menubar add cascade -menu .dialog.menubar.apple
     #.dialog.menubar.apple add command -label [mc "About ApE"] -command "about_dialog $w" -state disabled
     #.dialog.menubar.apple add separator
-    #.dialog.menubar.apple add command -label [mc "Preferences..."]  -command "configure_preferences $w" -state disabled
+    #.dialog.menubar.apple add command -label [mc "Preferences..."]  -command "configure_preferences $w" -state disabled 
   #}
 
 
@@ -31774,7 +33454,7 @@ proc edit_feature_library {w {new_fea ""}} {
         set mem($i) $mem([expr {$i-1}])
         incr i -1
         .dialog.frame1.list insert $i $nstore
-        .dialog.frame1.list itemconfigure $i -background $cstore
+        .dialog.frame1.list itemconfigure $i -background $cstore       
         set mem($i) $tstore
         .dialog.frame1.list selection set $i
         unset nstore cstore tstore
@@ -31786,7 +33466,7 @@ proc edit_feature_library {w {new_fea ""}} {
       unset i
     }
 
-  }
+  } 
 
   bind .dialog <<lower>> {
     for {set j [expr {[llength [.dialog.frame1.list curselection]]-1}]} {$j > -1} {incr j -1} {
@@ -31799,7 +33479,7 @@ proc edit_feature_library {w {new_fea ""}} {
         set mem($i) $mem([expr {$i+1}])
         incr i 1
         .dialog.frame1.list insert $i $nstore
-        .dialog.frame1.list itemconfigure $i -background $cstore
+        .dialog.frame1.list itemconfigure $i -background $cstore       
         set mem($i) $tstore
         .dialog.frame1.list selection set $i
         unset nstore cstore tstore
@@ -31821,11 +33501,11 @@ proc edit_feature_library {w {new_fea ""}} {
           set mem($i) $mem([expr {$i+1}])
           incr i
         }
-        array unset mem $i
+        array unset mem $i 
       }
       unset j i
     }
-  }
+  } 
 
   bind .dialog <<new>> {
     if {![info exists new_fea_global] || ($new_fea_global == "")} {
@@ -31873,7 +33553,7 @@ proc edit_feature_library {w {new_fea ""}} {
     }
     set fea_info(library) $new_feature_list
 
-    if {$ok == 1} {
+    if {$ok == 1} { 
       save_feature_library $fea_info(library_file)
     } elseif {$ok ==2} {
       save_feature_library
@@ -31922,7 +33602,7 @@ proc save_feature_library {{filename ""}} {
   }
 
   if {$filename != ""} {
-
+  
     foreach feature $fea_info(library) {
       puts $feature_file "[lindex $feature 0]\t[lindex $feature 5]\t[lindex $feature 6]\t[lindex $feature 7]\t[lindex $feature 8]\t[lindex $feature 9]\t[lindex $feature 10]\t[lindex $feature 11]"
     }
@@ -32039,7 +33719,7 @@ proc edit_color_favorites {w} {
     ::tk::unsupported::MacWindowStyle style $a document {closeBox}
   }
   set ok3 0
-
+ 
   grid [frame $a.f1 -relief ridge -borderwidth 2] -sticky nswe -row 0 -column 0
   grid [frame $a.f1.listframe] -sticky nswe -row 0 -column 0 -columnspan 2
   grid [listbox $a.f1.listframe.listbox -width 30 -yscrollcommand "optionscrollbar $a.f1.listframe.vert" -selectmode single -activestyle none -background white -exportselection 0] -row 0 -column 0 -sticky nswe
@@ -32175,7 +33855,7 @@ proc edit_color_favorites {w} {
 }
 
 ##############
-## scans a dna window textbox and stores the cutsites in the info array as info($w,$enzyme)
+## scans a dna window textbox and stores the cutsites in the info array as info($w,$enzyme) 
 ##############
 
 proc findenzymes {w} {
@@ -32184,12 +33864,12 @@ proc findenzymes {w} {
   if {![info exists info($w,scanned)]} {set info($w,scanned) 0}
   if {$info($w,scanned)} {return}
 
-  global longnamelist
-  global hexlist
+  global longnamelist 
+  global hexlist 
   global enzymes
   global enzinfo
 
-
+  
   foreach enzyme $enzymes {
     set info($w,$enzyme) [list]
     set info($w,enzdir,$enzyme) [list]
@@ -32341,7 +34021,7 @@ proc findenzymes {w} {
           } else {
             incr i
           }
-        }
+        } 
         #look for fwd sites cutting past end
         set s $last
         set lm  [expr {$last-$max+1}]
@@ -32398,15 +34078,15 @@ proc initialize_methylation {w} {
   foreach methylase $enzinfo(enz_methylaselist) {
     set metsiteslist $info($w,[lindex $methylase 0])
     foreach blocked_enzyme [lindex $methylase 1] {
-      set enzyme [lindex $blocked_enzyme 0]
-      #set info($w,mstore,$enzyme) [not_in_list [not_in_list $info($w,$enzyme) $metsiteslist [lindex $blocked_enzyme 1]] $metsiteslist [lindex $blocked_enzyme 2]]
-      set templist [not_in_list $info($w,$enzyme) $info($w,enzdir,$enzyme) $metsiteslist [lindex $blocked_enzyme 1]]
-      set templist [not_in_list {*}$templist $metsiteslist [lindex $blocked_enzyme 2]]
+      set enzyme [lindex $blocked_enzyme 0]  
+      #set info($w,mstore,$enzyme) [not_in_list [not_in_list $info($w,$enzyme) $metsiteslist [lindex $blocked_enzyme 1]] $metsiteslist [lindex $blocked_enzyme 2]]  
+      set templist [not_in_list $info($w,$enzyme) $info($w,enzdir,$enzyme) $metsiteslist [lindex $blocked_enzyme 1]]    
+      set templist [not_in_list {*}$templist $metsiteslist [lindex $blocked_enzyme 2]] 
       set info($w,mstore,$enzyme) [lindex $templist 0]
       set info($w,mstore_dir,$enzyme) [lindex $templist 1]
     }
   }
-  foreach z [list BisI BlsI GlaI GluI KroI MalI PcsI DpnI SgeI FspEI LpnPI MspJI MteI PkrI] {
+  foreach z [list AbaSI AoxI BisI BlsI DpnI FspEI GlaI GluI KroI LpnPI MalI MspJI MteI PcsI PkrI SgeI] {
     if {[array names info "$w,$z"] != ""} {
       set info($w,$z) [list]
       set info($w,enzdir,$z) [list]
@@ -32461,10 +34141,10 @@ proc toggle_methylation {w} {
   }
 
   foreach enzyme $info(blocked_enzymes) {
-    set templist $info($w,$enzyme)
+    set templist $info($w,$enzyme) 
     set info($w,$enzyme) $info($w,mstore,$enzyme)
     set info($w,mstore,$enzyme) $templist
-    set templist $info($w,enzdir,$enzyme)
+    set templist $info($w,enzdir,$enzyme) 
     set info($w,enzdir,$enzyme) $info($w,mstore_dir,$enzyme)
     set info($w,mstore_dir,$enzyme) $templist
   }
@@ -32483,40 +34163,40 @@ proc primer_window {w} {
   grid [label $a.lmin -text [mc "Minimum"]] -row 0 -column 2
   grid [label $a.lmax -text [mc "Maximum"]] -row 0 -column 3
   grid [label $a.llen -text [mc "Length: "]] -row 1 -column 1 -sticky e
-  grid [entry $a.elenmin -width 10 -textvariable info(primer_len_min) -validate all -vcmd "entry_integer %P %W %V 1 100"] -row 1 -column 2
-  grid [entry $a.elenmax -width 10 -textvariable info(primer_len_max) -validate all -vcmd "entry_integer %P %W %V 1 100"] -row 1 -column 3
+  grid [ttk::spinbox $a.elenmin -width 4 -textvariable info(primer_len_min) -from 10 -to 100 -validate all -validatecommand "entry_integer %P %W %V 1 100"] -row 1 -column 2
+  grid [ttk::spinbox $a.elenmax -width 4 -textvariable info(primer_len_max) -from 10 -to 100 -validate all -validatecommand "entry_integer %P %W %V 1 100"] -row 1 -column 3
   grid [label $a.lTm -text "Tm: "] -row 2 -column 1 -sticky e
-  grid [entry $a.eTmmin -width 10 -textvariable info(primer_Tm_min) -validate all -vcmd "entry_integer %P %W %V 1 100"] -row 2 -column 2
-  grid [entry $a.eTmmax -width 10 -textvariable info(primer_Tm_max) -validate all -vcmd "entry_integer %P %W %V 1 100"] -row 2 -column 3
+  grid [ttk::spinbox $a.eTmmin -width 4 -textvariable info(primer_Tm_min) -from 40 -to 80 -validate all -validatecommand "entry_integer %P %W %V 1 100"] -row 2 -column 2
+  grid [ttk::spinbox $a.eTmmax -width 4 -textvariable info(primer_Tm_max) -from 40 -to 80 -validate all -validatecommand "entry_integer %P %W %V 1 100"] -row 2 -column 3
   grid [label $a.l%gc -text "%GC: " -justify right] -row 3 -column 1 -sticky e
-  grid [entry $a.e%gcmin -width 10 -textvariable info(primer_gc_min) -validate all -vcmd "entry_integer %P %W %V 0 100"] -row 3 -column 2
-  grid [entry $a.e%gcmax -width 10 -textvariable info(primer_gc_max) -validate all -vcmd "entry_integer %P %W %V 0 100"] -row 3 -column 3
+  grid [ttk::spinbox $a.e%gcmin -width 4 -textvariable info(primer_gc_min) -from 0 -to 100 -validate all -validatecommand "entry_integer %P %W %V 0 100"] -row 3 -column 2
+  grid [ttk::spinbox $a.e%gcmax -width 4 -textvariable info(primer_gc_max) -from 0 -to 100 -validate all -validatecommand "entry_integer %P %W %V 0 100"] -row 3 -column 3
   grid [label $a.lclamp -text [mc "GC clamp: "]] -row 4 -column 1 -sticky e
-  grid [entry $a.eclampmin -width 10 -textvariable info(primer_clamp_min) -validate all -vcmd "entry_integer %P %W %V 0 100"] -row 4 -column 2
-  grid [entry $a.eclampmax -width 10 -textvariable info(primer_clamp_max) -validate all -vcmd "entry_integer %P %W %V 0 100"] -row 4 -column 3
+  grid [ttk::spinbox $a.eclampmin -width 4 -textvariable info(primer_clamp_min) -from 0 -to 5 -validate all -validatecommand "entry_integer %P %W %V 0 100"] -row 4 -column 2
+  grid [ttk::spinbox $a.eclampmax -width 4 -textvariable info(primer_clamp_max) -from 0 -to 5 -validate all -validatecommand "entry_integer %P %W %V 0 100"] -row 4 -column 3
   grid [label $a.lconcec -text [mc "Consecutive bases: "]] -row 5 -column 1 -sticky e
-  grid [entry $a.econsecmax -width 10 -textvariable info(primer_consec_max) -validate all -vcmd "entry_integer %P %W %V 0 100"] -row 5 -column 3
+  grid [ttk::spinbox $a.econsecmax -width 4 -textvariable info(primer_consec_max) -from 0 -to 5 -validate all -validatecommand "entry_integer %P %W %V 0 100"] -row 5 -column 3
 
   grid [frame $a.concframe -relief ridge -borderwidth 3] -row 6 -column 1 -columnspan 3 -pady 3
     grid [label $a.concframe.lsalt -text [mc "Salt (mM):"]] -row 0 -column 1
-    grid [entry $a.concframe.esalt -width 10 -textvariable info(primer_salt) -validate all -vcmd "entry_integer %P %W %V 1 1000"] -row 0 -column 2
+    grid [ttk::spinbox $a.concframe.esalt -width 4 -textvariable info(primer_salt) -from 0 -to 1000 -validate all -validatecommand "entry_integer %P %W %V 1 1000"] -row 0 -column 2
     grid [label $a.concframe.ldna -text [mc "Primer (nM):"]] -row 1 -column 1
-    grid [entry $a.concframe.edna -width 10 -textvariable info(primer_dna) -validate all -vcmd "entry_integer %P %W %V 1 1000"] -row 1 -column 2
+    grid [ttk::spinbox $a.concframe.edna -width 4 -textvariable info(primer_dna) -from 10 -to 1000 -validate all -validatecommand "entry_integer %P %W %V 1 1000"] -row 1 -column 2
 
   grid [frame $a.scomp -relief ridge -borderwidth 3] -row 7 -column 1 -columnspan 3 -pady 1
     grid [label $a.scomp.ltot -text [mc "total"]] -row 0 -column 1
     grid [label $a.scomp.ladj -text [mc "adjacent"]] -row 0 -column 2
     grid [label $a.scomp.ltp -text "3'"] -row 0 -column 3
     grid [checkbutton $a.scomp.lscomp -text [mc "Self complement: "] -variable info(primer_check_sc) -selectcolor white] -row 1 -column 0 -sticky e
-    grid [entry $a.scomp.scomptot -width 10 -textvariable info(primer_scomp_tot_max) -validate all -vcmd "entry_integer %P %W %V 1 1000" -width 3] -row 1 -column 1
-    grid [entry $a.scomp.scompadj -width 10 -textvariable info(primer_scomp_adj_max) -validate all -vcmd "entry_integer %P %W %V 1 1000" -width 3] -row 1 -column 2
-    grid [entry $a.scomp.scompthree -width 10 -textvariable info(primer_scomp_3_max) -validate all -vcmd "entry_integer %P %W %V 1 1000" -width 3] -row 1 -column 3
+    grid [ttk::spinbox $a.scomp.scomptot -width 4 -textvariable info(primer_scomp_tot_max) -from 0 -to 10 -validate all -validatecommand "entry_integer %P %W %V 1 1000" -width 3] -row 1 -column 1
+    grid [ttk::spinbox $a.scomp.scompadj -width 4 -textvariable info(primer_scomp_adj_max) -from 0 -to 10 -validate all -validatecommand "entry_integer %P %W %V 1 1000" -width 3] -row 1 -column 2
+    grid [ttk::spinbox $a.scomp.scompthree -width 4 -textvariable info(primer_scomp_3_max) -from 0 -to 10 -validate all -validatecommand "entry_integer %P %W %V 1 1000" -width 3] -row 1 -column 3
     grid [label $a.scomp.lhcomp -text [mc "Heterodimer: "]] -row 2 -column 0 -sticky e
-    grid [entry $a.scomp.hcomptot -width 10 -textvariable info(primer_hcomp_tot_max) -validate all -vcmd "entry_integer %P %W %V 1 1000" -width 3] -row 2 -column 1
-    grid [entry $a.scomp.hcompadj -width 10 -textvariable info(primer_hcomp_adj_max) -validate all -vcmd "entry_integer %P %W %V 1 1000" -width 3] -row 2 -column 2
-    grid [entry $a.scomp.hcompthree -width 10 -textvariable info(primer_hcomp_3_max) -validate all -vcmd "entry_integer %P %W %V 1 1000" -width 3] -row 2 -column 3
+    grid [ttk::spinbox $a.scomp.hcomptot -width 4 -textvariable info(primer_hcomp_tot_max) -from 0 -to 10 -validate all -validatecommand "entry_integer %P %W %V 1 1000" -width 3] -row 2 -column 1
+    grid [ttk::spinbox $a.scomp.hcompadj -width 4 -textvariable info(primer_hcomp_adj_max) -from 0 -to 10 -validate all -validatecommand "entry_integer %P %W %V 1 1000" -width 3] -row 2 -column 2
+    grid [ttk::spinbox $a.scomp.hcompthree -width 4 -textvariable info(primer_hcomp_3_max) -from 0 -to 10 -validate all -validatecommand "entry_integer %P %W %V 1 1000" -width 3] -row 2 -column 3
     #grid [label $a.scomp.lholigo -text [mc "Oligo: "]] -row 3 -column 0 -sticky e
-    grid [entry $a.scomp.scompoligo -width 10 -textvariable info(primer_hcomp_oligo) -validate key -vcmd {if {[regexp {[^atcgATGC]} %P] || ([string length %P] > 40)} {bell; return 0} else {return 1}} -width 35 -selectforeground $info(text_select_fg_color) -selectbackground $info(text_select_bg_color) -foreground $info(text_fg_color) -background $info(text_bg_color)] -row 3 -column 0 -columnspan 4
+    grid [entry $a.scomp.scompoligo -width 10 -textvariable info(primer_hcomp_oligo) -validate key -validatecommand {if {[regexp {[^atcgATGC]} %P] || ([string length %P] > 40)} {bell; return 0} else {return 1}} -width 35] -row 3 -column 0 -columnspan 4
 
 
   grid [label $a.lscan -text [mc "Orientation:"]] -row 8 -column 1 -sticky e
@@ -32563,7 +34243,7 @@ proc primer_scan {w} {
   $w configure -cursor watch
   $w.textarea configure -cursor watch
   update idletasks
-  set log_dna [expr {1.987 * log( $info(primer_dna) / 1000000000.0)}]
+  set log_dna [expr {1.987 * log( $info(primer_dna) / 1000000000.0)}] 
   set log_salt [expr {12 * log10($info(primer_salt) / 1000.0)}]
 
   if {[$w.textarea tag ranges sel] == ""} {
@@ -32578,7 +34258,7 @@ proc primer_scan {w} {
     set first [$w.textarea index sel.first]
     set last  [$w.textarea index sel.last]
   }
-#selection used here
+#selection used here 
   if {$info(primer_scan) == "3'<--5'"} {
     set text [textarea_get $w.textarea $first $last]
   } else {
@@ -32601,10 +34281,10 @@ proc primer_scan {w} {
   array set hadd {aa 79 tt 79 at 72 ta 72 ca 63 tg 107 gt 62 ac 106 ct 56 ag 100 ga 60 tc 104 cg 106 gc 98 gg 80 cc 80}
   array set srem {aa -222 tt -222 at -204 ta -213 ca -296 tg -158 gt -293 ac -155 ct -279 ag -141 ga -291 tc -153 cg -272 gc -244 gg -199 cc -199}
   array set hrem {aa -79 tt -79 at -72 ta -72 ca -107 tg -63 gt -106 ac -62 ct -100 ag -56 ga -104 tc -60 cg -106 gc -98 gg -80 cc -80}
-
+  
   if {[string first [string index $text 0] "at"] > -1} {
     set htot -46
-    set stot -82
+    set stot -82 
     set gc 0
   } else {
     set htot -2
@@ -32620,7 +34300,7 @@ proc primer_scan {w} {
   set hmem $htot
   set smem $stot
   set gcmem $gc
-
+ 
   #set min_sc $info(primer_scomp_3_max)
   #if {$info(primer_scomp_adj_max) < $min_sc} {
   #  set min_sc $info(primer_scomp_adj_max)
@@ -32694,7 +34374,7 @@ proc primer_scan {w} {
     }
     set htot $hmem
     set stot $smem
-    set gc $gcmem
+    set gc $gcmem  
   }
   if {$primerlist != [list]} {
     set a [new_analysis_window $w "Find Primers" find_primers]
@@ -32703,10 +34383,10 @@ proc primer_scan {w} {
     set first_tab [expr {[font measure dnafont "100000 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 100028"]/[winfo pixels $a "1c"]*1.01}]
     set tab_spacing [expr {[font measure dnafont "length "]/[winfo pixels $a "1c"]*1.0}]
     grid [text $a.heading -background $info(bg_color) -foreground $info(label_fg_color) -height 1 -relief flat -font labelfont -wrap none -width 120 -tabs "[expr {$first_tab}]c center [expr {$first_tab+$tab_spacing}]c center [expr {$first_tab+2*$tab_spacing}]c center [expr {$first_tab+3*$tab_spacing}]c left"] -row 0 -column 0 -columnspan 2 -sticky nswe
-    #$a.heading insert end "[mc "Primer (5'-->3')"] \t[mc "length"]\t[mc "%GC"]\t[mc "Tm(\xB0\C)"]\t[mc "self/other(max adj 3')"]\n"
+    #$a.heading insert end "[mc "Primer (5'-->3')"] \t[mc "length"]\t[mc "%GC"]\t[mc "Tm(\xB0\C)"]\t[mc "self/other(max adj 3')"]\n" 
     $a.heading configure -font dnafont
     $a.heading insert end [format %-54s%-7s%-4s%-7s%-7s\n [mc "Primer (5'-->3')"] [mc "length"] [mc "%GC"] [mc "Tm(\xB0\C)"] [mc "self/other(max adj 3')"]]
-    $a.heading configure -state disabled
+    $a.heading configure -state disabled 
 
     create_textframe $a 80
     #grid [text $a.textframe.text -yscrollcommand "$a.scroll set" -font dnafont -wrap none -width 120 -tabs "[expr {$first_tab}]c center [expr {$first_tab+$tab_spacing}]c center [expr {$first_tab+2*$tab_spacing}]c center [expr {$first_tab+3*$tab_spacing}]c left" -insertontime 0 -insertofftime 1000 -setgrid 1] -row 1 -column 0 -rowspan 2 -sticky nswe
@@ -32725,7 +34405,7 @@ proc primer_scan {w} {
     }
     #$a.textframe.text insert end "$info($w,filename) \n"
     $a.textframe.text insert end "From [expr {[ix2bp $w.textarea $first]+1}] to [ix2bp $w.textarea $last] ($info(primer_scan)) \n\n"
-    $a.textframe.text insert end "Find Primers\n"
+    $a.textframe.text insert end "Find Primers\n" 
     #$a.textframe.text insert end "[mc "Primer (5'-->3')"] \t[mc "length"]\t[mc "%GC"]\t[mc "Tm(\xB0\C)"]\t[mc "self/other(max adj 3')"]\n"
     $a.textframe.text insert end [format %-54s%-7s%-4s%-7s%-7s\n [mc "Primer (5'-->3')"] [mc "length"] [mc "%GC"] [mc "Tm(\xB0\C)"] [mc "self/other(max adj 3')"]]
     set first [ix2bp $w.textarea $first]
@@ -32799,7 +34479,7 @@ proc primer_scan {w} {
     bind $a.textframe.text <Button-1> "if \{\[lsearch -exact \[$a.textframe.text tag names @%x,%y\] sel\] != -1\} break"
     $a.textframe.text configure -state disabled
     set outputmenu [add_output_menu $a.textframe.text "Text" text $w]
-    bind $a <Button-1> "focus $a.textframe.text"
+    bind $a <Button-1> "focus $a.textframe.text" 
     bindtags $a.textframe.text [list $a.textframe.text AnalysisText . all]
     wm deiconify $a
     if {[info exists info(last_analysis_xy)]} {
@@ -32887,7 +34567,7 @@ proc oligo_self_compl {o1 o2} {
       } else {
         if {($this_adj_working > $max_three) && ($i <= 0) && ($bottom_flag)} {set max_three $this_adj_working; set max_three_loc $i}
         set this_adj_working 0
-        set bottom_flag 0
+        set bottom_flag 0  
       }
     }
     #sputs "$top\n$bottom\n$this_max_match $this_adj $this_adj_working $max_three"
@@ -32896,16 +34576,16 @@ proc oligo_self_compl {o1 o2} {
     #if {($this_adj_working > $max_three) && ($i <= $len_dif)} {set max_three $this_adj_working;}
   }
   return [list $max_match $max_adj $max_three $max_match_loc $max_adj_loc $max_three_loc]
-}
+} 
 
 ##############
 ## New align dialog with multiple sequences aligned to a reference sequence
 ##############
 proc align_dialog2 {w} {
-  global info
+  global info  
   global align_ref_seq align_windows_list
   global align_seq align_seq_winlist align_prog align_sel_list align_dir_list
-  global ok dialogblock
+  global ok dialogblock 
 ###algn windows data shows up in:
 #global align_ref_seq
 #global list align_windows_list- list of windows to align to
@@ -32921,16 +34601,16 @@ proc align_dialog2 {w} {
   menubutton $s.seqsframe.win_button1
     menu $s.seqsframe.win_button1.menu
     foreach window [dnawindows_list 1] {
-      $s.seqsframe.win_button1.menu add radiobutton -command "$s.seqsframe.win_button1 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_ref_seq -value $window
+      $s.seqsframe.win_button1.menu add radiobutton -command "$s.seqsframe.win_button1 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_ref_seq -value $window 
     }
     set abi_list [lsort -unique [lsearch -all -inline -regexp [winfo children .] {.abi_window[0-9]+$}]]
     if {[llength $abi_list] > 0} {
       $s.seqsframe.win_button1.menu add separator
       foreach window $abi_list {
-        $s.seqsframe.win_button1.menu add radiobutton -command "$s.seqsframe.win_button1 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_ref_seq -value $window
+        $s.seqsframe.win_button1.menu add radiobutton -command "$s.seqsframe.win_button1 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_ref_seq -value $window 
       }
     }
-  $s.seqsframe.win_button1 configure -text [wm title $w] -menu $s.seqsframe.win_button1.menu -indicatoron 1 -relief raised -width 60
+  $s.seqsframe.win_button1 configure -text [wm title $w] -menu $s.seqsframe.win_button1.menu -indicatoron 1 -relief raised -width 60 
   bind $s.seqsframe.win_button1.menu <<MenuSelect>> "focus $s"
 
   grid $s.seqsframe.win_button1 -row 1 -column 2 -columnspan 3
@@ -32939,7 +34619,7 @@ proc align_dialog2 {w} {
   grid [checkbutton $s.seqsframe.rc1 -width 10 -variable info(align_select_rc1) -text [mc "Rev-Com"] -offvalue "forward" -onvalue "rev/com" -indicator on -selectcolor white] -row 1 -column 6
 
   if {$align_ref_seq ne $w} {
-    set info(align_select_rc1) "forward"
+    set info(align_select_rc1) "forward" 
     set info(align_select_region1) "all"
     set info(align_windows_dict) [dict create]
   }
@@ -33062,20 +34742,20 @@ proc align_dialog2 {w} {
     #multi-list windows list
     #if {[grid info $s.seqsframe.alignwins.listframe] != ""} {
     #  foreach selection [$s.seqsframe.alignwins.listframe.windowlist curselection] {
-    #    lappend align_windows_list [lindex $align_seq_winlist $selection]
-    #    lappend align_dir_list [lindex $temp_align_dir_list $selection]
+    #    lappend align_windows_list [lindex $align_seq_winlist $selection] 
+    #    lappend align_dir_list [lindex $temp_align_dir_list $selection] 
     #    lappend align_sel_list [lindex $temp_align_sel_list $selection]
     #  }
     #}  else {
       #convert align_seq($i) array to list of windows
     #}
     #treeview windows list
-    set align_windows_list [$s.seqsframe.alignwins.listframe.windowlist selection]
+    set align_windows_list [$s.seqsframe.alignwins.listframe.windowlist selection] 
     set info(align_windows_dict) [dict create]
     foreach selection $align_windows_list {
-      lappend align_dir_list [$s.seqsframe.alignwins.listframe.windowlist set $selection Direction]
+      lappend align_dir_list [$s.seqsframe.alignwins.listframe.windowlist set $selection Direction] 
       lappend align_sel_list [$s.seqsframe.alignwins.listframe.windowlist set $selection Range]
-      dict set info(align_windows_dict) $selection [list [$s.seqsframe.alignwins.listframe.windowlist set $selection Direction] [$s.seqsframe.alignwins.listframe.windowlist set $selection Range]]
+      dict set info(align_windows_dict) $selection [list [$s.seqsframe.alignwins.listframe.windowlist set $selection Range] [$s.seqsframe.alignwins.listframe.windowlist set $selection Direction]]
     }
 
     #add progress bar
@@ -33096,7 +34776,7 @@ proc align_dialog2 {w} {
   destroy $s
 
   bind . <<RaiseDialogs>> ""
-  unset ok
+  unset ok 
   catch {unset align_seq align_ref_seq align_sel_list align_seq_winlist align_dir_list}
   return ""
 }
@@ -33119,16 +34799,16 @@ proc align_add_window_menu {frame i} {
 
     foreach window [dnawindows_list 1] {
 ####need to check for existence of $frame.win_button$j before calling align_add_window
-      $frame.awin_button$i.menu add radiobutton -command "$frame.awin_button$i configure -text \{[wm title $window]\}; event generate $frame <<add_blank>>" -label [wm title $window] -variable align_seq($i) -value $window
+      $frame.awin_button$i.menu add radiobutton -command "$frame.awin_button$i configure -text \{[wm title $window]\}; event generate $frame <<add_blank>>" -label [wm title $window] -variable align_seq($i) -value $window 
     }
     set abi_list [lsort -unique [lsearch -all -inline -regexp [winfo children .] {.abi_window[0-9]+$}]]
     if {[llength $abi_list] > 0} {
       $frame.awin_button$i.menu add separator
       foreach window $abi_list {
-        $frame.awin_button$i.menu add radiobutton -command "$frame.awin_button$i configure -text \{[wm title $window]\}; if \{!\[winfo exists $frame.awin_button$j\]\} \{align_add_window_menu $frame $j\}" -label [wm title $window] -variable align_seq($i) -value $window
+        $frame.awin_button$i.menu add radiobutton -command "$frame.awin_button$i configure -text \{[wm title $window]\}; if \{!\[winfo exists $frame.awin_button$j\]\} \{align_add_window_menu $frame $j\}" -label [wm title $window] -variable align_seq($i) -value $window 
       }
     }
-  $frame.awin_button$i configure -text [mc "Select Window to align"] -menu $frame.awin_button$i.menu -indicatoron 1 -relief raised -width 60
+  $frame.awin_button$i configure -text [mc "Select Window to align"] -menu $frame.awin_button$i.menu -indicatoron 1 -relief raised -width 60 
   set align_seq($i) ""
   bind $frame.awin_button$i.menu <<MenuSelect>> "focus [winfo toplevel $frame]"
   grid $frame.awin_button$i -row [expr {$i+2}] -column 2 -columnspan 3
@@ -33138,13 +34818,13 @@ proc align_add_window_menu {frame i} {
     set seqframecheck 1
     foreach element \[array names align_seq\] {
       if {\$align_seq(\$element) == \"\"} {set seqframecheck 0}
-    }
+    } 
     if {\$seqframecheck} {
       align_add_window_menu $frame $j
     }
     unset seqframecheck
   "
-  #endbind $frame <<add_blank>>
+  #endbind $frame <<add_blank>> 
 }
 
 ###########
@@ -33266,7 +34946,7 @@ proc align_fill_window_list_treeview {s} {
     if {[wm state $abiwindow] eq "withdrawn"} {continue}
     $s.windowlist insert {} end  -id $abiwindow -text "[wm title $abiwindow]" -tag abi
     if {[dict exists $info(align_windows_dict) $abiwindow]} {
-      $s.windowlist selection add  $abiwindow
+      $s.windowlist selection add  $abiwindow     
       $s.windowlist set $abiwindow Range [lindex [dict get $info(align_windows_dict) $abiwindow] 0]
       $s.windowlist set $abiwindow Direction [lindex [dict get $info(align_windows_dict) $abiwindow] 1]
     } else {
@@ -33277,7 +34957,7 @@ proc align_fill_window_list_treeview {s} {
   foreach windowelement [dnawindows_list 1] {
     $s.windowlist insert {} end  -id $windowelement -text "[wm title $windowelement]" -tag seq
     if {[dict exists $info(align_windows_dict) $windowelement]} {
-      $s.windowlist selection add  $windowelement
+      $s.windowlist selection add  $windowelement 
       $s.windowlist set $windowelement Range [lindex [dict get $info(align_windows_dict) $windowelement] 0]
       $s.windowlist set $windowelement Direction [lindex [dict get $info(align_windows_dict) $windowelement] 1]
     } else {
@@ -33296,9 +34976,9 @@ proc align_fill_window_list_treeview {s} {
   bind $s.windowlist <Shift-Button-1> "toggle_align_treeview $s.windowlist %x %y extend; break"
   bind $s.windowlist <$modifier-Button-1> "toggle_align_treeview $s.windowlist %x %y toggle; break"
   bind $s.windowlist <$modifier-KeyPress-a> "$s.windowlist selection set \[$s.windowlist children {}\]"
-  bind $s.windowlist <Shift-$modifier-KeyPress-a> "$s.windowlist selection set {}"
+  bind $s.windowlist <Shift-$modifier-KeyPress-A> "$s.windowlist selection set {}"
   bind [winfo toplevel $s.windowlist] <$modifier-KeyPress-a> "$s.windowlist selection set \[$s.windowlist children {}\]"
-  bind [winfo toplevel $s.windowlist] <Shift-$modifier-KeyPress-a> "$s.windowlist selection set {}"
+  bind [winfo toplevel $s.windowlist] <Shift-$modifier-KeyPress-A> "$s.windowlist selection set {}"
 
   bind $t <B1-Motion> "treeview_move $t %x %y"
 
@@ -33311,7 +34991,7 @@ proc align_fill_window_list_treeview {s} {
 proc toggle_align_treeview {t x y op} {
 #sputs [$t identify region $x $y] [$t identify row $x $y] if {[$t identify region $x $y] eq "cell"} ;# can use identify item when 8.6 is available"
   if {[$t identify row $x $y] ne {}} {
-    set col [$t identify column $x $y]
+    set col [$t identify column $x $y]  
     set row [$t identify row $x $y]
     if {[$t column $col -id] eq "Range" && [lsearch {Selection All} [$t set $row Range]] > -1 } {
       $t set $row Range [lindex {All Selection} [lsearch {Selection All} [$t set $row Range]]]
@@ -33324,7 +35004,7 @@ proc toggle_align_treeview {t x y op} {
           ttk::treeview::Press $t $x $y
         }
         extend {
-          ttk::treeview::Select $t $x $y extend
+          ttk::treeview::Select $t $x $y extend 
         }
         toggle {
           ttk::treeview::Select $t $x $y toggle
@@ -33337,7 +35017,7 @@ proc toggle_align_treeview {t x y op} {
         ttk::treeview::Press $t $x $y
       }
       extend {
-        ttk::treeview::Select $t $x $y extend
+        ttk::treeview::Select $t $x $y extend 
       }
       toggle {
         ttk::treeview::Select $t $x $y toggle
@@ -33365,7 +35045,7 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
     #$align_ref_seq.textarea configure -cursor watch
     set window_type1 "sequence"
     if {($align_select_region1 == "selection") && ([$align_ref_seq.textarea tag nextrange sel 1.0] != "")} {
-#selection used here
+#selection used here 
       set xdna [textarea_get $align_ref_seq.textarea sel.first sel.last]
       if {$align_select_rc1 == "rev/com"} {
         set xfirst [expr {1+[ix2bp $align_ref_seq.textarea [$align_ref_seq.textarea index sel.last]]}]
@@ -33373,7 +35053,7 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
         set xdir -1
       } else {
         set xfirst [ix2bp $align_ref_seq.textarea [$align_ref_seq.textarea index sel.first]]
-#selection used here
+#selection used here 
       }
     } else {
       set xdna [textarea_get $align_ref_seq.textarea 1.0 end-1chars]
@@ -33446,9 +35126,9 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
     ###window2 is a sequence window
       if {($align_sel eq [mc "Selection"]) && ([$align_select_window2.textarea tag nextrange sel 1.0] != "")} {
         set ydna [textarea_get $align_select_window2.textarea sel.first sel.last]
-#selection used here
+#selection used here 
         set yfirst [ix2bp $align_select_window2.textarea [$align_select_window2.textarea index sel.first]]
-#selection used here
+#selection used here 
       } else {
         set ydna [textarea_get $align_select_window2.textarea 1.0 end-1chars]
         set yfirst 0
@@ -33509,7 +35189,7 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
       set resultlist_r [list $xdna $ydna [string repeat . [expr {max([string length $xdna], [string length $ydna])}]]]
     }
 
-#sputs here2 [llength $resultlist] [llength $resultlist_r] [lindex $resultlist 2] [lindex $resultlist_r 2] [expr {[regexp -all {\#} [lindex $resultlist 2]] * $info(mm_penalty) + [regexp -all {\| } [lindex $resultlist 2]]* $info(gap_penalty) + [regexp -all {  } [lindex $resultlist 2]] *2 *$info(gap_extension_penalty)}]  [expr {[regexp -all {\#} [lindex $resultlist_r 2]] * $info(mm_penalty) + [regexp -all {\| } [lindex $resultlist_r 2]]* $info(gap_penalty) + [regexp -all {  } [lindex $resultlist_r 2]] *2 *$info(gap_extension_penalty)}]
+#sputs here2 [llength $resultlist] [llength $resultlist_r] [lindex $resultlist 2] [lindex $resultlist_r 2] [expr {[regexp -all {\#} [lindex $resultlist 2]] * $info(mm_penalty) + [regexp -all {\| } [lindex $resultlist 2]]* $info(gap_penalty) + [regexp -all {  } [lindex $resultlist 2]] *2 *$info(gap_extension_penalty)}]  [expr {[regexp -all {\#} [lindex $resultlist_r 2]] * $info(mm_penalty) + [regexp -all {\| } [lindex $resultlist_r 2]]* $info(gap_penalty) + [regexp -all {  } [lindex $resultlist_r 2]] *2 *$info(gap_extension_penalty)}]  
 ## bug: needs a way to calculate the exact score to decide which alignment to use
     if {($align_dir eq [mc "Forward"]) || (($align_dir eq [mc "Best"]) && ([expr {[regexp -all {[\#\.]} [lindex $resultlist 2]] * $info(mm_penalty) + [regexp -all {\| } [lindex $resultlist 2]]* $info(gap_penalty) + [regexp -all {  } [lindex $resultlist 2]] *2 *$info(gap_extension_penalty)}] >= [expr {[regexp -all {[\#\.]} [lindex $resultlist_r 2]] * $info(mm_penalty) + [regexp -all {\| } [lindex $resultlist_r 2]]* $info(gap_penalty) + [regexp -all {  } [lindex $resultlist_r 2]] *2 *$info(gap_extension_penalty)}]  ))} {
       lappend xout_list [lindex $resultlist 0]
@@ -33521,7 +35201,8 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
       lappend xout_list [lindex $resultlist_r 0]
       lappend yout_list [lindex $resultlist_r 1]
       lappend ydir_list [expr {-1 * $ydir}]
-      lappend yfirst_list [expr {1+ $yfirst + [regexp -all {[a-zA-Z]} [lindex $resultlist_r 1]]}]
+sputs yfirst 1+ $yfirst + [regexp -all {[a-zA-Z]} [lindex $resultlist_r 1]]
+      lappend yfirst_list [expr {1+ $yfirst + [regexp -all {[a-zA-Z]} [lindex $resultlist_r 1]]}] 
       lappend lineout_list [lindex $resultlist_r 2]
     }
     if {![info exists info(($align_select_window2,linked_events)]} {set info($align_select_window2,linked_events) [list]}
@@ -33537,7 +35218,7 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
     foreach {transdata dnadata} [lrange $tagdata 1 end] {
       if {($align_select_region1 == "selection") && ([$align_ref_seq.textarea tag nextrange sel 1.0] != "")} {
         set selfirst [ix2bp $align_ref_seq.textarea [$align_ref_seq.textarea index sel.first]]
-#selection used here
+#selection used here 
       } else {
           set selfirst 0
       }
@@ -33656,15 +35337,15 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
     set x_linestart [expr {$xfirst+ $xdir*([regexp -all  {[^- ~]} [string range $xout 0 $x-1]] + (($xchars>0)?1:0))}]
     $a.textframe.text insert end [format "%[expr {$left_margin -1}]u[expr {$xdir>0?">":"<"}]" $x_linestart]
     set dnastarts [$a.textframe.text index end-1char]
-    set lstag "ls[expr {$x_linestart}]\_$xdir"
+    set lstag "ls[expr {$x_linestart}]\_$xdir" 
     $a.textframe.text insert end "[set x_linestore [string range $xout $x [expr {$x+$info(align_linewidth)-1}]]]" [list $align_ref_seq\_reftag $lstag noalignhighlight]
     if {($info(align_copy_highlight)) && ([string first .abi_window $align_ref_seq] == -1) && ($xchars > 0)} {
-      copy_tags $align_ref_seq.textarea [list [bp2ix $align_ref_seq.textarea [expr {$x_linestart-1}]] [bp2ix $align_ref_seq.textarea [expr {$x_linestart-1 +$xdir * ( $xchars- (($xchars>0)?1:0))}]]] $a.textframe.text $dnastarts [expr {($xdir==1)?"forward":"reverse"}]
+      copy_tags $align_ref_seq.textarea [list [bp2ix $align_ref_seq.textarea [expr {$x_linestart-1}]] [bp2ix $align_ref_seq.textarea [expr {$x_linestart-1 +$xdir * ( $xchars- (($xchars>0)?1:0))}]]] $a.textframe.text $dnastarts [expr {($xdir==1)?"forward":"reverse"}] 
     }
 
 
     $a.textframe.text insert end "[format "[expr {$xdir>0?">":"<"}]%-[expr {$left_margin -1}]u" [expr {$x_linestart +$xdir*( $xchars- (($xchars>0)?1:0))}]]\n"
-    #add live link bindings
+    #add live link bindings 
     $a.textframe.text tag bind $align_ref_seq\_reftag <Double-Button-1> "$a.textframe.text tag add sel @%x,%y; alignlink2 $a.textframe.text $align_ref_seq \[$a.textframe.text index @%x,%y\] goto 1; break"
     lappend info($align_ref_seq,linked_events) [list $a.textframe.text $align_ref_seq\_reftag <Double-Button-1>]
     $a.textframe.text tag bind $align_ref_seq\_reftag <Shift-Double-Button-1> "$a.textframe.text tag add sel @%x,%y; alignlink2 $a.textframe.text $align_ref_seq \[$a.textframe.text index @%x,%y\] select 1; break"
@@ -33684,6 +35365,7 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
       incr y_line_count
       set ychars [regexp -all  {[^- ~]} [string range $yout $x [expr {$x+$info(align_linewidth)-1}]]]
       #** skip the line if $ychars == 0?
+sputs ychars $ychars $yfirst $ydir [regexp -all  {[^- ~]} [string range $yout 0 $x-1]]
       set y_linestart [expr {$yfirst+ $ydir*([regexp -all  {[^- ~]} [string range $yout 0 $x-1]] + (($ychars>0)?1:0))}]
       $a.textframe.text insert end [format "%[expr {$left_margin -1}]u[expr {$ydir>0?">":"<"}]" $y_linestart]
       set dnastarts [$a.textframe.text index end-1char]
@@ -33724,7 +35406,7 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
       }
       #** add mmhigligth to index numbers at start and end of the line too?
 
-      #add live link bindings
+      #add live link bindings 
       $a.textframe.text tag bind $ywindow\_tag <Double-Button-1> "$a.textframe.text tag add sel @%x,%y; alignlink2 $a.textframe.text $ywindow \[$a.textframe.text index @%x,%y\] goto 1; break"
       lappend info($ywindow,linked_events) [list $a.textframe.text $ywindow\_tag <Double-Button-1>]
       $a.textframe.text tag bind $ywindow\_tag <Shift-Double-Button-1> "$a.textframe.text tag add sel @%x,%y; alignlink2 $a.textframe.text $ywindow \[$a.textframe.text index @%x,%y\] select 1; break"
@@ -33767,7 +35449,7 @@ proc output_alignment2 {align_ref_seq align_select_region1 align_select_rc1 alig
     }
   }
   $a.textframe.text tag configure mmhighlite -background red -foreground white
-  $a.textframe.text tag raise mmhighlite
+  $a.textframe.text tag raise mmhighlite 
   $a.textframe.text tag configure unattemptedhighlite -background gray10 -foreground white
   $a.textframe.text tag raise unattemptedhighlite
   $a.textframe.text tag configure matchhighlite -underline 1
@@ -33879,14 +35561,14 @@ proc align_master_match {m_list s_list {l_list {}}} {
     append l_out($count) [string range [lindex $l_list $count] $i($count) end]
     set len_max [expr {max ($len_max, [string length $s_out($count)])}]
   }
-  append m_out [string repeat "-" [expr {$len_max - [string length $m_out]}]]
+  append m_out [string repeat "-" [expr {$len_max - [string length $m_out]}]] 
   set s_out_list [list]
   set l_out_list [list]
   for {set count 0} {$count < [llength $m_list]} {incr count} {
     append s_out($count) [string repeat "-" [expr {$len_max - [string length $s_out($count)]}]]
     append l_out($count) [string repeat "-" [expr {$len_max - [string length $l_out($count)]}]]
-    lappend s_out_list $s_out($count)
-    lappend l_out_list $l_out($count)
+    lappend s_out_list $s_out($count)  
+    lappend l_out_list $l_out($count) 
   }
   return [list $m_out $s_out_list $l_out_list]
 }
@@ -34024,7 +35706,7 @@ proc block_align3b {xdna ydna} {
       } else {
       }
     }
-   set new_res [blockalign_combine_blocks $res_list]
+   set new_res [blockalign_combine_blocks $res_list] 
 
     #take result list and generate alignment
     set x1 0
@@ -34065,7 +35747,7 @@ proc blockalign_combine_blocks {blockslist} {
   set align_blocksize $info(align_blocksize)
   if {$blockslist == {}} {return}
   set a([lindex $blockslist 0]) [lindex $blockslist 0]
-
+  
 
   foreach block [lrange $blockslist 1 end] {
     set i 0
@@ -34104,7 +35786,7 @@ proc blockalign_combine_blocks {blockslist} {
 
 
 
-  ####need to use the blockalign_result_insert algorithm to find the longest full alignment from the combined blocks
+  ####need to use the blockalign_result_insert algorithm to find the longest full alignment from the combined blocks 
   ##start with single blank list as out_list
   ##foreach reslist
   ## foreach out_list
@@ -34133,7 +35815,7 @@ proc blockalign_combine_blocks {blockslist} {
              break
            }
            lappend newlist $block
-         }
+         } 
          if {[lsearch $new_outlist [set newlist [concat $newlist [list $current_reslist]]]] == -1} {
            lappend new_outlist $newlist
          }
@@ -34203,7 +35885,7 @@ sputs ext $block_end_list [list [expr {$i}] [expr {$found}]]
 
 ##########################
 #blockalign Dec 2011- currently in use
-##########################
+########################## 
 proc block_align3 {xdna ydna blocksize} {
 global text1 text2
   set text1 [string toupper $xdna]
@@ -34243,7 +35925,7 @@ global text1 text2
     }
   }
 
-
+ 
   #sort by size, then adjust or take out any block inconsistent with a larger block
   if {[llength [lindex $res2 0]] > 0} {
   set rlist [list]
@@ -34254,10 +35936,10 @@ global text1 text2
     set ax2 [expr {$ax1 + $al}]
     set ay2 [expr {$ay1 + $al}]
     for {set j [expr {$i+1}]} {$j < [llength $res3]} {incr j} {
-      foreach {bx1 by1 bl} [lindex $res3 $j] {}
+      foreach {bx1 by1 bl} [lindex $res3 $j] {} 
       if {$bx1 == -1} continue
       set bx2 [expr {$bx1 + $bl}]
-      set by2 [expr {$by1 + $bl}]
+      set by2 [expr {$by1 + $bl}]  
       if {($bx1 < $ax1) && ($by1 < $ay1)}  {
         if {($bx2 > $ax1) || ($by2 > $ay1)} {
           #shorten b to be upper left of a
@@ -34309,7 +35991,7 @@ global text1 text2
     return [finealign $xdna $ydna]
   }
 
-
+  
 
   return [list $xout $yout $lout]
 }
@@ -34318,7 +36000,7 @@ global text1 text2
 ## OLD DNA alignment dialog- align two sequences
 ################
 proc align_dialog {w} {
-  global info
+  global info  
   global align_select_window1
   global align_select_window2
   global ok dialogblock
@@ -34332,16 +36014,16 @@ proc align_dialog {w} {
   menubutton $s.win_button1
     menu $s.win_button1.menu
     foreach window [dnawindows_list 1] {
-      $s.win_button1.menu add radiobutton -command "$s.win_button1 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_select_window1 -value $window
+      $s.win_button1.menu add radiobutton -command "$s.win_button1 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_select_window1 -value $window 
     }
     set abi_list [lsort -unique [lsearch -all -inline -regexp [winfo children .] {.abi_window[0-9]+$}]]
     if {[llength $abi_list] > 0} {
       $s.win_button1.menu add separator
       foreach window $abi_list {
-        $s.win_button1.menu add radiobutton -command "$s.win_button1 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_select_window1 -value $window
+        $s.win_button1.menu add radiobutton -command "$s.win_button1 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_select_window1 -value $window 
       }
     }
-  $s.win_button1 configure -text [wm title $w] -menu $s.win_button1.menu -indicatoron 1 -relief raised -width 60
+  $s.win_button1 configure -text [wm title $w] -menu $s.win_button1.menu -indicatoron 1 -relief raised -width 60 
   bind $s.win_button1.menu <<MenuSelect>> "focus $s"
   set align_select_window1 $w
   grid $s.win_button1 -row 1 -column 2 -columnspan 3
@@ -34354,12 +36036,12 @@ proc align_dialog {w} {
   menubutton $s.win_button2
     menu $s.win_button2.menu
     foreach window [dnawindows_list 1] {
-      $s.win_button2.menu add radiobutton -command "$s.win_button2 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_select_window2 -value $window
+      $s.win_button2.menu add radiobutton -command "$s.win_button2 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_select_window2 -value $window 
     }
     if {[llength $abi_list] > 0} {
       $s.win_button2.menu add separator
       foreach window $abi_list {
-        $s.win_button2.menu add radiobutton -command "$s.win_button2 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_select_window2 -value $window
+        $s.win_button2.menu add radiobutton -command "$s.win_button2 configure -text \{[wm title $window]\}" -label [wm title $window] -variable align_select_window2 -value $window 
       }
     }
   bind $s.win_button2.menu <<MenuSelect>> "focus $s"
@@ -34368,7 +36050,7 @@ proc align_dialog {w} {
   } else {
     set align_select_window2 $w
   }
-  $s.win_button2 configure -text [wm title $align_select_window2] -menu $s.win_button2.menu -indicatoron 1 -relief raised -width 60
+  $s.win_button2 configure -text [wm title $align_select_window2] -menu $s.win_button2.menu -indicatoron 1 -relief raised -width 60 
   grid $s.win_button2 -row 2 -column 2 -columnspan 3
 
   #grid [checkbutton $s.local2 -selectcolor $info(bg_color) -width 10 -variable info(align_select_region2) -textvariable info(align_select_region2) -onvalue "selection" -offvalue "all" -indicator off -selectcolor white] -row 2 -column 5
@@ -34454,7 +36136,7 @@ proc align_dialog {w} {
   destroy $s
   bind . <<RaiseDialogs>> ""
   if {$ok == 1} {output_alignment}
-  unset ok
+  unset ok 
 }
 
 ################
@@ -34477,15 +36159,15 @@ proc output_alignment {} {
     set window_type1 "sequence"
     if {($info(align_select_region1) == "selection") && ([$align_select_window1.textarea tag nextrange sel 1.0] != "")} {
       set xdna [textarea_get $align_select_window1.textarea sel.first sel.last]
-#selection used here
+#selection used here 
       if {$info(align_select_rc1) == "rev/com"} {
         set xfirst [expr {1+[ix2bp $align_select_window1.textarea [$align_select_window1.textarea index sel.last]]}]
-#selection used here
+#selection used here 
         set xdna [revcom $xdna]
         set xdir -1
       } else {
         set xfirst [ix2bp $align_select_window1.textarea [$align_select_window1.textarea index sel.first]]
-#selection used here
+#selection used here 
       }
     } else {
       set xdna [textarea_get $align_select_window1.textarea 1.0 end-1chars]
@@ -34535,15 +36217,15 @@ proc output_alignment {} {
     set window_type2 "sequence"
     if {($info(align_select_region2) == "selection") && ([$align_select_window2.textarea tag nextrange sel 1.0] != "")} {
       set ydna [textarea_get $align_select_window2.textarea sel.first sel.last]
-#selection used here
+#selection used here 
       if {$info(align_select_rc2) == "rev/com"} {
         set yfirst [expr {1+[ix2bp $align_select_window2.textarea [$align_select_window2.textarea index sel.last]]}]
-#selection used here
+#selection used here 
         set ydna [revcom $ydna]
         set ydir -1
       } else {
         set yfirst [ix2bp $align_select_window2.textarea [$align_select_window2.textarea index sel.first]]
-#selection used here
+#selection used here 
       }
     } else {
       set ydna [textarea_get $align_select_window2.textarea 1.0 end-1chars]
@@ -34561,7 +36243,7 @@ proc output_alignment {} {
     set window_type2 "abi"
     if {($info(align_select_region2) == "selection")} {
       set abi_seq [abi_get_seq $align_select_window2 sel.first sel.last]
-#selection used here
+#selection used here 
       if {$abi_seq == ""} {
         set abi_seq [abi_get_seq $align_select_window2 start end]
       }
@@ -34885,7 +36567,7 @@ proc NW_affine_align {xdna ydna {ignoremax 0}} {
   ###test with NW_affine_align AAA AA
   ###test with NW_affine_align ATA AA
 
-  #initialize 0,0
+  #initialize 0,0 
   set mlist [list [expr {[string index $seqx 0] eq [string index $seqy 0]?1:$mm}]]
   set mtlist 7
   set ilist [list -10000000]
@@ -34893,7 +36575,7 @@ proc NW_affine_align {xdna ydna {ignoremax 0}} {
   #rest of row 0
   for {set i 1} {$i < [string length $seqx]} {incr i} {
     set s [expr {[string index $seqx $i] eq [string index $seqy 0]?1:$mm}]
-    lappend mlist [expr {$s+$d+$e*($i-1)}]
+    lappend mlist [expr {$s+$d+$e*($i-1)}] 
     append mtlist 7
     if {[lindex $mlist [expr {$i-1}]] > [lindex $ilist [expr {$i-1}]]} {
       lappend ilist [expr {[lindex $mlist [expr {$i-1}]]+$d}]
@@ -34902,7 +36584,7 @@ proc NW_affine_align {xdna ydna {ignoremax 0}} {
       lappend ilist [expr {[lindex $ilist [expr {$i-1}]]+$e}]
       append itlist 4
     }
-  }
+  } 
   set mttable [list $mtlist]
   set ittable [list $itlist]
   set mstor $mlist
@@ -34989,8 +36671,8 @@ proc NW_affine_align {xdna ydna {ignoremax 0}} {
   #  sputs $row
   #}
   ### do traceback
-  set x [expr {[string length $xdna]-1}]
-  set y [expr {[string length $ydna]-1}]
+  set x [expr {[string length $xdna]-1}] 
+  set y [expr {[string length $ydna]-1}] 
   set yout ""
   set xout ""
   set lineout ""
@@ -35010,14 +36692,14 @@ proc NW_affine_align {xdna ydna {ignoremax 0}} {
         set yout "-$yout"
         set xout "[string index $xdna $x]$xout"
         set lineout " $lineout"
-        incr x -1
+        incr x -1 
         set z 1
       }
       5 {
         set yout "-$yout"
         set xout "[string index $xdna $x]$xout"
         set lineout " $lineout"
-        incr x -1
+        incr x -1 
         set z 0
       }
       6 {
@@ -35028,7 +36710,7 @@ proc NW_affine_align {xdna ydna {ignoremax 0}} {
         } else {
           set lineout "#$lineout"
         }
-        incr x -1
+        incr x -1 
         incr y -1
         set z 0
       }
@@ -35040,20 +36722,20 @@ proc NW_affine_align {xdna ydna {ignoremax 0}} {
         } else {
           set lineout "#$lineout"
         }
-        incr x -1
+        incr x -1 
         incr y -1
         set z 1
       }
       3 {
         set yout "[string index $ydna $y]$yout"
-        set xout "-$xout"
+        set xout "-$xout" 
         set lineout " $lineout"
         incr y -1
         set z 0
       }
       2 {
         set yout "[string index $ydna $y]$yout"
-        set xout "-$xout"
+        set xout "-$xout" 
         set lineout " $lineout"
         incr y -1
         set z 1
@@ -35131,13 +36813,13 @@ proc NWalign {xdna ydna {ignoremax 0}} {
       lappend scorelist $m
       set g $f
 
-    }
+    } 
     set scorelist1 $scorelist
     lappend allvecs $veclist
   }
   set btime [clock clicks]
-  set x [expr {[string length $xdna]-1}]
-  set y [expr {[string length $ydna]-1}]
+  set x [expr {[string length $xdna]-1}] 
+  set y [expr {[string length $ydna]-1}] 
   set yout ""
   set xout ""
   set lineout ""
@@ -35147,25 +36829,25 @@ proc NWalign {xdna ydna {ignoremax 0}} {
         set yout "-$yout"
         set xout "[string index $xdna $x]$xout"
         set lineout " $lineout"
-        incr x -1
+        incr x -1 
       }
       1 {
         set yout "[string index $ydna $y]$yout"
         set xout "[string index $xdna $x]$xout"
         set lineout "|$lineout"
-        incr x -1
+        incr x -1 
         incr y -1
       }
       3 {
         set yout "[string index $ydna $y]$yout"
         set xout "[string index $xdna $x]$xout"
         set lineout "#$lineout"
-        incr x -1
+        incr x -1 
         incr y -1
       }
       2 {
         set yout "[string index $ydna $y]$yout"
-        set xout "-$xout"
+        set xout "-$xout" 
         set lineout " $lineout"
         incr y -1
       }
@@ -35239,7 +36921,7 @@ proc alignlink {textbox window index dir mode {raise 1}} {
 }
 
 #############
-##align ling that uses lsxx_yy tag to find line start index(xx) and spacing(yy) for linking translated sequences, or DNA without indexes
+##align ling that uses lsxx_yy tag to find line start index(xx) and spacing(yy) for linking translated sequences, or DNA without indexes 
 #############
 proc alignlink2 {textbox window index mode {raise 1}} {
  if {([set lstag [lsearch -inline  [$textbox tag names $index] ls*]] != "") && [regexp {ls(-?[0-9]+)_(-?[0-9]+)} $lstag blank linestart spacing]} {
@@ -35299,7 +36981,7 @@ proc abi_tooltip_create {} {
 
   if {(0 && [tk windowingsystem] == "aqua")} {
     tk::unsupported::MacWindowStyle style .abitooltip2 help {}; after 40  "if {\[winfo exists .abitooltip2\]} {raise .abitooltip2}"
-  } else {
+  } else { 
     wm overrideredirect .abitooltip2 1
   }
   catch {wm attributes .abitooltip2 -alpha .7}
@@ -35342,7 +37024,7 @@ proc abi_tooltip_update {abi_window from_base to_base to_canvas} {
   }
   if {$mid_base <= 0} {
     set mid_base 1
-  }
+  }  
 
   set from_index [expr {[lindex $abi_info($abi_window,basecall_loc,edited) $mid_base-1]}]
   set to_index [expr {[lindex $abi_info($abi_window,basecall_loc,edited) $mid_base+1]}]
@@ -35413,7 +37095,7 @@ proc abi_tooltip_seq_update {window base to_canvas} {
 #needs to deal with rev-com abi window and rev-com alignment
 proc abi_tooltip_post {textbox window x y} {
   if {![winfo exists $window]} return
-  set index [$textbox index @$x,$y]
+  set index [$textbox index @$x,$y]  
   if {([set lstag [lsearch -inline  [$textbox tag names $index] ls*]] != "") && [regexp {ls(-?[0-9]+)_(-?[0-9]+)} $lstag blank linestart spacing]} {
     set text [$textbox get [$textbox index "$index linestart"] [$textbox index $index]]
     regsub -all {[0-9]|[[:blank:]~]|<|>} $text "" text
@@ -35465,7 +37147,7 @@ proc NCBI_Blast {w} {
     grid [frame $dialog.frame1] -row 1 -column 0
     grid [label $dialog.frame1.label -text [mc "Window:"] -font boldlabelfont] -row 0 -column 0 -sticky ens
     menubutton $dialog.frame1.win_button
-    menu $dialog.frame1.win_button.menu
+    menu $dialog.frame1.win_button.menu 
     foreach window [dnawindows_list 1] {
       $dialog.frame1.win_button.menu add radiobutton -label [wm title $window] -variable ncbi_select_window -value $window  -command "$dialog.frame1.win_button configure -text \{[wm title $window]\}"
     }
@@ -35474,7 +37156,7 @@ proc NCBI_Blast {w} {
     set ncbi_select_window $w
     grid $dialog.frame1.win_button -row 0 -column 1 -sticky wens
 
-    grid [checkbutton $dialog.frame1.local -height 1 -variable info(analyze_selection) -text [mc "Selection Only"] -onvalue "selection" -offvalue "all" -indicator on -selectcolor white] -row 0 -column 2 -sticky wns
+    grid [checkbutton $dialog.frame1.local -height 1 -variable info(analyze_selection) -text [mc "Selection Only"] -onvalue "selection" -offvalue "all" -indicator on -selectcolor white] -row 0 -column 2 -sticky wns 
 
 
 
@@ -35509,7 +37191,7 @@ proc NCBI_Blast {w} {
     update idletasks
 
     focus $dialog
-    vwait ok
+    vwait ok 
     set dialogblock 0
     destroy $dialog
     bind . <<RaiseDialogs>> ""
@@ -35520,7 +37202,7 @@ proc NCBI_Blast {w} {
       } else {
         set first [$w.textarea index sel.first]
         set last [$w.textarea index sel.last]
-#selection used here
+#selection used here 
       }
       set text [textarea_get $w.textarea $first $last]
       if {($info(ncbi_blast,program) == "blastp") || ($info(ncbi_blast,program) == "tblastn")} {
@@ -35571,7 +37253,7 @@ proc blast_callback {token} {
         tk_messageBox -icon error -message "There was an unknown error with the server.\n[::http::error $token]"
       }
     }
-  }
+  }  
   ::http::cleanup $token
 }
 
@@ -35609,8 +37291,8 @@ proc NCBI_align {t1 t2} {
           set i 20
         }
       }
-    }
-  }
+    }  
+  }  
   ::http::cleanup $token
   ::http::cleanup $token2
   return $html2
@@ -35632,7 +37314,7 @@ proc URL_Post {base_url function vars_list} {
         }
         puts $htmlfile "<h1>If Javascript is disabled, click here</h1>"
         puts $htmlfile "<INPUT TYPE=SUBMIT VALUE=\"Get results\"> "
-        puts $htmlfile "</form>"
+        puts $htmlfile "</form>" 
         puts $htmlfile "<SCRIPT language=\"JavaScript1.2\">"
         puts $htmlfile " document.myform.submit();"
         puts $htmlfile "</SCRIPT>"
@@ -35797,7 +37479,7 @@ proc entrez_dialog {w} {
   grid [button $a.buttonframe.okframe.ok -text [mc "Done"] -command "set ok 1"] -row 0 -column 1
   grid columnconfigure $a.buttonframe.okframe 1 -weight 1
   grid columnconfigure $a.buttonframe 2 -weight 1
-
+  
   grid columnconfigure $a 1 -weight 1
   grid rowconfigure $a 2 -weight 1
   focus $a.queryframe.query0
@@ -35812,7 +37494,7 @@ proc entrez_dialog {w} {
 }
 
 ################
-## Fill in the Entrez query text box
+## Fill in the Entrez query text box 
 ################
 proc entrez_do_query {a} {
   global info query field bool
@@ -35836,7 +37518,7 @@ proc entrez_do_query {a} {
     }
   }
   $a.resultframe.result insert 1.0 "Query: $query_string\n"
-
+  
   #get the query from NCBI
   set url "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?[http::formatQuery tool ApE db nucleotide term $query_string retmax $info(entrez,max_hits)]"
 
@@ -35847,9 +37529,9 @@ proc entrez_do_query {a} {
   #parse result
   set count_list [list]
   foreach termset [regexp -inline -all "<TermSet>.*?</TermSet>" $html] {
-    if {[regexp ".*<Term>(.*?)</Term>.*<Count>(.*?)</Count>.*" $termset termset term count]} {
+    if {[regexp ".*<Term>(.*?)</Term>.*<Count>(.*?)</Count>.*" $termset termset term count]} { 
       lappend count_list [list $term $count]
-    } elseif {[regexp ".*<Count>(.*?)</Count>.*<Term>(.*?)</Term>.*" $termset termset count term]} {
+    } elseif {[regexp ".*<Count>(.*?)</Count>.*<Term>(.*?)</Term>.*" $termset termset count term]} { 
       lappend count_list [list $term $count]
     }
   }
@@ -35861,14 +37543,14 @@ proc entrez_do_query {a} {
     $a.resultframe.result insert end "[lindex $count 0] : [lindex $count 1] hits.\n"
   }
   set id_list [list]
-  foreach {id_line id} [regexp -inline -all "<Id>(.*?)</Id>" $html] {
+  foreach {id_line id} [regexp -inline -all "<Id>(.*?)</Id>" $html] { 
       lappend id_list $id
   }
   $a.resultframe.result insert end "[llength $id_list] references returned."
   if {[llength $id_list] == $info(entrez,max_hits)} {
     $a.resultframe.result insert end " (Max Hits limit reached)\n"
   } else {
-    $a.resultframe.result insert end "\n"
+    $a.resultframe.result insert end "\n" 
   }
     $a.resultframe.result insert end "-------------------\n"
   foreach ref $id_list {
@@ -35886,7 +37568,7 @@ proc entrez_do_query {a} {
      } else {
     $a.resultframe.result tag bind "REF$ref" <Any-Enter> "$a.resultframe.result tag configure REF$ref -underline 1; $a.resultframe.result configure -cursor pointinghand"
     }
-    $a.resultframe.result tag bind "REF$ref" <Any-Leave> "$a.resultframe.result tag configure REF$ref -underline 0; $a.resultframe.result configure -cursor xterm"
+    $a.resultframe.result tag bind "REF$ref" <Any-Leave> "$a.resultframe.result tag configure REF$ref -underline 0; $a.resultframe.result configure -cursor xterm" 
     $a.resultframe.result tag bind "REF$ref" <Button-1> "entrez_download $ref {$j(Title)}"
 
     array unset j
@@ -35905,11 +37587,11 @@ proc entrez_summary {id_list} {
   ::http::cleanup $x
   #sputs $html
   set data_list [list]
-  foreach {doc_data} [regexp -inline -all "<DocSum>.*?</DocSum>" $html] {
+  foreach {doc_data} [regexp -inline -all "<DocSum>.*?</DocSum>" $html] { 
     set data_list [list]
     if {[regexp "<Id>(.*?)</Id>" $doc_data id_line id]} {
       set data_list [list [list ID Integer $id]]
-      foreach {data_line name type data} [regexp -inline -all {<Item Name="(.*?)"[\n ]Type="(.*?)">(.*?)</Item>} $doc_data] {
+      foreach {data_line name type data} [regexp -inline -all {<Item Name="(.*?)"[\n ]Type="(.*?)">(.*?)</Item>} $doc_data] { 
         lappend data_list [list $name $type [regsub \n $data " "]]
       }
     }
@@ -36069,7 +37751,7 @@ proc recomb_dialog {w} {
   grid [menubutton $t.editsitesframe.menubutton -menu $t.editsitesframe.menubutton.menu -textvariable recomb_temp(menu_site_name)] -row 0 -column 0 -sticky nw
   menu $t.editsitesframe.menubutton.menu -postcommand "recomb_dialog_edit_sites_fill_menu $t.editsitesframe"
   set recomb_temp(menu_site_name) "Edit Site..."
-
+  
   grid [frame $t.okframe  -relief ridge  -borderwidth 2] -row 6 -column 1 -columnspan 2 -sticky nswe
   grid [button $t.okframe.ok -text "OK" -command "set ok 1"] -row 4 -column 0 -sticky nswe
   grid rowconfigure $t 1 -weight 1
@@ -36094,7 +37776,7 @@ proc recomb_dialog {w} {
   $tv delete [$tv children {}]
   foreach {name data} $info(recomb,prototypes) {
     if {$data == ""} {set tags heading} else {set tags ""}
-    catch {$tv insert {} end -text $name -values [list $data] -tags $tags}
+    catch {$tv insert {} end -text $name -values [list $data] -tags $tags} 
   }
   $tv selection set [list [lindex [$tv children {}] 0]]
 
@@ -36137,7 +37819,7 @@ proc recomb_dialog_reaction_to_clipboard {tv} {
     set ix [lindex [$tv selection] 0]
     set data [$tv set $ix data]
     lappend temp [$tv item $ix -text] $data
-    clipboard clear
+    clipboard clear 
     clipboard append -displayof [winfo toplevel $tv] $temp
     selection own -selection CUT_BUFFER0 [winfo toplevel $tv]
   }
@@ -36152,7 +37834,7 @@ proc recomb_dialog_reset_defaults {tv} {
   $tv delete [$tv children {}]
   foreach {name data} $info(recomb,prototypes) {
     if {$data == ""} {set tags heading} else {set tags ""}
-    catch {$tv insert {} end -text $name -values [list $data] -tags $tags}
+    catch {$tv insert {} end -text $name -values [list $data] -tags $tags} 
   }
   $tv selection set [list [lindex [$tv children {}] 0]]
 }
@@ -36208,7 +37890,7 @@ sputs clip_data $clip_data
 proc recomb_dialog_fill_mainframe {f data} {
   global recomb_temp info
   set i 0
-  if {$data == ""} {grid remove $f; return} else {grid configure $f}
+  if {$data == ""} {grid remove $f; return} else {grid configure $f} 
   trace remove variable recomb_temp write "recomb_dialog_mainframe_to_tv $f;#"
   foreach name [lindex $data 0] {site dir} [lindex $data 1] {
     if {![winfo exists $f.frame$i]} {
@@ -36388,11 +38070,11 @@ proc recomb_dialog_edit_sites {f} {
   grid [entry $f.siteframe.site3 -width 50 -textvariable recomb_temp(entry_site3) -justify right] -row 2 -column 0 -sticky nswe
   grid [entry $f.siteframe.site4 -width 50 -textvariable recomb_temp(entry_site4)] -row 2 -column 2 -sticky nswe
   grid [checkbutton $f.siteframe.same -text [mc "Same"] -variable recomb_temp(entry_same) -onvalue 1 -offvalue 0 -command "recomb_dialog_edit_sites_process_same $f"] -row 2 -column 3 -sticky ns
-
+  
   grid columnconfigure $f.siteframe 0 -weight 1
   grid columnconfigure $f.siteframe 2 -weight 1
   grid columnconfigure $f 0 -weight 1
-
+  
   set recomb_temp(entry_same) 0
   #set recomb_temp(menu_site_name) [lindex [dict keys $info(recomb,sites)] 0]
   recomb_dialog_edit_sites_fill_sites $f $recomb_temp(menu_site_name)
@@ -36479,7 +38161,7 @@ proc recomb_dialog_edit_sites_fill_sites {f site} {
     set site_list [dict get $info(recomb,sites) $site]
     set recomb_temp(entry_site_name) $site
   }
-
+  
   for {set i 0} {$i < 5} {incr i} {
     set recomb_temp(entry_site$i) [lindex $site_list $i]
   }
@@ -36495,7 +38177,7 @@ proc recomb_dialog_edit_sites_fill_sites {f site} {
 ##
 ####################
 proc recombination_window {w} {
-  global info modifier dialogblock
+  global info modifier dialogblock 
   global ok recomb_prototype recomb_window recomb_data toolbar_images
 
   if {$dialogblock == 1} {return}
@@ -36506,7 +38188,7 @@ proc recombination_window {w} {
 
   grid [frame $a.typeframe -relief ridge -borderwidth 2] -row 1 -column 1 -sticky nswe
   grid [menubutton $a.typeframe.menubutton -textvariable recomb_prototype -menu $a.typeframe.menubutton.menu -indicator on -relief raised] -row 1 -column 1
-  set recomb_prototype [mc "Chose a Recombination Prototype"]
+  set recomb_prototype [mc "Choose a Recombination Prototype"]
   menu $a.typeframe.menubutton.menu
   set maxwidth 15
   set mi 0
@@ -36520,13 +38202,13 @@ proc recombination_window {w} {
       $a.typeframe.menubutton.menu add radiobutton -label [mc $name] -variable recomb_prototype -value $name -command "fill_recomb_reation_frame $a"
     }
     incr mi
-    if {[string length $name] > $maxwidth} {set maxwidth [string length $name]}
+    if {[string length $name] > $maxwidth} {set maxwidth [string length $name]}   
   }
   incr maxwidth 3
   if {$maxwidth > 200} {set maxwidth 200}
   $a.typeframe.menubutton configure -width $maxwidth
-  grid [checkbutton $a.typeframe.circularize -text [mc "Treat All Sequences as Circular"] -command "if {\$recomb_prototype ne \[mc {Chose a Recombination Prototype}\]} {fill_recomb_reation_frame $a}" -variable info(recomb,circularize)] -row 2 -column 1
-
+  grid [checkbutton $a.typeframe.circularize -text [mc "Treat All Sequences as Circular"] -command "if {\$recomb_prototype ne \[mc {Choose a Recombination Prototype}\]} {fill_recomb_reation_frame $a}" -variable info(recomb,circularize)] -row 2 -column 1
+  
   grid [labelframe $a.reactionframe -relief ridge -borderwidth 2 -text [mc "Recombination Reaction Product"]] -row 2 -column 1 -sticky nswe
 
   grid [frame $a.okframe] -row 3 -column 1 -sticky nswe
@@ -36543,7 +38225,7 @@ proc recombination_window {w} {
 
     vwait ok
 
-    if {$recomb_prototype == [mc "Chose a Recombination Prototype"]} {
+    if {$recomb_prototype == [mc "Choose a Recombination Prototype"]} {
       set ok -1
     }
     if {$ok == 1} {
@@ -36634,7 +38316,7 @@ proc recombination_window {w} {
   }
   } ;# while keep open
   array unset recomb_data
-  array unset recomb_window
+  array unset recomb_window 
   unset ok recomb_prototype
 }
 
@@ -36645,7 +38327,7 @@ proc fill_recomb_reation_frame {a} {
   global info recomb_prototype recomb_window recomb_data
 
   array set proto_list $info(recomb,prototypes)
-  array set all_sites_list $info(recomb,sites)
+  array set all_sites_list $info(recomb,sites) 
 
   set label_list [lindex $proto_list($recomb_prototype) 0]
   set sites_list [lindex $proto_list($recomb_prototype) 1]
@@ -36660,16 +38342,16 @@ proc fill_recomb_reation_frame {a} {
 
   set found_all 1
   for {set i 0} {$i < [expr {[llength $sites_list]-2}]} {incr i 2} {
-    set name [lindex $label_list [expr {$i/2}]]
+    set name [lindex $label_list [expr {$i/2}]] 
     set site1 [lindex $sites_list $i]
     set dir1 [lindex $sites_list [expr {$i+1}]]
     set site2 [lindex $sites_list [expr {$i+2}]]
     set dir2 [lindex $sites_list [expr {$i+3}]]
     #label for the fragment type
-    grid [label $a.reactionframe.l0$site_count -text $name] -row $site_count -column 0
+    grid [label $a.reactionframe.l0$site_count -text $name] -row $site_count -column 0 
     #label for the site on the left side
-    #grid [label $a.reactionframe.l1$site_count -text $site1] -row $site_count -column 1
-    grid [menubutton $a.reactionframe.mb$site_count -menu $a.reactionframe.mb$site_count.menu -textvariable recomb_window($site_count) -indicator on -relief raised -width 50] -row $site_count -column 2
+    #grid [label $a.reactionframe.l1$site_count -text $site1] -row $site_count -column 1 
+    grid [menubutton $a.reactionframe.mb$site_count -menu $a.reactionframe.mb$site_count.menu -textvariable recomb_window($site_count) -indicator on -relief raised -width 50] -row $site_count -column 2 
     set recomb_window($site_count) $site_count
     menu $a.reactionframe.mb$site_count.menu
     #fill the menu with radiobutton items sequences between sites
@@ -36741,7 +38423,7 @@ proc fill_recomb_reation_frame {a} {
       } else {
         set index_list1 [regexp -all -indices -nocase -inline $site_rc_reg1 $text]
         set index1 [lindex [lindex $index_list1 end] 1]
-      }
+      }  
       if {$index1 != ""} {
         set index1 [expr {$index1 % $len}]
         if {$site2 eq "end"} {
@@ -36759,7 +38441,7 @@ proc fill_recomb_reation_frame {a} {
         if {$index2 != ""} {
           set index2 [expr {($index2 % $len)+1}]
           if {$info(recomb,circularize) || ($info($window,circular) == "circular") || ($index2 < $index1)} {
-            $a.reactionframe.mb$site_count.menu add radiobutton -label [wm title $window] -variable recomb_window($site_count) -value [wm title $window] -command "set recomb_data($site_count) {1 $window $index2 $index1}"
+            $a.reactionframe.mb$site_count.menu add radiobutton -label [wm title $window] -variable recomb_window($site_count) -value [wm title $window] -command "set recomb_data($site_count) {1 $window $index2 $index1}"       
           }
         }
       }
@@ -36849,7 +38531,7 @@ proc golden_gate_enzymes {} {
   foreach enzyme $enzymes {
     set pattern $enzinfo(flatpat,$enzyme)
     set cs $enzinfo(enz_cut_sites,$enzyme)
-    if {([lindex $cs 0] > [string length $pattern]) && ([lindex $cs 1] >= [string length $pattern]) && ([expr {abs([lindex $cs 0] -[lindex $cs 1])}] >= 2) && ([string length $pattern] > 5) && ![regexp {[^ACGT]} $pattern]} {
+    if {([lindex $cs 0] > [string length $pattern]) && ([lindex $cs 1] >= [string length $pattern]) && ([expr {abs([lindex $cs 0] -[lindex $cs 1])}] >= 3) && ([expr {abs([lindex $cs 0] -[lindex $cs 1])}] <= 4) && ([string length $pattern] > 5) && ![regexp {[^ACGT]} $pattern]} {
       lappend result $enzyme
     }
   }
@@ -36891,7 +38573,7 @@ proc golden_gate_fragments {enzyme_list} {
 
 
 ################
-##proc: given window, enzyme and index of site1 and site2, return: site1 overhang, site1->site2 sequence (as list of 2 if split), site2 overhang
+##proc: given window, enzyme and index of site1 and site2, return: site1 overhang, site1->site2 sequence (as list of 2 if split), site2 overhang 
 ################
 proc golden_gate_fragment {w enzyme1 site1 dir1 enzyme2 site2 dir2} {
   global info enzinfo
@@ -36950,7 +38632,7 @@ proc golden_gate_dialog {w} {
   bind $s <<Cancel>> "set ok -1"
   bind $s <<OK>> "set ok 1"
   set ok 0
-
+  
   grid [frame $s.enzframe] -row 0 -column 0 -sticky nswe
   if {$info(use_tile)} {
     grid [ttk::separator $s.sep] -row 1 -column 0 -sticky nwe
@@ -36978,7 +38660,7 @@ proc golden_gate_dialog {w} {
     grid remove $s.enzframe.menub1
     grid remove $s.enzframe.menub2
   } else {
-    set gg_enz [mc "Chose an Enzyme..."]
+    set gg_enz [mc "Choose an Enzyme..."]
     foreach enz [golden_gate_enzymes] {
       $s.enzframe.menub.m add command -label "$enz" -command "set gg_enz $enz; set gg_info(enz) $enz; golden_gate_fill_dialog $s 0"
     }
@@ -36986,7 +38668,7 @@ proc golden_gate_dialog {w} {
     foreach enz [golden_gate_enzymes] {
       $s.enzframe.menub1.m1 add command -label "$enz" -command "set gg_enz1 $enz; set gg_info(enz1) $enz; golden_gate_fill_dialog $s 0"
     }
-    $s.enzframe.menub1.m1 add command -label "No Enzyme" -command "set gg_enz1 \[mc \"Chose an Enzyme...\"\]; set gg_info(enz1) {}; golden_gate_fill_dialog $s 0"
+    $s.enzframe.menub1.m1 add command -label "No Enzyme" -command "set gg_enz1 \[mc \"Choose an Enzyme...\"\]; set gg_info(enz1) {}; golden_gate_fill_dialog $s 0"
     if {[llength $enz_list] == 2} {
       grid remove $s.enzframe.menub2
     } else {
@@ -36994,7 +38676,7 @@ proc golden_gate_dialog {w} {
       foreach enz [golden_gate_enzymes] {
         $s.enzframe.menub2.m2 add command -label "$enz" -command "set gg_enz2 $enz; set gg_info(enz2) $enz; golden_gate_fill_dialog $s 0"
       }
-      $s.enzframe.menub2.m2 add command -label "No Enzyme" -command "set gg_enz2 \[mc \"Chose an Enzyme...\"\]; set gg_info(enz2) {}; golden_gate_fill_dialog $s 0"
+      $s.enzframe.menub2.m2 add command -label "No Enzyme" -command "set gg_enz2 \[mc \"Choose an Enzyme...\"\]; set gg_info(enz2) {}; golden_gate_fill_dialog $s 0"
     }
   }
 
@@ -37048,7 +38730,9 @@ proc golden_gate_fill_dialog {s pos} {
   if {($pos > 0) && ($gg_info(oh5,0) == $gg_info(oh3,[expr {$pos-1}]))} {
     #check pos-1 3' end for closing the circle- set ok to active and grid remove from pos to end then return
     if {([revcom $gg_info(oh3,[expr {$pos-1}])] == $gg_info(oh3,[expr {$pos-1}]))} {
-      set gg_info(status,[expr {$pos-1}]) "$gg_info(oh3,[expr {$pos-1}])**Palindromic Junction**"
+      set gg_info(status,[expr {$pos-1}]) "$gg_info(oh3,[expr {$pos-1}])**Warning: Palindromic Junction**"
+    } elseif {([revcom $gg_info(oh5,[expr {$pos-1}])] == $gg_info(oh3,[expr {$pos-1}]))} {
+       set gg_info(status,[expr {$pos-1}]) "$gg_info(oh3,[expr {$pos-1}])**Warning: Fragment ends are the same overhang**"
     } else {
        set gg_info(status,[expr {$pos-1}]) "$gg_info(oh3,[expr {$pos-1}])"
     }
@@ -37067,7 +38751,9 @@ proc golden_gate_fill_dialog {s pos} {
   }
   if {($pos > 0)} {
     if {([revcom $gg_info(oh3,[expr {$pos-1}])] == $gg_info(oh3,[expr {$pos-1}]))} {
-      set gg_info(status,[expr {$pos-1}]) "$gg_info(oh3,[expr {$pos-1}])**Palindromic Junction**"
+      set gg_info(status,[expr {$pos-1}]) "$gg_info(oh3,[expr {$pos-1}])**Warning: Palindromic Junction**"
+    } elseif {([revcom $gg_info(oh5,[expr {$pos-1}])] == $gg_info(oh3,[expr {$pos-1}]))} {
+      set gg_info(status,[expr {$pos-1}]) "$gg_info(oh3,[expr {$pos-1}])**Warning: Fragment ends are the same overhang**"
     } else {
        set gg_info(status,[expr {$pos-1}]) "$gg_info(oh3,[expr {$pos-1}])"
     }
@@ -37105,7 +38791,7 @@ proc golden_gate_fill_dialog {s pos} {
 
 
 #find all fragments that are compatible with pos-1 3' end, add them to menubutton (or label, if only 1)
-#for all new 3' ends, check if they are all the same- if so, check if they match pos+1 5' ends, if so stop, if not fill pos+1, if not the same grid remove pos+1 to end and reset ends
+#for all new 3' ends, check if they are all the same- if so, check if they match pos+1 5' ends, if so stop, if not fill pos+1, if not the same grid remove pos+1 to end and reset ends 
   grid configure $s.seqsframe.seqframe$pos
   if {([llength $new_frag_list] > 0) && ($pos < 19)} {
     if {[llength $new_frag_list] > 1} {
@@ -37114,8 +38800,8 @@ proc golden_gate_fill_dialog {s pos} {
       grid remove $s.seqsframe.seqframe0.label
       if {$new_frag_match} {
         foreach frag $new_frag_list {
-          set enz1_pos [lindex $frag 3 0 1]
-          set enz2_pos [lindex $frag 3 1 1]
+          set enz1_pos [lindex $frag 3 0 1]  
+          set enz2_pos [lindex $frag 3 1 1]  
           $s.seqsframe.seqframe$pos.menub.m add command -label "$enz1_pos - $enz2_pos\: [wm title [lindex $frag 0]]" -command "set gg_info(seq,$pos) \{[wm title [lindex $frag 0]]\}; set gg_info(w,$pos) [lindex $frag 0]; set gg_info(oh3,$pos) [lindex $frag 2]; set gg_info(frag_info,$pos) [list [lindex $frag 3]]; set gg_info(dir,$pos) [lindex $frag 4]"
         }
         set gg_info(seq,$pos) [wm title [lindex [lindex $new_frag_list 0] 0]]
@@ -37130,8 +38816,8 @@ proc golden_gate_fill_dialog {s pos} {
         }
       } else {
         foreach frag $new_frag_list {
-          set enz1_pos [lindex $frag 3 0 1]
-          set enz2_pos [lindex $frag 3 1 1]
+          set enz1_pos [lindex $frag 3 0 1]  
+          set enz2_pos [lindex $frag 3 1 1] 
           $s.seqsframe.seqframe$pos.menub.m add command -label "$enz1_pos - $enz2_pos\: [wm title [lindex $frag 0]]" -command "set gg_info(seq,$pos) \{[wm title [lindex $frag 0]]\}; set gg_info(w,$pos) [lindex $frag 0]; set gg_info(oh5,$pos) [lindex $frag 1]; set gg_info(oh3,$pos) [lindex $frag 2]; set gg_info(frag_info,$pos) [list [lindex $frag 3]]; set gg_info(dir,$pos) [lindex $frag 4]; golden_gate_fill_dialog $s [expr {$pos+1}]"
         }
         set gg_info(seq,$pos) [mc "Choose a Fragment"]
@@ -37247,7 +38933,7 @@ proc golden_gate_generate_product {} {
     set end [string length $dna]
     set new_tags2 [list]
     foreach {tag data} $tags_0 {
-      set newcoords [list]
+      set newcoords [list]  
       foreach {a b} [lindex $data 0] {
 	set a [expr {$a +$end_0}]
         set b [expr {$b +$end_0}]
@@ -37258,7 +38944,7 @@ proc golden_gate_generate_product {} {
         } elseif {$b > $end} {
           lappend newcoords $a [expr {$end}]
           lappend newcoords 0 [expr {$b-$end}]
-        }
+        } 
       }
       if {$newcoords != [list]} {
         lset data 0 $newcoords
@@ -37267,7 +38953,7 @@ proc golden_gate_generate_product {} {
     }
     lappend_tags tags {*}$new_tags2
   }
-
+    
   dialog_cancel .dialog
   create_window $dna "" $filecomment "circular" 1 0 New_DNA $tags {} Genbank
 }
@@ -37275,7 +38961,7 @@ proc golden_gate_generate_product {} {
 ################
 ## NOT USED reverse_golden_gate_dialog
 ################
-proc reverse_golden_gate_dialog {w} {
+proc reverse_golden_gate_dialog {w} { 
   global info modifier dialogblock modstring enzinfo
   global ok gg_enz gg_seq gg_nparam gg_info
 
@@ -37284,7 +38970,7 @@ proc reverse_golden_gate_dialog {w} {
   bind $s <<Cancel>> "set ok -1"
   bind $s <<OK>> "set ok 1"
   set ok 0
-
+  
 
   grid [frame $s.seqframe] -row 0 -column 0 -sticky nswe
   grid [menubutton $s.seqframe.menub -menu $s.seqframe.menub.m -textvariable gg_seq] -row 0 -column 1 -sticky nsew
@@ -37306,7 +38992,7 @@ proc reverse_golden_gate_dialog {w} {
     set gg_enz [lindex $enz_list 0]
     set gg_info(enz) [lindex $enz_list 0]
   } else {
-    set gg_enz [mc "Chose an Enzyme..."]
+    set gg_enz [mc "Choose an Enzyme..."]
     foreach enz [golden_gate_enzymes] {
       $s.enzframe.menub.m add radiobutton -label "$enz" -variable gg_info(enz) -value $enz -command "set gg_enz $enz; set gg_info(enz) $enz; rev_golden_gate_fill_dialog $s"
     }
@@ -37356,7 +39042,7 @@ proc reverse_golden_gate_dialog {w} {
     grid [frame $s.okframe] -row 5 -column 0 -sticky nswe
      grid [button $s.okframe.cancel -text [mc "Cancel"] -command "set ok -1"] -row 1 -column 0 -sticky nw -padx 10 -pady 3
     grid [button $s.okframe.ok -text [mc "OK"] -command "set ok 1" -default active -state disabled] -row 1 -column 1 -sticky nw -padx 10 -pady 3
-
+ 
 
   rev_golden_gate_fill_dialog $s
   vwait ok
@@ -37514,7 +39200,7 @@ proc rev_golden_gate_fill_dialog {s} {
       if {[string length [set oh_sequence [textarea_get $w.textarea {*}[$w.textarea tag ranges $feature]]]] != $overhang} {continue}
       lappend indices [list $feature $feature_name [lindex [$w.textarea tag ranges $feature] 0] [ix2bp $w.textarea [lindex [$w.textarea tag ranges $feature] 0]] $oh_sequence]
     }
-    if {[llength $indices] > 0} {
+    if {[llength $indices] > 0} {  
       set indices [lsort -increasing -integer -index 3 $indices]
       set gg_info(indices) $indices
       $s.okframe.ok configure -state normal
@@ -37547,7 +39233,7 @@ proc rev_golden_gate_fill_dialog {s} {
         }
         set gg_info(gg_name$i) [lindex $name_list 0]
         grid [ttk::combobox $s.fragmentsframe.name$i -textvariable gg_info(gg_name$i) -values $name_list]
-
+        
         grid [label $s.fragmentsframe.l$i -text "[lindex $indices $i 1] at [lindex $indices $i 3] to [lindex $indices [expr {($i+1)%[llength $indices]}] 1] at [lindex $indices [expr {($i+1)%[llength $indices]}] 3]"] -row $i -column 1
         grid [checkbutton $s.fragmentsframe.cb$i -variable gg_info(gg_oligos$i) -text "Oligos" ] -row $i -column 2
         set gg_info(gg_skip$i) 0
@@ -37604,7 +39290,7 @@ proc rev_golden_gate_fill_dialog {s} {
       } else {
         grid remove $s.mismatchframe.warnings
       }
-
+ 
     } else {
       set gg_info(indices) [list]
       $s.okframe.ok configure -state disabled
@@ -37615,7 +39301,7 @@ proc rev_golden_gate_fill_dialog {s} {
       }
       grid [label $s.fragmentsframe.l0 -text [mc "There are no matching features with a length of %1\$s (the overhang length of %2\$s)." $overhang $enzyme] -foreground red] -row 0 -column 0
 
-    }
+    }  
   }
 }
 
@@ -37625,16 +39311,16 @@ proc rev_golden_gate_fill_dialog {s} {
 ################
 proc gibson_dialog {w} {
   global info temp_info modifier dialogblock modstring
-  global ok
+  global ok 
 
   if {$dialogblock == 1} {return}
 
-  set s [new_dialog $w "Gibson Reaction..." "NEW DNA"]
+  set s [new_dialog $w "Gibson Designer" "NEW DNA"]
   bind $s <<Cancel>> "set ok -1"
   bind $s <<OK>> "set ok 1"
   set ok 0
   array unset temp_info
-
+  
   grid [frame $s.configframe] -row 0 -column 0 -sticky nswe
   if {$info(use_tile)} {
     grid [ttk::separator $s.sep] -row 1 -column 0 -sticky nwe
@@ -37643,25 +39329,25 @@ proc gibson_dialog {w} {
   }
   grid [frame $s.configframe.min] -row 0 -column 0 -sticky nwe
   grid [label $s.configframe.min.label1 -text "Minimum overlap"] -row 0 -column 1 -sticky nw
-  grid [label $s.configframe.min.min_value -textvariable info(gib_min_overlap)]  -row 0 -column 2 -sticky nw
-  grid [ttk::scale $s.configframe.min.min_scale  -orient horizontal -from 5 -to 100 -variable info(gib_min_overlap) -command "set info(gib_min_overlap) \[expr {int(\$info(gib_min_overlap))}\];set info(gib_max_overlap) \[expr {max(\$info(gib_max_overlap), \$info(gib_min_overlap))}\];gibson_fill_frame_first $s.seqsframe $w;#"]  -row 0 -column 3 -sticky nwe -padx {0 8}
+  grid [ttk::spinbox $s.configframe.min.min_value -textvariable info(gib_min_overlap) -from 5 -to 100 -validate all -validatecommand "entry_integer %P %W %V 5 100"]  -row 0 -column 2 -sticky nw 
+  grid [ttk::scale $s.configframe.min.min_scale  -orient horizontal -from 5 -to 100 -variable info(gib_min_overlap) -command "set info(gib_min_overlap) \[expr {int(\$info(gib_min_overlap))}\];set info(gib_max_overlap) \[expr {max(\$info(gib_max_overlap), \$info(gib_min_overlap))}\];gibson_fill_frame_first $s.seqsframe $w;#"]  -row 0 -column 3 -sticky nwe -padx {0 8} 
   grid columnconfigure $s.configframe.min 3 -weight 1
 
   grid [frame $s.configframe.max] -row 1 -column 0 -sticky nwe
   grid [label $s.configframe.max.label1 -text "Maximum overlap"] -row 0 -column 1 -sticky nw
-  grid [label $s.configframe.max.max_value -textvariable info(gib_max_overlap)]  -row 0 -column 2 -sticky nw
-grid [ttk::scale $s.configframe.max.max_scale  -orient horizontal -from 10 -to 1000 -variable info(gib_max_overlap) -command "set info(gib_max_overlap) \[expr {int(\$info(gib_max_overlap))}\];set info(gib_min_overlap) \[expr {min(\$info(gib_max_overlap), \$info(gib_min_overlap))}\];gibson_fill_frame_first $s.seqsframe $w;#"]  -row 0 -column 3 -sticky nwe -padx {0 8}
+  grid [ttk::spinbox $s.configframe.max.max_value -textvariable info(gib_max_overlap) -from 10 -to 1000 -validate all -validatecommand "entry_integer %P %W %V 10 1000"]  -row 0 -column 2 -sticky nw 
+grid [ttk::scale $s.configframe.max.max_scale  -orient horizontal -from 10 -to 1000 -variable info(gib_max_overlap) -command "set info(gib_max_overlap) \[expr {int(\$info(gib_max_overlap))}\];set info(gib_min_overlap) \[expr {min(\$info(gib_max_overlap), \$info(gib_min_overlap))}\];gibson_fill_frame_first $s.seqsframe $w;#"]  -row 0 -column 3 -sticky nwe -padx {0 8} 
   grid columnconfigure $s.configframe.max 3 -weight 1
 
   grid [frame $s.configframe.max_nh] -row 2 -column 0 -sticky nwe
   grid [label $s.configframe.max_nh.label1 -text "Maximum Non-homologous end"] -row 0 -column 1 -sticky nw
-  grid [label $s.configframe.max_nh.max_value -textvariable info(gib_max_nonhom)]  -row 0 -column 2 -sticky nw
-  grid [ttk::scale $s.configframe.max_nh.max_scale  -orient horizontal -from 0 -to 20 -variable info(gib_max_nonhom) -command "set info(gib_max_nonhom) \[expr {int(\$info(gib_max_nonhom))}\]; if {\$info(gib_max_nonhom) > 0} {$s.configframe.allow_double configure -state normal} else {$s.configframe.allow_double configure -state disabled};gibson_fill_frame_first $s.seqsframe $w;#"]  -row 0 -column 3 -sticky nwe -padx {0 8}
+  grid [label $s.configframe.max_nh.max_value -textvariable info(gib_max_nonhom) -from 0 -to 20 -validate all -validatecommand "entry_integer %P %W %V 0 20"]  -row 0 -column 2 -sticky nw 
+  grid [ttk::scale $s.configframe.max_nh.max_scale  -orient horizontal -from 0 -to 20 -variable info(gib_max_nonhom) -command "set info(gib_max_nonhom) \[expr {int(\$info(gib_max_nonhom))}\]; if {\$info(gib_max_nonhom) > 0} {$s.configframe.allow_double configure -state normal} else {$s.configframe.allow_double configure -state disabled};gibson_fill_frame_first $s.seqsframe $w;#"]  -row 0 -column 3 -sticky nwe -padx {0 8} 
   grid columnconfigure $s.configframe.max_nh 3 -weight 1
 
   grid [frame $s.configframe.max_frag] -row 3 -column 0 -sticky nwe
   grid [label $s.configframe.max_frag.label1 -text "Maximum Fragments"] -row 0 -column 1 -sticky nw
-  grid [label $s.configframe.max_frag.max_value -textvariable info(gib_max_fragments)]  -row 0 -column 2 -sticky nw
+  grid [ttk::spinbox $s.configframe.max_frag.max_value -textvariable info(gib_max_fragments) -from 1 -to 100 -validate all -validatecommand "entry_integer %P %W %V 1 100"]  -row 0 -column 2 -sticky nw 
   grid [ttk::scale $s.configframe.max_frag.max_scale  -orient horizontal -from 1 -to 100 -variable info(gib_max_fragments) -command "set info(gib_max_fragments) \[expr {int(\$info(gib_max_fragments))}\];gibson_fill_frame_first $s.seqsframe $w;#"]  -row 0 -column 3 -padx {0 8} -sticky nwe
   grid columnconfigure $s.configframe.max_frag 3 -weight 1
 
@@ -37681,7 +39367,7 @@ grid [ttk::scale $s.configframe.max.max_scale  -orient horizontal -from 10 -to 1
   grid [button $s.okframe.cancel -text [mc "Cancel"] -command "set ok -1"] -row 1 -column 0 -sticky nw -padx 10 -pady 3
   grid [button $s.okframe.ok -text [mc "OK"] -command "set ok 1" -default active -state normal] -row 1 -column 1 -sticky nw -padx 10 -pady 3
   #update
-  grid columnconfigure $s 0 -weight 1
+  grid columnconfigure $s 0 -weight 1 
   gibson_fill_frame_first $s.seqsframe $w
 
   vwait ok
@@ -37715,7 +39401,7 @@ grid [ttk::scale $s.configframe.max.max_scale  -orient horizontal -from 10 -to 1
       } else {
         ## reverse fragment
         set new_dna [textarea_get $w1.textarea [bp2ix $w1.textarea [expr {$right_skip+$overhang}]] [bp2ix $w1.textarea [expr {$len-$left_skip}]]]
-        set new_dna [revcom $new_dna]
+        set new_dna [revcom $new_dna] 
         if {$j == 0} {
           set new_tags [get_tags $w1.textarea [list [bp2ix $w1.textarea [expr {$right_skip+$overhang}]] [bp2ix $w1.textarea [expr {$len-$left_skip}]]] [expr {$dir?"reverse":"forward"}]]
         } else {
@@ -37804,7 +39490,7 @@ proc gibson_find_chains {frag_num current_chain found_list} {
   }
   if {[lindex $current_chain 0 0 0] eq [lindex $current_chain end 1 0] && [lindex $current_chain 0 0 1] == [expr {![lindex $current_chain end 1 1]}] } {
     return [list $current_chain]
-  }
+  } 
   set target [list [lindex $current_chain end 1 0] [expr {![lindex $current_chain end 1 1]}]]
   foreach h [lsearch -inline -all -index 1 $found_list $target] {
     set h [list [lindex $h 1] [lindex $h 0] [lindex $h 2] [lindex $h 4] [lindex $h 3]]
@@ -37892,9 +39578,9 @@ proc gibson_fill_frame_first {frame w} {
   set found_list [gibson_find_ends]
   if {$info(gib_require_circ)} {
     ###  circular product
-    grid [frame $frame.f0] -row 0 -column 0 -sticky nwe
+    grid [frame $frame.f0] -row 0 -column 0 -sticky nwe 
     set window_mb [menubutton $frame.f0.window_mb -textvariable temp_info(window_mb_text,0) -menu $frame.f0.window_mb.menu]
-    menu $frame.f0.window_mb.menu
+    menu $frame.f0.window_mb.menu 
     set i 0
     set set_window -1
     set w_window -1
@@ -37913,7 +39599,7 @@ proc gibson_fill_frame_first {frame w} {
       incr i
     }
     if {$w1 != {}} {
-        grid $window_mb -row 0 -column 1 -sticky nw
+        grid $window_mb -row 0 -column 1 -sticky nw 
         if {$set_window > -1} {
           $frame.f0.window_mb.menu invoke $set_window
         } else {
@@ -37954,10 +39640,10 @@ proc gibson_fill_frame_next {frame last} {
   if {$info(gib_require_circ)} {
     ###  circular product
 
-    grid [frame $frame.f$next] -row $next -column 0 -sticky nwe
+    grid [frame $frame.f$next] -row $next -column 0 -sticky nwe 
 
     set window_mb [menubutton $frame.f$next.window_mb -textvariable temp_info(window_mb_text,$next) -menu $frame.f$next.window_mb.menu]
-    menu $frame.f$next.window_mb.menu
+    menu $frame.f$next.window_mb.menu 
     set i 0
     set set_window -1
     set w1 {}
@@ -37972,12 +39658,12 @@ proc gibson_fill_frame_next {frame last} {
       }
       if {$w1 eq $temp_info(window_mb_window,0) && $fwd1 == [expr {$temp_info(frag_fwd,0)}]} {
         ### circle formed
-        #sputs circle formed
+        #sputs circle formed 
         grid configure [winfo toplevel $frame].okframe.ok
         destroy $frame.f$next
         array unset temp_info "*,$next"
         return
-      }
+      } 
       incr i
     }
 
@@ -37990,7 +39676,7 @@ proc gibson_fill_frame_next {frame last} {
 
     if {$w1 != {}} {
       if {$i> 1} {
-        grid $window_mb -row $next -column 1 -sticky nw
+        grid $window_mb -row $next -column 1 -sticky nw 
         if {$set_window > -1} {
           $frame.f$next.window_mb.menu invoke $set_window
         } else {
@@ -38023,7 +39709,7 @@ proc gibson_wizard_dialog {w} {
 
   if {$dialogblock == 1} {return}
 
-  set s [new_dialog $w "Gibson Reaction..." "NEW DNA"]
+  set s [new_dialog $w "Gibson Designer" "NEW DNA"]
   wm resizable [winfo toplevel $s] 0 0
   wm transient $s {}
   bind $s <<Cancel>> "sputs cancel; dialog_cancel $s"
@@ -38064,7 +39750,7 @@ proc gibson_wizard_fragments_frame {s} {
     grid [frame $s.f] -row 1 -column 1 -sticky nswe
     if {[gibson_wizard_add_fragment_frame $s.f] eq "error"} {return error}
   } else {
-    grid configure $s.f
+    grid configure $s.f 
     if {[winfo exists $s.j]} {
       grid remove $s.j
     }
@@ -38105,7 +39791,7 @@ proc gibson_wizard_add_fragment_frame {s {after_frame {}}} {
   grid [button $s.f$i.f1.add_buttons.add -text "+" -command "gibson_wizard_add_fragment_frame $s $s.f$i" -width 1 ]  -row 1 -column 1 -sticky n
   grid [button $s.f$i.f1.add_buttons.remove -text "-"  -width 1  -command "if {\[llength \[grid slaves $s\]\] > 1} {gibson_wizard_delete_fragment_frame $s $i}"] -row 1 -column 2 -sticky n
 
-  grid [frame $s.f$i.f1.sels] -row 1 -column 2 -sticky nswe
+  grid [frame $s.f$i.f1.sels] -row 1 -column 2 -sticky nswe 
   menubutton $s.f$i.f1.sels.win_button
     menu $s.f$i.f1.sels.win_button.menu
     foreach window [dnawindows_list 1] {
@@ -38120,14 +39806,14 @@ proc gibson_wizard_add_fragment_frame {s {after_frame {}}} {
     return "error"
   }
 
-  $s.f$i.f1.sels.win_button configure -menu $s.f$i.f1.sels.win_button.menu -indicatoron 1 -relief raised
-  grid $s.f$i.f1.sels.win_button -row 1 -column 2 -sticky nswe
-  grid [menubutton $s.f$i.f1.sels.sel_button] -row 2 -column 2 -sticky n
+  $s.f$i.f1.sels.win_button configure -menu $s.f$i.f1.sels.win_button.menu -indicatoron 1 -relief raised 
+  grid $s.f$i.f1.sels.win_button -row 1 -column 2 -sticky nswe   
+  grid [menubutton $s.f$i.f1.sels.sel_button] -row 2 -column 2 -sticky n 
   bind $s.f$i.f1.sels.sel_button <Button-1> "gibson_wizard_sel_menu \$temp_info(frame_window,$i) $s $i"
   $s.f$i.f1.sels.sel_button configure -menu [menu $s.f$i.f1.sels.sel_button.menu]
 
-  grid [frame $s.f$i.f1.sels.rcframe] -row 3 -column 2 -sticky nswe
-  grid [checkbutton $s.f$i.f1.sels.rcframe.rc -variable temp_info(frame_rc,$i) -text "Rev-com"] -row 1 -column 1 -sticky nw
+  grid [frame $s.f$i.f1.sels.rcframe] -row 3 -column 2 -sticky nswe 
+  grid [checkbutton $s.f$i.f1.sels.rcframe.rc -variable temp_info(frame_rc,$i) -text "Rev-com"] -row 1 -column 1 -sticky nw 
   grid [menubutton $s.f$i.f1.sels.rcframe.skip_primer -state normal -textvariable temp_info(frame_tails_display,$i)] -row 1 -column 2 -sticky nwe
   $s.f$i.f1.sels.rcframe.skip_primer configure -menu [menu $s.f$i.f1.sels.rcframe.skip_primer.menu]
   $s.f$i.f1.sels.rcframe.skip_primer.menu add radiobutton -command "set temp_info(frame_tails_display,$i) {PCR with tails}; set temp_info(frame_skip_primer,$i) 0" -label "PCR with tails" -variable temp_info(frame_tails_zero,$i) -value 0
@@ -38135,11 +39821,11 @@ proc gibson_wizard_add_fragment_frame {s {after_frame {}}} {
   $s.f$i.f1.sels.rcframe.skip_primer.menu add radiobutton -command "set temp_info(frame_tails_display,$i) {No primers}; set temp_info(frame_skip_primer,$i) 1" -label "No primers" -variable temp_info(frame_tails_zero,$i) -value -1
 
 
-
+  
   grid [ttk::separator $s.f$i.separator ] -row 2 -column 1 -sticky nwe
 
   $s.f$i.f1.sels.win_button.menu invoke 0
-
+  
   bind $s.f$i.f1 <<GelLaneDrop>> "gibson_wizard_gel_lane_drop %d $s $i "
   bind $s.f$i.f1.sels.win_button <<GelLaneDrop>> "gibson_wizard_gel_lane_drop %d $s $i "
   bind $s.f$i.f1.sels.sel_button <<GelLaneDrop>> "gibson_wizard_gel_lane_drop %d $s $i "
@@ -38194,7 +39880,7 @@ proc gibson_wizard_gel_lane_drop {data s i} {
     set first [expr {min($from_top, $from_bottom)}]
     set last [expr {max($to_top, $to_bottom)}]
   }
-
+  
 
 
   $s.f$i.f1.sels.sel_button configure -text "Gel band $first-$last"
@@ -38214,7 +39900,7 @@ proc gibson_wizard_gel_lane_drop {data s i} {
   set temp_info(frame_tails_display,$i) {No primers}
   set temp_info(frame_digest_enz,$i) [list $enz1 $e1d $enz2 $e2d [$canvas bind $band <<Size>>]]
   #$s.f$i.f1.sels.sel_button.menu add radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"Gel band $first-$last\" ; set temp_info(frame_first,$i) $first; set temp_info(frame_last,$i) $last" -label "Gel band $first-$last"
-
+  
 }
 
 ############
@@ -38238,13 +39924,13 @@ proc gibson_wizard_sel_menu {w s i} {
         $s.f$i.f1.sels.sel_button.menu insert 0 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"Selected [expr {$sel_first+1}]-[expr {$sel_last}]\" ; set temp_info(frame_first,$i) $sel_first; set temp_info(frame_last,$i) $sel_last; set temp_info(frame_digest_enz,$i) {}" -label "Selected [expr {$sel_first+1}]-[expr {$sel_last}]"
       }
       if {[expr {$seq_length - $sel_last + $sel_first}] > 20} {
-        $s.f$i.f1.sels.sel_button.menu insert 1 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"All but Selected [expr {(($sel_last+1) % $seq_length)}]-[expr {(($sel_first-1) % $seq_length) +1}]\"; set temp_info(frame_first,$i) [expr {(($sel_last+1) % $seq_length) - 1}]; set temp_info(frame_last,$i) [expr {(($sel_first-1) % $seq_length) +1}]; set temp_info(frame_digest_enz,$i) {}" -label "All but Selected [expr {(($sel_last+1) % $seq_length)}]-[expr {(($sel_first-1) % $seq_length) +1}]"
+        $s.f$i.f1.sels.sel_button.menu insert 1 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"All but Selected [expr {(($sel_last+1) % $seq_length)}]-[expr {(($sel_first-1) % $seq_length) +1}]\"; set temp_info(frame_first,$i) [expr {(($sel_last+1) % $seq_length) - 1}]; set temp_info(frame_last,$i) [expr {(($sel_first-1) % $seq_length) +1}]; set temp_info(frame_digest_enz,$i) {}" -label "All but Selected [expr {(($sel_last+1) % $seq_length)}]-[expr {(($sel_first-1) % $seq_length) +1}]" 
       }
-      $s.f$i.f1.sels.sel_button.menu insert 2 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"All- Open at Origin\"; set temp_info(frame_first,$i) [ix2bp $w.textarea [$w.textarea index 1.0]]; set temp_info(frame_last,$i) [ix2bp $w.textarea [$w.textarea index end]]; set temp_info(frame_digest_enz,$i) {}" -label "All- Open at Origin"
+      $s.f$i.f1.sels.sel_button.menu insert 2 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"All- Open at Origin\"; set temp_info(frame_first,$i) [ix2bp $w.textarea [$w.textarea index 1.0]]; set temp_info(frame_last,$i) [ix2bp $w.textarea [$w.textarea index end]]; set temp_info(frame_digest_enz,$i) {}" -label "All- Open at Origin" 
     } else {
       # $s.f$i.f1.sels.sel_button.menu delete 0 1
       set insert_pos [ix2bp $w.textarea [$w.textarea index insert]]
-      $s.f$i.f1.sels.sel_button.menu insert 0 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"All- Open at Origin\"; set temp_info(frame_first,$i) [ix2bp $w.textarea [$w.textarea index 1.0]]; set temp_info(frame_last,$i) [ix2bp $w.textarea [$w.textarea index end]]; set temp_info(frame_digest_enz,$i) {}" -label "All- Open at Origin"
+      $s.f$i.f1.sels.sel_button.menu insert 0 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"All- Open at Origin\"; set temp_info(frame_first,$i) [ix2bp $w.textarea [$w.textarea index 1.0]]; set temp_info(frame_last,$i) [ix2bp $w.textarea [$w.textarea index end]]; set temp_info(frame_digest_enz,$i) {}" -label "All- Open at Origin" 
       $s.f$i.f1.sels.sel_button.menu insert 1 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"All- Open at Insert [expr {$insert_pos + 1}]\"; set temp_info(frame_first,$i) [expr {(($insert_pos+1) % $seq_length) -1}]; set temp_info(frame_last,$i) [expr {(($insert_pos-1) % $seq_length) +1}]; set temp_info(frame_digest_enz,$i) {}" -label "All- Open at Insert [expr {$insert_pos + 1}]"
     }
   } else {
@@ -38263,7 +39949,7 @@ proc gibson_wizard_sel_menu {w s i} {
       # $s.f$i.f1.sels.sel_button.menu delete 0 1
       set insert_pos [ix2bp $w.textarea [$w.textarea index insert]]
       $s.f$i.f1.sels.sel_button.menu insert 0 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"All\"; set temp_info(frame_first,$i) [ix2bp $w.textarea [$w.textarea index 1.0]]; set temp_info(frame_last,$i) [ix2bp $w.textarea [$w.textarea index end]]; set temp_info(frame_digest_enz,$i) {}" -label "All"
-      $s.f$i.f1.sels.sel_button.menu insert 1 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"Circularize - Open at Insert [expr {$insert_pos + 1}]\"; set temp_info(frame_first,$i) [expr {(($insert_pos+1) % $seq_length) -1}]; set temp_info(frame_last,$i) [expr {(($insert_pos-1) % $seq_length) +1}]; set temp_info(frame_digest_enz,$i) {}" -label "Circularize - Open at Insert [expr {$insert_pos + 1}]"
+      $s.f$i.f1.sels.sel_button.menu insert 1 radiobutton -command "$s.f$i.f1.sels.sel_button configure -text \"Circularize - Open at Insert [expr {$insert_pos + 1}]\"; set temp_info(frame_first,$i) [expr {(($insert_pos+1) % $seq_length) -1}]; set temp_info(frame_last,$i) [expr {(($insert_pos-1) % $seq_length) +1}]; set temp_info(frame_digest_enz,$i) {}" -label "Circularize - Open at Insert [expr {$insert_pos + 1}]"  
     }
   }
   $s.f$i.f1.sels.sel_button.menu insert end command -state disabled -label "Drag and Drop a Gel Band here to use as a fragment"
@@ -38275,7 +39961,7 @@ proc gibson_wizard_sel_menu {w s i} {
 #############
 proc gibson_wizard_frame_to_data {s} {
   global temp_info
-
+ 
   set temp_info(fragment_number) [llength [grid slaves $s.f]]
   for {set i 0} {$i < $temp_info(fragment_number)} {incr i} {
     if {![regexp {[0-9]+$} [grid slaves $s.f -row $i -column 1] index]} {
@@ -38285,6 +39971,10 @@ proc gibson_wizard_frame_to_data {s} {
       return
     } else {
       set temp_info(window,$i)  $temp_info(frame_window,$index)
+      set temp_info(template_seq,$i) ""
+      set temp_info(gibson_tm,$i) ""
+      set temp_info(template1_tm,$i) ""
+      set temp_info(template2_tm,$i) ""
       set temp_info(rc,$i) $temp_info(frame_rc,$index)
       set temp_info(skip_primer,$i) $temp_info(frame_skip_primer,$index)
       set temp_info(digest_enz,$i) $temp_info(frame_digest_enz,$index)
@@ -38311,7 +40001,7 @@ proc gibson_wizard_junction_frame {s i} {
     }
   }
 
-  if {![info exists temp_info(template2_tm,$i)] || $temp_info(template2_tm,$i)  == "" } {
+  if  {![info exists temp_info(template2_tm,$i)] || $temp_info(template2_tm,$i)  == "" } {
     if {[info exists temp_info(template1_tm,$next_i)] && $temp_info(template1_tm,$next_i)  != ""} {
       set temp_info(template2_tm,$i) $temp_info(template1_tm,$next_i)
     } else {
@@ -38338,7 +40028,7 @@ proc gibson_wizard_junction_frame {s i} {
     grid [frame $s.j] -row 1 -column 1 -sticky nswe
     grid [frame $s.j.top] -row 1 -column 1 -sticky nswe
     grid [label $s.j.top.t1 -textvariable temp_info(template1_label) -font dnafont] -row 0 -column 1 -columnspan 2 -sticky e
-
+    
     grid [frame $s.j.top.left] -row 1 -column 1 -sticky nswe
     #grid [label $s.j.top.left.t1 -textvariable temp_info(template1_label) -font dnafont] -row 1 -column 1 -sticky e
     grid [label $s.j.top.left.s1 -text "" -font dnafont] -row 1 -column 1 -sticky e
@@ -38363,57 +40053,61 @@ proc gibson_wizard_junction_frame {s i} {
     grid [label $s.j.top.right.p2 -textvariable temp_info(primer2_display) -font dnafont] -row 5 -column 1 -sticky w
     grid [label $s.j.top.right.ps2 -textvariable temp_info(template2_align_display) -font dnafont] -row 6 -column 1 -sticky w
     grid [label $s.j.top.right.t2 -textvariable temp_info(template2_display) -font dnafont] -row 7 -column 1 -sticky w
-
+    
     grid [label $s.j.top.t2 -textvariable temp_info(template2_label) -font dnafont] -row 2 -column 1 -columnspan 2 -sticky e
 
     grid [ttk::separator $s.j.sep1] -row 2 -column 1 -sticky nswe
 
     grid [frame $s.j.bottom] -row 3 -column 1 -sticky nswe
     grid [frame $s.j.bottom.f1] -row 1 -column 1 -sticky nswe
-    grid [label $s.j.bottom.f1.t1tm -text "Rev primer Tm"] -row 1 -column 1 -sticky nw
-    grid [ttk::scale $s.j.bottom.f1.t1tmsc -orient horizontal -length 200] -row 1 -column 2 -sticky nw
-    grid [label $s.j.bottom.f1.t1tmlab1] -row 1 -column 3 -sticky nw
+    grid [label $s.j.bottom.f1.t1tm -text "Rev primer Tm:"] -row 1 -column 1 -sticky nw
+    #grid [ttk::scale $s.j.bottom.f1.t1tmsc -orient horizontal -length 200] -row 1 -column 3 -sticky nw
+    #grid [label $s.j.bottom.f1.t1tmlab1] -row 1 -column 2 -sticky nw
+    grid [ttk::spinbox $s.j.bottom.f1.t1tmsc -width 3 -from 45 -to 72 -validate key -validatecommand "string_is_in_range %P 45 72" ] -row 1 -column 3 -sticky nw
     grid [label $s.j.bottom.f1.t1tmlab2] -row 1 -column 4 -sticky nw
 
     grid [frame $s.j.bottom.f2] -row 2 -column 1 -sticky nswe
-    grid [label $s.j.bottom.f2.t2tm -text "Fwd primer Tm"] -row 1 -column 1 -sticky nswe
-    grid [ttk::scale $s.j.bottom.f2.t2tmsc -orient horizontal -length 200] -row 1 -column 2 -sticky nswe
-    grid [label $s.j.bottom.f2.t2tmlab1] -row 1 -column 3 -sticky nswe
+    grid [label $s.j.bottom.f2.t2tm -text "Fwd primer Tm:"] -row 1 -column 1 -sticky nswe
+    #grid [ttk::scale $s.j.bottom.f2.t2tmsc -orient horizontal -length 200] -row 1 -column 3 -sticky nswe
+    #grid [label $s.j.bottom.f2.t2tmlab1] -row 1 -column 2 -sticky nswe
+    grid [ttk::spinbox $s.j.bottom.f2.t2tmsc  -width 3 -from 45 -to 72 -validate key -validatecommand "string_is_in_range %P 45 72" ] -row 1 -column 3 -sticky nswe
     grid [label $s.j.bottom.f2.t2tmlab2] -row 1 -column 4 -sticky nswe
 
     grid [frame $s.j.bottom.f3] -row 3 -column 1 -sticky nswe
-    grid [label $s.j.bottom.f3.overlapl -text "Template Overlap"] -row 1 -column 1 -sticky nw
+    grid [label $s.j.bottom.f3.overlapl -text "Template Overlap:"] -row 1 -column 1 -sticky nw
     grid [menubutton $s.j.bottom.f3.overlap -textvariable temp_info(overlap_len_display)] -row 1 -column 2 -sticky nw
     menu $s.j.bottom.f3.overlap.menu
     $s.j.bottom.f3.overlap configure -menu $s.j.bottom.f3.overlap.menu
     grid [entry $s.j.bottom.f3.overlap_entry -width 30 -textvariable temp_info(overlap_seq,$i) -validate all -validatecommand "if {\[regexp {\[^ATGCatgc\]} %P\]} {return 0} else {set temp_info(overlap_len,$i) \[string length %P\]; after 100 gibson_wizard_calculate $i; return 1}"]  -row 1 -column 3 -sticky nswe
 
     grid [frame $s.j.bottom.f4] -row 4 -column 1 -sticky nswe
-    grid [label $s.j.bottom.f4.t1tm -text "Overlap Tm"] -row 1 -column 1 -sticky nswe
-    grid [ttk::scale $s.j.bottom.f4.gtmsc -orient horizontal -length 200] -row 1 -column 2 -sticky nswe
-    grid [label $s.j.bottom.f4.gtmlab1] -row 1 -column 3 -sticky nswe
+    grid [label $s.j.bottom.f4.t1tm -text "Overlap Tm:"] -row 1 -column 1 -sticky nswe
+    #grid [ttk::scale $s.j.bottom.f4.gtmsc -orient horizontal -length 200] -row 1 -column 3 -sticky nswe
+    #grid [label $s.j.bottom.f4.gtmlab1] -row 1 -column 2 -sticky nswe
+    grid [ttk::spinbox $s.j.bottom.f4.gtmsc  -width 3 -from 45 -to 72 -validate key -validatecommand "string_is_in_range %P 45 72" ] -row 1 -column 3 -sticky nswe
     grid [label $s.j.bottom.f4.gtmlab2] -row 1 -column 4 -sticky nswe
 
     grid [frame $s.j.bottom.f5] -row 5 -column 1 -sticky nswe
     grid [menubutton $s.j.bottom.f5.tail_side] -row 1 -column 1 -sticky nswe
     $s.j.bottom.f5.tail_side configure -menu [menu $s.j.bottom.f5.tail_side.menu]
-    grid [label $s.j.bottom.f5.primer_taill -text "Primer Tail"] -row 1 -column 2 -sticky nswe
-    grid [ttk::scale $s.j.bottom.f5.primer_tail -orient horizontal -length 200] -row 1 -column 3 -sticky nswe
-    grid [label $s.j.bottom.f5.primer_taillab] -row 1 -column 4 -sticky nswe
+    grid [label $s.j.bottom.f5.primer_taill -text "Primer Tail:"] -row 1 -column 2 -sticky nswe
+    #grid [ttk::scale $s.j.bottom.f5.primer_tail -orient horizontal -length 200] -row 1 -column 4 -sticky nswe
+    #grid [label $s.j.bottom.f5.primer_taillab] -row 1 -column 3 -sticky nswe
+    grid [ttk::spinbox $s.j.bottom.f5.primer_tail   -width 3 -from 0 -to 40 -validate key -validatecommand "string_is_in_range %P 0 40" ] -row 1 -column 4 -sticky nswe
 
     grid [ttk::separator $s.j.sep2] -row 4 -column 1 -sticky nswe
   } else {
-    grid configure $s.j
+    grid configure $s.j 
   }
 
   ## set textvariable and conmmand values to match $index for all controls
   if {$temp_info(skip_primer,$i)} {
-    set temp_info(template1_tm_scaled) 0
+    #set temp_info(template1_tm_scaled) 0
     set temp_info(template1_tm,$i) ""
     set temp_info(rev_primer_name,$i) ""
     grid remove $s.j.top.left.p1f.p1e
   } else {
-    set temp_info(template1_tm_scaled) [expr {($temp_info(template1_tm,$i)-50)/22.0}]
+    #set temp_info(template1_tm_scaled) [expr {($temp_info(template1_tm,$i)-50)/22.0}]
     if {![info exists temp_info(rev_primer_name,$i)] || $temp_info(rev_primer_name,$i)== ""} {
       set temp_info(rev_primer_name,$i) "primer[expr {$i+1}]_rev"
     }
@@ -38421,12 +40115,13 @@ proc gibson_wizard_junction_frame {s i} {
   }
   $s.j.top.left.p1f.p1e configure -textvariable temp_info(rev_primer_name,$i)
 
-  $s.j.bottom.f1.t1tmsc configure -command "set temp_info(template1_tm,$i) \[expr {round(\$temp_info(template1_tm_scaled)*22.0+50)}\];gibson_wizard_calculate $i; #" -variable temp_info(template1_tm_scaled) -from 0 -to 1
-  $s.j.bottom.f1.t1tmlab1 configure -textvariable temp_info(template1_tm,$i)
+  #$s.j.bottom.f1.t1tmsc configure -command "set temp_info(template1_tm,$i) \[expr {round(\$temp_info(template1_tm_scaled)*22.0+50)}\];gibson_wizard_calculate $i; #" -variable temp_info(template1_tm_scaled) -from 0 -to 1 
+  #$s.j.bottom.f1.t1tmlab1 configure -textvariable temp_info(template1_tm,$i)
+  $s.j.bottom.f1.t1tmsc configure -textvariable temp_info(template1_tm,$i) -command "gibson_wizard_calculate $i"
   $s.j.bottom.f1.t1tmlab2 configure -textvariable  temp_info(template1_tm_actual,$i)
 
   if {$temp_info(skip_primer,$next_i)} {
-    set temp_info(template2_tm_scaled) 0
+    #set temp_info(template2_tm_scaled) 0
     set temp_info(template2_tm,$i) ""
     set temp_info(fwd_primer_name,$next_i) ""
     grid remove $s.j.top.left.p2f.p2e
@@ -38435,25 +40130,33 @@ proc gibson_wizard_junction_frame {s i} {
       set temp_info(fwd_primer_name,$next_i) "primer[expr {$next_i+1}]_fwd"
     }
     grid configure $s.j.top.left.p2f.p2e
-    set temp_info(template2_tm_scaled) [expr {($temp_info(template2_tm,$i)-50)/22.0}]
+    #set temp_info(template2_tm_scaled) [expr {($temp_info(template2_tm,$i)-50)/22.0}]
   }
   $s.j.top.left.p2f.p2e configure -textvariable temp_info(fwd_primer_name,$next_i)
 
-  $s.j.bottom.f2.t2tmsc configure -command "set temp_info(template2_tm,$i) \[expr {round(\$temp_info(template2_tm_scaled)*22.0+50)}\];gibson_wizard_calculate $i; #" -variable temp_info(template2_tm_scaled)  -from 0 -to 1
-  $s.j.bottom.f2.t2tmlab1 configure -textvariable temp_info(template2_tm,$i)
+  #$s.j.bottom.f2.t2tmsc configure -command "set temp_info(template2_tm,$i) \[expr {round(\$temp_info(template2_tm_scaled)*22.0+50)}\];gibson_wizard_calculate $i; #" -variable temp_info(template2_tm_scaled)  -from 0 -to 1 
+  #$s.j.bottom.f2.t2tmlab1 configure -textvariable temp_info(template2_tm,$i)
+  $s.j.bottom.f2.t2tmsc configure -textvariable temp_info(template2_tm,$i) -command "gibson_wizard_calculate $i"
   $s.j.bottom.f2.t2tmlab2 configure -textvariable  temp_info(template2_tm_actual,$i)
 
    ### need to set temp_info(overlap_len,$i) and temp_info(overlap_seq,$i) with menu
   $s.j.bottom.f3.overlap.menu delete 0 end
   $s.j.bottom.f3.overlap.menu add radiobutton -label "None" -variable temp_info(overlap_len_display) -value {None} -command "set temp_info(overlap_len,$i) 0; set temp_info(overlap_seq,$i) {}; set temp_info(overlap_len_display) {None}; grid remove $s.j.bottom.f3.overlap_entry; gibson_wizard_calculate $i"
   $s.j.bottom.f3.overlap.menu add radiobutton -label "Additional Sequence"  -variable temp_info(overlap_len_display) -value {Additional Sequence}  -command "set temp_info(overlap_len_display) {Additional Sequence}; grid configure $s.j.bottom.f3.overlap_entry; set temp_info(overlap_len,$i) \[string length \$temp_info(overlap_seq,$i)\]; gibson_wizard_calculate $i"
+
+##work here for gibson deletion
   for {set k [expr {min (200, [string length $temp_info(template_seq,$i)], [string length $temp_info(template_seq,$next_i)])}]} {$k > 0} {incr k -1} {
-    if {[string range $temp_info(template_seq,$i) end-$k end] eq [string range $temp_info(template_seq,$next_i) 0 $k]} {
-      $s.j.bottom.f3.overlap.menu add radiobutton -label "[expr {$k +1}]" -variable  temp_info(overlap_len_display) -value [expr {$k +1}] -command "set temp_info(overlap_len_display) [expr {$k +1}]; set temp_info(overlap_seq,$i) {}; grid remove $s.j.bottom.f3.overlap_entry; gibson_wizard_calculate $i;"
+    if {[string tolower [string range $temp_info(template_seq,$i) end-$k end]] eq [string tolower [string range $temp_info(template_seq,$next_i) 0 $k]]} {
+      $s.j.bottom.f3.overlap.menu add radiobutton -label "[expr {$k +1}] bp" -variable  temp_info(overlap_len_display) -value [expr {$k +1}] -command "set temp_info(overlap_len_display) \"[expr {$k +1}] bp\"; set temp_info(overlap_len,$i) [expr {-$k -1}]; set temp_info(overlap_seq,$i) {}; grid remove $s.j.bottom.f3.overlap_entry; gibson_wizard_calculate $i;"
       if {$k > 7 && $temp_info(overlap_len,$i) == 0} {
         set temp_info(overlap_len,$i) [expr {-$k -1}]
+	set temp_info(overlap_len_display) "[expr {$k +1}] bp"
       }
     }
+  }
+  set found_left [string first [string tolower [string range $temp_info(template_seq,$i) end-9 end]] [string tolower [string range $temp_info(template_seq,$next_i) 0 200]]]
+  if {$temp_info(overlap_len,$i)==0 && $found_left >  -1} {
+
   }
 
   $s.j.bottom.f3.overlap_entry configure -textvariable temp_info(overlap_seq,$i) -validatecommand "if {\[regexp {\[^ATGCatgc\]} %P\]} {return 0} else {set temp_info(overlap_len,$i) \[string length %P\]; after 100 gibson_wizard_calculate $i; return 1}"
@@ -38472,19 +40175,21 @@ proc gibson_wizard_junction_frame {s i} {
 
 
   set temp_info(gibson_tm_scaled) [expr {($temp_info(gibson_tm,$i)-37)/35.0}]
-  $s.j.bottom.f4.gtmsc configure -state normal -command "set temp_info(gibson_tm,$i) \[expr {round(\$temp_info(gibson_tm_scaled)*35.0+37)}\];gibson_wizard_calculate $i; #" -variable temp_info(gibson_tm_scaled)  -from 0 -to 1
-  $s.j.bottom.f4.gtmlab1 configure -textvariable temp_info(gibson_tm,$i)
+  #$s.j.bottom.f4.gtmsc configure -state normal -command "set temp_info(gibson_tm,$i) \[expr {round(\$temp_info(gibson_tm_scaled)*35.0+37)}\];gibson_wizard_calculate $i; #" -variable temp_info(gibson_tm_scaled)  -from 0 -to 1 
+  #$s.j.bottom.f4.gtmlab1 configure -textvariable temp_info(gibson_tm,$i)
+  $s.j.bottom.f4.gtmsc configure -textvariable temp_info(gibson_tm,$i) -command "gibson_wizard_calculate $i"
   $s.j.bottom.f4.gtmlab2 configure -textvariable temp_info(gibson_tm_actual,$i)
 
 
   $s.j.bottom.f5.tail_side.menu delete 0 end
-  $s.j.bottom.f5.tail_side.menu add radiobutton -command "$s.j.bottom.f5.tail_side configure -text [mc Forward]; gibson_wizard_calculate $i; #" -label [mc Forward] -variable temp_info(primer_tail_side,$i) -value 1
+  $s.j.bottom.f5.tail_side.menu add radiobutton -command "$s.j.bottom.f5.tail_side configure -text [mc Forward]; gibson_wizard_calculate $i; #" -label [mc Forward] -variable temp_info(primer_tail_side,$i) -value 1 
   $s.j.bottom.f5.tail_side.menu add radiobutton -command "$s.j.bottom.f5.tail_side configure -text [mc Reverse]; gibson_wizard_calculate $i; #" -label [mc Reverse] -variable temp_info(primer_tail_side,$i) -value 0
   if {![info exists temp_info(primer_tail_side,$i)] || ($temp_info(primer_tail_side,$i) eq "")} {
     set temp_info(primer_tail_side,$i) $info(gibson_wizard_default_tail_side)
   }
-  $s.j.bottom.f5.primer_tail configure -command "set temp_info(primer_tail,$i) \[expr {round(\$temp_info(primer_tail,$i))}\];gibson_wizard_calculate $i; #" -variable temp_info(primer_tail,$i)  -from 0 -to 40
-  $s.j.bottom.f5.primer_taillab configure -textvariable temp_info(primer_tail,$i)
+  #$s.j.bottom.f5.primer_tail configure -command "set temp_info(primer_tail,$i) \[expr {round(\$temp_info(primer_tail,$i))}\];gibson_wizard_calculate $i; #" -variable temp_info(primer_tail,$i)  -from 0 -to 40
+  #$s.j.bottom.f5.primer_taillab configure -textvariable temp_info(primer_tail,$i)
+  $s.j.bottom.f5.primer_tail configure -textvariable temp_info(primer_tail,$i) -command "gibson_wizard_calculate $i"
 
   if {$temp_info(primer_tail_side,$i)} {
     $s.j.bottom.f5.tail_side configure -text [mc Forward]
@@ -38500,31 +40205,31 @@ proc gibson_wizard_junction_frame {s i} {
     set temp_info(primer_tail,$i) 0
     set temp_info(gibson_tm,$i) ""
 ### disable overlap Tm scale and  here
-    foreach element [list $s.j.bottom.f3.overlap $s.j.bottom.f4.gtmsc  $s.j.bottom.f5.tail_side $s.j.bottom.f5.primer_taill  $s.j.bottom.f5.primer_tail $s.j.bottom.f5.primer_taillab] {
+    foreach element [list $s.j.bottom.f3.overlap $s.j.bottom.f4.gtmsc  $s.j.bottom.f5.tail_side $s.j.bottom.f5.primer_taill  $s.j.bottom.f5.primer_tail ] {
       $element configure -state disabled
     }
   } elseif {$temp_info(tails_zero,$i)} {
     $s.j.bottom.f5.tail_side configure -text [mc Reverse]
     set temp_info(primer_tail_side,$i) 0
     set temp_info(primer_tail,$i) 0
-    foreach element [list $s.j.bottom.f5.tail_side $s.j.bottom.f5.primer_taill  $s.j.bottom.f5.primer_tail $s.j.bottom.f5.primer_taillab] {
+    foreach element [list $s.j.bottom.f5.tail_side $s.j.bottom.f5.primer_taill  $s.j.bottom.f5.primer_tail] {
       $element configure -state disabled
     }
   } elseif {$temp_info(tails_zero,$next_i)} {
     $s.j.bottom.f5.tail_side configure -text [mc Forward]
     set temp_info(primer_tail_side,$i) 1
     set temp_info(primer_tail,$i) 0
-    foreach element [list $s.j.bottom.f5.tail_side $s.j.bottom.f5.primer_taill  $s.j.bottom.f5.primer_tail $s.j.bottom.f5.primer_taillab] {
+    foreach element [list $s.j.bottom.f5.tail_side $s.j.bottom.f5.primer_taill  $s.j.bottom.f5.primer_tail] {
       $element configure -state disabled
     }
   } else {
     set temp_info(primer_tail_side,$i) 1
-    foreach element [list $s.j.bottom.f5.tail_side $s.j.bottom.f5.primer_taill  $s.j.bottom.f5.primer_tail $s.j.bottom.f5.primer_taillab] {
+    foreach element [list $s.j.bottom.f5.tail_side $s.j.bottom.f5.primer_taill  $s.j.bottom.f5.primer_tail] {
       $element configure -state normal
     }
   }
 
-  foreach element [list $s.j.top.left.p1f.p1e $s.j.bottom.f1.t1tm $s.j.bottom.f1.t1tmlab1 $s.j.bottom.f1.t1tmsc] {
+  foreach element [list $s.j.top.left.p1f.p1e $s.j.bottom.f1.t1tm $s.j.bottom.f1.t1tmsc] {
     if {$temp_info(skip_primer,$i)} {
       $element configure -state disabled
     } else {
@@ -38532,7 +40237,7 @@ proc gibson_wizard_junction_frame {s i} {
     }
   }
 
-  foreach element [list $s.j.top.left.p2f.p2e $s.j.bottom.f2.t2tm $s.j.bottom.f2.t2tmlab1 $s.j.bottom.f2.t2tmsc] {
+  foreach element [list $s.j.top.left.p2f.p2e $s.j.bottom.f2.t2tm $s.j.bottom.f2.t2tmsc] {
     if {$temp_info(skip_primer,$next_i)} {
       $element configure -state disabled
     } else {
@@ -38540,7 +40245,7 @@ proc gibson_wizard_junction_frame {s i} {
     }
   }
 
-  grid remove $s.f
+  grid remove $s.f 
   grid configure $s.okframe.back
 
 
@@ -38593,9 +40298,8 @@ proc gibson_wizard_calculate {i} {
 
   set overlap_seq [expr {$temp_info(overlap_len,$i)> 0 ? $temp_info(overlap_seq,$i) : {}}]
 
-  #1 set fusion_sequence
+  #1 set fusion_sequence 
   set fusion_sequence "$new_dna$overlap_seq[string range $new_dna2 [expr {max (0,-$temp_info(overlap_len,$i))}] end]"
-
   #2 set left_template_length
   set left_template_length [string length $new_dna]
   set fusion_template_length [string length $fusion_sequence]
@@ -38691,7 +40395,7 @@ proc gibson_wizard_calculate {i} {
     set temp_info(template1_tm_actual,$i) ""
     set temp_info(template1_align_display) "[string repeat { } [expr {$fwd_primer_5 - $display_left}]][string repeat {|} [expr {$rev_primer_5 - $fwd_primer_5 + 1}]]"
     set temp_info(primer1_display) "[string repeat { } [expr {$fwd_primer_5 - $display_left}]][string repeat {|} [expr {$rev_primer_5 - $fwd_primer_5 + 1}]]"
-  }
+  } 
   if {$temp_info(skip_primer,$next_i)} {
     set temp_info(template2_tm_actual,$i) ""
     set temp_info(template2_align_display) "[string repeat { } [expr {$fwd_primer_5 - $display_left}]][string repeat {|} [expr {$rev_primer_5 - $fwd_primer_5 + 1}]]"
@@ -38725,19 +40429,22 @@ proc gibson_wizard_set_defaults {s} {
 
 
   if {![winfo exists $s.d]} {
-    frame $s.d
+    frame $s.d 
 
     grid [frame $s.d.f1] -row 1 -column 1 -sticky nswe
     grid [label $s.d.f1.l0 -text "Default primer Tm"] -row 1 -column 1 -sticky w
-    set temp_info(gibson_wizard_default_tm_scaled) [expr {($info(gibson_wizard_default_tm)-50)/22.0}]
-    grid [ttk::scale $s.d.f1.tmsc -orient horizontal -length 200 -command "set info(gibson_wizard_default_tm) \[expr {round(\$temp_info(gibson_wizard_default_tm_scaled)*22.0+50)}\];#"  -variable temp_info(gibson_wizard_default_tm_scaled) -from 0 -to 1] -row 1 -column 2 -sticky ew
-    grid [label $s.d.f1.l1 -textvariable info(gibson_wizard_default_tm)] -row 1 -column 3 -sticky e
+    #set temp_info(gibson_wizard_default_tm_scaled) [expr {($info(gibson_wizard_default_tm)-50)/22.0}]
+    #grid [ttk::scale $s.d.f1.tmsc -orient horizontal -length 200 -command "set info(gibson_wizard_default_tm) \[expr {round(\$temp_info(gibson_wizard_default_tm_scaled)*22.0+50)}\];#"  -variable temp_info(gibson_wizard_default_tm_scaled) -from 0 -to 1] -row 1 -column 2 -sticky ew
+    #grid [label $s.d.f1.l1 -textvariable info(gibson_wizard_default_tm)] -row 1 -column 3 -sticky e
+    grid [ttk::spinbox $s.d.f1.tmsc -width 3 -from 45 -to 72 -validate key -validatecommand "string_is_in_range %P 45 72" -textvariable info(gibson_wizard_default_tm)] -row 1 -column 2 -sticky ew
 
-    grid [frame $s.d.f2] -row 2 -column 1 -sticky nswe
+    grid [frame $s.d.f2] -row 2 -column 1 -sticky nswe 
     grid [label $s.d.f2.l0 -text "Default overlap Tm"] -row 1 -column 1 -sticky w
-    set temp_info(gibson_wizard_default_g_tm_scaled) [expr {($info(gibson_wizard_default_g_tm)-37)/35.0}]
-    grid [ttk::scale $s.d.f2.gsc -orient horizontal -length 200 -command "set info(gibson_wizard_default_g_tm) \[expr {round(\$temp_info(gibson_wizard_default_g_tm_scaled)*35.0+37)}\];#"  -variable temp_info(gibson_wizard_default_g_tm_scaled) -from 0 -to 1] -row 1 -column 2 -sticky ew
-    grid [label $s.d.f2.l1 -textvariable info(gibson_wizard_default_g_tm)] -row 1 -column 3 -sticky e
+    #set temp_info(gibson_wizard_default_g_tm_scaled) [expr {($info(gibson_wizard_default_g_tm)-37)/35.0}]
+    #grid [ttk::scale $s.d.f2.gsc -orient horizontal -length 200 -command "set info(gibson_wizard_default_g_tm) \[expr {round(\$temp_info(gibson_wizard_default_g_tm_scaled)*35.0+37)}\];#"  -variable temp_info(gibson_wizard_default_g_tm_scaled) -from 0 -to 1] -row 1 -column 2 -sticky ew
+    #grid [label $s.d.f2.l1 -textvariable info(gibson_wizard_default_g_tm)] -row 1 -column 3 -sticky e
+    grid [ttk::spinbox $s.d.f2.gsc -width 3 -from 45 -to 72 -validate key -validatecommand "string_is_in_range %P 45 72" -textvariable info(gibson_wizard_default_g_tm)] -row 1 -column 2 -sticky ew
+
 
     grid [frame $s.d.f3] -row 3 -column 1 -sticky nswe
     grid [label $s.d.f3.l0 -text "Default Exonuclease direction"] -row 1 -column 1 -sticky w
@@ -38765,6 +40472,10 @@ proc gibson_wizard_set_defaults {s} {
     grid configure $s.okframe.ok;\
     grid configure $back_frame;\
   "
+}
+
+proc string_is_in_range {a from to} {
+  return [expr {$a ne "" && [string is integer $a] && $a>=$from && $a <= $to}] 
 }
 
 ############
@@ -38822,13 +40533,21 @@ proc gibson_wizard_generate_product {} {
 
     set new_tags [get_tags2 $w1.textarea $temp_info(first,$i) [expr {$temp_info(last,$i)}] $temp_info(rc,$i) $end]
 
+    set new_tags_temp [list]
+    foreach {at bt} $new_tags {
+      if {[regexp {fn?[0-9]+#} $at]} {
+        lappend new_tags_temp $at $bt
+      }
+    }
+    set new_tags $new_tags_temp
+    unset new_tags_temp
       ### add in the primer_bind features here, need to use $temp_info(skip_primer,$i)
     if {!$temp_info(skip_primer,$next_i)} {
        ## fwd primer
       set coords [list [expr {$temp_info(fwd_5,$next_i) + $end}] [expr {$temp_info(fwd_3,$next_i) + $end +1}]]
       set bg_color [lindex $revcolors 0]
       set metadata [list $temp_info(fwd_primer_name,$next_i) $gformat primer_bind 0 [list PCR_conditions "primer sequence:$temp_info(fwd_primer,$next_i)"] [list]]
-      lappend_tags new_tags f0# [list $coords [list $bg_color {} {} {}] [list <<Revcolors>> <<Metadata>>] [list $revcolors $metadata]]
+      lappend_tags new_tags f0# [list $coords [list $bg_color {} {} {}] [list <<Metadata>> <<Revcolors>> ] [list $metadata $revcolors]]
     }
 
     if {!$temp_info(skip_primer,$i)} {
@@ -38836,7 +40555,7 @@ proc gibson_wizard_generate_product {} {
       set coords [list [expr {$temp_info(rev_3,$i) + $end}] [expr {$temp_info(rev_5,$i) + $end+1}]]
       set bg_color [lindex $revcolors 1]
       set metadata [list $temp_info(rev_primer_name,$i) $gformat primer_bind 1 [list PCR_conditions "primer sequence:$temp_info(rev_primer,$i)"] [list]]
-      lappend_tags new_tags f0# [list $coords [list $bg_color {} {} {}] [list <<Revcolors>> <<Metadata>>] [list $revcolors $metadata]]
+      lappend_tags new_tags f0# [list $coords [list $bg_color {} {} {}] [list <<Metadata>> <<Revcolors>>] [list $metadata $revcolors]]
 
 
 
@@ -38867,18 +40586,20 @@ proc gibson_wizard_generate_product {} {
       lappend amplicon_note_list "note" $line
     }
     ## add in amplicon misc_feature here
-    set coords [list [expr {$end - ($temp_info(fwd_mid,$i) - $temp_info(fwd_5,$i))}] [expr {$end + 1+$temp_info(rev_5,$i)}]]
+    if {$info(gibson_wizard_add_amplicon_fetures)} {
+      set coords [list [expr {$end - ($temp_info(fwd_mid,$i) - $temp_info(fwd_5,$i))}] [expr {$end + 1+$temp_info(rev_5,$i)}]]
 
-    set bg_color [lindex $revcolors_misc $temp_info(rc,$i)]
-    set metadata [list "Gibson_fragment_$i" $gformat_misc misc_feature $temp_info(rc,$i) $amplicon_note_list [list]]
-    lappend_tags new_tags f0# [list $coords [list $bg_color {} {} {}] [list <<Revcolors>> <<Metadata>>] [list $revcolors_misc $metadata]]
+      set bg_color [lindex $revcolors_misc $temp_info(rc,$i)]
+      set metadata [list "Gibson_fragment_$i" $gformat_misc misc_feature $temp_info(rc,$i) $amplicon_note_list [list]]
+      lappend_tags new_tags f0# [list $coords [list $bg_color {} {} {}] [list <<Metadata>> <<Revcolors>>] [list $metadata $revcolors_misc]]
+    }
 
     if {$next_i ==0} {
       ##move tags past the end of the last fragment to the beginning
       set end [string length $dna]
       set new_tags2 [list]
       foreach {tag data} $new_tags {
-        set newcoords [list]
+        set newcoords [list]  
         foreach {a b} [lindex $data 0] {
           if {$b <= $end} {
             lappend newcoords $a $b
@@ -38887,7 +40608,7 @@ proc gibson_wizard_generate_product {} {
           } elseif {$b > $end} {
             lappend newcoords $a [expr {$end}]
             lappend newcoords 0 [expr {$b-$end}]
-          }
+          } 
         }
         if {$newcoords != [list]} {
           lset data 0 $newcoords
@@ -38900,7 +40621,6 @@ proc gibson_wizard_generate_product {} {
     }
   }
   append filecomment [join $primer_order \n]
-
 
   dialog_cancel .dialog
   create_window $dna "" $filecomment "circular" 1 0 New_DNA $tags {} Genbank
@@ -38919,11 +40639,11 @@ proc gibson_wizard_get_dna {w1 dna_first dna_last dir} {
     set len [ix2bp $w1.textarea end]
     set new_dna [textarea_get $w1.textarea [bp2ix $w1.textarea $dna_first] [bp2ix $w1.textarea [expr {$len}]]]
     append new_dna [textarea_get $w1.textarea [bp2ix $w1.textarea 0] [bp2ix $w1.textarea [expr {$dna_last % $len}]]]
-  }
+  } 
   if {$dir} {
     ## reverse fragment
     set new_dna [revcom $new_dna]
-  }
+  } 
   return $new_dna
 }
 
@@ -38971,9 +40691,9 @@ proc gg_wizard_dialog {w} {
   }
   close $fileid
   set gg_calc(b2n) [dict create aaaa 0 aaac 1 aaag 2 aaat 3 aaca 4 aacc 5 aacg 6 aact 7 aaga 8 aagc 9 aagg 10 aagt 11 aata 12 aatc 13 aatg 14 aatt 15 acaa 16 acac 17 acag 18 acat 19 acca 20 accc 21 accg 22 acct 23 acga 24 acgc 25 acgg 26 acgt 27 acta 28 actc 29 actg 30 actt 31 agaa 32 agac 33 agag 34 agat 35 agca 36 agcc 37 agcg 38 agct 39 agga 40 aggc 41 aggg 42 aggt 43 agta 44 agtc 45 agtg 46 agtt 47 ataa 48 atac 49 atag 50 atat 51 atca 52 atcc 53 atcg 54 atct 55 atga 56 atgc 57 atgg 58 atgt 59 atta 60 attc 61 attg 62 attt 63 caaa 64 caac 65 caag 66 caat 67 caca 68 cacc 69 cacg 70 cact 71 caga 72 cagc 73 cagg 74 cagt 75 cata 76 catc 77 catg 78 catt 79 ccaa 80 ccac 81 ccag 82 ccat 83 ccca 84 cccc 85 cccg 86 ccct 87 ccga 88 ccgc 89 ccgg 90 ccgt 91 ccta 92 cctc 93 cctg 94 cctt 95 cgaa 96 cgac 97 cgag 98 cgat 99 cgca 100 cgcc 101 cgcg 102 cgct 103 cgga 104 cggc 105 cggg 106 cggt 107 cgta 108 cgtc 109 cgtg 110 cgtt 111 ctaa 112 ctac 113 ctag 114 ctat 115 ctca 116 ctcc 117 ctcg 118 ctct 119 ctga 120 ctgc 121 ctgg 122 ctgt 123 ctta 124 cttc 125 cttg 126 cttt 127 gaaa 128 gaac 129 gaag 130 gaat 131 gaca 132 gacc 133 gacg 134 gact 135 gaga 136 gagc 137 gagg 138 gagt 139 gata 140 gatc 141 gatg 142 gatt 143 gcaa 144 gcac 145 gcag 146 gcat 147 gcca 148 gccc 149 gccg 150 gcct 151 gcga 152 gcgc 153 gcgg 154 gcgt 155 gcta 156 gctc 157 gctg 158 gctt 159 ggaa 160 ggac 161 ggag 162 ggat 163 ggca 164 ggcc 165 ggcg 166 ggct 167 ggga 168 gggc 169 gggg 170 gggt 171 ggta 172 ggtc 173 ggtg 174 ggtt 175 gtaa 176 gtac 177 gtag 178 gtat 179 gtca 180 gtcc 181 gtcg 182 gtct 183 gtga 184 gtgc 185 gtgg 186 gtgt 187 gtta 188 gttc 189 gttg 190 gttt 191 taaa 192 taac 193 taag 194 taat 195 taca 196 tacc 197 tacg 198 tact 199 taga 200 tagc 201 tagg 202 tagt 203 tata 204 tatc 205 tatg 206 tatt 207 tcaa 208 tcac 209 tcag 210 tcat 211 tcca 212 tccc 213 tccg 214 tcct 215 tcga 216 tcgc 217 tcgg 218 tcgt 219 tcta 220 tctc 221 tctg 222 tctt 223 tgaa 224 tgac 225 tgag 226 tgat 227 tgca 228 tgcc 229 tgcg 230 tgct 231 tgga 232 tggc 233 tggg 234 tggt 235 tgta 236 tgtc 237 tgtg 238 tgtt 239 ttaa 240 ttac 241 ttag 242 ttat 243 ttca 244 ttcc 245 ttcg 246 ttct 247 ttga 248 ttgc 249 ttgg 250 ttgt 251 ttta 252 tttc 253 tttg 254 tttt 255 aaa 0 aac 1 aag 2 aat 3 aca 4 acc 5 acg 6 act 7 aga 8 agc 9 agg 10 agt 11 ata 12 atc 13 atg 14 att 15 caa 16 cac 17 cag 18 cat 19 cca 20 ccc 21 ccg 22 cct 23 cga 24 cgc 25 cgg 26 cgt 27 cta 28 ctc 29 ctg 30 ctt 31 gaa 32 gac 33 gag 34 gat 35 gca 36 gcc 37 gcg 38 gct 39 gga 40 ggc 41 ggg 42 ggt 43 gta 44 gtc 45 gtg 46 gtt 47 taa 48 tac 49 tag 50 tat 51 tca 52 tcc 53 tcg 54 tct 55 tga 56 tgc 57 tgg 58 tgt 59 tta 60 ttc 61 ttg 62 ttt 63]
-
+    
     set gg_calc(n2rc_4) [dict create 0 255 1 191 2 127 3 63 4 239 5 175 6 111 7 47 8 223 9 159 10 95 11 31 12 207 13 143 14 79 15 15 16 251 17 187 18 123 19 59 20 235 21 171 22 107 23 43 24 219 25 155 26 91 27 27 28 203 29 139 30 75 31 11 32 247 33 183 34 119 35 55 36 231 37 167 38 103 39 39 40 215 41 151 42 87 43 23 44 199 45 135 46 71 47 7 48 243 49 179 50 115 51 51 52 227 53 163 54 99 55 35 56 211 57 147 58 83 59 19 60 195 61 131 62 67 63 3 64 254 65 190 66 126 67 62 68 238 69 174 70 110 71 46 72 222 73 158 74 94 75 30 76 206 77 142 78 78 79 14 80 250 81 186 82 122 83 58 84 234 85 170 86 106 87 42 88 218 89 154 90 90 91 26 92 202 93 138 94 74 95 10 96 246 97 182 98 118 99 54 100 230 101 166 102 102 103 38 104 214 105 150 106 86 107 22 108 198 109 134 110 70 111 6 112 242 113 178 114 114 115 50 116 226 117 162 118 98 119 34 120 210 121 146 122 82 123 18 124 194 125 130 126 66 127 2 128 253 129 189 130 125 131 61 132 237 133 173 134 109 135 45 136 221 137 157 138 93 139 29 140 205 141 141 142 77 143 13 144 249 145 185 146 121 147 57 148 233 149 169 150 105 151 41 152 217 153 153 154 89 155 25 156 201 157 137 158 73 159 9 160 245 161 181 162 117 163 53 164 229 165 165 166 101 167 37 168 213 169 149 170 85 171 21 172 197 173 133 174 69 175 5 176 241 177 177 178 113 179 49 180 225 181 161 182 97 183 33 184 209 185 145 186 81 187 17 188 193 189 129 190 65 191 1 192 252 193 188 194 124 195 60 196 236 197 172 198 108 199 44 200 220 201 156 202 92 203 28 204 204 205 140 206 76 207 12 208 248 209 184 210 120 211 56 212 232 213 168 214 104 215 40 216 216 217 152 218 88 219 24 220 200 221 136 222 72 223 8 224 244 225 180 226 116 227 52 228 228 229 164 230 100 231 36 232 212 233 148 234 84 235 20 236 196 237 132 238 68 239 4 240 240 241 176 242 112 243 48 244 224 245 160 246 96 247 32 248 208 249 144 250 80 251 16 252 192 253 128 254 64 255 0]
-
+    
     set gg_calc(n2rc_3) [dict create 0 63 1 47 2 31 3 15 4 59 5 43 6 27 7 11 8 55 9 39 10 23 11 7 12 51 13 35 14 19 15 3 16 62 17 46 18 30 19 14 20 58 21 42 22 26 23 10 24 54 25 38 26 22 27 6 28 50 29 34 30 18 31 2 32 61 33 45 34 29 35 13 36 57 37 41 38 25 39 9 40 53 41 37 42 21 43 5 44 49 45 33 46 17 47 1 48 60 49 44 50 28 51 12 52 56 53 40 54 24 55 8 56 52 57 36 58 20 59 4 60 48 61 32 62 16 63 0]
 
   set data_4_double $gg_calc(data_4);#sputs ok
@@ -38985,7 +40705,7 @@ proc gg_wizard_dialog {w} {
     }
   }
   set gg_calc(data_4_double) $data_4_double
-
+    
   set data_3_double $gg_calc(data_3);#sputs ok
   for {set i 0} {$i <64} {incr i} {
     for {set j 0} {$j <64} {incr j} {
@@ -38995,10 +40715,10 @@ proc gg_wizard_dialog {w} {
     }
   }
   set gg_calc(data_3_double) $data_3_double
-
+		
   if {$dialogblock == 1} {return}
 
-  set s [new_dialog $w "Golden Gate Reaction..." "NEW DNA"]
+  set s [new_dialog $w "Golden Gate Designer" "NEW DNA"]
   wm resizable [winfo toplevel $s] 0 0
   wm transient $s {}
   bind $s <<Cancel>> "gg_wizard_dialog_cancel $s"
@@ -39034,10 +40754,10 @@ proc gg_wizard_fragments_frame {s} {
   if {![winfo exists $s.f]} {
     grid [frame $s.f] -row 1 -column 1 -sticky nswe
     grid [frame $s.f.enz] -row 0 -column 1 -sticky nswe
-    grid [label $s.f.enz.ref1  -text "All data from Pryor JM, et al." ] -row 0 -column 1 -columnspan 2 -sticky nsw
-    grid [label $s.f.enz.ref  -text "https://doi.org/10.1371/journal.pone.0238592" ] -row 1 -column 1 -columnspan 2 -sticky nsw
-    bind $s.f.enz.ref <Any-Button> " open_url https://doi.org/10.1371/journal.pone.0238592"
-    tooltip_install $s.f.enz.ref "Click Here to Open Reference"
+    grid [message $s.f.enz.ref1  -text "All data from Pryor JM, et al. https://doi.org/10.1371/journal.pone.0238592" -aspect 800 ] -row 0 -column 1 -columnspan 2 -sticky nsw
+   # grid [label $s.f.enz.ref  -text "" ] -row 1 -column 1 -columnspan 2 -sticky nsw
+    bind $s.f.enz.ref1 <Any-Button> " open_url https://doi.org/10.1371/journal.pone.0238592"
+    tooltip_install $s.f.enz.ref1 "Click Here to Open Reference"
     grid [menubutton $s.f.enz.menub -menu $s.f.enz.menub.m -textvariable temp_info(gg_enz_text)] -row 2 -column 1 -sticky nsw
     menu $s.f.enz.menub.m
     set temp_info(gg_enz) ""
@@ -39048,14 +40768,14 @@ proc gg_wizard_fragments_frame {s} {
       set temp_info(gg_enz_text) [lindex $enz_list 0]
       set temp_info(gg_enz) [lindex $enz_list 0]
     } else {
-      set temp_info(gg_enz_text) [mc "Chose an Enzyme..."]
+      set temp_info(gg_enz_text) [mc "Choose an Enzyme..."]
       foreach enz $enz_list {
 	  $s.f.enz.menub.m add command -label "$enz" -command "set temp_info(gg_enz_text) $enz; set temp_info(gg_enz) $enz; gg_wizard_frame_validate $s.f.frags"
       }
     }
-
+    
     grid [frame $s.f.frags] -row 1 -column 1 -sticky nswe
-
+    
     grid rowconfigure $s.f 4 -weight 1
     grid [frame $s.f.okframe] -row 5 -column 1 -sticky swe
     grid [button $s.f.okframe.setdef -text [mc "Set Defaults"] -command "gg_wizard_set_defaults $s" -state normal] -row 1 -column 2 -sticky n
@@ -39063,7 +40783,7 @@ proc gg_wizard_fragments_frame {s} {
 
     if {[gg_wizard_add_fragment_frame $s.f.frags] eq "error"} {return error}
   } else {
-    grid configure $s.f
+    grid configure $s.f 
     foreach f [list $s.summary $s.p] {
       if {[winfo exists $f]} {
         grid remove $f
@@ -39104,7 +40824,7 @@ proc gg_wizard_add_fragment_frame {s {after_frame {}}} {
   grid [button $s.f$i.f1.add_buttons.add -text "+" -command "gg_wizard_add_fragment_frame $s $s.f$i" -width 1 ]  -row 1 -column 1 -sticky n
   grid [button $s.f$i.f1.add_buttons.remove -text "-"  -width 1  -command "if {\[llength \[grid slaves $s\]\] > 1} {gg_wizard_delete_fragment_frame $s $i}"] -row 1 -column 2 -sticky n
 
-  grid [frame $s.f$i.f1.sels] -row 1 -column 2 -sticky nswe
+  grid [frame $s.f$i.f1.sels] -row 1 -column 2 -sticky nswe 
   menubutton $s.f$i.f1.sels.win_button
     menu $s.f$i.f1.sels.win_button.menu
     foreach window [dnawindows_list 1] {
@@ -39119,7 +40839,7 @@ proc gg_wizard_add_fragment_frame {s {after_frame {}}} {
     return "error"
   }
 
-  $s.f$i.f1.sels.win_button configure -menu $s.f$i.f1.sels.win_button.menu -indicatoron 1 -relief raised
+  $s.f$i.f1.sels.win_button configure -menu $s.f$i.f1.sels.win_button.menu -indicatoron 1 -relief raised 
   grid $s.f$i.f1.sels.win_button -row 1 -column 2 -sticky nswe
     grid [label $s.f$i.f1.sels.error_label -textvariable temp_info(frame_error,$i)] -row 2 -column 2 -sticky n
     grid remove $s.f$i.f1.sels.error_label
@@ -39129,16 +40849,16 @@ proc gg_wizard_add_fragment_frame {s {after_frame {}}} {
   grid [menubutton $s.f$i.f1.sels.rcframe.sel_button] -row 1 -column 0 -sticky nw
   bind $s.f$i.f1.sels.rcframe.sel_button <Button-1> "gg_wizard_sel_menu \$temp_info(frame_window,$i) $s $i"
   $s.f$i.f1.sels.rcframe.sel_button configure -menu [menu $s.f$i.f1.sels.rcframe.sel_button.menu]
-  grid [checkbutton $s.f$i.f1.sels.rcframe.rc -variable temp_info(frame_rc,$i) -text "Rev-com" -command "gg_wizard_frame_validate $s" ] -row 1 -column 1 -sticky nw
-  grid [checkbutton $s.f$i.f1.sels.rcframe.as_oligos -variable temp_info(frame_as_oligos,$i) -text "dsOligo"  ] -row 1 -column 2 -sticky nw
+  grid [checkbutton $s.f$i.f1.sels.rcframe.rc -variable temp_info(frame_rc,$i) -text "Rev-com" -command "gg_wizard_frame_validate $s" ] -row 1 -column 1 -sticky nw 
+  grid [checkbutton $s.f$i.f1.sels.rcframe.as_oligos -variable temp_info(frame_as_oligos,$i) -text "dsOligo"  ] -row 1 -column 2 -sticky nw 
   #grid [menubutton $s.f$i.f1.sels.rcframe.as_oligos -state normal -textvariable temp_info(frame_as_oligos_display,$i)] -row 1 -column 2 -sticky nwe
   #$s.f$i.f1.sels.rcframe.as_oligos configure -menu [menu $s.f$i.f1.sels.rcframe.as_oligos.menu]
   #$s.f$i.f1.sels.rcframe.as_oligos.menu add radiobutton -command "set temp_info(frame_as_oligos_display,$i) {PCR with tails}" -label "PCR with tails" -variable temp_info(frame_as_oligos,$i) -value 0
   #$s.f$i.f1.sels.rcframe.as_oligos.menu add radiobutton -command "set temp_info(frame_as_oligos_display,$i) {dsOligo}" -label "dsOligo" -variable temp_info(frame_as_oligos,$i) -value 1
-
+  
   grid [ttk::separator $s.f$i.separator ] -row 2 -column 1 -sticky nwe
   $s.f$i.f1.sels.win_button.menu invoke 0
-
+  
 
 }
 
@@ -39215,9 +40935,7 @@ proc gg_wizard_sel_menu {w s i} {
   }
   if {![info exists temp_info(frame_sel,$i)] || $temp_info(frame_sel,$i) =={}} {
     $menu invoke 0
-  } else {
-    sputs exists $i $temp_info(frame_sel,$i)
-  }
+  } 
 }
 
 ############
@@ -39228,7 +40946,7 @@ proc gg_wizard_frame_validate {s} {
   set top [winfo toplevel $s]
   $top.f.okframe.next configure -state normal
   #sputs s $s $top.f.okframe.next
-
+    
   if {$temp_info(gg_enz) == ""} {
       $top.f.okframe.next configure -state disabled
       return
@@ -39279,7 +40997,7 @@ proc gg_wizard_frame_validate {s} {
         } elseif {$temp_info(oh_len) == 4 && [gg_wizard_seq_to_overhangs "[string range $temp_info(template_seq,[expr {$i-1}]) end-7 end][string range $temp_info(template_seq,[expr {$i}]) 0 [expr {8+$temp_info(oh_len)}]]" $temp_info(oh_len)] =={}} {
           set temp_info(frame_error,$last_index) "No valid overhangs in the junction of this fragment."
           set temp_info(frame_error,$index) "No valid overhangs in the junction of this fragment."
-          $top.f.okframe.next configure -state disabled
+          $top.f.okframe.next configure -state disabled	    
 	}
       }
       set last_index $index
@@ -39287,7 +41005,7 @@ proc gg_wizard_frame_validate {s} {
     }
   }
   set res ""
-
+    
   if {[regexp $regpat "[string range $temp_info(template_seq,[expr {$i-1}]) end-$pat_len end][string range $temp_info(template_seq,[expr {0}]) 0 $pat_len]"]} {
     set temp_info(frame_error,$last_index) "Site $temp_info(gg_enz) is present in the junction of this fragment."
     grid configure $s.f$last_index.f1.sels.error_label
@@ -39299,7 +41017,7 @@ proc gg_wizard_frame_validate {s} {
     grid configure $s.f$last_index.f1.sels.error_label
     set temp_info(frame_error,$index_zero) "No valid overhangs in the junction of this fragment."
     grid configure $s.f$index_zero.f1.sels.error_label
-    $top.f.okframe.next configure -state disabled
+    $top.f.okframe.next configure -state disabled	    
   }
 
 }
@@ -39395,7 +41113,7 @@ proc gg_wizard_summary_frame {s} {
     grid [text $s.summary.f1.text_frame.result_text -bg $info(bg_color) -font labelfont -wrap none -xscrollcommand "optionscrollbar $s.summary.f1.text_frame.horiz_sc" -yscrollcommand "optionscrollbar $s.summary.f1.text_frame.vert_sc"] -row 1 -column 1 -sticky nswe
     grid [scrollbar $s.summary.f1.text_frame.vert_sc -orient vertical -command "$s.summary.f1.text_frame.result_text yview"] -row 1 -column 2 -sticky nsw
     grid [scrollbar $s.summary.f1.text_frame.horiz_sc -orient horizontal -command "$s.summary.f1.text_frame.result_text xview"] -row 2 -column 1 -sticky nwe
-
+      
     grid rowconfigure $s.summary.f1 4 -weight 1
     grid [frame $s.summary.okframe] -row 5 -column 1 -sticky swe
     grid [button $s.summary.okframe.setdef -text [mc "Set Defaults"] -command "gg_wizard_set_defaults $s" -state normal] -row 1 -column 2 -sticky n
@@ -39452,7 +41170,7 @@ proc gg_wizard_primer_frame {s i} {
 ##
 #############
 proc gg_wizard_calculate {s} {
-  global temp_info info gg_calc
+  global temp_info info gg_calc 
 
   if {![info exists gg_calc(junction_index)]} {
     gg_wizard_calculate_init $s
@@ -39472,7 +41190,7 @@ proc gg_wizard_calculate {s} {
     set new_oh [lindex $j_map $new_index]
     set new_num_list [list]
     set new_den_list [list]
-    set new_oh_list [list]
+    set new_oh_list [list] 
     set new_oh_list_half [lreplace $gg_calc(oh_list_half) $oh_to_change $oh_to_change $new_oh]
     set i 0
     set new_eff 1.0
@@ -39544,7 +41262,7 @@ proc gg_wizard_calculate {s} {
       set den_r [lindex $gg_calc(denoms_list) [expr {$i+ $temp_info(fragment_number)}]]
 
       set next_i [expr {($i +1) % $temp_info(fragment_number)}]
-
+	
       $text insert end "[file rootname [wm title $temp_info(window,$i)]]\n"
       $text insert end "Left overhang: $oh_seq_l, [expr {round(1000.0*$num_l/$den_l)/10.0}]% efficiency.\n"
       #[gg_wizard_row_efficency_calc [dict get $gg_calc(b2n) $oh_seq_l] $gg_calc(oh_list)]
@@ -39552,10 +41270,10 @@ proc gg_wizard_calculate {s} {
       $text insert end "Right overhang: $rc_oh_seq_r, [expr {round(1000.0*$num_r/$den_r)/10.0}]% efficency.\n"
       #[gg_wizard_row_efficency_calc [dict get $gg_calc(b2n) $rc_oh_seq_r] $gg_calc(oh_list)]
       #$text insert end "[string range $temp_info(template_seq,$i) end+ $temp_info(right_bound,$i) end] $temp_info(incr_right,$i) [string range $temp_info(template_seq,$next_i) 0 20]\n"
-
+	
       if {!$temp_info(as_oligos,$i)} {
         set pl [expr {max($temp_info(right_bound,$last_i) +$temp_info(incr_left,$i), 1)}]
-        while {[Tm [string range $temp_info(template_seq,$i) [expr {$temp_info(right_bound,$last_i)+$temp_info(incr_left,$i)-1}] $pl]] < $temp_info(left_tm,$i) && $pl < [string length $temp_info(template_seq,$i)]} {incr pl}
+        while {[Tm [string range $temp_info(template_seq,$i) [expr {$temp_info(right_bound,$last_i)+$temp_info(incr_left,$i)-1}] $pl]] < $temp_info(left_tm,$i) && $pl < [string length $temp_info(template_seq,$i)]} {incr pl} 
         set temp_info(fwd_primer_len,$i) $pl
         set temp_info(fwd_primer_base,$i) [string range $temp_info(template_seq,$i) [expr {$temp_info(right_bound,$last_i)+$temp_info(incr_left,$i)-1}] $pl]
         set temp_info(fwd_primer,$i) "$temp_info(enz_extension_seq)[string range $temp_info(template_seq,$last_i) end+[expr {$temp_info(right_bound,$last_i)+$temp_info(incr_left,$i)}] end][string range $temp_info(template_seq,$i) [expr {$temp_info(right_bound,$last_i)+$temp_info(incr_left,$i)-1}] $pl]"
@@ -39564,8 +41282,10 @@ proc gg_wizard_calculate {s} {
         $text insert end "fwd primer (Tm1=$left_base_tm\u2103, Tm2= $left_total_tm\u2103): $temp_info(enz_extension_seq)[string range $temp_info(template_seq,$last_i) end+[expr {$temp_info(right_bound,$last_i)+$temp_info(incr_left,$i)}] end] [string range $temp_info(template_seq,$i) [expr {$temp_info(right_bound,$last_i)+$temp_info(incr_left,$i)-1}] $pl]\n"
 
         set pr [expr {max($temp_info(right_bound,$i)+$temp_info(incr_right,$i)+$temp_info(oh_len), 1)}]
-        while {[Tm [string range $temp_info(template_seq,$i) end+[expr {-$pr}] end+[expr {$temp_info(right_bound,$i) +$temp_info(incr_right,$i)+$temp_info(oh_len)-1}]]] < $temp_info(right_tm,$i) && $pr < [string length $temp_info(template_seq,$i)]} {incr pr}
-        set temp_info(rev_primer_len,$i) $pl
+sputs pr $pr
+        while {[Tm [string range $temp_info(template_seq,$i) end+[expr {-$pr}] end+[expr {$temp_info(right_bound,$i) +$temp_info(incr_right,$i)+$temp_info(oh_len)-1}]]] < $temp_info(right_tm,$i) && $pr < [string length $temp_info(template_seq,$i)]} {incr pr} 
+sputs tm [set yy [string range $temp_info(template_seq,$i) end+[expr {-$pr}] end+[expr {$temp_info(right_bound,$i) +$temp_info(incr_right,$i)+$temp_info(oh_len)-1}]]] [Tm $yy]
+        set temp_info(rev_primer_len,$i) $pr
         set temp_info(rev_primer_base,$i) [revcom [string range $temp_info(template_seq,$i) end+[expr {-$pr}] end+[expr {$temp_info(right_bound,$i)+$temp_info(incr_right,$i)+$temp_info(oh_len)-1}]]]
 	 set temp_info(rev_primer,$i) "$temp_info(enz_extension_seq)[revcom "[string range $temp_info(template_seq,$i) end+[expr {-$pr}] end+[expr {$temp_info(right_bound,$i)+$temp_info(incr_right,$i)+$temp_info(oh_len)-1}]][string range $temp_info(template_seq,$next_i) 0 [expr {$temp_info(right_bound,$i)+$temp_info(incr_right,$i)+$temp_info(oh_len)-2}]]"]"
 	set right_base_tm [Tm $temp_info(rev_primer_base,$i)]
@@ -39592,16 +41312,16 @@ proc gg_wizard_calculate {s} {
 ##
 #############
 proc gg_wizard_calculate_init {s} {
-  global temp_info info gg_calc
+  global temp_info info gg_calc 
 
   if {$temp_info(oh_len) == 4} {
     set gg_calc(data) $gg_calc(data_4)
     set gg_calc(data_double) $gg_calc(data_4_double)
-    set  gg_calc(n2rc) $gg_calc(n2rc_4)
+    set  gg_calc(n2rc) $gg_calc(n2rc_4) 
   } else {
     set gg_calc(data) $gg_calc(data_3)
     set gg_calc(data_double) $gg_calc(data_3_double)
-    set gg_calc(n2rc) $gg_calc(n2rc_3)
+    set gg_calc(n2rc) $gg_calc(n2rc_3) 
   }
   set gg_calc(junction_map) [list]
   set gg_calc(junction_map_as_oh) [list]
@@ -39646,7 +41366,7 @@ proc gg_wizard_set_defaults {s} {
 
   if {![winfo exists $s.d]} {
     frame $s.d
-
+    
     grid [frame $s.d.f1] -row 2 -column 1 -sticky nswe
     grid [label $s.d.f1.l0 -text "Default primer Tm"] -row 1 -column 1 -sticky w
     set temp_info(gg_wizard_default_tm_scaled) [expr {($info(gg_wizard_default_tm)-50)/22.0}]
@@ -39657,7 +41377,7 @@ proc gg_wizard_set_defaults {s} {
     grid [label $s.d.f2.l0 -text "Default search time"] -row 1 -column 1 -sticky w
     grid [ttk::scale $s.d.f2.tmsc -orient horizontal -length 200 -command "set info(gg_wizard_default_search_time) \[expr {round(\$info(gg_wizard_default_search_time)*10)/10.0}\];#"  -variable info(gg_wizard_default_search_time) -from 0.5 -to 10] -row 1 -column 2 -sticky ew
     grid [label $s.d.f2.l2 -textvariable info(gg_wizard_default_search_time)] -row 1 -column 3 -sticky e
-
+    
 
     grid [frame $s.d.f3] -row 4 -column 1 -sticky nswe
     grid [label $s.d.f3.l0 -text "Default 5' extension"] -row 1 -column 1 -sticky w
@@ -39669,7 +41389,7 @@ proc gg_wizard_set_defaults {s} {
 
     grid [frame $s.d.f5] -row 6 -column 1 -sticky nswe
     grid [checkbutton $s.d.f5.c1 -text "Add amplicon features to product" -variable info(gg_wizard_add_amplicon_fetures)] -row 1 -column 1 -sticky w
-
+    
     grid rowconfigure $s.d 6 -weight 1
     grid [frame $s.d.okframe] -row 9 -column 1 -sticky swe
     grid [button $s.d.okframe.ok -text "Set Defaults" -command "event generate $s <<SetDefaults>>"] -row 1 -column 1 -sticky n
@@ -39735,18 +41455,19 @@ proc gg_wizard_generate_product {s} {
     #sputs \n
     if {!$temp_info(as_oligos,$i)} {
       ## fwd primer
-      set coords [list [expr {$end  + $temp_info(right_bound,$last_i) + $temp_info(incr_left,$i)-1}] [expr {$end + $temp_info(fwd_primer_len,$i)}] ]
+      set coords [list [expr {$end  + $temp_info(right_bound,$last_i) + $temp_info(incr_left,$i)-1}] [expr {$end + $temp_info(fwd_primer_len,$i)+1}] ]
+
       set bg_color [lindex $revcolors 0]
       set metadata [list $temp_info(fwd_primer_name,$i) $gformat primer_bind 0 [list PCR_conditions "primer sequence:$temp_info(fwd_primer,$i)"] [list]]
       lappend_tags new_tags f0# [list $coords [list $bg_color {} {} {}] [list <<Revcolors>> <<Metadata>>] [list $revcolors $metadata]]
       set left_coord [lindex $coords 0]
-
+      
       ## rev primer
-      set coords [list [expr {[string length $dna]-$temp_info(rev_primer_len,$i)}] [expr {[string length $dna]+$temp_info(right_bound,$i)+$temp_info(incr_right,$i)+$temp_info(oh_len)-1}] ]
+      set coords [list [expr {[string length $dna]-$temp_info(rev_primer_len,$i) -1}] [expr {[string length $dna]+$temp_info(right_bound,$i)+$temp_info(incr_right,$i)+$temp_info(oh_len)-1}] ]
       set bg_color [lindex $revcolors 1]
       set metadata [list $temp_info(rev_primer_name,$i) $gformat primer_bind 1 [list PCR_conditions "primer sequence:$temp_info(rev_primer,$i)"] [list]]
       lappend_tags new_tags f0# [list $coords [list $bg_color {} {} {}] [list <<Revcolors>> <<Metadata>>] [list $revcolors $metadata]]
-
+      
       ## File comment for PCR
       set length_string "[expr {[lindex $coords 1]- $left_coord +2 *[string length $temp_info(enz_extension_seq)]}]"
       set tm_string1 "[Tm $temp_info(fwd_primer_base,$i)], [Tm $temp_info(fwd_primer,$i)]"
@@ -39780,11 +41501,11 @@ proc gg_wizard_generate_product {s} {
       set end [string length $dna]
       set new_tags2 [list]
       foreach {tag data} $new_tags {
-        set newcoords [list]
+        set newcoords [list]  
 	foreach {a b} [lindex $data 0] {
 	  if {$a <0} {
             lappend newcoords [expr {$end + $a}] [expr {$end}]
-            lappend newcoords 0 [expr {$b}]
+            lappend newcoords 0 [expr {$b}]		
 	  } elseif {$b <= $end} {
             lappend newcoords $a $b
           } elseif {$a >= $end} {
@@ -39792,7 +41513,7 @@ proc gg_wizard_generate_product {s} {
           } elseif {$b > $end} {
             lappend newcoords $a [expr {$end}]
             lappend newcoords 0 [expr {$b-$end}]
-          }
+          } 
         }
         if {$newcoords != [list]} {
           lset data 0 $newcoords
@@ -39824,11 +41545,11 @@ proc gg_wizard_get_dna {w1 dna_first dna_last dir} {
     set len [ix2bp $w1.textarea end]
     set new_dna [textarea_get $w1.textarea [bp2ix $w1.textarea $dna_first] [bp2ix $w1.textarea [expr {$len}]]]
     append new_dna [textarea_get $w1.textarea [bp2ix $w1.textarea 0] [bp2ix $w1.textarea [expr {$dna_last % $len}]]]
-  }
+  } 
   if {$dir} {
     ## reverse fragment
     set new_dna [revcom $new_dna]
-  }
+  } 
   return $new_dna
 }
 
@@ -39878,10 +41599,10 @@ proc pcr_dialog {w} {
   set temp_info(pcr_key_location_dict) [dict create]
   foreach primer $info(pcr_primer_database) {
     set item [$tv insert {} 0 -text [lindex $primer 0]]
-    $tv set $item Sequence [lindex $primer 1]
+    $tv set $item Sequence [lindex $primer 1] 
     $tv set $item Note [lindex $primer 2]
     $tv set $item Colors [lindex $primer 3]
-    $tv set $item Qualifiers [lindex $primer 4]
+    $tv set $item Qualifiers [lindex $primer 4] 
     dict set temp_info(pcr_key_location_dict) "[lindex $primer 0]\t[lindex $primer 1]" $item
   }
 
@@ -39897,8 +41618,8 @@ proc pcr_dialog {w} {
   bind $tv <Any-Leave> "if {\[winfo exists .w_tooltip\]} {destroy .w_tooltip}; catch {after cancel \$temp_info(pcr_dialog_mouseover_cancel)}"
   bind $tv <FocusOut> "if {\[winfo exists .w_tooltip\]} {destroy .w_tooltip}; catch {after cancel \$temp_info(pcr_dialog_mouseover_cancel)}"
   bind $tv <Unmap> "if {\[winfo exists .w_tooltip\]} {destroy .w_tooltip}; catch {after cancel \$temp_info(pcr_dialog_mouseover_cancel)}"
-
-  grid [scrollbar $s.treeframe.sc -orient vertical -command "$s.treeframe.tv yview" -width 15] -row 1 -column 2 -sticky nse
+    
+  grid [scrollbar $s.treeframe.sc -orient vertical -command "$s.treeframe.tv yview" -width 15] -row 1 -column 2 -sticky nse 
   grid rowconfigure $s.treeframe 1 -weight 1
   grid columnconfigure $s.treeframe 1 -weight 1
 
@@ -39960,14 +41681,17 @@ proc pcr_dialog {w} {
     #$s.limitframe.sel.menu add radiobutton -label [mc "Unique In Template Selection"] -command "set temp_info(pcr_show_display) \[mc \"Unique In Template Selection\"\];pcr_dialog_filter $tv $w" -variable temp_info(pcr_show) -value 2
     #$s.limitframe.sel.menu add radiobutton -label [mc "Unique Outside Template Selection"] -command "set temp_info(pcr_show_display) \[mc \"Unique Outside Template Selection\"\];pcr_dialog_filter $tv $w" -variable temp_info(pcr_show) -value 3
     $s.limitframe.sel.menu add radiobutton -label [mc "Show All"] -command "set temp_info(pcr_show_display) \[mc \"Show All\"\];pcr_dialog_filter $tv $w" -variable temp_info(pcr_show) -value 4
-  grid [label $s.limitframe.l2 -text [mc "Min. Anneling Length"]]  -row 2 -column 2 -sticky e
-  grid [label $s.limitframe.l3 -width 3 -textvariable temp_info(pcr_min_match)]  -row 2 -column 3 -sticky w
+  grid [label $s.limitframe.l2 -text [mc "Min. Annealing Length"]]  -row 2 -column 2 -sticky e
+  #grid [label $s.limitframe.l3 -width 3 -textvariable temp_info(pcr_min_match)]  -row 2 -column 3 -sticky w
+  grid [ttk::spinbox $s.limitframe.l3 -width 3 -textvariable temp_info(pcr_min_match) -from 5 -to 30 -validate all -validatecommand "entry_integer %P %W %V 5 30"]  -row 2 -column 3 -sticky w
   grid [ttk::scale $s.limitframe.3scale -orient horizontal -length 100 -variable temp_info(pcr_min_match) -from 5 -to 30 -command "set temp_info(pcr_min_match) \[expr {int(\$temp_info(pcr_min_match))}\];if {\$temp_info(old_pcr_min_match) != \$temp_info(pcr_min_match)} {pcr_dialog_scan $tv}; set temp_info(old_pcr_min_match) \$temp_info(pcr_min_match);#" ]  -row 2 -column 4 -sticky w
   grid [label $s.limitframe.l4 -text [mc "Max Mismatch"]]  -row 3 -column 2  -sticky e
-  grid [label $s.limitframe.l5 -width 3 -textvariable temp_info(pcr_max_mm)]  -row 3 -column 3  -sticky w
+  #grid [label $s.limitframe.l5 -width 3 -textvariable temp_info(pcr_max_mm)]  -row 3 -column 3  -sticky w
+  grid [ttk::spinbox $s.limitframe.l5 -width 3 -textvariable temp_info(pcr_max_mm) -from 0 -to 10 -validate all -validatecommand "entry_integer %P %W %V 0 10"]  -row 3 -column 3  -sticky w
   grid [ttk::scale $s.limitframe.mm_scale -orient horizontal -length 100 -variable temp_info(pcr_max_mm) -from 0 -to 10 -command "set temp_info(pcr_max_mm) \[expr {int(\$temp_info(pcr_max_mm))}\];if {\$temp_info(old_pcr_max_mm) != \$temp_info(pcr_max_mm)} {pcr_dialog_scan $tv};set temp_info(old_pcr_max_mm) \$temp_info(pcr_max_mm);#" ]  -row 3 -column 4 -sticky w
   grid [label $s.limitframe.l6 -text [mc "Minimum match at 3' End"]]  -row 4 -column 2  -sticky e
-  grid [label $s.limitframe.l7 -width 3 -textvariable temp_info(pcr_min_3_match)]  -row 4 -column 3  -sticky w
+  #grid [label $s.limitframe.l7 -width 3 -textvariable temp_info(pcr_min_3_match)]  -row 4 -column 3  -sticky w
+  grid [ttk::spinbox $s.limitframe.l7 -width 3 -textvariable temp_info(pcr_min_3_match) -from 0 -to 4 -validate all -validatecommand "entry_integer %P %W %V 0 4"]  -row 4 -column 3  -sticky w
   grid [ttk::scale $s.limitframe.mmatch_scale -orient horizontal -length 100 -variable temp_info(pcr_min_3_match) -from 0 -to 4 -command "set temp_info(pcr_min_3_match) \[expr {int(\$temp_info(pcr_min_3_match))}\];if {\$temp_info(pcr_min_3_match) != \$temp_info(old_pcr_min_3_match)} {pcr_dialog_scan $tv}; set temp_info(old_pcr_min_3_match) \$temp_info(pcr_min_3_match);#" ]  -row 4 -column 4 -sticky w
 
   grid [frame $s.infoframe] -row 7 -column 1  -sticky nswe
@@ -39975,9 +41699,9 @@ proc pcr_dialog {w} {
   grid columnconfigure $s.infoframe 1 -weight 1
 
   grid [frame $s.okframe] -row 8 -column 1 -sticky nswe
-  grid [button $s.okframe.cancel -text [mc "Close"] -command "event generate $s <<Cancel>>"] -row 1 -column 1
+  grid [button $s.okframe.cancel -text [mc "Close"] -command "event generate $s <<Cancel>>"] -row 1 -column 1 
   grid [ttk::checkbutton $s.okframe.select_pairs -text "Select Primer Pairs" -variable temp_info(pcr_selectmode) -command "pcr_dialog_set_selectmode $s \$temp_info(pcr_selectmode)" -onvalue "PCR" -offvalue "extended"] -row 1 -column 2  -sticky e
-  grid [button $s.okframe.pcr -text [mc "New PCR Product"] -command "pcr_dialog_do_pcr $tv" -default active -state disabled]  -row 1 -column 3
+  grid [button $s.okframe.pcr -text [mc "New PCR Product"] -command "pcr_dialog_do_pcr $tv" -default active -state disabled]  -row 1 -column 3 
   grid columnconfigure $s.okframe 2 -weight 1
 
 
@@ -39988,7 +41712,7 @@ proc pcr_dialog {w} {
     #$s.okframe.action.menu add radiobutton -label [mc "Append Selected Primers to Database"] -command "set temp_info(pcr_action_display) \[mc \"Append Primers to Database\"\]; pcr_dialog_set_function $s append_primers_file" -variable temp_info(pcr_action) -value 2
     #$s.okframe.action.menu add radiobutton -label [mc "Save Selected Primers to New Database"] -command "set temp_info(pcr_action_display) \[mc \"Save Primers to New Database\"\]; pcr_dialog_set_function $s save_primers_file" -variable temp_info(pcr_action) -value 3
 
-  #grid [button $s.okframe.ok -text [mc "OK"] -command "event generate $s <<OK>>" -default active -state normal]  -row 1 -column 3
+  #grid [button $s.okframe.ok -text [mc "OK"] -command "event generate $s <<OK>>" -default active -state normal]  -row 1 -column 3  
   grid columnconfigure $s.okframe 2 -weight 1
 
 
@@ -40013,10 +41737,10 @@ proc pcr_dialog {w} {
   bind $s <$modifier-Key-c> "pcr_dialog_copy_primers $tv"
   bind $s <$modifier-Key-o> "pcr_dialog_open_primers $tv"
   bind $s <$modifier-Key-s> "pcr_dialog_save_primers $tv new"
-
+  
   bind $s <$modifier-Key-a> "$tv selection add \[$tv children {}\]"
   bind $s <$modifier-Shift-Key-A> "set selstore \[$tv selection\]; $tv selection add \[$tv children {}\]; $tv selection remove \$selstore; unset -nocomplain selstore"
-
+  
   #bind $s <$modifier-Shift-Key-s> "pcr_dialog_save_primers $tv append"
   bind $s <$modifier-Shift-Key-BackSpace> "pcr_dialog_delete_primers $tv 1"
   bind $s <$modifier-Shift-Key-Delete> "pcr_dialog_delete_primers $tv 1"
@@ -40103,7 +41827,7 @@ proc pcr_dialog_edit_primer {tv x y} {
   set s [winfo toplevel $tv]
   if {![winfo exists $s.editframe]} {
     grid [frame $s.editframe] -row 0 -rowspan 7 -column 1 -sticky nswe
-
+    
     grid [label $s.editframe.label -text "Edit Primer"] -row 0 -column 1 -columnspan 2 -sticky w
     grid [label $s.editframe.name_label -text "Name:"] -row 1 -column 1 -sticky e
     grid [entry $s.editframe.name -state normal -textvariable temp_info(edit_primer_name)] -row 1 -column 2 -sticky ew
@@ -40117,7 +41841,7 @@ proc pcr_dialog_edit_primer {tv x y} {
   } else {
     grid configure $s.editframe
   }
-
+      
 }
 
 ############
@@ -40142,7 +41866,7 @@ proc pcr_dialog_do_edit_primer {tv} {
   #foreach n [split $new_note \u00B6] {
   #  lappend new_qual_list note $n
   #}
-  $tv set $item Qualifiers $qual_list
+  $tv set $item Qualifiers $new_qual_list
   set old_key "$old_name)\t$old_seq"
   set temp_info(pcr_key_location_dict) [dict remove  $temp_info(pcr_key_location_dict) $old_key]
   dict set temp_info(pcr_key_location_dict)  "$temp_info(edit_primer_name)\t$temp_info(edit_primer_seq)" $item
@@ -40170,7 +41894,7 @@ proc pcr_dialog_copy_primers {tv} {
     lappend data_list "$key\t[dict get $data_dict $key]"
   }
   set text [join $data_list \n]
-  clipboard clear
+  clipboard clear 
   clipboard append -displayof [winfo toplevel $tv] $text
   set info(clipboard_text) $text
   set info(clipboard_tags) {}
@@ -40183,7 +41907,7 @@ proc pcr_dialog_open_primers {tv} {
   global temp_info
   set text [list]
   set filename [tk_getOpenFile]
-  if {$filename != {}} {
+  if {$filename != {}} { 
     if {![catch {open $filename r} fileid err]} {
       while {[eof $fileid] != 1} {
         lappend text [gets $fileid]
@@ -40205,8 +41929,8 @@ proc pcr_dialog_open_primers {tv} {
 proc pcr_dialog_delete_primers {tv {all 0}} {
   global temp_info info
   if {$all} {
-    $tv delete [$tv children {}]
-    $tv delete [$tv children detached]
+    $tv delete [$tv children {}] 
+    $tv delete [$tv children detached] 
     set temp_info(pcr_key_location_dict) [dict create]
     set info(pcr_primer_database) [list]
   } else {
@@ -40253,6 +41977,16 @@ proc pcr_dialog_load_primers {tv template text} {
     if {$line eq {}} {continue}
     if {[regexp -nocase {^[\s]*([NBDHVKMRYWSACGT]{5,})[\s]*$} $line - seq]} {
     } elseif {[regexp -nocase {^([^\t,]+)[\t,][\s]*([NBDHVKMRYWSACGT]{5,})[\s]*$} $line - name seq]} {
+    } elseif {[regexp -nocase {^([^\t,]+)[\t,][\s]*([NBDHVKMRYWSACGT\s]{5,})[\s]*$} $line - name seq] || [regexp -nocase {^([^\t]+)[\t\s]+([^\t]{5,})[\s]*$} $line - name seq] || [regexp -nocase {^([^\t,]+)[\t,][\s]*([NBDHVKMRYWSACGT\s]{5,})[\s]*[\t,]([^\t]*)$} $line - name seq note] || [regexp -nocase {^([^\t]+)[\t\s]+([^\t]{5,})[\s]*[\t,]([^\t]*)$} $line - name seq note]} {
+      regsub -all {\s+} $seq "" seq
+      regsub -all {\\[^\\]*\\} $seq "" seq
+      if {[regexp -nocase {[^NBDHVKMRYWSACGT]} $seq] || [string length $seq] < 5} {
+        set bad_text $line
+	set seq {}
+        incr bad_lines
+      }
+    } elseif {[regexp -nocase {^([^\t,]+)[\t,][\s]*([^\t,]{5,})*$} $line - name seq]} {
+      regsub -all {\s+} $seq "" seq
     } elseif {[regexp -nocase {^([^\t,]+)[\t,][\s]*([NBDHVKMRYWSACGT]{5,})[\s]*[\t,]([^\t]*)$} $line - name seq note]} {
     } elseif {[regexp -nocase {^([^\t]+)[\t][\s]*([NBDHVKMRYWSACGT]{5,})[\s]*[\t]([\s]*primer_bind[\s]*)[\t]([^\t]*)[\t]([^\t]*)$} $line - name seq type fwd_color rev_color]} {
     } elseif {[regexp -nocase {^([^\t]+)[\t][\s]*([NBDHVKMRYWSACGT]{5,})[\s]*[\t]([\s]*primer_bind[\s]*)[\t]([^\t]*)[\t]([^\t]*)[\t]([^\t]*)[\t]([^\t]*)$} $line - name seq type fwd_color rev_color bold ital]} {
@@ -40364,7 +42098,7 @@ proc pcr_dialog_add_primers_from_sequence {tv w} {
     }
   }
 
-  set reslist [list]
+  set reslist [list] 
   foreach key [dict keys $result] {
     lappend reslist "$key\t[join [dict get $result $key] \t]"
   }
@@ -40476,7 +42210,7 @@ proc pcr_dialog_save_primers {tv mode {filename {}}} {
     tk_messageBox -title "No items selected" -message "No Primers are selected. Noting was written." -type ok -icon warning -default ok
     return
   }
-
+  
   while { (![file isdirectory $info(default_dnadir)])} {
     set info(default_dnadir) [file dirname $info(default_dnadir)]
   }
@@ -40620,15 +42354,15 @@ proc pcr_dialog_set_selectmode {s mode} {
     bind $tv <<TreeviewSelect>> ""
     pcr_dialog_tv_select_pairs $tv
     bind $tv <<TreeviewSelect>> "pcr_dialog_tv_select_pairs $tv"
-    #grid remove $s.selframe.sel
+    #grid remove $s.selframe.sel 
   } else {
     bind $tv <<TreeviewSelect>> ""
     $tv selection add [$tv tag has rev_primer]
     $tv selection add [$tv tag has fwd_primer]
     $tv tag remove rev_primer
-    $tv tag remove fwd_primer
+    $tv tag remove fwd_primer 
     $s.treeframe.tv configure -selectmode extended
-    #grid configure $s.selframe.sel
+    #grid configure $s.selframe.sel 
     $s.okframe.pcr configure -state disabled
     bind $tv <<TreeviewSelect>> "pcr_dialog_tv_select_multiple $tv"
   }
@@ -40863,7 +42597,7 @@ proc pcr_dialog_do_pcr {tv} {
       ## make the dna_last negative, but recovered by % $len
       set dna_last [expr {(($rev_primer_i + $rev_primer_j) % $len) - $len}]
 
-        #  Overlap warnings
+        #  Overlap warnings    
         #--------->
         #    <----
         #$rev_primer_i -($fwd_primer_i - $fwd_primer_j) > $len
@@ -40871,7 +42605,7 @@ proc pcr_dialog_do_pcr {tv} {
         #| <10 |----->
         #<-------------
         #$rev_primer_i +10 -($fwd_primer_i - $fwd_primer_j)  > $len
-
+     
       if {$rev_primer_i -($fwd_primer_i - $fwd_primer_j) > $len} {
         tk_messageBox "Warning: Reverse primer amplifies part of forward primer. Primer dimers are very likely." -type ok
       } elseif {$rev_primer_i +10 -($fwd_primer_i - $fwd_primer_j)  > $len} {
@@ -40888,7 +42622,7 @@ proc pcr_dialog_do_pcr {tv} {
   ## Need to do warning for hairpin and primer pairwise overlap
   set fwd_tail [string range $fwd_primer_seq 0 [expr {[string length $fwd_primer_seq] - $fwd_primer_j -1}]]
   set rev_tail [revcom [string range $rev_primer_seq 0 [expr {[string length $rev_primer_seq] - $rev_primer_j -1}]]]
-
+ 
   if {[llength $fwd_primer_colors] < 2 || ![catch {winfo rgb . [lindex $fwd_primer_colors 0]}]} {
     if {[dict exists $info(feature_default_type_colors) primer_bind]} {
       set fwd_primer_colors [dict get $info(feature_default_type_colors) primer_bind]
@@ -40933,9 +42667,9 @@ proc pcr_dialog_do_pcr {tv} {
   } else {
     ## fragment  through origin
     set dna [textarea_get $w.textarea [bp2ix $w.textarea $dna_first] [bp2ix $w.textarea [expr {$len}]]]
-    ## $dna_last could be negative, indicating > $len total product.
+    ## $dna_last could be negative, indicating > $len total product. 
     append dna [textarea_get $w.textarea [bp2ix $w.textarea 0] [bp2ix $w.textarea [expr {$dna_last % $len}]]]
-  }
+  } 
   set end [string length $fwd_tail]
   #sputs end $end $rev_tail [string length $rev_primer_seq] $rev_primer_j
 
@@ -41004,7 +42738,7 @@ proc pcr_dialog_scan {tv {d 1}} {
 
   if {$d} {after 100 pcr_dialog_scan $tv 0; return}
   set target [expr {[clock milliseconds] + 100}]
-
+  
   set s [winfo toplevel $tv]
   set infotext "$s.infoframe.text"
   $infotext configure -state normal
@@ -41013,7 +42747,7 @@ proc pcr_dialog_scan {tv {d 1}} {
     set pcr_break [expr {$pcr_break +1}]
     $infotext delete 1.0 end
     $infotext insert end "Restarting Scan...\n"
-    sputs exists
+
   } else {
     set pcr_break 0
     $infotext delete 1.0 end
@@ -41022,7 +42756,7 @@ proc pcr_dialog_scan {tv {d 1}} {
   }
   set old_break $pcr_break
   sputs starting $old_break
-
+  
   set template $temp_info(template_window)
   set dna [string toupper [textarea_get $template.textarea 1.0 end]]
   set dna_len [string length $dna]
@@ -41163,11 +42897,11 @@ proc pcr_dialog_precompute {w circular} {
     set dict_4 [dict create]
     foreach a {A C G T} {
       dict set dict_1 $a {}
-      foreach b {A C G T} {
+      foreach b {A C G T} {  
         dict set dict_2 "$a$b" {}
         foreach c {A C G T} {
           dict set dict_3 "$a$b$c" {}
-          foreach d {A C G T} {
+          foreach d {A C G T} {  
             dict set dict_4 "$a$b$c$d" {}
           }
         }
@@ -41268,7 +43002,7 @@ proc pcr_dialog_filter {tv template} {
 #############
 proc pcr_dialog_set_dist {tv w} {
   global info temp_info
-
+  
   set template $temp_info(template_window)
   if {$w ne $template} {return}
   set length [ix2bp $template.textarea end]
@@ -41306,7 +43040,7 @@ proc pcr_dialog_change_template_window {tv} {
   global temp_info info
 
   $tv tag remove rev_primer
-  $tv tag remove fwd_primer
+  $tv tag remove fwd_primer 
   #$tv selection remove [$tv children {}]
   set infotext "[winfo toplevel $tv].infoframe.text"; $infotext configure -state normal; $infotext delete 1.0 end; ; $infotext configure -state disabled
 
@@ -41339,7 +43073,7 @@ proc re_cloning_wizard_dialog {w} {
   grid [label $s.win_frame0.left.m_l -textvariable temp_info(left_enz_text,0)] -row 1 -column 1 -sticky w
   grid [menubutton $s.win_frame0.left.m_lp -textvariable temp_info(left_process_text,0) -menu $s.win_frame0.left.m_lp.menu] -row 1 -column 2 -sticky w
   menu $s.win_frame0.left.m_lp.menu -postcommand "re_cloning_wizard_fill_process_menu $s 0 0 $s.win_frame0.left.m_lp.menu"
-
+    
   grid [frame $s.win_frame0.seq -relief ridge -bd 3] -row 1 -column 2 -sticky nswe
   grid [menubutton $s.win_frame0.seq.w -textvariable temp_info(window_text,0) -menu $s.win_frame0.seq.w.menu] -row 1 -column 1 -sticky we
   menu $s.win_frame0.seq.w.menu -postcommand "re_cloning_wizard_fill_window_menu $s 0 $s.win_frame0.seq.w.menu"
@@ -41350,7 +43084,7 @@ proc re_cloning_wizard_dialog {w} {
   grid [label $s.win_frame0.right.m_r -textvariable temp_info(right_enz_text,0)] -row 1 -column 1 -sticky w
   grid [menubutton $s.win_frame0.right.m_rp -textvariable temp_info(right_process_text,0) -menu $s.win_frame0.right.m_rp.menu] -row 1 -column 2 -sticky w
   menu $s.win_frame0.right.m_rp.menu -postcommand "re_cloning_wizard_fill_process_menu $s 0 1 $s.win_frame0.right.m_rp.menu"
-
+    
   grid [canvas $s.win_frame0.canvas0 -highlightthickness 0  -bg white -height 60] -row 2 -column 0 -columnspan 4 -sticky new
   $s.win_frame0.canvas0 create text 0 0 -text "" -anchor w -font dnafont -tags [list sequence_right]
   $s.win_frame0.canvas0 create text 0 0 -text ""  -anchor w -font dnafont -tags [list sequence_left]
@@ -41395,7 +43129,7 @@ proc re_cloning_wizard_dialog {w} {
   bind $s.win_frame1 <<GelLaneDrop>> "re_cloning_wizard_gel_lane_drop %d $s 1 "
   bind $s.win_frame1.seq.w <<GelLaneDrop>> "re_cloning_wizard_gel_lane_drop %d $s 1 "
   bind $s.win_frame1.canvas0 <<GelLaneDrop>> "re_cloning_wizard_gel_lane_drop %d $s 1"
-
+  
   ####
   grid [frame $s.win_frame2] -row 3 -column 1 -sticky nswe
 
@@ -41435,7 +43169,7 @@ proc re_cloning_wizard_dialog {w} {
   grid [button $s.okframe.ok -text [mc "OK"] -command "event generate $s <<OK>>" -default active] -row 1 -column 1 -sticky nw -padx 10 -pady 3
   grid [checkbutton $s.okframe.keep_open -text [mc "Keep Ligation Dialog Open"] -variable info(ligation_wizard_keep_open)] -row 2 -column 0 -columnspan 2 -sticky w
 
-
+    
   set temp_info(color_list) [list red blue violet]
 
   re_cloning_wizard_intitialize $s 0 ""
@@ -41511,7 +43245,7 @@ proc round_curve {type x1 x2 x3 x4 x5 y1 y2 y3 r} {
 proc re_cloning_wizard_update {s} {
   global temp_info update_block
   foreach {color0 color1 color2} $temp_info(color_list) {}
-
+ 
   if {$temp_info(window,0) == {}} {
     grid remove $s.win_frame1
     grid remove $s.win_frame2
@@ -41537,8 +43271,18 @@ proc re_cloning_wizard_update {s} {
       }
     }
   }
-  update idletasks
 
+  for {set i 0} {$i < 3} {incr i} {
+      if {$temp_info(left_process_text,$i) == {}} {
+      $s.win_frame$i.left.m_lp configure -state disabled
+      $s.win_frame$i.right.m_rp configure -state disabled
+    } else {
+      $s.win_frame$i.left.m_lp configure -state -normal
+      $s.win_frame$i.right.m_rp configure -state normal
+    }
+  }
+  update idletasks
+  
   sputs update
   if {$temp_info(window,0) == {}} {
   } else {
@@ -41564,13 +43308,13 @@ proc re_cloning_wizard_update {s} {
       $s.win_frame0.canvas0 coords sequence_right $x3 $y1
       foreach {xr1 yr1 xr2 yr2} [$s.win_frame0.canvas0 bbox sequence_right] {}
       $s.win_frame0.canvas0 itemconfigure sequence_left -fill $color0 -text $left_text
-      $s.win_frame0.canvas0 coords sequence_left [expr {4 + $xr2}] $y1
+      $s.win_frame0.canvas0 coords sequence_left [expr {4 + $xr2}] $y1   
       foreach {xl1 yl1 xl2 yl2} [$s.win_frame0.canvas0 bbox sequence_left] {}
       $s.win_frame0.canvas0 coords line_right {*}[round_curve 0 $x1 $x2 $x3 $x4 $x5 $y1 $y2 $y3 5]
       $s.win_frame0.canvas0 itemconfigure line_right -fill $color0
       $s.win_frame0.canvas0 itemconfigure line_left -state hidden
       re_cloning_wizard_draw_map_features $s.win_frame0.canvas0 0 [expr {8 + $xl2}] $x4 $y1
-
+      
       $s.win_frame1.canvasleft itemconfigure line_left -state hidden
       $s.win_frame1.canvasleft itemconfigure line_right -state hidden
     } else {
@@ -41590,7 +43334,7 @@ proc re_cloning_wizard_update {s} {
           set left_text [re_cloning_wizard_site_text 0 1 1]
         }
         $s.win_frame0.canvas0 itemconfigure sequence_left -fill $color0 -text $left_text
-        $s.win_frame0.canvas0 coords sequence_left [expr {4 + $xr2}] $y1
+        $s.win_frame0.canvas0 coords sequence_left [expr {4 + $xr2}] $y1   
         foreach {xl1 yl1 xl2 yl2} [$s.win_frame0.canvas0 bbox sequence_left] {}
         $s.win_frame0.canvas0 coords line_right {*}[round_curve 1 $x1 $x2 $x3 $x4 $x5 $y1 $y2 $y3 5]
         $s.win_frame0.canvas0 itemconfigure line_right -fill $color0
@@ -41611,7 +43355,7 @@ proc re_cloning_wizard_update {s} {
           set left_text [re_cloning_wizard_site_text 1 1 1]
         }
         $s.win_frame1.canvas0 itemconfigure sequence_left -fill $color1 -text $left_text
-        $s.win_frame1.canvas0 coords sequence_left [expr {4 + $xr2}] $y1
+        $s.win_frame1.canvas0 coords sequence_left [expr {4 + $xr2}] $y1   
         foreach {xl1 yl1 xl2 yl2} [$s.win_frame0.canvas0 bbox sequence_left] {}
         $s.win_frame1.canvas0 coords line_right {*}[round_curve 2 $x1 $x2 $x3 $x4 $x5 $y1 $y2 $y3 5]
         $s.win_frame1.canvas0 itemconfigure line_right -fill $color1
@@ -41624,7 +43368,7 @@ proc re_cloning_wizard_update {s} {
 	$s.win_frame1.canvasleft itemconfigure line_left -fill $color1 -state normal
 	$s.win_frame1.canvasleft coords line_right $x2 0 $x2 $h
 	$s.win_frame1.canvasleft itemconfigure line_right -fill $color0 -state normal
-
+	
 	$s.win_frame2.canvasleft itemconfigure line_left -state hidden
 	$s.win_frame2.canvasleft itemconfigure line_right -state hidden
       } else {
@@ -41643,7 +43387,7 @@ proc re_cloning_wizard_update {s} {
           set left_text [re_cloning_wizard_site_text 0 1 1]
         }
         $s.win_frame0.canvas0 itemconfigure sequence_left -fill $color0 -text $left_text
-        $s.win_frame0.canvas0 coords sequence_left [expr {4 + $xr2}] $y1
+        $s.win_frame0.canvas0 coords sequence_left [expr {4 + $xr2}] $y1   
         foreach {xl1 yl1 xl2 yl2} [$s.win_frame0.canvas0 bbox sequence_left] {}
         $s.win_frame0.canvas0 coords line_right {*}[round_curve 1 $x1 $x2 $x3 $x4 $x5 $y1 $y2 $y3 5]
         $s.win_frame0.canvas0 itemconfigure line_right -fill $color0
@@ -41665,7 +43409,7 @@ proc re_cloning_wizard_update {s} {
           set left_text [re_cloning_wizard_site_text 1 1 1]
         }
         $s.win_frame1.canvas0 itemconfigure sequence_left -fill $color1 -text $left_text
-        $s.win_frame1.canvas0 coords sequence_left [expr {4 + $xr2}] $y1
+        $s.win_frame1.canvas0 coords sequence_left [expr {4 + $xr2}] $y1   
         foreach {xl1 yl1 xl2 yl2} [$s.win_frame1.canvas0 bbox sequence_left] {}
         $s.win_frame1.canvas0 coords line_right {*}[round_curve 1 $x1 $x2 $x3 $x4 $x5 $y1 $y2 $y3 5]
         $s.win_frame1.canvas0 itemconfigure line_right -fill $color1
@@ -41693,7 +43437,7 @@ proc re_cloning_wizard_update {s} {
           set left_text [re_cloning_wizard_site_text 2 1 1]
         }
         $s.win_frame2.canvas0 itemconfigure sequence_left -fill $color2 -text $left_text
-        $s.win_frame2.canvas0 coords sequence_left [expr {4 + $xl2}] $y1
+        $s.win_frame2.canvas0 coords sequence_left [expr {4 + $xl2}] $y1   
         foreach {xl1 yl1 xl2 yl2} [$s.win_frame2.canvas0 bbox sequence_left] {}
         $s.win_frame2.canvas0 coords line_right {*}[round_curve 2 $x1 $x2 $x3 $x4 $x5 $y1 $y2 $y3 5]
         $s.win_frame2.canvas0 itemconfigure line_right -fill $color2
@@ -41707,7 +43451,7 @@ proc re_cloning_wizard_update {s} {
 	$s.win_frame2.canvasleft itemconfigure line_right -fill $color1 -state normal
       }
     }
-
+    
   }
   # validate
   if {$temp_info(window,0) != {}} {
@@ -41743,11 +43487,10 @@ proc re_cloning_wizard_update {s} {
     set valid 0
   }
   if {$valid} {
-    $s.okframe.ok configure -state normal
+    $s.okframe.ok configure -state normal -text "OK"
   } else {
-    $s.okframe.ok configure -state disabled
+    $s.okframe.ok configure -state disabled -text "Can't Ligate"
   }
-    sputs valid $valid
 }
 
 ############
@@ -41765,7 +43508,7 @@ proc re_cloning_wizard_draw_map_features {c i x1 x2 y} {
   set last [expr {$temp_info(right_process_top,$i) % ($len+1)}]
   set line_width 5
   set c_width [expr {$x2 - $x1}]
-  set c_scale [expr {1.0 * ($c_width) /(($last-$first) % ($len+1))}]
+  set c_scale [expr {1.0 * ($c_width) /(($last-$first-1) % ($len) +1)}]
   set maxy 0
   #$c create rectangle $x1 $y $x2 [expr {$y +6}] -outline black -fill {} -tags [list map frame]
   foreach {tag data} [get_tags2 $w.textarea $first $last $dir] {
@@ -41796,12 +43539,16 @@ proc re_cloning_wizard_site_text {i right_side revcom} {
   #toplevel .t
     #bind .t <<GelLaneDrop>> "sputs \[dict get %d canvas\] \[dict get %d band\] \[\[dict get %d canvas\] bind \[dict get %d band\] <<Link>>\] "
   if {$right_side} {
-    set w $temp_info(window,$i)
+    set w $temp_info(window,$i) 
     set top $temp_info(right_enz_top,$i)
     set bottom $temp_info(right_enz_bottom,$i)
     set enz $temp_info(right_enz_text,$i)
     if {$temp_info(right_process_text,$i) eq "Same"} {
-      set process_text $temp_info(left_process_text,$i)
+      if {[regexp {[ACGT] Overhang} $temp_info(left_process_text,$i)] && $temp_info(right_enz_top,$i) != $temp_info(right_enz_bottom,$i)} {
+        set process_text "None"
+      } else {
+        set process_text $temp_info(left_process_text,$i)
+      }
     } else {
       set process_text $temp_info(right_process_text,$i)
     }
@@ -41835,7 +43582,7 @@ proc re_cloning_wizard_site_text {i right_side revcom} {
     set temp_info(right_process_bottom,$i) $process_bottom
     set temp_info(right_process_ext,$i) $process_ext
   } else {
-    set w $temp_info(window,$i)
+    set w $temp_info(window,$i) 
     set top $temp_info(left_enz_top,$i)
     set bottom $temp_info(left_enz_bottom,$i)
     set enz $temp_info(left_enz_text,$i)
@@ -41871,7 +43618,7 @@ proc re_cloning_wizard_site_text {i right_side revcom} {
   }
   set text [textarea_get $w.textarea 1.0 end]
   append text [string range $text 0 100]
-
+    
   if {$right_side} {
     ## right side site
     set left [expr {min($top-3,$bottom-3)}]
@@ -41908,8 +43655,8 @@ proc re_cloning_wizard_site_text {i right_side revcom} {
       set temp_info(left_overhang_seq,$i) [string range $text $process_top $process_bottom-1]
       set temp_info(left_overhang_dir,$i) 5
     }
-    set temp_info(left_overhang_seq,$i) [string toupper $temp_info(left_overhang_seq,$i)]
-
+    set temp_info(left_overhang_seq,$i) [string toupper $temp_info(left_overhang_seq,$i)] 
+    
     set top_line [string range $text $process_top $right]
     set top_line "[string repeat " " [expr {$process_top-$process_bottom+[string length $process_ext]}]]$top_line"
     set bottom_line [string range $text $process_bottom $right]
@@ -42007,14 +43754,14 @@ proc re_cloning_wizard_fill_window_menu {s i m} {
 #############
 proc re_cloning_wizard_fill_process_menu {s i right m} {
   global info temp_info
-
+    
   $m delete 0 end
   set side left
   if {$right} {
     $m add radiobutton -label [mc "Same"] -variable temp_info(right_process_text,$i) -value "Same" -command "re_cloning_wizard_update $s"
     set side right
   }
-
+    
   if {$temp_info($side\_enz_top,$i) == $temp_info($side\_enz_bottom,$i)} {
     $m add radiobutton -label [mc "None"] -variable temp_info($side\_process_text,$i) -value "None" -command "re_cloning_wizard_update $s"
     $m add radiobutton -label [mc "A Overhang"] -variable temp_info($side\_process_text,$i) -value "A Overhang" -command "re_cloning_wizard_update $s"
@@ -42097,7 +43844,11 @@ proc re_cloning_wizard_generate_product {} {
     set len [string length $text]
     set dir $temp_info(revcom,$i)
     set first_enz $temp_info(left_enz_text,$i)
-    set first $temp_info(left_process_top,$i)
+    if {$dir} {
+      set first $temp_info(left_process_bottom,$i)
+    } else {
+      set first $temp_info(left_process_top,$i)
+    }
     if {$temp_info(left_process_text,$i) ne "None"} {
       set first_enz "$first_enz,$temp_info(left_process_text,$i)"
     }
@@ -42110,9 +43861,14 @@ proc re_cloning_wizard_generate_product {} {
         set first_enz "$first_enz,$temp_info(left_process_text,$i)"
       }
     }
+    if {$dir} {
+      set last [expr {$temp_info(right_process_bottom,$i) % ($len)}]
+    } else {
       set last [expr {$temp_info(right_process_top,$i) % ($len)}]
-      incr last -1
+    }
+    incr last -1
     set last_ext $temp_info(right_process_ext,$i)
+
     if {$dir} {
       append filecomment "[file rootname [wm title $w]] from $last ($last_enz) to $first ($first_enz)\n"
     } else {
@@ -42134,10 +43890,10 @@ proc re_cloning_wizard_generate_product {} {
       }
     } else {
       if {$dir} {
-        append dna  [revcom [string range $text $first end]  $first_ext
-	set new_tags [get_tags2 $w.textarea $first [string length $text]] $dir $end]
+        append dna  [revcom [string range $text $first end]]  $first_ext
+        set new_tags [get_tags2 $w.textarea $first [string length $text] $dir $end]
         set text_0 [revcom [string range $text 0 $last]]
-        set tags_0 [get_tags2 $w.textarea 0 [expr {$last +1} $dir 0]
+        set tags_0 [get_tags2 $w.textarea 0 [expr {$last +1}] $dir 0]
       } else {
 	append dna  [string range $text 0 $last] $last_ext
 	set new_tags [get_tags2 $w.textarea 0 [expr {$last+1}] $dir $end]
@@ -42146,11 +43902,11 @@ proc re_cloning_wizard_generate_product {} {
       }
     }
 
-
+	
     if {$i > 0 || $text_0 ==""} {
       set new_tags [get_tags2 $w.textarea $first [expr {$last+1}] $dir $end]
     }
-
+		
     lappend_tags tags {*}$new_tags
   }
 
@@ -42160,7 +43916,7 @@ proc re_cloning_wizard_generate_product {} {
     set end [string length $dna]
     set new_tags2 [list]
     foreach {tag data} $tags_0 {
-      set newcoords [list]
+      set newcoords [list]  
       foreach {a b} [lindex $data 0] {
 	set a [expr {$a +$end_0}]
         set b [expr {$b +$end_0}]
@@ -42171,7 +43927,7 @@ proc re_cloning_wizard_generate_product {} {
         } elseif {$b > $end} {
           lappend newcoords $a [expr {$end}]
           lappend newcoords 0 [expr {$b-$end}]
-        }
+        } 
       }
       if {$newcoords != [list]} {
         lset data 0 $newcoords
@@ -42283,7 +44039,7 @@ proc search_with_mm3 {s w dir circular} {
 ################
 ## Create features from FASTA sequences
 ################
-proc multi_search_dialog {w} {
+proc multi_search_dialog {w} { 
   global ok info dialogblock ms_select_window allow_mm_number reverse_color forward_color
 
   if {$dialogblock == 1} {return}
@@ -42296,9 +44052,9 @@ proc multi_search_dialog {w} {
   grid [frame $s.winframe] -row 0 -column 0 -sticky nswe
   grid [label $s.winframe.label -text [mc "Search Sequence:"]] -row 0 -column 0 -sticky wns
   grid [menubutton $s.winframe.win_button -text [wm title $w]] -row 0 -column 1 -sticky wns
-  menu $s.winframe.win_button.menu
+  menu $s.winframe.win_button.menu 
   foreach window [dnawindows_list 1] {
-    $s.winframe.win_button.menu add radiobutton -command "$s.winframe.win_button configure -text [wm title $window]" -label [wm title $window] -variable ms_select_window -value $window
+    $s.winframe.win_button.menu add radiobutton -command "$s.winframe.win_button configure -text [wm title $window]" -label [wm title $window] -variable ms_select_window -value $window 
   }
   set ms_select_window $w
 
@@ -42355,7 +44111,8 @@ proc multi_search_dialog_load_fasta {filename_label ok_button} {
     $ok_button configure -state disabled
     return
   }
-  if {[set count [regexp -all {>([^[:space:]\n]+)\n([ABCDGHKMNRSTVWYabcdghkmnrstvwy]+)\n+} $fastatext]] < 0} {
+
+  if {[set count [regexp -all {>([^\n]+)\n([ABCDGHKMNRSTUVWYabcdghkmnrstuvwy]+)\n+} $fastatext]] < 0} {
     tk_messageBox -message "This is not a FASTA formatted file" -type ok
     $filename_label configure -text ""
     $ok_button configure -state disabled
@@ -42382,8 +44139,7 @@ proc multi_search {w {f ""} {mm_allowed 3} {color_list {pink pink}} {s {}}} {
   if {![catch {open $f r} fileid]} {
     catch {read $fileid} fastatext
   }
-  set fasta_list [regexp -all -inline {>([^[:space:]\n]+)\n([ABCDGHKMNRSTVWYabcdghkmnrstvwy]+)\n+} $fastatext]
-
+  set fasta_list [regexp -all -inline {>([^\n]+)\n([ABCDGHKMNRSTUVWYabcdghkmnrstuvwy]+)\n+} $fastatext]
   if {[llength $fasta_list] > 0} {
     if {$s =={}} {
       set a [toplevel .multi_search]
@@ -42408,16 +44164,21 @@ proc multi_search {w {f ""} {mm_allowed 3} {color_list {pink pink}} {s {}}} {
     set time1 [clock milliseconds]
     foreach {ignore title seq} $fasta_list {
       if {[expr {$rec% $update_rate}] == 0} {
-        if {$ok == -1 || ![winfo exists $a.prog]} {break}
+        if {$ok == -1 || ![winfo exists $a.prog]} {break} 
         $a.prog configure -value $rec
         if {$found} {features_to_tree_view $w; set found 0}
         update idletasks
         set time2 [clock milliseconds]
-        set update_rate [expr {min (300, max(1, int($update_rate*500/($time2-$time1))))}]
+        if {$time2 > $time1} {
+          set update_rate [expr {min (300, max(1, int($update_rate*500/($time2-$time1))))}]
+        } else {
+          set update_rate 1
+       } 
         set time1 $time2
       }
       incr rec
       set seq [string toupper $seq]
+      regsub -all U $seq T seq
       if {[regexp {[BDHKMNRSVWY]} $seq]} {
         set degen 1
       } else {
@@ -42497,12 +44258,12 @@ proc multi_search {w {f ""} {mm_allowed 3} {color_list {pink pink}} {s {}}} {
   # sort based on 3' most mismatch, regardless of number of mismatches?
   # get pre and post texts when circular
 proc dcaps_dialog {w} {
-  global info modifier dialogblock
+  global info modifier dialogblock 
   global ok mut2_text max_mm
 
   if {$dialogblock == 1} {return}
 
-
+ 
   if {[$w.textarea tag ranges sel] != {}} {
     if {[llength [$w.textarea tag ranges sel]] > 2 || [string length [set mut_text [textarea_get $w.textarea sel.first sel.last]]] > 1} {
 #selection used here - ok
@@ -42567,7 +44328,7 @@ proc dcaps_dialog {w} {
   set title [mc "dCAPS"]
   set a [new_analysis_window $w $title list_enzymes]
   create_textframe $a 120
-
+    
   catch {$a.textframe.text insert end "[clock format [clock seconds] -format $info(clock_format)]\n"}
   $a.textframe.text insert end "[wm title $w] \n"
   $a.textframe.text insert end "$pre_text\("
@@ -42582,7 +44343,7 @@ proc dcaps_dialog {w} {
   $a.textframe.text insert end "Forward primer, wild-type cut\n"
   foreach r $reslist {
     foreach {enz offset mmlist flatpat} $r {}
-    $a.textframe.text insert end "[string repeat { } 15]$pre_text" [list] $mut_text red
+    $a.textframe.text insert end "[string repeat { } 15]$pre_text" [list] $mut_text red 
     foreach mm $mmlist {
       $a.textframe.text tag add mismatch end-[expr {$mm+3}]\char end-[expr {$mm+2}]char
     }
@@ -42604,7 +44365,7 @@ proc dcaps_dialog {w} {
   $a.textframe.text insert end "Reverse primer, wild-type cut\n"
   foreach r $reslist {
     foreach {enz offset mmlist flatpat} $r {}
-    $a.textframe.text insert end "[string repeat { } 15][revcom $post_text]" [list] [revcom $mut_text] red
+    $a.textframe.text insert end "[string repeat { } 15][revcom $post_text]" [list] [revcom $mut_text] red 
     foreach mm $mmlist {
       $a.textframe.text tag add mismatch end-[expr {$mm+3}]\char end-[expr {$mm+2}]char
     }
@@ -42626,7 +44387,7 @@ proc dcaps_dialog {w} {
   $a.textframe.text insert end "Forward primer, alternate allele cut\n"
   foreach r $reslist {
     foreach {enz offset mmlist flatpat} $r {}
-    $a.textframe.text insert end "[string repeat { } 15]$pre_text" [list] $mut2_text red
+    $a.textframe.text insert end "[string repeat { } 15]$pre_text" [list] $mut2_text red 
     foreach mm $mmlist {
       $a.textframe.text tag add mismatch end-[expr {$mm+3}]\char end-[expr {$mm+2}]char
     }
@@ -42648,7 +44409,7 @@ proc dcaps_dialog {w} {
   $a.textframe.text insert end "Reverse primer, alternate allele cut\n"
   foreach r $reslist {
     foreach {enz offset mmlist flatpat} $r {}
-    $a.textframe.text insert end "[string repeat { } 15][revcom $post_text]" [list] [revcom $mut2_text] red
+    $a.textframe.text insert end "[string repeat { } 15][revcom $post_text]" [list] [revcom $mut2_text] red 
     foreach mm $mmlist {
       $a.textframe.text tag add mismatch end-[expr {$mm+3}]\char end-[expr {$mm+2}]char
     }
@@ -42664,7 +44425,7 @@ proc dcaps_dialog {w} {
     $a.textframe.text insert end "[mc "**None**"]\n\n\n" [list]
    }
   $a.textframe.text configure -state disabled
-  focus $a.textframe.text
+  focus $a.textframe.text 
   unset mut2_text max_mm
 }
 
@@ -42680,7 +44441,7 @@ global enzymes enzinfo
   set post [string toupper $post]
   foreach enz $enzymes {
     # skip metylation requiring enzymes
-    if {$enz in [list BisI BlsI GlaI GluI KroI MalI PcsI DpnI SgeI FspEI LpnPI MspJI MteI PkrI]} {continue}
+    if {$enz in [list AbaSI AoxI BisI BlsI DpnI FspEI GlaI GluI KroI LpnPI MalI MspJI MteI PcsI PkrI SgeI]} {continue}
     set flatpat $enzinfo(flatpat,$enz)
     foreach pat [expr {$flatpat eq [revcom $flatpat]?[list $flatpat]:[list $flatpat [revcom $flatpat]]}] {
       for {set i 0} {$i < [set patlen [string length $pat]]} {incr i} {
@@ -42867,21 +44628,23 @@ proc sg_RNA_analysis {w} {
   set f2 [frame $top.scaleframe]
   grid $f2 -row 4 -column 0 -sticky nsew
   grid [label $f2.scalelabel -text "Minimum Score:"] -row 0 -column 1 -sticky NW
+  set info(sgRNA_cuttoff,$top) 0
+  grid [label $f2.scalelabel2 -textvariable info(sgRNA_cuttoff,$top)] -row 0 -column 2 -sticky NW
   if {$info(use_tile)} {
-    grid [ttk::scale $top.scaleframe.scale -from 0 -to 1 -command "sg_RNA_manage_slider $top;#" -orient horizontal -variable info(sgRNA_cuttoff,$top)] -row 0 -column 2 -sticky nwe
+    grid [ttk::scale $top.scaleframe.scale -from 0 -to 1 -command "sg_RNA_manage_slider $top;#" -orient horizontal -variable info(sgRNA_cuttoff,$top)] -row 0 -column 3 -sticky nwe
   } else {
-    grid [scale $top.scaleframe.scale -from 0 -to 1 -sliderrelief raised -showvalue 0 -resolution 0.1 -troughcolor white -background $info(bg_color) -width 10  -command ";#" -orient horizontal -variable info(sgRNA_cuttoff,$top)] -row 0 -column 2 -sticky nswe
+    grid [scale $top.scaleframe.scale -from 0 -to 1 -sliderrelief raised -showvalue 0 -resolution 0.1 -troughcolor white -background $info(bg_color) -width 10  -command ";#" -orient horizontal -variable info(sgRNA_cuttoff,$top)] -row 0 -column 3 -sticky nswe 
   }
+  grid columnconfigure $f2 3 -minsize 175
+  grid columnconfigure $f2 3 -weight 1
 
   set f3 [frame $top.refframe]
   grid $f3 -row 5 -column 0 -sticky nsew
   grid [label $top.refframe.reflabel -text "Scores from: Doench et al. Nature Biotechnology (2014) doi:10.1038/nbt.3026"] -row 1 -column 1 -sticky nw
 
 
-  set info(sgRNA_cuttoff,$top) 0
-  grid [label $f2.scalelabel2 -textvariable info(sgRNA_cuttoff,$top)] -row 0 -column 3 -sticky NW
-  grid columnconfigure $f2 3 -minsize 175
-  grid columnconfigure $f2 2 -weight 1
+
+
 
 
   wm protocol $top WM_DELETE_WINDOW "closewindow $top; unset info(sgRNA_cuttoff,$top)"
@@ -43000,7 +44763,7 @@ proc sg_RNA_manage_slider {a} {
     foreach pair [lsort -dictionary -index 1 {*}-[expr {$direction?"increasing":"decreasing"}] $l] {
         lappend o [lindex $pair 0]
     }
-    $a.tvframe.tv children {} $o
+    $a.tvframe.tv children {} $o 
   }
 
 }
@@ -43009,7 +44772,7 @@ proc sg_RNA_manage_slider {a} {
 ##
 ###########
 proc treeview_highlight_under_mouse {t x y} {
-  treeview_tag_remove $t highlight
+  treeview_tag_remove $t highlight 
   if {[set item [$t identify row $x $y]] != {} && $item ne "heading"} {
     $t item $item -tags [list {*}[$t item $item -tags] highlight]
     #$t tag add highlight $item;# can use this when 8.6 is available
@@ -43025,7 +44788,7 @@ proc treeview_tag_remove {t tag {parent {}}} {
   foreach item [$t children $parent] {
     if {[$t exists $item]} {
       if {([set i [lsearch [$t item $item -tags] $tag]] > -1)} {
-        $t item $item -tags [lreplace [$t item $item -tags] $i $i]
+        $t item $item -tags [lreplace [$t item $item -tags] $i $i]  
       }
       treeview_tag_remove $t $tag $item
     }
@@ -43036,7 +44799,7 @@ proc treeview_tag_remove {t tag {parent {}}} {
 ## multi-fragment loxP
 ################
 proc lox_recombination_window {window} {
-  global info modifier dialogblock
+  global info modifier dialogblock 
   global ok loxP_acceptor  loxP_acceptor_win loxP_donor
 
 
@@ -43050,7 +44813,7 @@ proc lox_recombination_window {window} {
   set loxP_acceptor ""
   grid [frame $a.acceptorframe -relief ridge -borderwidth 2] -row 1 -column 1 -sticky nswe
   grid [menubutton $a.acceptorframe.menubutton -textvariable loxP_acceptor_win -menu $a.acceptorframe.menubutton.menu -indicator on -relief raised] -row 1 -column 1
-  set loxP_acceptor_win [mc "Chose an Acceptor Vector"]
+  set loxP_acceptor_win [mc "Choose an Acceptor Vector"]
   menu $a.acceptorframe.menubutton.menu
   set maxwidth 25
   set loxP_acceptor ""
@@ -43073,10 +44836,10 @@ proc lox_recombination_window {window} {
     }
     if {[llength $index_list1] == 1 && [llength $index_list2] == 0} {
       $a.acceptorframe.menubutton.menu add radiobutton -label [wm title $window] -variable loxP_acceptor -value "$window,$index_list1,0" -command "fill_loxP_frame; set loxP_acceptor_win \"[wm title $window]\""
-      if {[string length [wm title $window]] > $maxwidth} {set maxwidth [string length [wm title $window]]}
+      if {[string length [wm title $window]] > $maxwidth} {set maxwidth [string length [wm title $window]]}   
     } elseif {[llength $index_list1] == 0 && [llength $index_list2] == 1} {
       $a.acceptorframe.menubutton.menu add radiobutton -label [wm title $window] -variable loxP_acceptor -value "$window,$index_list2,1" -command "fill_loxP_frame; set loxP_acceptor_win \"[wm title $window]\""
-      if {[string length [wm title $window]] > $maxwidth} {set maxwidth [string length [wm title $window]]}
+      if {[string length [wm title $window]] > $maxwidth} {set maxwidth [string length [wm title $window]]}   
     }
   }
   set loxP_acceptor ""
@@ -43120,7 +44883,7 @@ proc lox_recombination_window {window} {
     foreach loxplist2 [combinations $loxplist] {
       set dna $first_dna
       set tags $first_tags
-      set new_title $acceptor_title
+      set new_title $acceptor_title 
       foreach loxp_donor $loxplist2 {
         if {![regexp {(.+),(.+),([0-1])} $loxp_donor blank loxp_donor_win loxp_donor_ix loxp_donor_dir]} {
           continue
@@ -43176,12 +44939,12 @@ proc lox_recombination_window {window} {
       }
     }
   }
-
+ 
   unset -nocomplain ok loxP_acceptor loxP_acceptor_win loxP_donor
 }
 
 ################
-##
+## 
 ################
 proc combinations {l} {
   if {[llength $l] == 1} {
@@ -43198,7 +44961,7 @@ proc combinations {l} {
 }
 
 ################
-##
+## 
 ################
 proc fill_loxP_frame {} {
   global loxP_acceptor loxP_donor info
@@ -43242,7 +45005,7 @@ proc fill_loxP_frame {} {
 }
 
 ################
-##
+## 
 ################
 proc digest_open_windows {} {
   global info
@@ -43300,7 +45063,7 @@ proc digest_open_windows {} {
     if {($info($w,circular) == "circular")} {
       if {$templist != [list]} {
         lappend fraglist [list [expr {[lindex [lindex $templist 0] 0]+ $total_length - $lastsite}] $lastenz $lastsite [lindex [lindex $templist 0] 1] [lindex [lindex $templist 0] 0] $i [expr {round(100.0*([lindex [lindex $templist 0] 0]+ $total_length - $lastsite)/$total_length)}] $lastsitedir [lindex [lindex $templist 0] 2]]
-      } else {
+      } else {    
         lappend fraglist [list  $total_length uncut 0 "" 0 0 100 0 0]
       }
     }
@@ -43338,7 +45101,7 @@ proc initialize_win32 {} {
    #   source [file join $info(Accdir) "lib" "tls1.6.7.1"  tls.tcl]
   #    tls::initlib [file join $info(Accdir) "lib" "tls1.6.7.1"]  tls1671.dll
   #  }
-  #}
+  #} 
   #::tls::init  -tls1 1 -tls1.2 0 -tls1.1 0 -ssl3 0 -ssl2 0
   #::http::register https 443 ::tls::socket
   # try using tls_socket from TWAPI below
@@ -43370,7 +45133,7 @@ proc initialize_win32 {} {
       } else {
         sputs "Sorry, I don't recognize the browser: [file tail $info(appCmd)]"
         set info(browser) ""
-      }
+      } 
     } else {
       sputs "Sorry, no shell command registered for .html files" $appKey $err1
       set info(browser) ""
@@ -43388,7 +45151,7 @@ proc initialize_win32 {} {
     set window_icon [file join $info(Accdir) "Icons and images" "APE_icon.ico"]
     catch {wm iconbitmap . -default $window_icon}
   }
-
+  
   ##load the wmf, gdi, hdc and printer dlls
   if {[file exists [file join $info(Accdir) "lib" "printer.dll"]]} {
     if {[file exists [file join $info(Accdir) "lib" "hdc.dll"]]} {
@@ -43474,7 +45237,7 @@ proc initialize_win32 {} {
     ### hand-rolled shortcut resolver
     proc find_link_target {filename} {
       set fileid [open $filename r]
-
+ 
       if {[read $fileid 1] != "L"} {close $fileid; return ""}
       #read flags
       seek $fileid 0x14
@@ -43523,7 +45286,7 @@ proc initialize_win32 {} {
           set local_path "$local_path$c"
         }
       }
-
+ 
       if {$has_net} {
         #read net_volume_table_header
         seek $fileid [expr {$file_loc_off+$net_v_off}]
@@ -43560,7 +45323,7 @@ proc initialize_win32 {} {
         reurn [read_shortcut $filename -path]
       }
     }
-
+  
   }
 }
 
@@ -43615,11 +45378,12 @@ proc initialize_aqua {} {
   set modstring "Cmd"
 
   proc ::tk::mac::Quit {} {
-    exit_with_checks
+    ## need to do this after, so the option_q global can be set
+    after 10 exit_with_checks
   }
 
   if {!$info(use_cocoa)} {
-   proc ::tk::mac::ShowPreferences {} {configure_preferences}
+   proc ::tk::mac::ShowPreferences {} {configure_preferences}  
   } else {
     proc tkAboutDialog {} {after 200 about_dialog}
     proc ::tk::mac::ShowPreferences {} {after 200 configure_preferences}
@@ -43677,14 +45441,13 @@ if {1} {
   . configure -menu [menu .menubar]
   menu .menubar.filemenu
   .menubar add cascade -menu .menubar.filemenu -label "File"
-  .menubar.filemenu add command -label "New" -accelerator "$modstring+N"  -command "create_window" -state disabled
+  .menubar.filemenu add command -label "New" -accelerator "$modstring+N"  -command "create_window" ;#-state disabled
 
-  .menubar.filemenu add command -label "Open..." -accelerator "$modstring+O" -command "open_file_dialog" -state disabled
+  .menubar.filemenu add command -label "Open..." -accelerator "$modstring+O" -command "open_file_dialog";# -state disabled
   menu .menubar.filemenu.open_previous
   .menubar.filemenu add cascade -label [mc "Open Recent Files"] -menu .menubar.filemenu.open_previous
   .menubar.filemenu add command -label "Duplicate Selection"  -accelerator "$modstring+D"  -state disabled
   .menubar.filemenu add command -label "Duplicate All"  -accelerator "$modstring+Shift+D"  -state disabled
-
   .menubar.filemenu add command -label "Close"  -accelerator "$modstring+W" -state disabled
   .menubar.filemenu add separator
   .menubar.filemenu add command -label "Save"  -accelerator "$modstring+S" -state disabled
@@ -43766,7 +45529,7 @@ menu .menubar.features
   .menubar.features add command -label [mc "List Features"] -state disabled
   #.menubar.features add command -label [mc "Edit Features..."]  -state disabled
   .menubar.features add command -label [mc "Clear Features"] -accelerator "$modstring+Shift+K" -state disabled
-  .menubar.features add command -label [mc "Edit Feaure Color Favorites"] -state disabled
+  .menubar.features add command -label [mc "Edit Feature Color Favorites"] -state disabled
   .menubar.features add separator
   .menubar.features add command -label [mc "Edit Feature Library..."]  -state disabled
   .menubar.features add command -label [mc "New Feature in Library..."] -state disabled
@@ -43794,6 +45557,9 @@ menu .menubar.windows
 #add Help menu
 menu .menubar.help1
   .menubar add cascade -menu .menubar.help1 -label "Help"
+    .menubar.help1 add command -label [mc "Calculator..."] -accelerator "$modstring+1" -command " calc"  -state disabled
+    .menubar.help1 add command -label [mc "Molecular Reaction Calculator..."] -accelerator "$modstring+2" -command "mol_calc"  -state disabled
+    .menubar.help1 add separator
     .menubar.help1 add command -label "Standard Genetic Code" -state disabled
     .menubar.help1 add command -label "AA Info" -state disabled
 
@@ -43801,7 +45567,7 @@ menu .menubar.help1
    #define the apple menu
     #menu .menubar.apple
     #  .menubar add cascade -menu .menubar.apple
-    #  .menubar.apple add command -label [mc "About ApE"] -command "about_dialog ."
+    #  .menubar.apple add command -label [mc "About ApE"] -command "about_dialog ." 
     #  .menubar.apple add separator
       #.menubar.apple add command -label [mc "Preferences..."]  -command "configure_preferences ." -accelerator "$modstring+,"
 }
@@ -43855,7 +45621,6 @@ menu .menubar.help1
     }
     return [lindex $args 0]
   }
-
 }
 
 ################
@@ -43886,14 +45651,14 @@ proc initialize_android {} {
   ::tls::init  -tls1 0 -tls1.1 0 -tls1.2 1 -ssl2 0 -ssl3 0
   ##::http::register https 443 ::tls::socket
   ::http::register https 443 [list ::tls::socket -autoservername true]
-
+  
   package require pdf4tcl
 
   #package require Img
   #set info(display_metrics) [borg displaymetrics]
   # create file treeview style: no indicator, 60px image padding
 
-##########
+########## 
 proc ::tk::NumberEntryButton1 {w x} {
     variable ::tk::Priv
 
@@ -44071,7 +45836,7 @@ proc ::tk::dialog::color:: {args} {
 	toplevel $w -class TkColorDialog -screen $sc -bg white
         if {([tk windowingsystem] == "aqua")} {
           tk::unsupported::MacWindowStyle style $w help {}
-        } else {
+        } else { 
           wm overrideredirect $w 1
         }
 	if {[tk windowingsystem] eq "x11"} {wm attributes $w -type dialog}
@@ -44146,8 +45911,8 @@ proc ::tk::dialog::color::BuildDialog2 {w} {
 	entry $box.entry -textvariable \
 		::tk::dialog::color::[winfo name $w]($color,intensity) \
 		-width 4 -bg white  -highlightthickness 0 -relief flat
-	pack $box.label -side left -fill y -padx 2 -pady 3
-	pack $box.entry -side left -anchor n -pady 0
+	pack $box.label -side left -fill y -padx 2 -pady 3 
+	pack $box.entry -side left -anchor n -pady 0 
 	pack $box -side left -fill both
 
 	set height [expr {
@@ -44282,7 +46047,7 @@ proc post_menu_hamburger {w} {
   } else {
     raise $w.menutree
   }
-
+ 
   set menuwidth [expr {int(280 * $info(pixels_per_dp))}]
   set screenheight [winfo screenheight .]
   wm geometry $w.menutree [list $menuwidth\x$screenheight+[expr {int(5 - $menuwidth)}]+0]
@@ -44301,8 +46066,8 @@ proc hamburger_treeview_button_down {w x y} {
   set tvx $x
   set tvy $y
   set tv_i [lindex [$w.t yview] 0]
-  set tvnet 0
-  set tvmode 0
+  set tvnet 0 
+  set tvmode 0 
   set tvxg [winfo x $w]
   set tvyg [winfo y $w]
   set wx [expr {$x - [winfo rootx $w.t]}]
@@ -44384,7 +46149,7 @@ proc hamburger_treeview_button_release {w x y} {
     set return  [$w.t identify row $wx $wy]
   } elseif {$tvmode == 1} {
     if  {[expr {$tvx - $x}] > [expr {[winfo width $w] / 2}]} {
-      menu_off_screen $w
+      menu_off_screen $w 
       set return -1
     } else {
       menu_on_screen $w
@@ -44409,7 +46174,7 @@ proc menu_treeview_invoke {w item} {
     switch [$w.t set $item type] {
       cascade {
         $w.t item $item -open [expr {![$w.t item $item -open]}]
-
+     
       }
       separator {
 
@@ -44419,7 +46184,7 @@ proc menu_treeview_invoke {w item} {
         uplevel #0 [$w.t set $item value]
       }
       default {
-        #sputs invoke menu default type [$w.t set $item type]
+        #sputs invoke menu default type [$w.t set $item type] 
       }
     }
 }
@@ -44458,7 +46223,7 @@ proc menu_on_screen_y {m offset} {
 ######
 proc menu_off_screen {m} {
   set screenwidth 250
-  set destx [expr {int(5 + -.95 * $screenwidth)}]
+  set destx [expr {int(5 + -.95 * $screenwidth)}] 
   for {set menux [winfo x $m]} {$menux > $destx} {set menux [expr {max($destx,$menux -10)}]} {
     after 5
     update idletasks
@@ -44476,7 +46241,7 @@ proc menu_off_screen {m} {
 ######
 proc menu_set_bg_alpha {m} {
   #set screenwidth 250
-  #set destx [expr {int(5 + .95 * $screenwidth)}]
+  #set destx [expr {int(5 + .95 * $screenwidth)}] 
   #wm attributes .bg -alpha [expr {1.0 *($destx + [winfo x $m])/ $destx * .95}]
 }
 
@@ -44531,8 +46296,8 @@ proc menu_to_treeview {m t {item {}} {depth 0}} {
 ## add external and internal root, or just external root, possibly just external downloads and external docs root. Internal is maintained by savig the current workspace.;
 
 ### Save file options
-## 1. Save file dialog- needs a filename entry on bottom or in next dialog,
-## 2. Export file dialog: let user rename in the top window (option of copy or rename). Chose directory using this window, but without files shown, and with a "select this directory" button at the bottom or top. No new directory option.
+## 1. Save file dialog- needs a filename entry on bottom or in next dialog, 
+## 2. Export file dialog: let user rename in the top window (option of copy or rename). Choose directory using this window, but without files shown, and with a "select this directory" button at the bottom or top. No new directory option.
 ## 3. Save copy as- just save the file with the current name, or option to save a copy with a new name in the current directory
 
 proc post_file_hamburger {dir} {
@@ -44673,7 +46438,7 @@ proc textarea_insert {text index seq} {
   if {[string length $subtext] == 0} {return}
   lappend undo(undo,$w) [list textarea_insert [ix2bp $text $index] [string length $subtext]]
   $text insert $index $seq {}
-
+  
   if {([info exists info($w,textwidth)]) && ($info($w,textwidth) > 1)} {
     reline $text [expr {$info($w,textwidth)}]
   }
@@ -44689,7 +46454,7 @@ proc textarea_delete {text index1 {index2 ""}} {
   if {![winfo exists $text] || [file_lock_check [set w [winfo toplevel $text]]]} {return}
   if {[$w.textarea get $index1] == "\n"} {set index1 [$text index $index1-1c]}
   if {$index2 == ""} {set index2 [$text index $index1+1c]}
-  foreach {tag data} [get_tags $text [list $index1 $index2]] {
+  foreach {tag data} [get_tags_exact $text [list $index1 $index2]] {
     textarea_tag_remove $text $tag $index1 $index2
     if {[$text tag ranges $tag] == {} && ![regexp {foundf|foundr} $tag]} {
       textarea_tag_delete $text $tag
@@ -44760,7 +46525,7 @@ proc textarea_tag_remove {text tag index1 index2 {lockcheck 1}} {
     }
   }
 
-  foreach {first last} $result {
+  foreach {first last} $result { 
     lappend undo(undo,$w) [list textarea_tag_remove $tag [ix2bp $text $first] [ix2bp $text $last]]
     $text tag remove $tag $first $last
   }
@@ -44835,7 +46600,7 @@ proc textarea_tag_delete {text tag {lockcheck 1}} {
   lappend undo(undo,$w) [list textarea_tag_delete $tag $actionlist $clist]
   if {[regexp {f[0-9]+#} $tag]} {
     set fntag [regsub "f" $tag "fn"]
-    while {[$text tag nextrange $tag 1.0 end] != {}} {
+    while {[$text tag nextrange $fntag 1.0 end] != {}} {
       textarea_tag_remove $text $fntag {*}[$text tag nextrange $fntag 1.0 end] $lockcheck
     }
     if {[$text tag ranges $fntag] == ""} {
@@ -44916,7 +46681,7 @@ proc textarea_tag_change_group {text tag add_groups grouplist {lockcheck 1}} {
     ## add groups
     foreach group $grouplist {
       if {[set index [lsearch -exact $groups $group]] == -1} {
-        set groups [concat $groups $group]
+        set groups [concat $groups $group] 
         lappend actual_grouplist $group
       }
     }
@@ -44924,7 +46689,7 @@ proc textarea_tag_change_group {text tag add_groups grouplist {lockcheck 1}} {
     ## remove groups
     foreach group $grouplist {
       if {[set index [lsearch -exact $groups $group]] > -1} {
-        set groups [lreplace $groups $index $index]
+        set groups [lreplace $groups $index $index] 
         lappend actual_grouplist $group
       }
     }
@@ -44996,7 +46761,7 @@ global undo redo info toolbar_images
 # lappend undo(undo,$w) [list textarea_insert [ix2bp $text $index] [string length $subtext]]
 # lappend undo(undo,$w) [list textarea_delete [regsub -all \n [$text get $index1 $index2] ""] [ix2bp $text $index1]]
 # lappend undo(undo,$w) [list textarea_tag_add $tag  [ix2bp $text $index1] [ix2bp $text $index2]]
-# lappend undo(undo,$w) [list textarea_tag_create $tag
+# lappend undo(undo,$w) [list textarea_tag_create $tag 
 # lappend undo(undo,$w) [list textarea_tag_remove $tag [ix2bp $text $index1] [ix2bp $text $index2]]
 # lappend undo(undo,$w) [list textarea_tag_configure $tag $args]
 # lappend undo(undo,$w) [list textarea_tag_bind $tag $action $actionlist]
@@ -45007,7 +46772,7 @@ global undo redo info toolbar_images
 # lappend undo(undo,$w) [list textarea_tag_hide $tag]
 # lappend undo(undo,$w) [list set $variable $value]
 # lappend undo(undo,$w) [list unlink_analysis_window $w [unlink_analysis_window $w]]
-
+  
 # shift undo actions to the redo list.
   if {$direction} {
     set stack1 undo
@@ -45273,7 +47038,7 @@ proc send_data {type data} {
 ## convert a bp integer to a textarea index
 ############
 proc bp2ix {t base_position} {
-    if {$base_position <= 0} {
+    if {$base_position <= 0 || ![winfo exists $t]} {
       return 1.0
     }
     set width [lindex [split [$t index 1.end] .] 1]
@@ -45322,6 +47087,15 @@ proc use_tile {} {
       set info(use_tile) 1
     }
   }
+  
+  if {[tk windowingsystem] == "aqua"} {
+  #  ttk::style theme create ape_green -parent aqua
+  } elseif {[tk windowingsystem] eq "win32"} {
+  # ttk::style theme create ape_green -parent winnative
+  } else {
+    #ttk::style theme create ape_green -parent alt
+  }
+ # ttk::style theme use ape_green
 
   if {$info(use_tile)} {
     ###use tile scale widgets (only used in abi window for now)
@@ -45390,7 +47164,7 @@ proc use_tile {} {
                  #sputs $name \$arg \$value
                 } else {
                  #sputs **reject** $name \$arg \$value
-                }
+                } 
               }
               #sputs * $name configure \$new_args
                tk_$name configure {*}\$new_args
@@ -45400,7 +47174,7 @@ proc use_tile {} {
             uplevel #0 tk_$name invoke
           } else {
             uplevel #0 tk_$name \$command \$args
-          }
+          } 
         "
         return $name
       }
@@ -45476,7 +47250,7 @@ proc use_tile {} {
                  #sputs $name \$arg \$value
                 } else {
                  #sputs **reject** $name \$arg \$value
-                }
+                } 
               }
               #sputs * $name configure \$new_args
                tk_$name configure {*}\$new_args
@@ -45488,7 +47262,7 @@ proc use_tile {} {
           } else {
             #sputs $name \$command \$args
             uplevel #0 tk_$name \$command \$args
-          }
+          } 
         "
         return $name
       }
@@ -45529,7 +47303,7 @@ proc use_tile {} {
                  #sputs $name \$arg \$value
                 } else {
                  #sputs **reject** $name \$arg \$value
-                }
+                } 
               }
               #sputs * $name configure \$new_args
                tk_$name configure {*}\$new_args
@@ -45541,11 +47315,11 @@ proc use_tile {} {
           } else {
             #sputs $name \$command \$args
             uplevel #0 tk_$name \$command \$args
-          }
+          } 
         "
         return $name
       }
-
+      
       ###use tile checkbutton widgets
       ###
       rename checkbutton tk_checkbutton
@@ -45580,7 +47354,7 @@ proc use_tile {} {
                  #sputs $name \$arg \$value
                 } else {
                  #sputs **reject** $name \$arg \$value
-                }
+                } 
               }
               #sputs * $name configure \$new_args
                tk_$name configure {*}\$new_args
@@ -45590,7 +47364,7 @@ proc use_tile {} {
             uplevel #0 tk_$name invoke
           } else {
             uplevel #0 tk_$name \$command \$args
-          }
+          } 
         "
         return $name
       }
@@ -45628,7 +47402,7 @@ proc use_tile {} {
                  #sputs $name \$arg \$value
                 } else {
                  #sputs **reject** $name \$arg \$value
-                }
+                } 
               }
               #sputs * $name configure \$new_args
                tk_$name configure {*}\$new_args
@@ -45638,7 +47412,7 @@ proc use_tile {} {
             uplevel #0 tk_$name invoke
           } else {
             uplevel #0 tk_$name \$command \$args
-          }
+          } 
         "
         return $name
       }
@@ -45663,7 +47437,7 @@ proc file_typer {{on_extensions {}} {off_extensions {}} {clear_type 0}} {
       set classpath "HKEY_LOCAL_MACHINE\\Software\\Classes\\ApE.DNA.file"
       if {![catch {registry set $classpath {} "ApE DNA File" sz}]} {
         registry set "$classpath\\DefaultIcon" {} "[file nativename [file join $info(Accdir) "Icons and images" "APE_icon.ico"]],0" sz
-        if {(![catch {package require starkit}]) && ($::starkit::mode == "starpack")} {
+        if {(![catch {package require starkit}]) && [info exists ::starkit::mode] && ($::starkit::mode == "starpack")} {
           registry set "$classpath\\Shell\\open\\command" {} "\"[file nativename [info nameofexecutable]]\" \"%1\"" sz
         } else {
           registry set "$classpath\\Shell\\open\\command" {} "\"[file nativename [info nameofexecutable]]\" \"[file nativename $argv0]\" \"%1\"" sz
@@ -45717,7 +47491,7 @@ proc get_registered_types {{file_descriptor ApE.DNA.file}} {
       if {[set descript [registry get "$hive\\Software\\Classes\\$extension" {}]] == $file_descriptor} {
         lappend r $extension
       } else {
-        lappend a $extension
+        lappend a $extension 
         if {![catch {set temp [registry get "$hive\\Software\\Classes\\$descript" {}]}]} {
           lappend b $temp
         } else {
@@ -45749,7 +47523,7 @@ proc update_windows_menu {} {
       if {[tk windowingsystem] == "aqua"} {
         $window.menubar.windows add command -label [mc "Minimize"] -command "catch {aqua_minimize $window}" -accelerator "$modstring+M"
         if {( $window == "")} {
-          $window.menubar.windows entryconfigure 0 -state disabled
+          $window.menubar.windows entryconfigure 0 -state disabled 
         }
         $window.menubar.windows add separator
         $window.menubar.windows add command -label [mc "Bring All to Front"] -command "catch {foreach wx \[wm stackorder .\] {raise \$wx}; unset -nocomplain wx}"
@@ -45768,9 +47542,9 @@ proc update_windows_menu {} {
           $windowelement.menubar.tools add command -label "Highlight PATC Features" -command "patc_make_features $windowelement"
         }
         if {($windowelement != $window)} {
-          $window.menubar.windows add command -label "[wm title $windowelement]" -command "wm withdraw $windowelement; wm deiconify $windowelement; raise $windowelement; focus $windowelement.textarea";# -compound left -image $toolbar_images(dna_win)
+          $window.menubar.windows add command -label "[wm title $windowelement]" -command "wm withdraw $windowelement; wm deiconify $windowelement; raise $windowelement; focus $windowelement.textarea";# -compound left -image $toolbar_images(dna_win)  
         } else {
-          $window.menubar.windows add checkbutton -variable global_true -label [wm title $windowelement] -command "set global_true 1;wm withdraw $windowelement;wm deiconify $windowelement; event generate $windowelement <<TraverseIn>>; focus $windowelement.textarea";# -compound left -image $toolbar_images(dna_win)
+          $window.menubar.windows add checkbutton -variable global_true -label [wm title $windowelement] -command "set global_true 1;wm withdraw $windowelement;wm deiconify $windowelement; event generate $windowelement <<TraverseIn>>; focus $windowelement.textarea";# -compound left -image $toolbar_images(dna_win)  
         }
         ##add the analysis children of the window
         set analysiswindows [regexp -all -inline "$windowelement\_analysis\[0-9\]+" [winfo children .]]
@@ -45792,7 +47566,7 @@ proc update_windows_menu {} {
         if {($abwindow != $window)} {
           $window.menubar.windows add command -label "[wm title $abwindow]" -command "wm withdraw $abwindow; wm deiconify $abwindow; raise $abwindow; focus $abwindow";#-compound left -image $toolbar_images(abi_win)
         }  else {
-          $window.menubar.windows add checkbutton -variable global_true -label [wm title $abwindow] -command "set global_true 1;wm withdraw $abwindow; wm deiconify $abwindow; raise $abwindow; focus $abwindow.c";# -compound left -image $toolbar_images(abi_win)
+          $window.menubar.windows add checkbutton -variable global_true -label [wm title $abwindow] -command "set global_true 1;wm withdraw $abwindow; wm deiconify $abwindow; raise $abwindow; focus $abwindow.c";# -compound left -image $toolbar_images(abi_win)  
         }
         ##add the analysis children of the window
         set analysiswindows [regexp -all -inline "$abwindow\_analysis\[0-9\]+" [winfo children .]]
@@ -45804,7 +47578,7 @@ proc update_windows_menu {} {
           }
         }
       }
-
+      
       ###add orphaned analysis windows
       set ping 0
       set awindows [regexp -all -inline {([^[:space:]]+)_analysis[0-9]+} [winfo children .]]
@@ -45875,7 +47649,7 @@ proc abiwindows_list {} {
 ## maintain the windows menu on Android
 ################
 proc android_update_windows_menu {} {
-  global info
+  global info 
 
   set window_count 0
   foreach window [winfo children .] {
@@ -45900,7 +47674,7 @@ proc android_update_windows_menu {} {
             } else {
               $window.windowsmenu insert 0 command -label "[wm title $awindow]" -command " raise $awindow; focus $awindow; event generate $awindow <Button-1> "
             }
-          }
+          } 
         }
       }
 
@@ -45912,7 +47686,7 @@ proc android_update_windows_menu {} {
       foreach abwindow $abiwindows {
         if {($abwindow != $window)} {
           $window.windowsmenu add command -label "[wm title $abwindow]" -command "raise $abwindow; focus $abwindow"
-        }
+        } 
         ##add the analysis children of the window
         set analysiswindows [regexp -all -inline "$abwindow\_analysis\[0-9\]+" [winfo children .]]
         foreach awindow $analysiswindows {
@@ -45925,7 +47699,7 @@ proc android_update_windows_menu {} {
           }
         }
       }
-
+      
       ###add orphaned analysis windows
       set ping 0
       set awindows [regexp -all -inline {([^[:space:]]+)_analysis[0-9]+} [winfo children .]]
@@ -45955,8 +47729,8 @@ proc remove_menu_accelerators {m} {
     $m entryconfigure $i -accelerator {}
     if {[$m type $i] == "cascade"} {
       remove_menu_accelerators [$m entrycget $i -menu]
-    }
-  }
+    } 
+  } 
 }
 
 ################
@@ -45966,15 +47740,15 @@ proc android_main_menu {w} {
   global info
   set bugdelay 0
   $w.menubar delete 0 end
-
+  
   #define file menu
   $w.menubar.filemenu  delete 0 end
-  $w.menubar add cascade -menu $w.menubar.filemenu -label [mc "File"]
+  $w.menubar add cascade -menu $w.menubar.filemenu -label [mc "File"] 
   $w.menubar.filemenu add command -label [mc "New"] -command "create_window"
   $w.menubar.filemenu add command -label [mc "Open..."] -command "open_file_dialog"
-  #menu $w.menubar.filemenu.open_previous
+  #menu $w.menubar.filemenu.open_previous 
   $w.menubar.filemenu add cascade -label [mc "Open Recent Files"] -menu $w.menubar.filemenu.open_previous
-  $w.menubar.filemenu add command -label [mc "Duplicate Selection"]    -command "duplicate_window $w selection"
+  $w.menubar.filemenu add command -label [mc "Duplicate Selection"]    -command "duplicate_window $w selection" 
   $w.menubar.filemenu add command -label [mc "Duplicate Full Sequence"]   -command "duplicate_window $w all"
   $w.menubar.filemenu add command -label [mc "Close"]  -command "closewindow $w"
   $w.menubar.filemenu add separator
@@ -45982,11 +47756,11 @@ proc android_main_menu {w} {
   $w.menubar.filemenu add command -label [mc "Save As..."]  -command "save_file $w Save_as"
   $w.menubar.filemenu add separator
 
-
+  
   ## dummy edit menu for the menu update procedures- this is not displayed
   $w.menubar.edit  delete 0 end
-  $w.menubar.edit  add command -label [mc "Undo"]
-  $w.menubar.edit  add command -label [mc "Redo"]
+  $w.menubar.edit  add command -label [mc "Undo"] 
+  $w.menubar.edit  add command -label [mc "Redo"] 
   $w.menubar.edit  add separator
   $w.menubar.edit  add command -label  [mc "Set Origin"]
   $w.menubar.edit  add command -label  [mc "Linearize @ insert site"]
@@ -46014,7 +47788,7 @@ $w.menubar.enzymes add command -label [mc "Digestion Dialog..."]  -command "afte
   $w.menubar.enzymes add command -label [mc "Add Diagnostic Site"]  -command "after $bugdelay {add_daignostic_site_dialog $w}"
   $w.menubar.enzymes add separator
   $w.menubar.enzymes add command -label [mc "Text Map..."]  -command "after $bugdelay enz_text_map $w "
-
+  
   #add ORFs menu
   $w.menubar.orf  delete 0 end
   $w.menubar add cascade -menu $w.menubar.orf -label [mc "ORFs"]
@@ -46032,30 +47806,41 @@ $w.menubar.enzymes add command -label [mc "Digestion Dialog..."]  -command "afte
     $w.menubar.tools add command -label [mc "Align Sequences..."]  -command "after $bugdelay align_dialog2 $w"
     $w.menubar.tools add command -label [mc "Align Two Sequences..."] -command "after $bugdelay align_dialog $w"
     $w.menubar.tools add separator
-    $w.menubar.tools add command -label [mc "Recombination Tool..."]  -command "after $bugdelay recombination_window $w"
+    $w.menubar.tools add command -label [mc "Recombination Assembler Tool..."]  -command "after $bugdelay recombination_window $w"
     $w.menubar.tools add command -label [mc "Recombination Reaction Editor..."] -command "after $bugdelay recomb_dialog $w"
+    $w.menubar.tools add separator
+    #$w.menubar.tools add command -label [mc "Gibson Reaction"] -command "after $bugdelay gibson_dialog $w"
+    $w.menubar.tools add command -label [mc "Gibson Designer"] -command "after $bugdelay gibson_wizard_dialog $w"
+    $w.menubar.tools add separator
+    $w.menubar.tools add command -label [mc "PCR Reaction"] -command "after $bugdelay pcr_dialog $w"
+    $w.menubar.tools add separator
+    $w.menubar.tools add command -label [mc "Golden Gate Designer"] -command "after $bugdelay gg_wizard_dialog $w"
+    $w.menubar.tools add command -label [mc "Golden Gate Assembler"] -command "after $bugdelay golden_gate_dialog $w"
+    #$w.menubar.tools add command -label [mc "Reverse Golden Gate Reaction"] -command "after $bugdelay reverse_golden_gate_dialog $w"
+    $w.menubar.tools add separator
+    $w.menubar.tools add command -label [mc "dCAPS calculator"] -command "after $bugdelay dcaps_dialog $w"
     $w.menubar.tools add separator
     $w.menubar.tools add command -label [mc "BLAST Sequences At NCBI..."]  -command "after $bugdelay NCBI_Blast $w"
     $w.menubar.tools add command -label [mc "Download sequences From NCBI..."] -command "after $bugdelay entrez_dialog $w"
     $w.menubar.tools add separator
-    $w.menubar.tools add command -label [mc "Calculator..."]  -command "after $bugdelay calc"
+    $w.menubar.tools add command -label [mc "Calculator..."]  -command "after $bugdelay calc" 
     $w.menubar.tools add command -label [mc "Palette Generator"] -command "after $bugdelay palette_test $w"
     $w.menubar.tools add separator
     # $w.menubar.tools add command -label [mc "Make Features From FASTA search file..."] -command "multi_search_dialog $w"
     # $w.menubar.tools add separator
-    $w.menubar.tools add command -label [mc "sgRNA Analysis"] -command "after $bugdelay sg_RNA_analysis $w"
+    $w.menubar.tools add command -label [mc "sgRNA Analysis"] -command "after $bugdelay sg_RNA_analysis $w" 
     $w.menubar.tools add separator
     $w.menubar.tools add command -label [mc "Insert Repeat Sequence..."] -command "after $bugdelay insert_repeat $w"
     $w.menubar.tools add separator
-    $w.menubar.tools add command -label [mc "Multi-Cre Recombination..."] -command "after $bugdelay lox_recombination_window $w"
+    $w.menubar.tools add command -label [mc "Multi-Cre Recombination..."] -command "after $bugdelay lox_recombination_window $w" 
     $w.menubar.tools add separator
-    $w.menubar.tools add command -label [mc "Digest All Open Windows"] -command "after $bugdelay digest_open_windows"
+    $w.menubar.tools add command -label [mc "Digest All Open Windows"] -command "after $bugdelay digest_open_windows" 
     $w.menubar.tools add separator
     #$w.menubar.tools add command -label [mc "Gibson Reaction"] -command "after $bugdelay gibson_dialog $w"
-    $w.menubar.tools add command -label [mc "Gibson Assembly Wizard"] -command "after $bugdelay gibson_wizard_dialog $w"
+    $w.menubar.tools add command -label [mc "Gibson Designer"] -command "after $bugdelay gibson_wizard_dialog $w"
     $w.menubar.tools add separator
-    $w.menubar.tools add command -label [mc "Golden Gate Assembly Wizard"] -command "after $bugdelay gg_wizard_dialog $w"
-    $w.menubar.tools add command -label [mc "Golden Gate Reaction"] -command "after $bugdelay golden_gate_dialog $w"
+    $w.menubar.tools add command -label [mc "Golden Gate Designer"] -command "after $bugdelay gg_wizard_dialog $w"
+    $w.menubar.tools add command -label [mc "Golden Gate Assember"] -command "after $bugdelay golden_gate_dialog $w"
     #$w.menubar.tools add command -label [mc "Reverse Golden Gate Reaction"] -command "after $bugdelay reverse_golden_gate_dialog $w"
     $w.menubar.tools add separator
     $w.menubar.tools add command -label [mc "dCAPS calculator"] -command "after $bugdelay dcaps_dialog $w"
@@ -46064,7 +47849,7 @@ $w.menubar.enzymes add command -label [mc "Digestion Dialog..."]  -command "afte
     $w.menubar add command -label [mc "AA Info"] -command "aa_info_dialog $w"
 
     $w.menubar add command -label [mc "Console"] -command "set ::w $w; console show;console eval {raise . }"
-    $w.menubar add command -label [mc "Preferences..."]  -command "configure_preferences $w"
+    $w.menubar add command -label [mc "Preferences..."]  -command "configure_preferences $w" 
     $w.menubar add command -label [mc "About ApE..."] -command "about_dialog $w"
 
   #menu $w.windowsmenu
@@ -46075,7 +47860,7 @@ $w.menubar.enzymes add command -label [mc "Digestion Dialog..."]  -command "afte
 
     #define overflow menu
     menu  $w.overflow
-
+  
   menu $w.overflow.copy_special
   $w.overflow  add cascade -menu $w.overflow.copy_special -label [mc "Copy Special"]
     $w.overflow.copy_special add command -label [mc "Copy All as Genbank"] -command "clipboard clear;clipboard append -displayof $w \[genbank_text $w\]"
@@ -46115,7 +47900,7 @@ $w.menubar.enzymes add command -label [mc "Digestion Dialog..."]  -command "afte
 ################
 ## main menu items: File: Open.., New (How to save and name?), Close, Save, Dup, Dup Full		Enzymes: Selector, Map, Map+U, Digest, Digest with all?, Mutiple Digest, List, Quick List?, Silent Sites, Text map		ORF: Translate, ORF Map		Features:  List, Open Library	Tools: All		Show aa		Show codons		Preferences		About
 
-# Overflow: Copy Special, Select all?, Set Origin, Enz Highlight, Clear Enz Highlight, New Feature, Clear features, Anotate from Library,
+# Overflow: Copy Special, Select all?, Set Origin, Enz Highlight, Clear Enz Highlight, New Feature, Clear features, Anotate from Library, 
 # Set selction translate always on
 # Find tab: clear highlight, features from higlight
 
@@ -46126,7 +47911,7 @@ $w.menubar.enzymes add command -label [mc "Digestion Dialog..."]  -command "afte
 proc android_action_bar {w {back 0}} {
   global toolbar_images
     frame $w.toolbar -borderwidth 0 -height 400 -relief flat
-
+    
     # back arrow
      if {$back} {
        grid [label $w.toolbar.back -text "\u2190" -font {Roboto 24} -width 2] -row 0 -column 0 -sticky nsw
@@ -46135,7 +47920,7 @@ proc android_action_bar {w {back 0}} {
        }
        bind $w.toolbar.back <<FingerUp>> "event generate $w <<Cancel>>"
      }
-
+ 
     # hamburger
      grid [label $w.toolbar.hamburger -text "\u2261" -font {Roboto 24} -width 2] -row 0 -column 1 -sticky nsw
      if {[tk windowingsystem] == "aqua"} {
@@ -46155,8 +47940,8 @@ proc android_action_bar {w {back 0}} {
     if {[winfo exists $w.windowsmenu]} {
       #grid [button $w.toolbar.window_menu_post -command "$w.windowsmenu post 0 0"] -row 0 -column 4 -sticky nse
       grid [frame $w.toolbar.window_menu_post -borderwidth 0] -row 0 -column 4 -sticky nswe
-      grid [label $w.toolbar.window_menu_post.win_count -textvariable info(window_count)  -font "helvetica 8" -relief solid -borderwidth 4 -padx 10] -row 0 -column 0
-      # grid [ttk::menubutton $w.toolbar.window_menu_post.win_count -textvariable info(window_count) -style Box.NoIndicator.TMenubutton -menu $w.toolbar.window_menu_post.win_count.menu] -row 0 -column 0
+      grid [label $w.toolbar.window_menu_post.win_count -textvariable info(window_count)  -font "helvetica 8" -relief solid -borderwidth 4 -padx 10] -row 0 -column 0 
+      # grid [ttk::menubutton $w.toolbar.window_menu_post.win_count -textvariable info(window_count) -style Box.NoIndicator.TMenubutton -menu $w.toolbar.window_menu_post.win_count.menu] -row 0 -column 0 
       # $w.windowsmenu clone $w.toolbar.window_menu_post.win_count.menu
       grid columnconfigure $w.toolbar.window_menu_post 0 -weight 1
       grid rowconfigure $w.toolbar.window_menu_post 0 -weight 1
@@ -46177,7 +47962,7 @@ proc android_action_bar {w {back 0}} {
       grid [frame $w.toolbar.overflow_menu_post] -row 0 -column 5 -sticky nswe
       #grid [ttk::menubutton $w.toolbar.overflow_menu_post.menubutton -image $toolbar_images(more_vert,4x) -style NoIndicator.TMenubutton -menu $w.toolbar.overflow_menu_post.menubutton.menu] -row 0 -column 0
       #$w.menubar clone $w.toolbar.overflow_menu_post.menubutton.menu
-      grid [label $w.toolbar.overflow_menu_post.icon -image $toolbar_images(more_vert,4x) -padx 10] -row 0 -column 0
+      grid [label $w.toolbar.overflow_menu_post.icon -image $toolbar_images(more_vert,4x) -padx 10] -row 0 -column 0 
       grid columnconfigure $w.toolbar.overflow_menu_post 0 -weight 1
       grid rowconfigure $w.toolbar.overflow_menu_post 0 -weight 1
       #bind $w.toolbar.overflow_menu_post <Any-Enter> "$w.overflow post \[expr {\[winfo screenwidth .\] - \[winfo reqwidth $w.menubar\]}\] 100"
@@ -46209,7 +47994,7 @@ proc DNA_keyboard {w} {
 
   set window_width [winfo width $w]
   bind $w <<KeyboardInfo>> "if {\[dict get \[borg keyboardinfo\] hidden\] != 1} {DNA_keyboard_destroy $w}"
-  grid [frame $w.dna_keyboard -width $window_width ] -row 9 -column 0 -columnspan 3 -sticky nwe  -padx 5
+  grid [frame $w.dna_keyboard -width $window_width ] -row 9 -column 0 -columnspan 3 -sticky nwe  -padx 5 
 
   #set key_list [list {{left \u2190 <Left> sel_left \u2347 <Shift-Left>} 1 1}  {{up \u2191 <Up> sel_up \u2350 <Shift-Up>} 1 2} {{a a <a> a_up A <A> star * <asterisk> star_up * <asterisk> b b <b> b_up B <B> } 1 3} {{c c  <c> c_up C <C> n n <n> n_up N <N> d d <d> d_up D <D>} 1 4} {{g g <g> g_up G <G> k k <k> k_up K <K> h h <h> h_up H <H>} 1 5}  {{t t <t> t_up T <T> m m <m> m_up M <M> v v <v> v_up V <V>} 1 6}  {{down \u2193 <Down> sel_down \u2357 <Shift-Down>} 2 1}  {{right \u2192 <Right> sel_right \u2348 <Shift-Right>} 2 2}  {{degen \u21F3 <Shift-Left>} 2 3}  {{bksp \u232B <BackSpace> del \u2326 <Delete>} 2 4}  {{shift \u21EA <Shift-Left>} 2 5} {{dism \u25BD <Shift-Left>} 2 6} ]
 
@@ -46217,7 +48002,7 @@ proc DNA_keyboard {w} {
 #  set key_list [list {{left \u2190 <Left> sel_left \u2347 <Shift-Left>} 1 1}  {{up \u2191 <Up> sel_up \u2350 <Shift-Up>} 1 2}  {{c c  <c> c_up C <C>  d d <d> d_up D <D>} 1 4} {{g g <g> g_up G <G> h h <h> h_up H <H>} 1 5}  {{t t <t> t_up T <T>  v v <v> v_up V <V>} 1 6}  {{down \u2193 <Down> sel_down \u2357 <Shift-Down>} 2 1}  {{right \u2192 <Right> sel_right \u2348 <Shift-Right>} 2 2}  {{degen \u21F3 <Shift-Left>} 2 3}  {{bksp \u232B <BackSpace> del \u2326 <Delete>} 2 4}  {{shift \u21EA <Shift-Left>} 2 5} {{dism \u25BD <Shift-Left>} 2 6} ]
 
 
-## 2 row x 9 col
+## 2 row x 9 col 
 set key_list [list {{shift \u21EA <Shift-Left>} 1 1} {{left \u2190 <Left> sel_left \u2347 <Shift-Left>} 1 2}  {{up \u2191 <Up> sel_up \u2350 <Shift-Up>} 1 3} {{n n <n> n_up N <N> k k <k> k_up K <K>  m m <m> m_up M <M>} 1 4} {{a a <a> a_up A <A>  w w <w> w_up W <W>  b b <b> b_up B <B> } 1 5} {{c c  <c> c_up C <C> s s <s> s_up S <S> d d <d> d_up D <D>} 1 6} {{g g <g> g_up G <G> r r <r> r_up R <R> h h <h> h_up H <H>} 1 7}  {{t t <t> t_up T <T> y y <y> y_up Y <Y> v v <v> v_up V <V>} 1 8} {{degen \u2026 <Shift-Left>} 1 9}   {{dism \u25BD <Shift-Left>} 2 1}  {{down \u2193 <Down> sel_down \u2357 <Shift-Down>} 2 2}  {{right \u2192 <Right> sel_right \u2348 <Shift-Right>} 2 3}  {{undo \u24E9 <Control-z> redo \u24CF <Control-Shift-z>} 2 4} {{cut \u24E7 <Control-x> cut_rc \u24CD <Control-Shift-x>} 2 5} {{copy \u24D2 <Control-c> copy_rc \u24B8 <Control-Shift-c>} 2 6} {{paste \u24E5 <Control-v> paste_rc \u24CB <Control-Shift-v>} 2 7} {{rc \u21BB <Control-slash> up_lower \u21F3 <Control-equal> to_up \u21D1 <Control-Shift-equal> to_lower \u21D3 <Control-minus>} 2 8} {{bksp \u232B <BackSpace> del \u2326 <Delete>} 2 9}  ]
 
   foreach key $key_list {
@@ -46400,7 +48185,9 @@ proc about_dialog {{w {}}} {
     wm geometry .about_dialog "+[expr (($winx<0)?0:$winx)+3]+[expr (($winy<0)?0:$winy)+50]"
   }
   if {[tk windowingsystem] != "aqua"} {
-    wm transient .about_dialog $w
+    if {$w ne "."} {
+      wm transient .about_dialog $w
+    }
   } else {
     ::tk::unsupported::MacWindowStyle style .about_dialog document {closeBox}
   }
@@ -46483,7 +48270,7 @@ proc about_dialog {{w {}}} {
 
   append text  "Tcl/Tk © Regents of the University of California, Sun Microsystems, Inc.,Scriptics Corporation, ActiveState Corporation and other parties.\n"
   set textwidth [font measure labelfont "Tcl/Tk Aqua port by Jim Ingham & Ian Reid © 2001-2002 Apple Computer."]
-  append text   "IncrTcl © Cadence Design Systems, Inc., and other parties.\n"
+  append text   "IncrTcl © Cadence Design Systems, Inc., and other parties.\n" 
   append text   "TclVFS © Vince Darley, and other parties.\n"
   append text   "Zlib © 1995-2003 Jean-loup Gailly and Mark Adler\n"
   append text   "Metakit © 1996-2004 Jean-Claude Wippler.\n"
@@ -46536,7 +48323,7 @@ proc about_dialog {{w {}}} {
       .about_dialog.t configure -cursor arrow
     }
     .about_dialog.t bind d_mouseover <Any-Button> {
-      open_url {http://www.biology.utah.edu/jorgensen/wayned/ape/Donations.html}
+      open_url {http://jorgensen.biology.utah.edu/wayned/ape/Donations.html}
     }
   } else {
     .about_dialog.t create text 250 $y -text "This user is a generous suporter of ApE- Thank you." -anchor n -font boldlabelfont -justify center -fill blue -tag {donate_text d_mouseover}
@@ -46586,12 +48373,14 @@ proc genetic_code_dialog {w} {
     wm deiconify .gen_code
     raise .gen_code
   } else {
-    toplevel .gen_code  -bg white
+    toplevel .gen_code  -bg white 
 
     wm title .gen_code [mc "Standard Genetic Code..."]
     wm protocol .gen_code WM_DELETE_WINDOW ".gen_code.f3.ok invoke"
     regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $w] wgeom winx winy
     wm geometry .gen_code "+[expr (($winx<0)?0:$winx)+3]+[expr (($winy<0)?0:$winy)+50]"
+
+    add_help_menubar .gen_code
 
     grid [text .gen_code.t -bg white -wrap none -width 55 -height 25 -font dnafont -setgrid 1 -highlightthickness 0] -row 1 -column 0  -sticky nwe
     grid columnconfigure .gen_code 0 -weight 1
@@ -46686,13 +48475,14 @@ proc aa_info_dialog {w} {
         }
       }
     }
-    toplevel .aa_data
+    toplevel .aa_data 
 
     wm title .aa_data [mc "Amino Acids Data..."]
     wm protocol .aa_data WM_DELETE_WINDOW ".aa_data.f3.ok invoke"
     regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $w] wgeom winx winy
     wm geometry .aa_data "+[expr (($winx<0)?0:$winx)+3]+[expr (($winy<0)?0:$winy)+50]"
 
+    add_help_menubar .aa_data
     grid [canvas .aa_data.c -bg wheat -bd 0 -highlightthickness 0 -width 200 -height 300 -yscrollcommand ".aa_data.ys set" ] -row 1 -column 0  -sticky nswe
     grid [scrollbar .aa_data.ys -command ".aa_data.c yview"] -row 1 -column 1 -rowspan 1 -sticky nsw
 
@@ -46744,7 +48534,7 @@ proc aa_info_dialog {w} {
 }
 
 #################
-## initialize special bindings
+## initialize special bindings 
 #################
 proc setup_special_bindings {} {
   global modifier modstring info tcl_platform modifier2 modstring2
@@ -46914,7 +48704,7 @@ proc android_handle_intent {args} {
 }
 
 #################
-## Hndle pinch zooms in Android
+## Hndle pinch zooms in Android 
 ###############
 proc android_pinch_seq_font {x state t} {
   global info
@@ -46935,7 +48725,7 @@ proc android_pinch_seq_font {x state t} {
 }
 
 #################
-## Hndle pinch zooms in Android
+## Hndle pinch zooms in Android 
 ###############
 proc android_pinch_text_analysis_font {x state t} {
   global info
@@ -46957,7 +48747,7 @@ proc android_pinch_text_analysis_font {x state t} {
 }
 
 #################
-## Hndle pinch zooms in Android
+## Hndle pinch zooms in Android 
 ###############
 proc android_pinch_circular_map_scale {dist state c} {
   global info
@@ -46983,7 +48773,7 @@ sputs circular pinch $c $dist $state
  }
 
 #################
-## Hndle pinch zooms in Android
+## Hndle pinch zooms in Android 
 ###############
 proc android_pinch_linear_map_scale {dist state c} {
   global info
@@ -47086,7 +48876,7 @@ sputs I'm #1
 proc validation_code {p} {
   set p [string map {" " "" ^ "" ( "" - "" ) "" / ""} $p]
   regsub -all {([0-9])*} $p "" p
-  set p [string trim $p "N"]
+  set p [string trim $p "N"] 
   if {[string length $p] < 7} {
     if {$p eq [revcom $p]} {
       return [list [expr {"0x[string map "A 7 B 8 C b D 4 G d H 2 K c M 3 N 0 R 5 S 9 T e V 1 W 6 Y a" [string range [append p "NNNNN"] 0 5]]"}]]
@@ -47121,10 +48911,10 @@ proc add_compatibles {} {
       } else {
         set overhang [string range $enzinfo(flatpat,$enzyme) [expr {$len-$caret}] [expr {$caret-1}]]
         if {([regexp {[^ACGT]} $overhang] == 0)} {
-          lappend h(-$overhang) $enzyme
-        }
+          lappend h(-$overhang) $enzyme 
+        }  
       }
-    }
+    } 
   }
 
   foreach ov [array names h] {
@@ -47143,7 +48933,7 @@ proc add_compatibles {} {
 ## return all aa encoded by a potentially degenerate 3 base sequence
 #############
 proc triplet_transl {t} {
-  set s [string map {b [cgt] d [agt] h [act] k [gt] m [ac] n ? r [ag] s [gc] v [acg] w [at] y [ct]} $t]
+  set s [string map {b [cgt] d [agt] h [act] k [gt] m [ac] n ? r [ag] s [gc] v [acg] w [at] y [ct]} $t] 
   array set aa {ttt F ttc F tta L ttg L tct S tcc S tca S tcg S tat Y tac Y taa * tag * tgt C tgc C tga * tgg W ctt L ctc L cta L ctg L cct P ccc P cca P ccg P cat H cac H caa Q cag Q cgt R cgc R cga R cgg R att I atc I ata I atg M act T acc T aca T acg T aat N aac N aaa K aag K agt S agc S aga R agg R gtt V gtc V gta V gtg V gct A gcc A gca A gcg A gat D gac D gaa E gag E ggt G ggc G gga G ggg G}
   set result [list]
   foreach i [array names aa $s] {
@@ -47224,12 +49014,12 @@ proc read_enzymes {enzfilename} {
       set newgroups [gets $fileid]
       set enzinfo(enz_groups_list) [concat $enzinfo(enz_groups_list) $newgroups]
       foreach group $newgroups {
-        set enzinfo(enz_groups,$group) [gets $fileid]
+        set enzinfo(enz_groups,$group) [gets $fileid] 
       }
       if {[winfo exists .enz_selector.groupsframe.groups_button]} {
         .enz_selector.groupsframe.groups_button.menu delete 0 end
         foreach element $enzinfo(enz_groups_list) {
-          .enz_selector.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element
+          .enz_selector.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element 
         }
       }
       unset newgroups
@@ -47245,7 +49035,7 @@ proc read_enzymes {enzfilename} {
         }
       }
       #add DpnI specifically
-      foreach z [list BisI BlsI GlaI GluI KroI MalI PcsI DpnI SgeI FspEI LpnPI MspJI MteI PkrI] {
+      foreach z [list AbaSI AoxI BisI BlsI DpnI FspEI GlaI GluI KroI LpnPI MalI MspJI MteI PcsI PkrI SgeI] {
         if {[lsearch -exact $enzymes $z] > -1} {
           lappend info(blocked_enzymes) $z
         }
@@ -47376,9 +49166,9 @@ proc save_enzymes {{filename ""} {default 0}} {
       lappend templongnamelist [list $na "$pf|$pr"]
     } else {
       lappend templongnamelist [list $na $pf]
-    }
+    } 
   }
-  puts $fileid $templongnamelist
+  puts $fileid $templongnamelist 
   puts $fileid $hexlist
   puts $fileid $enzymes
 
@@ -47461,7 +49251,7 @@ proc addhexarray {name pattern} {
 
   regsub -all {\(([0-9]|[/-])*\)} $pattern "" spattern
   regsub "\\^" $spattern "" spattern
-  set spattern [string trim $spattern "N"]
+  set spattern [string trim $spattern "N"] 
   set rpattern [revcom $spattern]
   if {[string length $spattern] >6} {
     if {$rpattern == $spattern} {
@@ -47504,7 +49294,7 @@ proc delete_enzyme {enzyme} {
   ##take the enzyme out of the enzyme list
   set enzymes [lreplace [K $enzymes [set enzymes {}]] $listpos $listpos]
 
-
+  
   ##take the enzyme out of the currently selected list
   set info(enz_currently_selected) [lsearch -exact -not -inline -all $info(enz_currently_selected) $enzyme]
 
@@ -47527,7 +49317,7 @@ proc delete_enzyme {enzyme} {
       set newlist [lindex $hexlist $location]
       set pos [lsearch -exact $newlist $enzyme]
       set newlist [lreplace [K $newlist [set newlist {}]] $pos $pos]
-      set hexlist [lreplace [K $hexlist [set hexlist {}]] $location $location $newlist]
+      set hexlist [lreplace [K $hexlist [set hexlist {}]] $location $location $newlist] 
     }
   }
 
@@ -47539,7 +49329,7 @@ proc delete_enzyme {enzyme} {
   #foreach element [array names enzinfo "*,$enzyme"] {
   #  array unset enzinfo $element
   #}
-#leave in the enzinfo array so that overhang info is still available
+#leave in the enzinfo array so that overhang info is still available 
 
 
   foreach element [array names info "*,$enzyme"] {
@@ -47557,7 +49347,7 @@ proc delete_enzyme {enzyme} {
   ##take the enzyme out of the metlist
   set newmetlists [list]
   foreach metlist $enzinfo(enz_methylaselist) {
-    set tempmetlist1 [list]
+    set tempmetlist1 [list]   
     foreach enz_met_set [lindex $metlist 1] {
       if {[lindex $enz_met_set 0] != $enzyme} {
         lappend  tempmetlist1 $enz_met_set
@@ -47573,14 +49363,14 @@ proc delete_enzyme {enzyme} {
     }
   }
   #add DpnI specifically
-  foreach z [list BisI BlsI GlaI GluI KroI MalI PcsI DpnI SgeI FspEI LpnPI MspJI MteI PkrI] {
+  foreach z [list AbaSI AoxI BisI BlsI DpnI FspEI GlaI GluI KroI LpnPI MalI MspJI MteI PcsI PkrI SgeI] {
     if {[lsearch -exact $enzymes $z] > -1} {
       lappend info(blocked_enzymes) $z
     }
   }
   set info(blocked_enzymes) [lsort -unique $info(blocked_enzymes)]
 
-  ##remake the compatibles elements
+  ##remake the compatibles elements 
   add_compatibles
 
   foreach window [dnawindows_list] {
@@ -47603,7 +49393,7 @@ proc pattern_groups {pattern} {
   regsub  {^[^ABCDGHKMNRSTVWY]*?\)} $pattern "" pattern ;#remove leading parens
   set caret [string first ^ $pattern]
   if {$caret > -1} {
-    set length [expr {[string length $pattern] -1.0}]
+    set length [expr {[string length $pattern] -1.0}]    
     set site [expr {$caret * 2 - $length}]
     if {[regexp -nocase "\[bdhkmnrsvwy\]" [string range $pattern [expr {int($length/2 - abs($caret-$length/2))}] [expr {int($length/2 + abs($caret-$length/2))}]]] == 1} {lappend result "degenerate cut"}
   } else {
@@ -47624,7 +49414,7 @@ proc pattern_groups {pattern} {
   if {$length  == 6} {lappend result "six cutter"}
   if {$length  > 6} {lappend result ">six cutter"}
 
-  if {$site != "nosite"} {
+  if {$site != "nosite"} {  
     if {$site < 0} {
       lappend result "5 prime"
     } elseif {$site == 0} {
@@ -47641,7 +49431,7 @@ proc pattern_groups {pattern} {
 ## dialog window for adding a new enzyme
 #################
 proc add_enzyme_dialog {parent_win} {
-  global enzymes
+  global enzymes 
   global info
   global enz_select_window
   global edit_new_enz
@@ -47685,7 +49475,7 @@ proc add_enzyme_dialog {parent_win} {
   #grab set .new_enzyme
   wm deiconify .new_enzyme
   vwait ok2
-
+ 
 
   if {$ok2 == 1} {
     set enzyme [.new_enzyme.name get]
@@ -47724,9 +49514,86 @@ proc add_enzyme_dialog {parent_win} {
   return $ok2
 }
 
+###############
+## Quick add Golden Gate enzyme 
+###############
+proc enz_add_gg {parent_win} {
+  global enzymes 
+  global info temp_info
+  global enz_select_window
+
+  global ok2
+
+  set gg_enz_dict [dict create  AarI CACCTGC(4/8) BbsI GAAGAC(2/6) BpiI GAAGAC(2/6) BsaI GGTCTC(1/5) BsmBI CGTCTC(1/5) BspQI GCTCTTC(1/4) BtgZI GCGATG(10/14) Esp3I CGTCTC(1/5) PaqCI CACCTGC(4/8) SapI GCTCTTC(1/4)]
+  set edit_new_enz 1
+  toplevel .new_enzyme
+  wm protocol .new_enzyme WM_DELETE_WINDOW "set ok2 -1"
+  bind .new_enzyme <KeyPress-Escape>  "set ok2 -1"
+  wm title .new_enzyme [mc "New Enzyme"]
+  set raisedialog_store [bind . <<RaiseDialogs>>]
+  bind . <<RaiseDialogs>> "wm deiconify .new_enzyme; raise .new_enzyme"
+  regexp {[0-9]*x[0-9]*\+(-?[0-9]*)\+(-?[0-9-]*)} [wm geometry $parent_win] wgeom winx winy
+  wm geometry .new_enzyme "+[expr (($winx<0)?0:$winx)+20]+[expr (($winy<0)?0:$winy)+50]"
+  if {[tk windowingsystem] != "aqua"} {
+    wm transient .new_enzyme $parent_win
+  } else {
+    ::tk::unsupported::MacWindowStyle style .new_enzyme document {closeBox}
+  }
+  wm deiconify .new_enzyme
+  set ok2 0
+
+  grid [set f [frame .new_enzyme.enz_frame -relief ridge]] -row 1 -column 0 -columnspan 2 -sticky nswe
+  set row 0  
+  dict for {name site} $gg_enz_dict {
+    grid [ttk::checkbutton $f.ch_$row -text "$name $site" -variable temp_info($name)] -row $row -column 0 -sticky w
+    set temp_info($name) 0
+    if {[lsearch -exact $enzymes $name] != -1} {
+      $f.ch_$row state disabled
+    }
+    incr row
+  }
+
+  grid [frame .new_enzyme.okframe -relief ridge] -row 4 -column 0 -columnspan 2
+  grid [button .new_enzyme.okframe.cancel -text [mc "Cancel"] -command "set ok2 -1"] -row 0 -column 1 -padx 12 -pady 3 -sticky nw
+  grid [button .new_enzyme.okframe.ok -text [mc "OK"] -command "set ok2 1" -default active] -row 0 -column 0 -padx 12 -pady 3 -sticky nw
+  bind .new_enzyme <Key-Return> ".new_enzyme.okframe.ok invoke"
+  #grab set .new_enzyme
+  wm deiconify .new_enzyme
+  vwait ok2
+ 
+
+  if {$ok2 == 1} {
+    dict for {name site} $gg_enz_dict {
+      if {$temp_info($name)} {
+        set enzyme $name
+        set comment $site
+        set pattern $site
+        add_enzyme $enzyme [string toupper $pattern] $comment
+        add_compatibles
+      }
+    }
+
+    foreach window [dnawindows_list] {
+      set info($window,scanned) 0
+      findenzymes $window
+    }
+
+    if {[winfo exists .enz_selector.textframe.textbox] == 1} {
+      fill_enzymes_box .enz_selector.textframe.textbox .enz_selector.enz_comment $enz_select_window
+    }
+    set info(enzymes_saved) 0
+
+  }
+  #grab release .new_enzyme
+  destroy .new_enzyme
+  bind . <<RaiseDialogs>> $raisedialog_store
+  wm deiconify $parent_win
+  return $ok2
+}
+
 
 ###############
-## add an enzyme
+## add an enzyme 
 ###############
 proc add_enzyme {enzyme pattern comment} {
   global enzymes
@@ -47744,7 +49611,7 @@ proc add_enzyme {enzyme pattern comment} {
   set enzinfo(enz_comment,$enzyme) $comment
   set p [string map {^ "" ( "" - "" ) "" / ""} $pattern]
   regsub -all {([0-9])*} $p "" p
-  set p [string trim $p "N"]
+  set p [string trim $p "N"] 
   set enzinfo(flatpat,$enzyme) $p
   set flatpattern $p
   if {[regexp {(-?[0-9]+)[[:space:]]*.[[:space:]]*(-?[0-9]+)} $pattern x d1 d2]} {
@@ -47793,13 +49660,13 @@ proc edit_enzyme {enzyme parent_win} {
 
   set maxcols 4
   if {[winfo exists .edit_enzyme]} {
-    destroy .edit_enzyme
+    destroy .edit_enzyme 
     array unset group_editenzyme
     array unset dam
     array unset dcm
     unset -nocomplain new_comment
   }
-  toplevel .edit_enzyme
+  toplevel .edit_enzyme 
   wm protocol .edit_enzyme WM_DELETE_WINDOW "set ok2 -1"
   bind .edit_enzyme <KeyPress-Escape>  "set ok2 -1"
   wm title .edit_enzyme "[mc "Edit enzyme:"] $enzyme"
@@ -47870,12 +49737,12 @@ proc edit_enzyme {enzyme parent_win} {
       grid [text .edit_enzyme.met.t$r -height 1 -relief flat -wrap none -background $info(bg_color)] -row $r -column 1 -sticky nw
       .edit_enzyme.met.t$r insert 1.0 $pattern
       .edit_enzyme.met.t$r tag add bold 1.[expr {[lindex $met 0]+2}] 1.[expr {[lindex $met 0]+6}] 1.[expr {[lindex $met 1]+2}] 1.[expr {[lindex $met 1]+6}]
-      .edit_enzyme.met.t$r tag configure bold -background red
+      .edit_enzyme.met.t$r tag configure bold -background red 
       bindtags .edit_enzyme.met.t$r [list all .]
       incr r
     }
 
-
+    
   }
   set pattern "N[append pattern N]"
   set metlist [list]
@@ -47895,8 +49762,8 @@ proc edit_enzyme {enzyme parent_win} {
       }
       grid [text .edit_enzyme.met.t$r -height 1 -relief flat -wrap none -background $info(bg_color)] -row $r -column 1 -sticky nw
       .edit_enzyme.met.t$r insert 1.0 $pattern
-      .edit_enzyme.met.t$r tag add bold 1.[expr {[lindex $met 0]+3}] 1.[expr {[lindex $met 0]+8}] 1.[expr {[lindex $met 1]+3}] 1.[expr {[lindex $met 1]+8}]
-      .edit_enzyme.met.t$r tag configure bold -background red
+      .edit_enzyme.met.t$r tag add bold 1.[expr {[lindex $met 0]+3}] 1.[expr {[lindex $met 0]+8}] 1.[expr {[lindex $met 1]+3}] 1.[expr {[lindex $met 1]+8}] 
+      .edit_enzyme.met.t$r tag configure bold -background red 
       bindtags .edit_enzyme.met.t$r [list all .]
       incr r
     }
@@ -47908,7 +49775,7 @@ proc edit_enzyme {enzyme parent_win} {
   #grab set .edit_enzyme
   wm deiconify .edit_enzyme
   vwait ok2
-
+ 
   #grab release .edit_enzyme
   destroy .edit_enzyme
   bind . <<RaiseDialogs>> $raisedialog_store
@@ -47934,7 +49801,7 @@ proc edit_enzyme {enzyme parent_win} {
       }
     }
 
-    #change methylation
+    #change methylation 
     foreach dam_index [array names dam] {
       set pos [lsearch $damlist [list $enzyme [lindex $dam_index 0] [lindex $dam_index 1]]]
       if {($dam($dam_index) == 0) && ($pos > -1)} {
@@ -47953,7 +49820,7 @@ proc edit_enzyme {enzyme parent_win} {
       }
     }
     set dcmlist [lsort -index 0 $dcmlist]
-    set enzinfo(enz_methylaselist) [list [list MDam $damlist] [list MDcm $dcmlist]]
+    set enzinfo(enz_methylaselist) [list [list MDam $damlist] [list MDcm $dcmlist]] 
     set info(blocked_enzymes) [list]
     foreach methylase $enzinfo(enz_methylaselist) {
       foreach blocked_enzyme [lindex $methylase 1] {
@@ -47961,7 +49828,7 @@ proc edit_enzyme {enzyme parent_win} {
       }
     }
     #add DpnI specifically
-    foreach z [list BisI BlsI GlaI GluI KroI MalI PcsI DpnI SgeI FspEI LpnPI MspJI MteI PkrI] {
+    foreach z [list AbaSI AoxI BisI BlsI DpnI FspEI GlaI GluI KroI LpnPI MalI MspJI MteI PcsI PkrI SgeI] {
       if {[array names enzinfo "enz_pattern,$z"] != ""} {
         lappend info(blocked_enzymes) $z
       }
@@ -48014,7 +49881,7 @@ proc add_enz_group {parent_win enzyme_list} {
   grid columnconfigure .new_group 1 -weight 1
   grid .new_group.namelabel -row 0 -column 0 -sticky w
   grid .new_group.name -row 0 -column 1 -sticky ew
-
+ 
   grid [button .new_group.cancel -text [mc "Cancel"] -command "set ok2 -1"] -row 3 -column 1 -sticky nw -padx 10 -pady 3
   grid [button .new_group.ok -text [mc "OK"] -command "set ok2 1" -default active] -row 3 -column 0 -sticky nw -padx 10 -pady 3
   bind .new_group <Key-Return> ".new_group.ok invoke"
@@ -48023,7 +49890,7 @@ proc add_enz_group {parent_win enzyme_list} {
   focus .new_group.name
 
   vwait ok2
-
+  
   if {$ok2 == 1} {
     set newname [.new_group.name get]
     if {($newname == "All") || ($newname == "Mem Recall") || ($newname == "Difference...")} {
@@ -48031,14 +49898,14 @@ proc add_enz_group {parent_win enzyme_list} {
     } elseif {[lsearch -exact $enzinfo(enz_groups_list) $newname] > -1} {
       if {[tk_messageBox -default no -title "Group Exists..." -message "The group \"$newname\" already exists. Should I replace the contents of the group with the curently selected enzymes?" -type yesno -icon warning -default no] == "yes" } {
         set enzinfo(enz_groups,$newname) $enzyme_list
-      }
+      }  
     } else {
       set enzinfo(enz_groups_list) [lappend enzinfo(enz_groups_list) $newname]
       set enzinfo(enz_groups,$newname) $enzyme_list
       if {[winfo exists .enz_selector.groupsframe.groups_button] == 1} {
         .enz_selector.groupsframe.groups_button.menu delete 0 end
         foreach element $enzinfo(enz_groups_list) {
-          .enz_selector.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element
+          .enz_selector.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element 
         }
       }
       set info(enzymes_saved) 0
@@ -48049,7 +49916,7 @@ proc add_enz_group {parent_win enzyme_list} {
   unset ok2
   wm deiconify $parent_win
   bind . <<RaiseDialogs>> $raisedialog_store
-}
+} 
 
 ###############
 ## delete an enzyme group
@@ -48085,13 +49952,13 @@ proc delete_enz_group {parent_win} {
   grid .dialog.namelabel -row 0 -column 0 -sticky w
   grid .dialog.grouplistbox -row 1 -column 0 -sticky nsew -columnspan 2
   grid .dialog.groupscroll -row 1 -column 2 -sticky nsw
-
+ 
   grid [button .dialog.cancel -text [mc "Cancel"] -command "set ok2 -1"] -row 2 -column 1 -sticky nw
   grid [button .dialog.ok -text [mc "Delete"] -command "set ok2 1"] -row 2 -column 0 -sticky nw
 
   foreach element $enzinfo(enz_groups_list) {
     if {($element != "All") && ($element != "Mem Recall") && ($element != "Difference...")} {
-      .dialog.grouplistbox insert end $element
+      .dialog.grouplistbox insert end $element 
     }
   }
   #grab set .dialog
@@ -48099,31 +49966,31 @@ proc delete_enz_group {parent_win} {
   focus .dialog.grouplistbox
 
   vwait ok2
-
+ 
   #grab release .dialog
-
+  
   if {$ok2 == 1} {
     set selection [.dialog.grouplistbox curselection]
     if {[llength $selection] > 0} {
       if {[llength $selection] > 1} {
         if {[tk_messageBox -default no -title [mc "Multiple Group Delete"] -message [format [mc {Are you sure you want to delete these %1$s groups?}] [llength $selection]] -type yesno -icon warning -default no] == "yes" } {
-          foreach element $selection {
+          foreach element $selection {  
             set groupname [.dialog.grouplistbox get $element]
             set index [lsearch -exact $enzinfo(enz_groups_list) $groupname]
-            array unset enzinfo "enz_groups,$groupname"
+            array unset enzinfo "enz_groups,$groupname" 
             set enzinfo(enz_groups_list) [lreplace $enzinfo(enz_groups_list) $index $index]
           }
-        }
+        }  
       } else {
         set groupname [.dialog.grouplistbox get [lindex $selection 0]]
         set index [lsearch -exact $enzinfo(enz_groups_list) $groupname]
-        array unset enzinfo "enz_groups,$groupname"
+        array unset enzinfo "enz_groups,$groupname" 
         set enzinfo(enz_groups_list) [lreplace $enzinfo(enz_groups_list) $index $index]
       }
       if {[winfo exists .enz_selector.groupsframe.groups_button]} {
         .enz_selector.groupsframe.groups_button.menu delete 0 end
         foreach element $enzinfo(enz_groups_list) {
-          .enz_selector.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element
+          .enz_selector.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element 
         }
       }
       set info(enzymes_saved) 0
@@ -48134,7 +50001,7 @@ proc delete_enz_group {parent_win} {
   unset ok2
   wm deiconify $parent_win
   bind . <<RaiseDialogs>> $raisedialog_store
-}
+} 
 
 ###############
 ## load enzyme groups from file
@@ -48158,7 +50025,7 @@ proc read_enz_groups {parent_win {filename ""}} {
       if {([llength $nextline] == 2)} {
         set newname [lindex $nextline 0]
         set enzyme_list [lindex $nextline 1]
-
+        
         set not_found [list]
         set found [list]
         foreach enz $enzyme_list {
@@ -48176,7 +50043,7 @@ proc read_enz_groups {parent_win {filename ""}} {
         } elseif {[lsearch -exact $enzinfo(enz_groups_list) $newname] > -1} {
           if {[tk_messageBox -title "Group Exists..." -message "The group \"$newname\" already exists. Should I replace the contents of the group with the curently selected enzymes?" -type yesno -icon warning -default no] == "yes" } {
             set enzinfo(enz_groups,$newname) $found
-          }
+          }  
         } else {
           set enzinfo(enz_groups_list) [lappend enzinfo(enz_groups_list) $newname]
           set enzinfo(enz_groups,$newname) $found
@@ -48191,7 +50058,7 @@ proc read_enz_groups {parent_win {filename ""}} {
       if {([winfo exists .enz_selector.groupsframe.groups_button])} {
         .enz_selector.groupsframe.groups_button.menu delete 0 end
         foreach element $enzinfo(enz_groups_list) {
-          .enz_selector.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element
+          .enz_selector.groupsframe.groups_button.menu add radiobutton -label $element -variable enz_select_groups -value $element 
         }
       }
     } else {
@@ -48261,14 +50128,14 @@ proc import_strider_enzymes {parent_win {filename ""}} {
           add_enzyme $enzyme $pattern $comment
           lappend newenz $enzyme
         }
-
+       
       }
     }
     tk_messageBox -message "[llength $newenz] enzymes added." -type ok -icon info -default ok
     wm deiconify $parent_win; raise $parent_win
     if {[llength $newenz] > 0} {
       add_compatibles
-      set enzinfo(enz_methylaselist) [met_list $enzymes $parent_win]
+      set enzinfo(enz_methylaselist) [met_list $enzymes $parent_win] 
       set info(blocked_enzymes) [list]
       foreach methylase $enzinfo(enz_methylaselist) {
         foreach blocked_enzyme [lindex $methylase 1] {
@@ -48276,7 +50143,7 @@ proc import_strider_enzymes {parent_win {filename ""}} {
         }
       }
       #add DpnI specifically
-      foreach z [list BisI BlsI GlaI GluI KroI MalI PcsI DpnI SgeI FspEI LpnPI MspJI MteI PkrI] {
+      foreach z [list AbaSI AoxI BisI BlsI DpnI FspEI GlaI GluI KroI LpnPI MalI MspJI MteI PcsI PkrI SgeI] {
         if {[lsearch -exact $enzymes $z] > -1} {
           lappend info(blocked_enzymes) $z
         }
@@ -48304,7 +50171,7 @@ proc import_strider_enzymes {parent_win {filename ""}} {
 #################
 proc copy_enz_seleted {s} {
   global enzinfo info
-
+ 
   set result [list]
   foreach enzyme $info(enz_currently_selected) {
     set r [list $enzyme $enzinfo(enz_pattern,$enzyme) $enzinfo(enz_comment,$enzyme)]
@@ -48334,7 +50201,7 @@ proc copy_enz_seleted {s} {
 #################
 proc paste_enz_seleted {s} {
   global enzinfo info enz_select_window enzymes
-
+ 
   if {[catch {set enz_list [selection get -displayof $s -selection CLIPBOARD]}]} {return}
   foreach e $enz_list {
     if {[llength $e] != 5} {
@@ -48423,7 +50290,7 @@ proc met_list {selectedenzymes parent_win} {
   grid columnconfigure $a.damlist 5 -weight 0
 
   foreach element $selectedenzymes {
-    set pattern $enzinfo(flatpat,$element)
+    set pattern $enzinfo(flatpat,$element) 
     #regsub -all {\(([0-9]|[/-])*\)} $pattern "" pattern
     #regsub "\\^" $pattern "" pattern
     #set pattern [string trim $pattern "N"]
@@ -48577,8 +50444,8 @@ proc edit_ladders {w} {
       } else {
         .dialog.ladderframe.delete configure -state disabled
       }
-    }
-  }
+    }     
+  } 
 
 ##binding to change to a different ladder in listbox
   bind .dialog.listframe.list <<ListboxSelect>> {
@@ -48588,7 +50455,7 @@ proc edit_ladders {w} {
       set temp_info(ladder_entry) ""
     }
     set temp_info(current_ladder) $temp_info(ladder_entry)
-    event generate .dialog <<update_ladder>>
+    event generate .dialog <<update_ladder>> 
   }
 
 ##binding to raise a ladder in the list
@@ -48708,7 +50575,7 @@ proc edit_ladders {w} {
         }
       }
       close $fileid
-    }
+    } 
     event generate .dialog <<update_ladder>>
     if {[.dialog.listframe.list size] > 1} {
       .dialog.listframe.delete configure -state normal
@@ -48796,7 +50663,7 @@ proc edit_ladders {w} {
   update idletasks
 
   focus .dialog
-  vwait ok
+  vwait ok 
   set dialogblock 0
   destroy .dialog
   bind . <<RaiseDialogs>> ""
@@ -48813,7 +50680,7 @@ proc edit_ladders {w} {
     update_ladders_menu
     ###need to save the new ladder list
     set temp_ladder_file [open [file join $info(user_defaults_dir) temp_ladderq_qqrx.txt] w]
-
+    
     puts $temp_ladder_file "#comment lines start with #"
     puts $temp_ladder_file "#enter each new ladder on a new line"
     puts $temp_ladder_file "#start with the name of the ladder"
@@ -48880,7 +50747,7 @@ proc read_ladders {{filename ""}} {
       }
     }
     close $fileid
-  }
+  } 
   if {[llength $info(ladderlist)] == 0} {
     set info(ladder,) [list]
     set info(current_ladder) ""
@@ -48911,7 +50778,7 @@ proc read_arrow_data {{filename ""}} {
       }
     }
     close $fileid
-  }
+  } 
 
    #set r {H1 >d1 >d2 d3 H2 >d4}
    #set r {H1 >d1 >d2 d3 H2 >H3 >>d4 >H4 >>d5 d6}
@@ -48929,7 +50796,7 @@ proc read_arrow_data {{filename ""}} {
         if {[llength [lindex $data 0]] % 2} {
           sputs odd number of arrow data: $line
           continue
-        }
+        } 
         set bad 0
         foreach d [lindex $data 0] {
           if {![string is double $d]} {set bad 1;break}
@@ -49001,7 +50868,7 @@ proc read_defaults {} {
       }
     }
     close $fileid
-  }
+  } 
 
   if ![font metrics \{$info(textfontfamily)\} -fixed] {
    set info(textfontfamily) [font actual courier -family]
@@ -49030,7 +50897,7 @@ proc read_defaults {} {
 ###############
 ## shows a msg box for debugging values
 ###############
-proc warning_dialog {args} {
+proc warning_dialog {args} { 
   tk_messageBox -message [join [join [list $args] ""] ""] -icon warning -type ok
 }
 
@@ -49232,7 +51099,7 @@ set info(allfontlist) [lsearch -inline -all -regexp -not [lsort -dictionary [fon
 set info(graphicfontsize) $info(dnafontsize); #10
 set info(print_font_size) 8
 set info(print_formatted) 0
-set info(tk_ps_fonts) [list]
+set info(tk_ps_fonts) [list] 
 set info(draw_graphic_connectors) 1
 set info(strider_incompatible_warning) 1
 set info(methylated_default) 1
@@ -49378,9 +51245,9 @@ set resultlist {{-10_signal {allele citation db_xref evidence gene label locus_t
 
 
 ## see http://www.insdc.org/documents/feature_table.html#3.3 for qualifiers (need to be able to edit qualifiers with - boxes, + at the end and a re-order)
-set genbank_typelist [list -10_signal -35_signal 3'UTR 3'clip 5'UTR 5'clip CAAT_signal CDS C_region D-loop D_segment GC_signal J_segment LTR N_region RBS STS S_region TATA_signal V_region V_segment assembly_gap attenuator centromere conflict enhancer exon gap gene iDNA intron mRNA mat_peptide misc_RNA misc_binding misc_difference misc_feature misc_recomb misc_signal misc_structure mobile_element modified_base ncRNA old_sequence operon oriT polyA_signal polyA_site precursor_RNA prim_transcript primer_bind promoter propeptide protein_bind rRNA regulatory rep_origin repeat_region repeat_unit satellite scRNA sig_peptide snRNA snoRNA source stem_loop tRNA telomere terminator tmRNA transit_peptide unsure variation]
+set genbank_typelist [list -10_signal -35_signal 3'UTR 3'clip 5'UTR 5'clip CAAT_signal CDS C_region D-loop D_segment GC_signal J_segment LTR N_region RBS STS S_region TATA_signal V_region V_segment assembly_gap attenuator centromere conflict enhancer exon gap gene iDNA intron mRNA mat_peptide misc_RNA misc_binding misc_difference misc_feature misc_recomb misc_signal misc_structure mobile_element modified_base ncRNA old_sequence operon oriT polyA_signal polyA_site precursor_RNA prim_transcript primer_bind promoter propeptide protein_bind rRNA regulatory rep_origin repeat_region repeat_unit satellite scRNA sig_peptide snRNA snoRNA source stem_loop tRNA telomere terminator tmRNA transit_peptide unsure variation] 
 
-set genbank_divided_typelist [list Genes [list promoter CDS exon intron gene 5'UTR 3'UTR polyA_site mRNA operon prim_transcript precursor_RNA propeptide 5'clip 3'clip] Signals [list regulatory rep_origin promoter enhancer polyA_site polyA_signal terminator CAAT_signal TATA_signal -35_signal -10_signal GC_signal RBS attenuator misc_signal sig_peptide transit_peptide mat_peptide] Binding [list primer_bind protein_bind misc_binding] Variation [list variation assembly_gap gap unsure STS unsure conflict modified_base misc_difference old_sequence] Repeats [list LTR repeat_region repeat_unit satellite] RNA [list mRNA rRNA tRNA scRNA snRNA snoRNA ncRNA tmRNA misc_RNA] Misc [list source misc_feature misc_binding misc_recomb misc_structure mobile_element centromere telomere iDNA stem_loop D-loop oriT] Ig [list C_region D_segment J_segment N_region S_region V_region V_segment]]
+set genbank_divided_typelist [list Genes [list promoter CDS exon intron gene 5'UTR 3'UTR polyA_site mRNA operon prim_transcript precursor_RNA propeptide 5'clip 3'clip] Signals [list regulatory rep_origin promoter enhancer polyA_site polyA_signal terminator CAAT_signal TATA_signal -35_signal -10_signal GC_signal RBS attenuator misc_signal sig_peptide transit_peptide mat_peptide] Binding [list primer_bind protein_bind misc_binding] Variation [list variation assembly_gap gap unsure STS unsure conflict modified_base misc_difference old_sequence] Repeats [list LTR repeat_region repeat_unit satellite] RNA [list mRNA rRNA tRNA scRNA snRNA snoRNA ncRNA tmRNA misc_RNA] Misc [list source misc_feature misc_binding misc_recomb misc_structure mobile_element centromere telomere iDNA stem_loop D-loop oriT] Ig [list C_region D_segment J_segment N_region S_region V_region V_segment]] 
 
 
 set genbank_unquoted_qualifiers [list codon_start transl_table direction mod_base anticodon citation compare estimated_length number protein_id rpt_unit_range translation transl_except]
@@ -49466,7 +51333,7 @@ while {![file isdirectory $info(Accdir)]} {
 
 ## this makes package require look in the lib directory first
 if {[file exists [file join $info(Accdir) lib]]} {
-  set auto_path [linsert $auto_path 0 [file join $info(Accdir) lib]]
+  set auto_path [linsert $auto_path 0 [file join $info(Accdir) lib]] 
 }
 
 
@@ -49567,7 +51434,7 @@ read_defaults
 #FIND VALID DEFAULT ENZYME DIRECTORY
 #check for valid default_enzymedir from defaults file
 #then copy $info(Accdir)/Enzymes to user preferences directory if that is valid
-#else try asking
+#else try asking 
 if {$info(default_enzymedir) == [file join $info(Accdir) "Enzymes"]} {
   if {![file exists [file join $info(user_defaults_dir) "Enzymes"]]} {
     catch {file copy [file join $info(Accdir) "Enzymes"] $info(user_defaults_dir)}
@@ -49592,7 +51459,7 @@ if {(![file exists [file join $info(default_enzymedir) "Default_Enzymes.txt"]])}
 ####need to: check for valid $info(default_enzymedir), if doesn't exist then copy from Accdir to user_defaults_dir and set it to be in user_defaults_dir
 #FIND VALID DEFAULT FEATURE DIRECTORY
 #check for defaults from file
-#else copy info(Accdir)/Features to user pref folder
+#else copy info(Accdir)/Features to user pref folder 
 if {$info(default_featuredir) == [file join $info(Accdir) "Features"]} {
   if {![file exists [file join $info(user_defaults_dir) "Features"]]} {
     file copy [file join $info(Accdir) "Features"] $info(user_defaults_dir)
@@ -49665,21 +51532,21 @@ unset item
 if {$info(graphic_map_properties) == ""} {
   set info(graphic_map_properties) [list circular_baseline_bg_width 1 circular_baseline_fg_width 1 circular_baseline_bg_color black circular_baseline_fg_color white circular_crosshair_length 0.016 circular_crosshair_bg_width 1 circular_crosshair_bg_color black circular_crosshair_fg_width 1 circular_crosshair_fg_color white]
   lappend info(graphic_map_properties) circular_map_index_offset -.05 circular_map_index_max_tick_spacing 500 index_label_format "1,000" circular_index_max_tick_color black circular_index_text_color black circular_index_max_tick_font graphicfont circular_index_max_tick_width 2 circular_index_max_tick_length .05 circular_index_min_tick_per_max 4 circular_index_min_tick_color black circular_index_min_tick_width 1 circular_index_min_tick_length .02
-
+  
   foreach tag {title seq_length file_comment enz_list feature_list} show {normal normal hidden hidden hidden} x {0 0 0 -500 500} y {-10 10 500 500 500} {
     dict set info(graphic_map_properties) circular_$tag\_font [list $info(graphicfontfamily) $info(graphicfontsize)]
     dict set info(graphic_map_properties) circular_$tag\_color black
     dict set info(graphic_map_properties) circular_$tag\_state $show
     dict set info(graphic_map_properties) circular_$tag\_x $x
     dict set info(graphic_map_properties) circular_$tag\_y $y
-    dict set info(graphic_map_properties) circular_$tag\_width 0  }
+    dict set info(graphic_map_properties) circular_$tag\_width 0  } 
   foreach tag {title seqtext file_comment enz_list feature_list} show {normal normal hidden hidden hidden} x {0 0 0 -500 500} y {-20 0 500 500 500} {
     dict set info(graphic_map_properties) linear_$tag\_font [list $info(graphicfontfamily) $info(graphicfontsize)]
     dict set info(graphic_map_properties) linear_$tag\_color black
     dict set info(graphic_map_properties) linear_$tag\_state $show
     dict set info(graphic_map_properties) linear_$tag\_x $x
     dict set info(graphic_map_properties) linear_$tag\_y $y
-    dict set info(graphic_map_properties) linear_$tag\_width 0  }
+    dict set info(graphic_map_properties) linear_$tag\_width 0  } 
   unset tag
 }
 
@@ -49728,10 +51595,10 @@ proc mcload {langdir} {
 if {[array names info locale] eq "locale"} {
   mclocale $info(locale)
   #sputs setting locale using mclocale [file join $info(Accdir) Msgs]
-}
+} 
 
 #######
-#utility proc to convert msg files to tab separated lines msg
+#utility proc to convert msg files to tab separated lines msg 
 #######
 proc mcformatLangFile {} {
  global text
@@ -49826,6 +51693,7 @@ if {[lsearch -exact [font names] dnafont] == -1} {
   font create entryfont -family [lindex TkTextFont 1] -size $info(dnafontsize)
   font create dnafont -family $info(textfontfamily) -size $info(dnafontsize)
   font create bolddnafont -family $info(textfontfamily) -size $info(dnafontsize) -weight bold
+  font create menufont -family [font configure TkMenuFont -family] -size [font configure TkMenuFont -size]
 }
 if {[lsearch -exact [font names] graphicfont] == -1} {
   font create graphicfont -family $info(graphicfontfamily) -size $info(graphicfontsize)
@@ -49852,9 +51720,10 @@ option add *Labelframe.font labelfont 40
 option add *Button.font labelfont 40
 
 ttk::style configure TCheckbutton -font labelfont
-ttk::style map TButton -font [list !pressed labelfont alternate boldlabelfont active boldlabelfont pressed boldlabelfont ]
-ttk::style map TMenubutton -font [list !pressed labelfont alternate boldlabelfont active boldlabelfont pressed boldlabelfont ]
-ttk::style configure TNotebook.Tab -font labelfont
+ttk::style map TButton -font [list !pressed labelfont alternate boldlabelfont active boldlabelfont pressed boldlabelfont ] 
+ttk::style map TMenubutton -font [list !pressed labelfont alternate boldlabelfont active boldlabelfont pressed boldlabelfont ]  
+ttk::style configure TNotebook.Tab -font labelfont -padding {6 5 6 2}
+ttk::style configure TNotebook -tabposition n
 ttk::style configure TRadiobutton -font labelfont
 ttk::style configure Treeview -font labelfont
 #ttk::style configure Treeview -rowheight [expr {[font metrics labelfont -linespace] + 0}]
@@ -49867,20 +51736,21 @@ ttk::style configure InfoboxStyle.TLabel -font labelfont
 
 
 if {[tk windowingsystem] == "aqua"} {
-  ttk::style configure Heading -font {Helvetica 11 bold} -foreground gray40
+  ttk::style configure Heading -font {Helvetica 11 bold} -foreground gray40 
 } elseif {$info(android)} {
   ttk::style configure Heading -font {Roboto 8} -foreground gray40
 } else {
   ttk::style configure Heading -font boldlabelfont -foreground gray40
 }
 
-
+  ttk::style configure TButton -anchor center
+  ttk::style configure Menubutton -anchor center
 if {[tk windowingsystem] != "aqua"} {
-  ttk::style configure TButton -font labelfont
+  ttk::style configure TButton -font labelfont 
   ttk::style configure Menubutton -font labelfont
 }
 
-#option add *Menu.font labelfont 40
+
 if {$info(use_cocoa)} {
 #option add *Menu.font {{Lucida Grande} 15} 40
 }
@@ -49898,15 +51768,24 @@ if {$info(use_cocoa)} {
       ttk::style configure Chip.TButton -font labelfont
     }
 
-if {[info exists info(menu_font_size)]} {
-  option add *Menu.font [list [font configure TkMenuFont -family] $info(menu_font_size)] 40
-} else {
-  set  info(menu_font_size) [font configure TkMenuFont -size]
-  option add *Menu.font [list [font configure TkMenuFont -family] $info(menu_font_size)] 40
+
+if {[tk windowingsystem] == "aqua"} {
+ set info(menu_font_size) [font configure TkMenuFont -size]
 }
 
+if {[info exists info(menu_font_size)]} {
+  #&#option add *Menu.font [list [font configure TkMenuFont -family] $info(menu_font_size)] 40
+  font configure menufont -size $info(menu_font_size)
+} else {
+  set  info(menu_font_size) [font configure menufont -size]
+  #&#option add *Menu.font [list [font configure TkMenuFont -family] $info(menu_font_size)] 40
+}
+option add *Menu.font menufont
+
 if {$info(android)} {
-  option add *Menu.font [list [font configure TkMenuFont -family] 10] 40
+  #&#option add *Menu.font [list [font configure TkMenuFont -family] 10] 40
+  font configure menufont -size 10
+  set  info(menu_font_size) 10
   option add *Menu.clickToFocus true 40
   option add *Scrollbar.width 16 40
 }
@@ -49937,7 +51816,7 @@ recolor_app
 set info(translation_map_lists) [gen_translation_map $info(translation_code)]
 
 ###if running as a starpack in windows, check for old style shortcut and file associations
-if {([tk windowingsystem] == "win32") && (![catch {package require starkit}]) && ($::starkit::mode == "starpack")} {
+if {([tk windowingsystem] == "win32") && (![catch {package require starkit}])  && [info exists ::starkit::mode] && ($::starkit::mode == "starpack")} {
   if {![catch {set regdata [registry get "HKEY_LOCAL_MACHINE\\Software\\Classes\\ApE.DNA.file\\Shell\\open\\command" ""]}]} {    regsub -all \\\\ $regdata / regdata    if {([llength $regdata] == 3)} {      if {![catch {registry set "HKEY_LOCAL_MACHINE\\Software\\Classes\\ApE.DNA.file\\Shell\\open\\command" {} "\"[file nativename [info nameofexecutable]]\" \"%1\"" sz} errmsg]} {
         tk_messageBox -title [mc "ApE Association Format Changed"] -message "The application file associations have been updated to the new format." -type ok -icon info
       } else {
@@ -49961,8 +51840,7 @@ if {([tk windowingsystem] == "win32") && (![catch {package require starkit}]) &&
 ##take out the set to -1 if update is reinstalled
 set info(update_check_interval) -1
 
-
-if {($info(update_check_interval) >= 0) && ( ($info(last_update_check) == "")||([expr {[clock seconds] - $info(last_update_check)}] > $info(update_check_interval)))} web_version_check
+if {($info(update_check_interval) >= 0) && ( ($info(last_update_check) == "")||([expr {[clock seconds] - $info(last_update_check)}] > $info(update_check_interval)))} web_version_check 
 if {$info(ApE_version) != $version} {
   set info(ApE_version) $version
   if {!$info(android) } {
@@ -49973,33 +51851,33 @@ if {$info(ApE_version) != $version} {
 
 ## create the first window (unless a window has been created by Apple open event)
 #update
-
+sputs argv $argv
 if {([lsearch [winfo children .] ".dna_window*"] == -1) && ([lsearch [winfo children .] ".abi_window*"] == -1)} {
   foreach file $info(open_at_close) {
     if {[file exists $file] && [file readable $file]} {
-      open_file $file
+      open_file $file 0
     }
   }
- unset -nocomplain  file
+  unset -nocomplain  file
 
 
   if {([llength $argv] == 0) || ($tcl_interactive == 1) || ([string index [lindex $argv 0] 0] == "-")} {
     if {$info(open_at_close) == [list]} {
       create_window -1
-    } else {
-    }
+    } 
   } else {
     foreach filename $argv {
-
       if {([file extension $filename] != ".tcl") && ([file extension $filename] != ".exe")} {
-        open_file [file nativename $filename]
+          open_file [file nativename $filename] 0
       }
     }
   }
 }
+set info(open_at_close) [list]
 
 if {$info(autosave_on)} {run_autosave}
 sputs "ApE version $version"
 set time1 [clock clicks -milliseconds]
 unset time0
 unset time1
+
