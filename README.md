@@ -12,16 +12,6 @@ assuming an environment similar to mine.
 
 ## Environment modules installation
 
-<<<<<<< HEAD
-I made a couple of changes to this repository in an attempt to make it easier to
-install/use on a linux host.  The hosts I work with all use environment
-modules[1] and so I am providing an example module file and instructions
-assuming an environment similar to mine.
-
-## Environment modules installation
-
-=======
->>>>>>> 954cb3f40867519f9d2db0066dbe6a540302785a
 Our environment modules installation is based in /sw where all the modules are
 in /sw/modules and the project root is /sw/local.  Thus the top of the module
 file defines those directories and attempts to automagically detect everything

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 graphicfontfamily	helvetica
 graphicfontsize	10
 
@@ -123,6 +122,3 @@ print_formatted	1
 print_abi_lines_per_page	5
 abi_default_canvas_height	300
 default_enzymedir	/Applications/Ape/Accessory Files/Enzymes
-=======
-#ApE defaults file
->>>>>>> 954cb3f40867519f9d2db0066dbe6a540302785a
