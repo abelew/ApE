@@ -5,16 +5,6 @@ M. Wayne Davis.
 
 http://jorgensen.biology.utah.edu/wayned/ape/
 
-It was extracted by doing the following:
-
-1. Create a directory for this repository.
-2. Download the current version of the windows executable.
-3. Invoke tclkit sdx.kit unwrap ApE_win_current.exe
-4. Copy the ApE_win_current.vfs/lib/app-AppMain/AppMain.tcl to ape.tcl in the
-   repository.
-5. rsync the 'ApE_win_current.vfs/Accessory Files/' directory into the repository.
-6. Delete the windows-specific 'lib/' directory.
-
 I made a couple of changes to this repository in an attempt to make it easier to
 install/use on a linux host.  The hosts I work with all use environment
 modules[1] and so I am providing an example module file and instructions
@@ -22,6 +12,16 @@ assuming an environment similar to mine.
 
 ## Environment modules installation
 
+<<<<<<< HEAD
+I made a couple of changes to this repository in an attempt to make it easier to
+install/use on a linux host.  The hosts I work with all use environment
+modules[1] and so I am providing an example module file and instructions
+assuming an environment similar to mine.
+
+## Environment modules installation
+
+=======
+>>>>>>> 954cb3f40867519f9d2db0066dbe6a540302785a
 Our environment modules installation is based in /sw where all the modules are
 in /sw/modules and the project root is /sw/local.  Thus the top of the module
 file defines those directories and attempts to automagically detect everything
@@ -45,3 +45,29 @@ The installation without environment modules is also quite simple:
 4. The first time ape is run on a new host, it will bring up a little box
    asking where the various files are located.  Tell it to go to the downloaded
    location.
+
+# What did I do?
+
+This repository is an essentially unchanged copy of M. Wayne Davis' code.  If
+one wishes to perform a similar extraction on a different version of the editor,
+here is what I did.  In an attempt to make that easier, I included a copy of the
+tclkit[2] and sdx.kit[3] I used.
+
+1.  Go into the bin/ directory of the repository.
+2.  Download the ApE windows zip file and unzip it into the $(pwd).
+3.  Extract the data with: `tclkit sdx.kit unwrap ApE_win_current.exe`,
+    this creates the ApE_win_current.vfs/ directory containing the tcl
+    script, the accessory files, and the miscellaneous stuff used by
+    tclkit/sdx.
+4.  Copy out the main script with:
+    `cp ApE_win_current.vfs/lib/app-AppMain/AppMain.tcl ..`
+5.  Copy the accessory files, I usually delete the existing files first, but I
+    doubt that is necessary: `rsync -av ApE_win_current.vfs/Accessory\ Files/ ..`
+6.  Delete the windows specific material: `rm -r ../lib`
+7.  Clean up the $(pwd).
+
+# References
+
+1. https://modules.readthedocs.io/en/latest/
+2. https://wiki.tcl-lang.org/page/basekit (I used the original)
+3. https://wiki.tcl-lang.org/page/sdx
