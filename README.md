@@ -1,3 +1,10 @@
+# Deprecated
+
+I think this repository is likely deprecated, a Linux download link
+recently (~202305) appeared on the ApE website.  It is likely that I
+will continue updating this repository, but only because I like
+looking at the code to see what has changed over time.
+
 # A Plasmid Editor
 
 This repository contains the TCL script for the plasmid editor written by
